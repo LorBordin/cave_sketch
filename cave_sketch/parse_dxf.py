@@ -1,15 +1,18 @@
-from typing import Dict, List, Tuple
+from typing import List, Dict, Tuple
 import pandas as pd
 import ezdxf
 
 def parse_dxf(input_dxf_path: str, out_file_path: str | None = None):
     
-    all_points = get_polylines(input_dxf_path)
+    all_polylines = parse_polylines(
+        input_dxf_path,
+        filter_layers=['SCRAP_0']  # or None to grab everything
+    )
     stations = get_stations(input_dxf_path)
     offset_x, offset_y = get_offset(input_dxf_path, offset_idx=0)
     df = resample_and_index(
         stations=stations,
-        polylines=all_points,
+        polylines=all_polylines,
         x_off=offset_x,
         y_off=offset_y
     )
@@ -71,31 +74,51 @@ def get_stations(input_dxf_file: str) -> Dict:
     return stations
 
 
-def get_polylines(
-        input_dxf_file: str, 
-        target_layer: str = 'SCRAP_0'
-    ) -> List[List[Tuple]]:
+def parse_polylines(
+    input_dxf_file: str,
+    filter_layers: List[str] = None
+) -> List[Dict[str, object]]:
     """
-    Load all the polygonals lines drawn by the user. 
-
+    Read all POLYLINE entities in the DXF (optionally limited to certain layers)
+    and return their vertex coordinates *plus* their DXF styling attributes.
+    
     Returns
     -------
-    all_points: list
-        The point coordinates of all the lines.
+    polylines : list of dicts
+        Each dict has:
+          - 'points': List[Tuple[float, float]]     # the polyline vertices
+          - 'color': int                            # DXF color index (0 = BYLAYER)
+          - 'linetype': str                         # e.g. 'CONTINUOUS', 'DASHED'
+          - 'lineweight': int                       # in 1/100 mm (0 = BYLAYER)
+          - 'layer': str                            # layer name
     """
-    # Load the DXF file
     doc = ezdxf.readfile(input_dxf_file)
     msp = doc.modelspace()
-    all_points = []
+    result = []
 
-    # Iterate through the entities in the DXF file and filter by layer
-    for entity in msp:
-        if entity.dxf.layer == target_layer:
-            if entity.dxftype() == 'POLYLINE':
-                points = [(point[0], point[1]) for point in entity.points()]
-                all_points.append(points)
+    for entity in msp.query('POLYLINE'):
+        layer = entity.dxf.layer
+        if filter_layers and layer not in filter_layers:
+            continue
 
-    return all_points
+        # extract raw points
+        pts = [(pt[0], pt[1]) for pt in entity.points()]
+
+        # extract style attributes
+        color      = entity.dxf.color        # integer index, 0=BYLAYER
+        linetype   = entity.dxf.linetype     # e.g. 'CONTINUOUS', 'HIDDEN'
+        lineweight = entity.dxf.lineweight    # 0 = BYLAYER, else in 1/100 mm
+
+        result.append({
+            'points': pts,
+            'color': color,
+            'linetype': linetype,
+            'lineweight': lineweight,
+            'layer': layer,
+        })
+
+    return result
+
 
 
 def get_offset(input_dxf_file: str, offset_idx: int) -> Tuple[int, int]:
@@ -144,14 +167,19 @@ def resample_and_index(
     for idx, item in stations.items():
         links = item['links']
         x, y = item['point']
-        data.append([idx, links, x - x_off, y - y_off])
+        p_type = "station"
+        data.append([idx, links, x - x_off, y - y_off, p_type])
     
     for i, polyline in enumerate(polylines):
         
+        p_type = polyline['linetype']
+
         if resample_step:
-            polyline = polyline[::resample_step]
+            points = polyline['points'][::resample_step]
+        else:
+            points = polyline['points']
         
-        for j, (x, y) in enumerate(polyline):
+        for j, (x, y) in enumerate(points):
             node_id = f"{i}P{j}"
             links = []
             if j > 0:
@@ -159,8 +187,8 @@ def resample_and_index(
             if j < len(polyline) - 1:
                 links.append(f"{i}P{j+1}")
             link_str = "-".join(links)
-            data.append([node_id, link_str, x - x_off, y - y_off])
+            data.append([node_id, link_str, x - x_off, y - y_off, p_type])
 
-    df = pd.DataFrame(data, columns=["Node_Id", "Links", "X", "Y"])
+    df = pd.DataFrame(data, columns=["Node_Id", "Links", "X", "Y", "Type"])
     df["Links"] = df["Links"].fillna("-")
     return df

@@ -1,56 +1,74 @@
 from matplotlib.backends.backend_pdf import PdfPages
+from typing import Dict, List, Optional
 import matplotlib.pyplot as plt
-from typing import List
 import pandas as pd
 
 from cave_sketch.graphics import create_survey
 
 def draw_survey(
     title: str,
-    csv_map_path: str,
-    csv_section_path: str,
-    output_path: str,
-    excluded_nodes: List | None = None,
+    rule_length: float,
+    csv_map_path: Optional[str] = None,
+    csv_section_path: Optional[str] = None,
+    output_path: Optional[str] = None,
+    excluded_nodes: Optional[List] = None,
+    config: Dict = {} 
 ) -> None:
-    
     # Load the CSV files
-    map_df = pd.read_csv(csv_map_path)
-    section_df = pd.read_csv(csv_section_path)
+    map_df, section_df = None, None
 
+    if csv_map_path is not None:
+        map_df = pd.read_csv(csv_map_path)
+    if csv_section_path is not None:
+        section_df = pd.read_csv(csv_section_path)
+
+    # Create Fig
     fig = plt.figure(figsize=(8.27, 11.69))
+    fig.subplots_adjust(top=0.88)  # Leave more space for title
+    fig.suptitle(title, fontsize=16, y=0.95)
 
-    # Add title
-    fig.suptitle(title, fontsize=16, y=.95)
+    n_plots = int(map_df is not None) + int(section_df is not None)
+    rotation_deg = config["rotation_deg"]
+    index = 1
 
-    # Create 2 subplots
-    
-    ## 1. Map subplot
-    ax1 = plt.subplot(2, 1, 2)
-    create_survey(
-        map_df,
-        rule_flag=True,
-        north_flag=True,
-        excluded_nodes=excluded_nodes,
-        ax=ax1,
-        rule_orientation="horizontal"
+
+    ## 1. Section Subplot
+    if section_df is not None:
+        ax = plt.subplot(n_plots, 1, index)
+        create_survey(
+            section_df, 
+            rule_flag=True, 
+            rule_length=rule_length,
+            north_flag=False,
+            excluded_nodes=excluded_nodes,
+            rule_orientation="vertical",
+            config=config, 
+            ax=ax
         )
-    ax1.set_title("Pianta")
-    
-    ## 2. Section Subplot
-    ax2 = plt.subplot(2, 1, 1)
-    create_survey(
-        section_df, 
-        rule_flag=True, 
-        north_flag=False,
-        excluded_nodes=excluded_nodes,
-        ax=ax2,
-        rule_orientation="vertical"
-    )
-    ax2.set_title("Sezione")
+        ax.set_title("Sezione")
+        index += 1
+
+    ## 2. Map subplot
+    if map_df is not None:
+        ax = plt.subplot(2, 1, index)
+        create_survey(
+            map_df,
+            rule_flag=True,
+            rule_length=rule_length,
+            north_flag=True,
+            excluded_nodes=excluded_nodes,
+            rule_orientation="horizontal", 
+            rotation_deg=rotation_deg,
+            config=config,
+            ax=ax,
+            )
+        ax.set_title("Pianta")
 
     # Adjust layout to prevent overlap
-    plt.tight_layout()
-    plt.subplots_adjust(top=.9)
+    #plt.tight_layout()
+    #plt.subplots_adjust(top=.9)
 
     with PdfPages(output_path) as pdf:
         pdf.savefig(fig)
+
+    return fig

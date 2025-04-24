@@ -1,32 +1,49 @@
+from cave_sketch.graphics.utils import rotate_point
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.axes._axes import Axes
+import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
+from typing import Tuple
+import numpy as np
 
 def _add_north_arrow(
     ax: Axes,
-    base_x: int,
-    base_y: int,
-    arrow_len: int
-):
-    triangle_height = arrow_len / 2
-    triangle_base = triangle_height / 2
+    coords: Tuple[int, int],
+    arrow_len: int,
+    rotation_deg: float
+):  
+    n_segments = 5
+    unit_len = arrow_len / n_segments
+
+    x_o, y_o = coords
+    x_left, y_left = x_o - unit_len, y_o + unit_len
+    x_top, y_top = x_o, y_o + unit_len * n_segments
+    x_right, y_right = x_o + unit_len, y_o + unit_len
+
+    if rotation_deg !=0: 
+        center = (x_o, y_o + arrow_len / 2)
+        x_o, y_o = rotate_point((x_o, y_o), center, rotation_deg)
+        x_left, y_left = rotate_point((x_left, y_left), center, rotation_deg)
+        x_top, y_top = rotate_point((x_top, y_top), center, rotation_deg)
+        x_right, y_right = rotate_point((x_right, y_right), center, rotation_deg)
 
     # Draw black triangle
     ax.add_patch(
         plt.Polygon(
-            [[base_x, base_y], 
-             [base_x - triangle_base, base_y - triangle_height], 
-             [base_x, base_y - 2 / 3 * triangle_height],
-             [base_x + triangle_base, base_y - triangle_height]],
+            [[x_o, y_o], 
+             [x_right, y_right], 
+             [x_top, y_top]],
             closed=True, color='black'
         )
     )
-    # Add N label
-    ax.text(
-        base_x + 1,
-        base_y, 
-        "N",
-        fontsize=12, 
-        ha="center",
-        va="bottom",
-        color="black"
-    ) 
+    # Draw white triangle
+    ax.add_patch(
+        plt.Polygon(
+            [[x_o, y_o], 
+             [x_left, y_left], 
+             [x_top, y_top]],
+            closed=True, facecolor="white", edgecolor='black'
+        )
+    )
+
+    ax.add_patch(plt.Circle(center, arrow_len / 2, fill=False))
