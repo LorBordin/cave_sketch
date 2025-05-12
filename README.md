@@ -36,16 +36,26 @@ No Csurvey, no QGIS, no headaches.
 
 ## 📸 How To Use
 
-1. Export your sketches from TopoDroid as **.dxf** files.
-   *(We'll include screenshots here!)*
-2. Upload them on the app:
-   - 🗺️ Map DXF (optional)
-   - 🏔️ Section DXF (optional)
-3. Customize the settings (scale, text size, rotation, etc.)
-4. Click **✨ Generate Survey Plot**
-5. Download your **PDF** — or switch to the 🌍 _Map View_ tab to position it on satellite imagery.
+### 1. Export your sketches from TopoDroid as **.dxf** files
+   - From the project main window in TopoDroid, tap on the Sketch Editing button and select the cave map
+   -  Tap on 3 buttons on Top Left and tap export
+   - Select the DXF option and tap on `Save`
+   - In the same way export the cave section
 
-You can also add known GPS points for survey stations to georeference your map.
+<img src="imgs/map_export.jpg" width="200">
+<img src="imgs/export_format.jpg" width="200">
+<img src="imgs/section_export.jpg" width="200">
+
+
+### 2. 🗺️ Create the survey on the map
+   - Upload the exported DXF files on the app. Notice: there is no need to upload both files, in case you are interested only on the map or the section.
+   - Customize the settings (scale, text size, rotation, etc.)
+   - Click **✨ Generate Survey Plot**
+   - If you are satisfied, download your **PDF**!
+
+### 3. 🌍 Position the cave map on satellite imagery.
+   - add known GPS points for survey stations to georeference your map.
+   - ToDO
 
 ---
 
@@ -77,3 +87,12 @@ Help us make CaveSketch even better!
 - 🌍 Add support for .kml export (Google Earth)
 - ➕ Allow adding surveys to an existing .kml file (merge drawings)
 - 🧊 Draw and export 3D cave models
+
+
+# ToDO
+- add app screenshot
+- check position bug
+- add `requirements.txt`
+- deploy the app on the streamlit cloud
+- add README in italian
+- instructions on satelite imagery
