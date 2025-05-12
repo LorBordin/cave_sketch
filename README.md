@@ -43,9 +43,9 @@ No Csurvey, no QGIS, no headaches.
    - In the same way export the cave section
 
 <div style="display: flex; gap: 0; justify-content: space-between;">
-  <img src="imgs/map_export.jpg" style="width: 33.33%;">
-  <img src="imgs/export_format.jpg" style="width: 33.33%;">
-  <img src="imgs/section_export.jpg" style="width: 33.33%;">
+  <img src="imgs/map_export.jpg" style="width: 200px;">
+  <img src="imgs/export_format.jpg" style="width: 200px;">
+  <img src="imgs/section_export.jpg" style="width: 200px;">
 </div>
 
 
