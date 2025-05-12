@@ -1,4 +1,4 @@
-from cave_sketch.survey import draw_survey
+from cave_sketch.survey.survey import draw_survey
 from cave_sketch.parse_dxf import parse_dxf
 import argparse
 

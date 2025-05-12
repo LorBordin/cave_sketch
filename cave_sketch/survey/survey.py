@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from cave_sketch.graphics import create_survey
+from cave_sketch.survey.graphics import create_survey
 
 def draw_survey(
     title: str,
