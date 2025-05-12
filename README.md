@@ -42,9 +42,9 @@ No Csurvey, no QGIS, no headaches.
    - Select the DXF option and tap on `Save`
    - In the same way export the cave section
 
-<img src="imgs/map_export.jpg" width="200">
-<img src="imgs/export_format.jpg" width="200">
-<img src="imgs/section_export.jpg" width="200">
+<img src="imgs/map_export.jpg" width="100">
+<img src="imgs/export_format.jpg" width="100">
+<img src="imgs/section_export.jpg" width="100">
 
 
 ### 2. 🗺️ Create the survey on the map
