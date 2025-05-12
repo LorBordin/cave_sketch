@@ -42,7 +42,7 @@ No Csurvey, no QGIS, no headaches.
    - Select the DXF option and tap on `Save`
    - In the same way export the cave section
 
-<div style="display: flex; gap: 0; justify-content: space-between;">
+<div style="display: flex; gap: 10px; justify-content: space-between;">
   <img src="imgs/map_export.jpg" style="width: 200px;">
   <img src="imgs/export_format.jpg" style="width: 200px;">
   <img src="imgs/section_export.jpg" style="width: 200px;">
