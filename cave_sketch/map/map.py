@@ -78,7 +78,7 @@ def create_html_map(df: pd.DataFrame, output_path: str, map: Optional[Map] = Non
                     continue
                 
                 line_type = row["Type"]
-                color = STYLE_MAP[line_type]["color"]
+                color = STYLE_MAP.get(line_type, "L_wall")["color"]
                 weight = 1 if line_type == "L_wall" else .5
                 folium.PolyLine(
                     locations=[[lat_link, lon_link],[lat, lon]], 

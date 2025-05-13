@@ -9,6 +9,11 @@ STYLE_MAP = {
         "linestyle": "solid",
         "type": "line"
     },
+    "L_slope": {
+        "color": "black",
+        "linestyle": "solid",
+        "type": "line"
+    },
     "L_chimney": {
         "color": "indigo",
         "linestyle": (0, (1, 2)),
