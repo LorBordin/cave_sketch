@@ -57,7 +57,8 @@ No Csurvey, no QGIS, no headaches.
 
 ### 3. 🌍 Position the cave map on satellite imagery.
    - add known GPS points for survey stations to georeference your map.
-   - ToDO
+   - add as many knwon points as you want (the more the better)
+   - click on **🌍 Generate Geo Map** to generate a satelite view map.
 
 ---
 
@@ -92,9 +93,5 @@ Help us make CaveSketch even better!
 
 
 # ToDO
-- add app screenshot
-- check position bug
-- add `requirements.txt`
 - deploy the app on the streamlit cloud
 - add README in italian
-- instructions on satelite imagery

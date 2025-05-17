@@ -138,10 +138,6 @@ st.markdown("## 🌍 Position Cave on Map")
 
 st.markdown("Input known GPS coordinates for known survey stations.")
 
-# Function to update known points in session state
-def update_known_points():
-    pass  # No need to explicitly update as we're using st.session_state directly
-
 def validate_known_points(points):
     for pt in points:
         if not pt["station"].strip() or not pt["lat"] or not pt["lon"]:
@@ -155,16 +151,21 @@ for i, point in enumerate(st.session_state.known_points):
     point["lat"] = cols[1].number_input("Latitude", value=float(point["lat"] or 0), format="%0.6f", key=f"lat_{i}")
     point["lon"] = cols[2].number_input("Longitude", value=float(point["lon"] or 0), format="%0.6f", key=f"lon_{i}")
 
+
+def add_known_point():
+    st.session_state.known_points.append({"station": "", "lat": "", "lon": ""})
+    
+def remove_known_point():
+    if st.session_state.known_points:
+        st.session_state.known_points.pop()
+
 col1, col2 = st.columns([1, 1])  # You can tweak the ratio as needed
 
 with col1:
-    if st.button("➕ Add another known point"):
-        st.session_state.known_points.append({"station": "", "lat": "", "lon": ""})
+    st.button("➕ Add another known point", on_click=add_known_point)
 
 with col2:
-    if st.button("➖ Remove last known point"):
-        if st.session_state.known_points:
-            st.session_state.known_points.pop()
+    st.button("➖ Remove last known point", on_click=remove_known_point)
 
 if "html_map" not in st.session_state:
     st.session_state.html_map = None
