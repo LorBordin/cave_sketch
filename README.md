@@ -5,8 +5,7 @@
 **Draw your cave surveys in seconds — directly from TopoDroid!**  
 No more heavy tools, no more painful setups. Just DXF files, a browser, and your next expedition.
 
-🔗 **Try it now**: [CaveSketch Live App](https://your-deployed-app-url.com)  
-*(Replace this with the real URL!)*
+🔗 **Try it now**: [CaveSketch Live App](https://cave-sketch.streamlit.app/)  
 
 ---
 

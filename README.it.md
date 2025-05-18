@@ -5,7 +5,7 @@
 **Disegna le tue poligonali in pochi secondi — direttamente da TopoDroid!**
 Niente più software pesanti, niente più configurazioni complicate. Solo file DXF, un browser e la tua prossima spedizione.
 
-🔗 **Provalo subito**: [CaveSketch Live App](https://your-deployed-app-url.com)  
+🔗 **Provalo subito**: [CaveSketch Live App](https://cave-sketch.streamlit.app/)  
 (Sostituisci questo con l'URL reale!)
 
 ## 🚀 Cos'è CaveSketch?
