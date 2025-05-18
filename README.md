@@ -1,5 +1,7 @@
 # 🗺️ CaveSketch
 
+🌍 Available languages: [🇬🇧 English](README.md) | [🇮🇹 Italiano](README.it.md)
+
 **Draw your cave surveys in seconds — directly from TopoDroid!**  
 No more heavy tools, no more painful setups. Just DXF files, a browser, and your next expedition.
 
@@ -37,8 +39,8 @@ No Csurvey, no QGIS, no headaches.
 ## 📸 How To Use
 
 ### 1. Export your sketches from TopoDroid as **.dxf** files
-   - From the project main window in TopoDroid, tap on the Sketch Editing button and select the cave map
-   -  Tap on 3 buttons on Top Left and tap export
+   - From the project main window in TopoDroid, tap on the Sketch Editing button <img src="imgs/topodroid_icon.png" style="width: 20px;"> and select the cave map
+   -  Tap on 3 buttons on Top Left and tap `Export`
    - Select the DXF option and tap on `Save`
    - In the same way export the cave section
 
@@ -67,7 +69,7 @@ No Csurvey, no QGIS, no headaches.
 ### 🔧 Run Locally
 
 ```bash
-git clone https://github.com/your-username/cavesketch.git
+git clone https://github.com/LorBordin/cave_sketch.git
 cd cavesketch
 pip install -r requirements.txt
 streamlit run app.py
@@ -90,8 +92,3 @@ Help us make CaveSketch even better!
 - 🌍 Add support for .kml export (Google Earth)
 - ➕ Allow adding surveys to an existing .kml file (merge drawings)
 - 🧊 Draw and export 3D cave models
-
-
-# ToDO
-- deploy the app on the streamlit cloud
-- add README in italian
