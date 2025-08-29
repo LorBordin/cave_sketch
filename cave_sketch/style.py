@@ -5,7 +5,7 @@ STYLE_MAP = {
         "type": "line"
     },
     "L_wall": {
-        "color": "black",
+        "color": "Blue",
         "linestyle": "solid",
         "type": "line"
     },
