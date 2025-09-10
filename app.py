@@ -219,27 +219,23 @@ if generate_html_clicked:
     files_dir = st.session_state.files_dir
     html_path = files_dir / "survey.html"
 
-    if uploaded_html_map:
-        html_path.write_bytes(uploaded_html_map.read())
-        st.success("✅ Uploaded HTML map loaded!")
+    if not validate_known_points(st.session_state.known_points):
+        st.warning("⚠️ Please fill in all fields (Station ID, Latitude, Longitude) for each known point.")
+    elif not st.session_state.map_loaded:
+        st.warning("⚠️ Please load a map of the cave before creating the HTML Map.")
     else:
-        if not validate_known_points(st.session_state.known_points):
-            st.warning("⚠️ Please fill in all fields (Station ID, Latitude, Longitude) for each known point.")
-        elif not st.session_state.map_loaded:
-            st.warning("⚠️ Please load a map of the cave before creating the HTML Map.")
-        else:
-            # Use uploaded JSON maps if available
-            additional_json_maps = st.session_state.uploaded_json_paths if st.session_state.uploaded_json_paths else None
-            
-            html_map, json_path = draw_map(
-                map_path=str(st.session_state.map_csv), 
-                gps_points=st.session_state.known_points, 
-                output_path=str(html_path),
-                map_name="Current Cave",
-                additional_json_maps=additional_json_maps
-            )
-            st.session_state.current_json_path = json_path
-            st.success("✅ HTML Map generated!")
+        # Use uploaded JSON maps if available
+        additional_json_maps = st.session_state.uploaded_json_paths if st.session_state.uploaded_json_paths else None
+        
+        html_map, json_path = draw_map(
+            map_path=str(st.session_state.map_csv), 
+            gps_points=st.session_state.known_points, 
+            output_path=str(html_path),
+            map_name="Current Cave",
+            additional_json_maps=additional_json_maps
+        )
+        st.session_state.current_json_path = json_path
+        st.success("✅ HTML Map generated!")
 
     # Load and display the map
     if html_path.exists():

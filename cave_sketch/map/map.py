@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import List, Dict, Optional
 from folium import Map
 import pandas as pd
 import numpy as np
@@ -7,13 +7,8 @@ import json
 
 from cave_sketch.style import STYLE_MAP
 
-def draw_map(
-    map_path: str, 
-    gps_points: List[Dict], 
-    output_path: str, 
-    map_name: str = "Cave", 
-    additional_json_maps: Optional[List[str]] = None
-):
+def draw_map(map_path: str, gps_points: List[Dict], output_path: str, 
+             map_name: str = "Cave", additional_json_maps: Optional[List[str]] = None):
     """
     Create cave map from CSV data and optionally combine with additional JSON maps
     
@@ -44,8 +39,6 @@ def draw_map(
     html_map = create_html_map(json_maps_to_combine, output_path)
     
     return html_map, json_path
-
-
 
 def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
 
@@ -81,7 +74,6 @@ def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
 
     return df
 
-
 def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
     """Export map data as JSON for later combination"""
     df["Links"].fillna(" ", inplace=True)
@@ -91,7 +83,8 @@ def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
         "name": map_name,
         "center": df[["Latitude", "Longitude"]].mean().to_dict(),
         "nodes": {},
-        "lines": []
+        "lines": [],
+        "water_polygons": []
     }
     
     # Store nodes
@@ -102,8 +95,38 @@ def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
             "type": row["Type"]
         }
     
-    # Store lines
-    for _, row in df.iterrows():
+    # Separate water areas from regular lines
+    water_df = df[df["Type"] == "A_water"].copy()
+    non_water_df = df[df["Type"] != "A_water"].copy()
+    
+    # Process water polygons
+    if not water_df.empty:
+        # Group by polygon ID (prefix of Node_Id)
+        water_df['polygon_id'] = water_df['Node_Id'].str.extract(r'^(\d+)P')
+        
+        for polygon_id, group in water_df.groupby('polygon_id'):
+            # Sort by the numeric part after 'P' to maintain order
+            group = group.copy()
+            group['sort_key'] = group['Node_Id'].str.extract(r'P(\d+)').astype(int)
+            group = group.sort_values('sort_key')
+            
+            # Extract coordinates in order
+            coordinates = []
+            for _, row in group.iterrows():
+                coordinates.append([row['Latitude'], row['Longitude']])
+            
+            # Ensure polygon is closed (first point = last point)
+            if coordinates and coordinates[0] != coordinates[-1]:
+                coordinates.append(coordinates[0])
+            
+            if len(coordinates) >= 3:  # Valid polygon needs at least 3 points
+                map_data["water_polygons"].append({
+                    "coordinates": coordinates,
+                    "polygon_id": polygon_id
+                })
+    
+    # Store regular lines (non-water)
+    for _, row in non_water_df.iterrows():
         lat, lon = row['Latitude'], row['Longitude']
         for link in row['Links'].split('-'):
             if link and link in map_data["nodes"]:
@@ -120,17 +143,8 @@ def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
     
     return output_path
 
-
-def create_html_map(
-    json_paths: List[str], 
-    output_path: str, 
-    colors: Optional[List[str]] = None, 
-    map: Optional[Map] = None
-):
+def create_html_map(json_paths: List[str], output_path: str, map: Optional[Map] = None):
     """Create HTML map from JSON data files"""
-    if not colors:
-        colors = ['blue', 'red', 'green', 'purple', 'orange', 'darkred', 'lightred']
-    
     all_data = []
     all_centers = []
     
@@ -138,7 +152,6 @@ def create_html_map(
     for i, json_path in enumerate(json_paths):
         with open(json_path, 'r') as f:
             data = json.load(f)
-            data['color'] = colors[i % len(colors)]  # Assign different colors
             all_data.append(data)
             all_centers.append([data["center"]["Latitude"], data["center"]["Longitude"]])
     
@@ -168,24 +181,52 @@ def create_html_map(
     for map_data in all_data:
         feature_group = folium.FeatureGroup(name=map_data["name"])
         
+        # Add water polygons for this map (if any)
+        for water_polygon in map_data.get("water_polygons", []):
+            folium.Polygon(
+                locations=water_polygon["coordinates"],
+                color='blue',          # Border color
+                weight=0,              # No border (set to 0)
+                fillColor='blue',      # Fill color
+                fillOpacity=0.3,       # Transparent blue (30% opacity)
+                popup=f"{map_data['name']}: Water Area {water_polygon['polygon_id']}"
+            ).add_to(feature_group)
+
         # Add lines for this map
         for line in map_data["lines"]:
             line_type = line["type"]
-            # Use assigned color or fallback to STYLE_MAP if available
-            try:
-                color = STYLE_MAP.get(line_type)["color"] if len(all_data) == 1 else map_data['color']
-            except (NameError, TypeError, KeyError):
-                color = map_data['color']
             
-            weight = 2 if line_type == "L_wall" else 1
+            # Get style from STYLE_MAP, with fallback
+            style = STYLE_MAP.get(line_type, {"color": "black", "type": "line"})
             
-            folium.PolyLine(
-                locations=[[line["from"]["lat"], line["from"]["lon"]], 
-                          [line["to"]["lat"], line["to"]["lon"]]], 
-                color=color, 
-                weight=weight,
-                popup=f"{map_data['name']}: {line_type}"
-            ).add_to(feature_group)
+            # Use original colors from STYLE_MAP for line types
+            color = style.get("color", "black")
+            
+            # Set line weight based on type
+            weight = style.get("weight", 1)
+            
+            # Handle dashed lines (convert matplotlib linestyle to folium dash array)
+            dash_array = None
+            linestyle = style.get("linestyle", "solid")
+            if linestyle == (0, (1, 1)):  # L_pit
+                dash_array = "5,5"
+            elif linestyle == (0, (1, 2)):  # L_chimney, L_wall-presumed
+                dash_array = "3,7"
+            
+            # Create the polyline
+            line_options = {
+                'locations': [[line["from"]["lat"], line["from"]["lon"]], 
+                             [line["to"]["lat"], line["to"]["lon"]]],
+                'color': color,
+                'weight': weight,
+                'opacity': 0.8,
+                'popup': f"{map_data['name']}: {line_type}"
+            }
+            
+            if dash_array:
+                line_options['dashArray'] = dash_array
+            
+            folium.PolyLine(**line_options).add_to(feature_group)
         
         feature_group.add_to(map)
     
@@ -194,3 +235,8 @@ def create_html_map(
     map.save(output_path)
     
     return map
+
+# Standalone function for combining existing JSON maps (keeping for backward compatibility)
+def combine_maps_from_json(json_paths: List[str], output_path: str):
+    """Combine multiple JSON map exports into single HTML map"""
+    return create_html_map(json_paths, output_path)
