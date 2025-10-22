@@ -136,6 +136,7 @@ def get_offset(input_dxf_file: str, offset_idx: int) -> Tuple[int, int]:
             elif entity.dxftype() == "LINE" and offset_flag:
                 start = entity.dxf.start
                 return start.x, start.y
+    return 0, 0
 
 
 def resample_and_index(

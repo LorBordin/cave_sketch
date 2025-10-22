@@ -7,7 +7,7 @@ import os
 
 from cave_sketch.survey import draw_survey
 from cave_sketch.parse_dxf import parse_dxf
-from cave_sketch.map import draw_map
+from cave_sketch.satellite_view import draw_map
 
 st.set_page_config(page_title="Cave Survey Plot Generator", layout="centered")
 
@@ -47,7 +47,7 @@ st.markdown("## 📄 Upload your files")
 
 col1, col2 = st.columns(2)
 with col1:
-    map_file = st.file_uploader("Cave Map (.dxf)", type=["dxf"], key="map")
+    map_file = st.file_uploader("Cave Map (.dxf)", type=["dxf", "csv"], key="map")
 with col2:
     section_file = st.file_uploader("Cave Section (.dxf)", type=["dxf"], key="section")
 
@@ -87,9 +87,24 @@ if st.button("✨ Generate Survey Plot"):
         
         if map_file:
             map_file.seek(0)
-            map_path.write_bytes(map_file.read())
-            map_csv = files_dir / "map.csv"
-            map_df = parse_dxf(input_dxf_path=map_path, out_file_path=map_csv)
+            file_name = map_file.name.lower()
+        
+            if file_name.endswith(".dxf"):
+                # Save DXF file and parse it to CSV
+                map_path = files_dir / "map.dxf"
+                map_path.write_bytes(map_file.read())
+                map_csv = files_dir / "map.csv"
+                map_df = parse_dxf(input_dxf_path=map_path, out_file_path=map_csv)
+        
+            elif file_name.endswith(".csv"):
+                # Save CSV file directly
+                map_csv = files_dir / "map.csv"
+                map_csv.write_bytes(map_file.read())
+        
+            else:
+                st.error("Unsupported file type. Please upload a .dxf or .csv file.")
+                st.stop()
+
             st.session_state.map_loaded = True
             st.session_state.map_csv = map_csv
         
@@ -132,12 +147,25 @@ if st.session_state.cave_survey is not None:
             st.download_button("📥 Download PDF", f, file_name="survey.pdf", mime="application/pdf")
 
 # -------------------------------
-# 3. GPS Map Section (Updated)
+# 3. GPS Map Section
 # -------------------------------
 st.markdown("---")
 st.markdown("## 🌍 Position Cave on Map")
 
 st.markdown("Input known GPS coordinates for known survey stations.")
+
+# 🔹 NEW: Rotation angle input
+rotation_angle = st.number_input(
+    "🧭 Map rotation angle (degrees)",
+    min_value=-180.0,
+    max_value=180.0,
+    value=0.0,
+    step=1.0,
+    help="Rotate the cave map around its center. Positive = counterclockwise, negative = clockwise."
+)
+
+# Save it to session_state (optional, so it persists)
+st.session_state.rotation_angle = rotation_angle
 
 def validate_known_points(points):
     for pt in points:
@@ -232,7 +260,8 @@ if generate_html_clicked:
             gps_points=st.session_state.known_points, 
             output_path=str(html_path),
             map_name="Current Cave",
-            additional_json_maps=additional_json_maps
+            additional_json_maps=additional_json_maps,
+            rotation_angle=rotation_angle
         )
         st.session_state.current_json_path = json_path
         st.success("✅ HTML Map generated!")

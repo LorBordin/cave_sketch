@@ -29,6 +29,6 @@ if __name__ == "__main__":
     
 
     main(
-        map_dxf_file="../cave_survey/grotta_zocchi/grotta_zocchi-1p.dxf", #args.map_path,
-        section_dxf_path="../cave_survey/grotta_zocchi/grotta_zocchi-1s.dxf" #args.section_path
+        map_dxf_file="/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/monte_05_25/grotta_mittelbergferner-1p.dxf", #args.map_path,
+        section_dxf_path=".." #args.section_path
     )

@@ -1,4 +1,4 @@
-from cave_sketch.survey.graphics.utils import rotate_point
+from cave_sketch.features.geometry import rotate_point
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.axes._axes import Axes
 import matplotlib.image as mpimg
