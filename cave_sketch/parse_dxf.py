@@ -10,12 +10,21 @@ def parse_dxf(input_dxf_path: str, out_file_path: str | None = None):
     )
     stations = get_stations(input_dxf_path)
     offset_x, offset_y = get_offset(input_dxf_path, offset_idx=0)
+    blocks = get_features(input_dxf_path)  # <-- new part
+
     df = resample_and_index(
         stations=stations,
         polylines=all_polylines,
         x_off=offset_x,
         y_off=offset_y
     )
+
+    # Append BLOCK and B_ice information
+    if blocks:
+        blocks_df = pd.DataFrame(blocks)
+        blocks_df["X"] -= offset_x
+        blocks_df["Y"] -= offset_y
+        df = pd.concat([df, blocks_df], ignore_index=True)
 
     if out_file_path:
         df.to_csv(out_file_path)
@@ -193,3 +202,37 @@ def resample_and_index(
     df = pd.DataFrame(data, columns=["Node_Id", "Links", "X", "Y", "Type"])
     df["Links"] = df["Links"].fillna("-")
     return df
+
+def get_features(input_dxf_file: str) -> list[dict]:
+    """
+    Extract all INSERT entities for blocks named 'B_ice', 'B_snow' and 'BLOCK'.
+
+    Returns
+    -------
+    List of dicts:
+        - Node_Id : str (unique id for each block)
+        - Links   : str ('-')
+        - X, Y    : float
+        - Type    : str ('B_ice' or 'BLOCK')
+    """
+    import ezdxf
+    doc = ezdxf.readfile(input_dxf_file)
+    msp = doc.modelspace()
+
+    valid_block_names = {"B_ice", "BLOCK", 'B_snow'}
+    blocks = []
+
+    for entity in msp.query('INSERT'):
+        block_name = entity.dxf.name
+        if block_name in valid_block_names:
+            x, y = entity.dxf.insert.x, entity.dxf.insert.y
+            node_id = f"{block_name}_{len(blocks)}"
+            blocks.append({
+                "Node_Id": node_id,
+                "Links": "-",
+                "X": x,
+                "Y": y,
+                "Type": block_name,
+            })
+
+    return blocks

@@ -49,7 +49,7 @@ col1, col2 = st.columns(2)
 with col1:
     map_file = st.file_uploader("Cave Map (.dxf)", type=["dxf", "csv"], key="map")
 with col2:
-    section_file = st.file_uploader("Cave Section (.dxf)", type=["dxf"], key="section")
+    section_file = st.file_uploader("Cave Section (.dxf)", type=["dxf", "csv"], key="section")
 
 # Centra il titolo
 st.markdown("<h3>📝 Survey name</h3>", unsafe_allow_html=True)
@@ -87,16 +87,16 @@ if st.button("✨ Generate Survey Plot"):
         
         if map_file:
             map_file.seek(0)
-            file_name = map_file.name.lower()
+            map_file_name = map_file.name.lower()
         
-            if file_name.endswith(".dxf"):
+            if map_file_name.endswith(".dxf"):
                 # Save DXF file and parse it to CSV
                 map_path = files_dir / "map.dxf"
                 map_path.write_bytes(map_file.read())
                 map_csv = files_dir / "map.csv"
                 map_df = parse_dxf(input_dxf_path=map_path, out_file_path=map_csv)
         
-            elif file_name.endswith(".csv"):
+            elif map_file_name.endswith(".csv"):
                 # Save CSV file directly
                 map_csv = files_dir / "map.csv"
                 map_csv.write_bytes(map_file.read())
@@ -110,9 +110,18 @@ if st.button("✨ Generate Survey Plot"):
         
         if section_file:
             section_file.seek(0)
-            section_path.write_bytes(section_file.read())
-            section_csv = files_dir / "section.csv"
-            _ = parse_dxf(input_dxf_path=section_path, out_file_path=section_csv)
+            section_file_name = section_file.name.lower()
+
+            if section_file_name.endswith('.dxf'):
+                map_path = files_dir / "section.dxf"
+                section_path.write_bytes(section_file.read())
+                section_csv = files_dir / "section.csv"
+                _ = parse_dxf(input_dxf_path=section_path, out_file_path=section_csv)
+            
+            elif section_file_name.endswith(".csv"):
+                section_csv = files_dir / "section.csv"
+                section_csv.write_bytes(section_file.read())
+                
             st.session_state.section_csv = section_csv
         
         with st.spinner("🛠️ Creating survey plot..."):

@@ -6,7 +6,8 @@ import folium
 import json
 import math
 
-from cave_sketch.features.render_features import extract_features
+from cave_sketch.features.render_features import extract_features_from_json
+from cave_sketch.features.geometry import rotate_points    
 from cave_sketch.backend_renders import render_to_folium
 from cave_sketch.style import STYLE_MAP
 
@@ -25,19 +26,18 @@ def draw_map(
     rotation_angle: float = 0):
     """
     Create cave map from CSV data and optionally combine with additional JSON maps
-    
-    Args:
-        map_path: Path to CSV file with cave data
-        gps_points: List of GPS reference points
-        output_path: Path for HTML output
-        map_name: Name for the current map
-        additional_json_maps: List of paths to additional JSON map files to combine
-    
-    Returns:
-        tuple: (html_map, json_path) - The created map and path to JSON export
     """
     # Load and process the main map data
     map_df = pd.read_csv(map_path)
+    if rotation_angle != 0:
+        if rotation_angle != 0:
+            #center = np.array([map_df["X"].mean(), map_df["Y"].mean()])
+            mask=map_df["Node_Id"]=='13'
+            center = np.array([map_df[mask]["X"].mean(), map_df[mask]["Y"].mean()])
+            map_df[["X", "Y"]] = rotate_points(
+                map_df[["X", "Y"]].values, center, rotation_angle
+            )
+    
     map_df = cartesian_to_latlon(map_df, gps_points)
     
     # Export current map as JSON (different path to avoid conflicts)
@@ -49,9 +49,12 @@ def draw_map(
     if additional_json_maps:
         json_maps_to_combine.extend(additional_json_maps)
     
-    # Create HTML map from JSON data
-    html_map = create_html_map(json_maps_to_combine, output_path, rotation_angle=rotation_angle)
-    
+    # Create HTML map; only rotate the first JSON (the current one)
+    html_map = create_html_map(
+        json_maps_to_combine, 
+        output_path, 
+    )
+
     return html_map, json_path
 
 def _meters_per_degree_wgs84(lat_deg: float):
@@ -203,7 +206,7 @@ def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
                           "lon": map_data["nodes"][link]["lon"], "id": link},
                     "type": row["Type"]
                 })
-    
+
     # Save as JSON
     with open(output_path, 'w') as f:
         json.dump(map_data, f, indent=2)
@@ -214,39 +217,38 @@ def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
 def create_html_map(
     json_paths: List[str],
     output_path: str,
-    rotation_angle: float = 0
 ):
     """Create a Folium HTML map by combining multiple survey JSONs."""
+
     all_data = []
     centers = []
 
+    # ---- Load JSON maps ----
     for p in json_paths:
         with open(p, "r", encoding="utf-8") as f:
             d = json.load(f)
         all_data.append(d)
         centers.append([d["center"]["Latitude"], d["center"]["Longitude"]])
 
+    # ---- Compute overall center (after rotation if applied) ----
     overall_center = [
         sum(c[0] for c in centers) / len(centers),
         sum(c[1] for c in centers) / len(centers)
     ]
 
+    # ---- Create Folium map ----
     fmap = Map(location=overall_center, zoom_start=15, control_scale=True)
     folium.TileLayer(
         'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
         attr='Google', name='Google Satellite', overlay=False
     ).add_to(fmap)
 
-    for d in all_data:
-        features = extract_features(d, rotation_angle)
+    # ---- Render each dataset ----
+    for i, d in enumerate(all_data):
+        # Apply rotation only to the first dataset if requested
+        features = extract_features_from_json(d)
         render_to_folium(features, fmap, d["name"])
 
     folium.LayerControl().add_to(fmap)
     fmap.save(output_path)
     return fmap
-
-
-# Standalone function for combining existing JSON maps (keeping for backward compatibility)
-def combine_maps_from_json(json_paths: List[str], output_path: str):
-    """Combine multiple JSON map exports into single HTML map"""
-    return create_html_map(json_paths, output_path)

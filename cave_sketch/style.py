@@ -6,10 +6,10 @@ STYLE_MAP = {
             "weight": 1
         },
         "L_wall": {
-            "color": "black",
+            "color": "red",
             "linestyle": "solid",
             "type": "line",
-            "weight": 3,
+            "weight": 2,
         },
         "L_slope": {
             "color": "black",
@@ -45,5 +45,23 @@ STYLE_MAP = {
             "color": "blue",
             "alpha": 0.3,
             "type": "area"
+        },
+        "B_ice": {
+            "color": "deepskyblue",
+            "marker": ".",     
+            "markersize": 2,
+            "type": "point",
+        },
+        "B_snow": {
+            "color": "aliceblue",
+            "marker": "*",    
+            "markersize": 2,
+            "type": "point",
+        },
+        "BLOCK": {
+            "color": "saddlebrown",
+            "marker": "o",      # square marker
+            "markersize": 4,
+            "type": "point",
         },
     }

@@ -49,7 +49,7 @@ def _add_rule(
         )
     else:
         ax.text(
-            x_start - 1.5,  # distanza dal bordo sinistro della barra
+            x_start - 6,  # distanza dal bordo sinistro della barra
             y_start + scale_len / 2,
             f'{scale_len} m',
             ha='center',

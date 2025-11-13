@@ -57,7 +57,7 @@ def plot_3d_segments(segments):
 
 
 if __name__ == "__main__":
-    # 👉 Cambia il percorso con il tuo file
+    
     dxf_path = "/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/un_altro_buco_nell_acqua.dxf"
     segments = parse_dxf_lines(dxf_path)
     print(f"Letti {len(segments)} segmenti 3D")

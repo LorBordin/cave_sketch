@@ -168,18 +168,22 @@ if __name__ == "__main__":
     #    sys.exit(1)
 
     #df1_path, df2_path, node_id_df1, node_id_df2, output_path = sys.argv[1:6]
+    
+    section = True
+    suffix = 's' if section else 'p'
+    out_suffix = 'sezione' if section else 'pianta'
 
-    #df1_path = "/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/monte_05_25/grotta_mittelbergferner-1p.dxf"
-    #df2_path = "/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/intermezzo_monte_10_25/grotta_mittelbergferner-2-1p.dxf"
+    #df1_path = f"/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/surveys/monte_05_25/grotta_mittelbergferner-1{suffix}.dxf"
+    #df2_path = f"/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/surveys/intermezzo_monte_10_25/grotta_mittelbergferner-2-1{suffix}.dxf"
     #node_id_df1 = 30
     #node_id_df2 = 47
-    #output_path = "/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/monte_10_25/monte_10_25_pianta.csv"
+    #output_path = f"/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/surveys/monte_10_25/monte_10_25_{out_suffix}.csv"
 
-    df1_path = "/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/monte_10_25/monte_10_25_pianta.csv"
-    df2_path = "/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/valle_10_25/grotta_mittelbergferner-3-1p.dxf"
+    df1_path = f"/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/surveys/monte_10_25/monte_10_25_{out_suffix}.csv"
+    df2_path = f"/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/surveys/valle_10_25/grotta_mittelbergferner-3-1{suffix}.dxf"
     node_id_df1 = 31
     node_id_df2 = 54
-    output_path = "/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/full_10_25_pianta.csv"
+    output_path = f"/Users/bordil/projects/cave_survey/un_altro_buco_nell_acqua/surveys/full_10_25_{out_suffix}.csv"
 
     print(f"\n📂 Loading dataframes:\n - {df1_path}\n - {df2_path}\n")
     if df1_path.endswith('.dxf'):

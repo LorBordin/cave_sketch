@@ -28,7 +28,7 @@ def draw_survey(
     fig.suptitle(title, fontsize=16, y=0.95)
 
     n_plots = int(map_df is not None) + int(section_df is not None)
-    rotation_deg = config["rotation_deg"]
+    rotation_deg = config.get("rotation_deg", 0)
     index = 1
 
 
