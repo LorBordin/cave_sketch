@@ -1,29 +1,28 @@
-from typing import Dict, List, Optional
-from matplotlib.axes import Axes
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
+from typing import List, Optional, Tuple
 
-from cave_sketch.features.render_features import extract_features_from_df
-from cave_sketch.survey.graphics.north import _add_north_arrow
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
 from cave_sketch.backend_renders import render_to_matplotlib
 from cave_sketch.features.geometry import rotate_points
+from cave_sketch.features.render_features import extract_features_from_df
+from cave_sketch.survey.graphics.north import _add_north_arrow
 from cave_sketch.survey.graphics.rule import _add_rule
-from cave_sketch.style import STYLE_MAP
+
 
 def create_survey(
     df: pd.DataFrame,
     rule_flag: bool,
     north_flag: bool,
     config: dict,
-    rotation_deg: int = 0,
+    rotation_deg: float = 0,
     rule_orientation: str = "horizontal",
     rule_length: float = 20,
-    excluded_nodes: List[str] = None,
+    excluded_nodes: Optional[List[str]] = None,
     ax=None,
 ):
     """Draw survey on Matplotlib using backend renderer (non-destructive rotation)."""
-    import matplotlib.pyplot as plt
 
     if ax is None:
         ax = plt.gca()
@@ -36,7 +35,7 @@ def create_survey(
     # --- Apply rotation safely using shared helper ---
     if rotation_deg != 0:
         points = df[["X", "Y"]].values
-        center = np.array([df["X"].mean(), df["Y"].mean()])
+        center: Tuple[float, float] = (float(df["X"].mean()), float(df["Y"].mean()))
         df[["X", "Y"]] = rotate_points(points, center, rotation_deg)
 
     # --- Compute scale parameters ---
@@ -73,7 +72,7 @@ def create_survey(
 
     # --- Rule and North arrow as before ---
     if rule_flag:
-        xs, ys = df['X'].min(), df['Y'].min()
+        xs, ys = float(df['X'].min()), float(df['Y'].min())
         if rule_orientation == "horizontal":
             ys -= ref_scale * 0.1
         else:
@@ -83,10 +82,13 @@ def create_survey(
                   orientation=rule_orientation,
                   scale_len=rule_length,
                   scale_width=rule_w,
-                  segment_len=rule_length // 5)
+                  segment_len=rule_length / 5)
 
     if north_flag:
-        coord = (df['X'].min() + rule_length / 2, df['Y'].min() + ref_scale * 0.025)
+        coord: Tuple[float, float] = (
+            float(df['X'].min() + rule_length / 2),
+            float(df['Y'].min() + ref_scale * 0.025)
+        )
         arrow_len = ref_scale * 0.07
         _add_north_arrow(ax=ax, coords=coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
 

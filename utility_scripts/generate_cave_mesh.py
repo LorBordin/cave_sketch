@@ -1,7 +1,8 @@
-import numpy as np
+from collections import Counter
+
 import matplotlib.pyplot as plt
+import numpy as np
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-from collections import Counter, defaultdict
 from scipy.spatial import Delaunay
 
 # === CONFIG ===

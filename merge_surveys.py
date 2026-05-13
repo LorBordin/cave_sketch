@@ -23,12 +23,14 @@ Author: Lorenzo + ChatGPT
 Date: October 2025
 """
 
-import pandas as pd
 import re
 import sys
 
+import pandas as pd
+
 sys.path.append("../")
 from cave_sketch import parse_dxf
+
 
 def merge_cave_graphs(
     df1: pd.DataFrame,

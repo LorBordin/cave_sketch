@@ -1,6 +1,7 @@
-from cave_sketch.survey.survey import draw_survey
+
 from cave_sketch.parse_dxf import parse_dxf
-import argparse
+from cave_sketch.survey.survey import draw_survey
+
 
 def main(map_dxf_file, section_dxf_path):
 

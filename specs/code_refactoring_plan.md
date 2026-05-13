@@ -47,10 +47,10 @@ Steps:
 ```
 
 **Done when:**
-- [ ] `pyproject.toml` exists with all deps
-- [ ] `uv.lock` exists and is committed
-- [ ] `requirements.txt` is deleted
-- [ ] `uv run streamlit run app.py` launches the app without errors
+- [x] `pyproject.toml` exists with all deps
+- [x] `uv.lock` exists and is committed
+- [x] `requirements.txt` is deleted
+- [x] `uv run streamlit run app.py` launches the app without errors
 
 ---
 
@@ -74,9 +74,9 @@ Requirements:
 ```
 
 **Done when:**
-- [ ] `cave_sketch/dxf/models.py` exists
-- [ ] `mypy cave_sketch/dxf/models.py` passes with zero errors
-- [ ] No Streamlit import anywhere in the file
+- [x] `cave_sketch/dxf/models.py` exists
+- [x] `mypy cave_sketch/dxf/models.py` passes with zero errors
+- [x] No Streamlit import anywhere in the file
 
 ---
 
@@ -106,10 +106,10 @@ Requirements:
 ```
 
 **Done when:**
-- [ ] `cave_sketch/dxf/parser.py` exists with typed API
-- [ ] `tests/test_dxf_parser.py` has ≥3 tests, all passing via `uv run pytest tests/test_dxf_parser.py`
-- [ ] Old import path still works (shim in place)
-- [ ] `ruff check cave_sketch/dxf/parser.py` clean
+- [x] `cave_sketch/dxf/parser.py` exists with typed API
+- [x] `tests/test_dxf_parser.py` has ≥3 tests, all passing via `uv run pytest tests/test_dxf_parser.py`
+- [x] Old import path still works (shim in place)
+- [x] `ruff check cave_sketch/dxf/parser.py` clean
 
 ---
 
@@ -137,10 +137,10 @@ Requirements:
 ```
 
 **Done when:**
-- [ ] `cave_sketch/geo/georef.py` and `cave_sketch/geo/models.py` exist
-- [ ] `uv run pytest tests/test_georef.py` passes
-- [ ] `mypy cave_sketch/geo/` passes
-- [ ] `satellite_view.py` still works (imports the new function internally)
+- [x] `cave_sketch/geo/georef.py` and `cave_sketch/geo/models.py` exist
+- [x] `uv run pytest tests/test_georef.py` passes
+- [x] `mypy cave_sketch/geo/` passes
+- [x] `satellite_view.py` still works (imports the new function internally)
 
 ---
 
@@ -167,9 +167,9 @@ Requirements:
 ```
 
 **Done when:**
-- [ ] Three new files exist: `renderer.py`, `pdf.py`, `config.py`
-- [ ] `mypy cave_sketch/survey/` passes
-- [ ] App still runs end-to-end
+- [x] Three new files exist: `renderer.py`, `pdf.py`, `config.py`
+- [x] `mypy cave_sketch/survey/` passes
+- [x] App still runs end-to-end
 
 ---
 
@@ -194,9 +194,9 @@ Do not change any UI behaviour — only reorganise state initialisation.
 ```
 
 **Done when:**
-- [ ] `app/session.py` exists
-- [ ] No `if "X" not in st.session_state` pattern anywhere outside `session.py`
-- [ ] App runs without errors
+- [x] `app/session.py` exists
+- [x] No `if "X" not in st.session_state` pattern anywhere outside `session.py`
+- [x] App runs without errors
 
 ---
 
@@ -228,11 +228,11 @@ Requirements:
 ```
 
 **Done when:**
-- [ ] `app/pages/1_survey_plot.py` and `2_satellite_map.py` exist
-- [ ] Each page file < 80 lines
-- [ ] No bare `except:` remaining
-- [ ] No `st.stop()` inside button handlers
-- [ ] Both features work end-to-end
+- [x] `app/pages/1_survey_plot.py` and `2_satellite_map.py` exist
+- [x] Each page file < 80 lines
+- [x] No bare `except:` remaining
+- [x] No `st.stop()` inside button handlers
+- [x] Both features work end-to-end
 
 ---
 

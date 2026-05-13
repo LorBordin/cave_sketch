@@ -1,8 +1,10 @@
-from typing import Any, Dict, Optional, List
-import pandas as pd
 import re
+from typing import Any, Dict, List, Optional
+
+import pandas as pd
 
 from cave_sketch.style import STYLE_MAP
+
 
 def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
     """

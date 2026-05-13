@@ -1,7 +1,9 @@
-import math
 import copy
-import numpy as np
+import math
 from typing import List, Tuple, Union
+
+import numpy as np
+
 
 def rotate_points(
     points: Union[List[float], List[List[float]], np.ndarray],

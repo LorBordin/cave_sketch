@@ -1,8 +1,9 @@
-from typing import Any, Dict, List
 import xml.etree.ElementTree as ET
+from typing import Any, Dict, List
 from xml.dom import minidom
 
 from cave_sketch.features.render_features import extract_features_from_json
+
 
 def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") -> str:
     """

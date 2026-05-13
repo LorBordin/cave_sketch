@@ -1,9 +1,11 @@
-from matplotlib.backends.backend_pdf import PdfPages
 from typing import Dict, List, Optional
+
 import matplotlib.pyplot as plt
 import pandas as pd
+from matplotlib.backends.backend_pdf import PdfPages
 
 from cave_sketch.survey.graphics import create_survey
+
 
 def draw_survey(
     title: str,
@@ -13,7 +15,7 @@ def draw_survey(
     output_path: Optional[str] = None,
     excluded_nodes: Optional[List] = None,
     config: Dict = {} 
-) -> None:
+) -> plt.Figure:
     # Load the CSV files
     map_df, section_df = None, None
 

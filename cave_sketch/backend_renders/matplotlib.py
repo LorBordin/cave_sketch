@@ -1,12 +1,8 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Polygon as MplPolygon
 from typing import Dict, Optional
 
 import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as MplPolygon
-from typing import Dict, Optional
+
 
 def render_to_matplotlib(
     features: Dict[str, list],

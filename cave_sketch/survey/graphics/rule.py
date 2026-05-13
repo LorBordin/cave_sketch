@@ -1,28 +1,30 @@
-from matplotlib.axes._axes import Axes
+
 import matplotlib.pyplot as plt
-from typing import Tuple
+from matplotlib.axes._axes import Axes
+
 
 def _add_rule(
         ax: Axes,
-        x_start: int,
-        y_start: int,
-        scale_len: int = 20,
-        scale_width: int = .5,
-        segment_len: int = 4,
+        x_start: float,
+        y_start: float,
+        scale_len: float = 20.0,
+        scale_width: float = 0.5,
+        segment_len: float = 4.0,
         orientation: str = "horizontal"
 ) -> None:
     # Add rule as a segmented rectangle
     assert scale_len % segment_len == 0, "Scale_length should be evenly divisible by segment_length"
-    num_segments = scale_len // segment_len
+    num_segments = int(scale_len // segment_len)
 
     for i in range(num_segments):
-        
+        dx: float = 0.0
+        dy: float = 0.0
         if orientation == "horizontal":
-            dx, dy = segment_len, 0
+            dx, dy = segment_len, 0.0
             width, height = segment_len, scale_width
         
         elif orientation == "vertical":
-            dx, dy = 0, segment_len
+            dx, dy = 0.0, segment_len
             width, height = scale_width, segment_len
 
         segment_color = "black" if i % 2 == 0 else "white"

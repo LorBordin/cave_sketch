@@ -1,6 +1,6 @@
 import numpy as np
 import pyvista as pv
-from scipy.spatial import Delaunay
+
 
 def parse_dxf_lines(file_path):
     """

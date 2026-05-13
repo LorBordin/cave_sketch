@@ -1,5 +1,7 @@
 from typing import Dict
+
 import folium
+
 
 def render_to_folium(features: Dict[str, list], folium_map, layer_name: str):
     """Render extracted features onto a Folium map."""

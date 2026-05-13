@@ -1,7 +1,8 @@
-from typing import List
 import json
+from typing import List
 
 from cave_sketch.backend_renders import render_to_kml
+
 
 def main(json_paths: List[str], output_path: str):
 

@@ -1,15 +1,14 @@
-from typing import List, Dict, Optional
-from folium import Map
-import pandas as pd
-import numpy as np
-import folium
 import json
-import math
+from typing import Dict, List, Optional
 
-from cave_sketch.features.render_features import extract_features_from_json
-from cave_sketch.features.geometry import rotate_points    
+import folium
+import numpy as np
+import pandas as pd
+from folium import Map
+
 from cave_sketch.backend_renders import render_to_folium
-from cave_sketch.style import STYLE_MAP
+from cave_sketch.features.geometry import rotate_points
+from cave_sketch.features.render_features import extract_features_from_json
 
 # WGS84 constants
 _A = 6378137.0
