@@ -261,9 +261,9 @@ Requirements:
 ```
 
 **Done when:**
-- [ ] `.github/workflows/ci.yml` exists and is valid YAML
-- [ ] Workflow passes on a clean push (check Actions tab)
-- [ ] README has a CI badge
+- [x] `.github/workflows/ci.yml` exists and is valid YAML
+- [x] Workflow passes on a clean push (check Actions tab)
+- [x] README has a CI badge
 
 ---
 
