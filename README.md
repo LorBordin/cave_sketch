@@ -70,8 +70,8 @@ No Csurvey, no QGIS, no headaches.
 ```bash
 git clone https://github.com/LorBordin/cave_sketch.git
 cd cavesketch
-pip install -r requirements.txt
-streamlit run app.py
+uv sync
+uv run streamlit run app/app.py
 ```
 
 ### 🧑‍💻 Contribute
