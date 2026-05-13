@@ -1,6 +1,5 @@
 import streamlit as st
-
-from app.session import init_session
+from session import init_session
 
 st.set_page_config(page_title="CaveSketch", layout="centered")
 init_session()

@@ -1,10 +1,10 @@
 from pathlib import Path
 
 import streamlit as st
+from components.file_upload import file_uploader_component
+from components.settings_panel import settings_panel_component
+from session import init_session
 
-from app.components.file_upload import file_uploader_component
-from app.components.settings_panel import settings_panel_component
-from app.session import init_session
 from cave_sketch.survey import draw_survey
 
 st.set_page_config(page_title="Cave Survey Plot", layout="centered")

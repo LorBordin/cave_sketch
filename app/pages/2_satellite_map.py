@@ -1,8 +1,8 @@
 
 import streamlit as st
+from components.gps_points import gps_points_editor_component, validate_known_points
+from session import init_session
 
-from app.components.gps_points import gps_points_editor_component, validate_known_points
-from app.session import init_session
 from cave_sketch.satellite_view import draw_map
 
 st.set_page_config(page_title="Satellite Map", layout="centered")
@@ -42,13 +42,13 @@ if col1.button("🌍 Generate HTML Map"):
         )
         st.session_state.current_json_path = json_path
         st.session_state.html_path = html_path
-        with open(html_path, "r") as f:
-            st.session_state.html_content = f.read()
+        with open(html_path, "r") as html_f:
+            st.session_state.html_content = html_f.read()
 
 if "html_content" in st.session_state and st.session_state.html_content:
     st.components.v1.html(st.session_state.html_content, height=400)
     col1, col2 = st.columns(2)
-    with open(st.session_state.html_path, "rb") as f:
-        col1.download_button("📥 Download HTML Map", f, file_name="cave_map.html")
-    with open(st.session_state.current_json_path, "rb") as f:
-        col2.download_button("📥 Download JSON Map", f, file_name="cave_map.json")
+    with open(st.session_state.html_path, "rb") as html_f_bin:
+        col1.download_button("📥 Download HTML Map", html_f_bin, file_name="cave_map.html")
+    with open(st.session_state.current_json_path, "rb") as json_f_bin:
+        col2.download_button("📥 Download JSON Map", json_f_bin, file_name="cave_map.json")
