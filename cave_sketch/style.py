@@ -1,6 +1,6 @@
 STYLE_MAP = {
         "station": {
-            "color": "gray",
+            "color": "black", #"gray",
             "linestyle": "solid",
             "type": "line",
             "weight": 1
