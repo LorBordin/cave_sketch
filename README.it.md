@@ -1,5 +1,7 @@
 # 🗺️ CaveSketch
 
+[![CI](https://github.com/LorBordin/cave_sketch/actions/workflows/ci.yml/badge.svg)](https://github.com/LorBordin/cave_sketch/actions/workflows/ci.yml)
+
 🌍 Lingue disponibili: [🇬🇧 English](README.md) | [🇮🇹 Italiano](README.it.md)
 
 **Disegna le tue poligonali in pochi secondi — direttamente da TopoDroid!**

@@ -1,7 +1,6 @@
 from typing import List, Optional, Tuple
 
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
 from cave_sketch.backend_renders import render_to_matplotlib
@@ -44,7 +43,6 @@ def create_survey(
     ref_scale = max(x_span, y_span)
     mz = config.get("marker_zoom", 10)
     tz = config.get("text_zoom", 10)
-    lz = config.get("line_width_zoom", 10)
     marker_size = 300 / ref_scale * 10**mz
     text_size = 300 / ref_scale * 10**tz
 
@@ -93,7 +91,8 @@ def create_survey(
         _add_north_arrow(ax=ax, coords=coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
 
     ax.axis('equal')
-    ax.set_xticks([]); ax.set_yticks([])
+    ax.set_xticks([])
+    ax.set_yticks([])
     for s in ax.spines.values():
         s.set_visible(False)
 

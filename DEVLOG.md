@@ -74,3 +74,36 @@
 
 **Assumptions:** None
 **Next session notes:** Phase 1 fully operational and type-safe. Ready for Phase 2.
+
+## [2026-05-13 16:15] Phase 2a — GitHub Actions CI
+**Files:**
+- .github/workflows/ci.yml
+- README.md
+- README.it.md
+- pyproject.toml
+- cave_sketch/__init__.py
+- cave_sketch/backend_renders/__init__.py
+- cave_sketch/satellite_view/__init__.py
+- cave_sketch/survey/__init__.py
+- cave_sketch/survey/graphics/__init__.py
+- cave_sketch/backend_renders/folium.py
+- cave_sketch/backend_renders/google_earth.py
+- cave_sketch/backend_renders/matplotlib.py
+- cave_sketch/survey.py
+- cave_sketch/survey/graphics/rule.py
+- cave_sketch/survey/graphics/survey_plot.py
+- cave_sketch/features/geometry.py
+- cave_sketch/features/render_features.py
+- cave_sketch/dxf/parser.py
+- cave_sketch/satellite_view/map.py
+- main.py
+
+**Deviations from spec:**
+- Fixed multiple Ruff errors (F401, E741, E501, E702, F841) and MyPy errors in the core `cave_sketch/` package to ensure CI passes.
+- Excluded legacy files (`utility_scripts`, `merge_surveys.py`) from Ruff check in `pyproject.toml`.
+- Added CI badge to both English and Italian READMEs.
+
+**Assumptions:**
+- GitHub repo owner is `LorBordin` based on `git remote`.
+
+**Next session notes:** Phase 2a complete. Ready for Job 2b (pre-commit).

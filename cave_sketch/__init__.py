@@ -1,1 +1,1 @@
-from .parse_dxf import parse_dxf
+from .parse_dxf import parse_dxf as parse_dxf

@@ -70,7 +70,6 @@ def _add_rule_auto(
 ):
     # Compute automatic scale length based on the x_range
     x_len = x_range[1] - x_range[0]
-    y_len = y_range[1] - y_range[0]
     scale_len = int(x_len * scale_ratio)
 
     # Round scale_len to nearest multiple of 20

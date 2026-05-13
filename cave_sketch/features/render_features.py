@@ -11,7 +11,7 @@ def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
     Extract abstract features (lines, polygons) with styles, 
     independent of rendering backend.
     """
-    features = {"lines": [], "polygons": []}
+    features: Dict[str, List[Dict[str, Any]]] = {"lines": [], "polygons": []}
 
     # Polygons
     for water_polygon in map_data.get("water_polygons", []):
@@ -52,12 +52,14 @@ def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
     return features
 
 
-def extract_features_from_df(df: pd.DataFrame, excluded_nodes: Optional[List[str]] = None) -> Dict[str, list]:
-    """Convert survey DataFrame into backend-agnostic drawable features, including area reconstruction."""
+def extract_features_from_df(
+    df: pd.DataFrame, excluded_nodes: Optional[List[str]] = None
+) -> Dict[str, list]:
+    """Convert survey DataFrame into backend-agnostic drawable features."""
     if excluded_nodes is None:
         excluded_nodes = []
 
-    features = {"lines": [], "polygons": [], "points": []}  # <-- added points
+    features: Dict[str, list] = {"lines": [], "polygons": [], "points": []}  # <-- added points
 
     # --- 1️⃣ Handle standard line features (walls, shots, etc.) ---
     for _, row in df.iterrows():
@@ -81,7 +83,11 @@ def extract_features_from_df(df: pd.DataFrame, excluded_nodes: Optional[List[str
 
         # --- Existing line logic ---
         if pd.notna(links) and links != "-":
-            neighbors = [nbr.strip() for nbr in links.split("-") if nbr.strip() and nbr not in excluded_nodes]
+            neighbors = [
+                nbr.strip()
+                for nbr in links.split("-")
+                if nbr.strip() and nbr not in excluded_nodes
+            ]
             for nbr in neighbors:
                 nbr_row = df[df["Node_Id"] == nbr]
                 if nbr_row.empty:
@@ -101,9 +107,11 @@ def extract_features_from_df(df: pd.DataFrame, excluded_nodes: Optional[List[str
     # --- 2️⃣ Handle area features (A_water, A_sediment, etc.) ---
     area_rows = df[df["Type"].str.startswith("A_")].copy()
     if not area_rows.empty:
-        area_rows["Area_ID"] = area_rows["Node_Id"].apply(
-            lambda x: re.match(r"(\d+)P\d+", x).group(1) if re.match(r"(\d+)P\d+", x) else None
-        )
+        def get_area_id(node_id: str) -> Optional[str]:
+            m = re.match(r"(\d+)P\d+", node_id)
+            return m.group(1) if m else None
+
+        area_rows["Area_ID"] = area_rows["Node_Id"].apply(get_area_id)
 
         for area_id, group in area_rows.groupby("Area_ID"):
             if len(group) < 3:

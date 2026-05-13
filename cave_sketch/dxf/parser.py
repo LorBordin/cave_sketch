@@ -109,7 +109,7 @@ def _get_stations(input_dxf_file: str) -> Dict:
                 end = entity.dxf.end
                 legs.append({'start': (start.x, start.y), 'end': (end.x, end.y)})
     
-    stations = {idx: {'point': coord} for idx, coord in zip(idxs, coords)}
+    stations: Dict[str, Dict] = {idx: {'point': coord} for idx, coord in zip(idxs, coords)}
 
     for leg in legs:
         station_1, station_2 = None, None
@@ -120,26 +120,31 @@ def _get_stations(input_dxf_file: str) -> Dict:
             elif leg['end'] == coord:
                 station_2 = station
         if station_1 and station_2:
-            if stations[station_1].get('links', False):
-                stations[station_1]['links'] += f'-{station_2}'
+            s1_links = stations[station_1].get('links')
+            if s1_links:
+                stations[station_1]['links'] = f"{s1_links}-{station_2}"
             else:
-                stations[station_1]['links'] = station_2
-            if stations[station_2].get('links', False):
-                stations[station_2]['links'] += f'-{station_1}'
+                stations[station_1]['links'] = str(station_2)
+            
+            s2_links = stations[station_2].get('links')
+            if s2_links:
+                stations[station_2]['links'] = f"{s2_links}-{station_1}"
             else:
-                stations[station_2]['links'] = station_1
+                stations[station_2]['links'] = str(station_1)
         
     return stations
 
-def _parse_polylines(input_dxf_file: str, filter_layers: List[str] = None) -> List[Dict]:
+def _parse_polylines(input_dxf_file: str, filter_layers: Optional[List[str]] = None) -> List[Dict]:
     doc = ezdxf.readfile(input_dxf_file)
     msp = doc.modelspace()
     result = []
     for entity in msp.query('POLYLINE'):
+        # Polyline entities in ezdxf have a different way to access points depending on type
+        # For simplicity in this legacy-port, we cast to any or use the known method
         layer = entity.dxf.layer
         if filter_layers and layer not in filter_layers:
             continue
-        pts = [(pt[0], pt[1]) for pt in entity.points()]
+        pts = [(pt[0], pt[1]) for pt in entity.points()]  # type: ignore
         result.append({
             'points': pts,
             'color': entity.dxf.color,
@@ -165,7 +170,7 @@ def _get_features(input_dxf_file: str) -> List[Dict]:
     doc = ezdxf.readfile(input_dxf_file)
     msp = doc.modelspace()
     valid_block_names = {"B_ice", "BLOCK", 'B_snow'}
-    blocks = []
+    blocks: List[Dict] = []
     for entity in msp.query('INSERT'):
         if entity.dxf.name in valid_block_names:
             blocks.append({

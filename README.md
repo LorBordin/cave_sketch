@@ -1,5 +1,7 @@
 # 🗺️ CaveSketch
 
+[![CI](https://github.com/LorBordin/cave_sketch/actions/workflows/ci.yml/badge.svg)](https://github.com/LorBordin/cave_sketch/actions/workflows/ci.yml)
+
 🌍 Available languages: [🇬🇧 English](README.md) | [🇮🇹 Italiano](README.it.md)
 
 **Draw your cave surveys in seconds — directly from TopoDroid!**  

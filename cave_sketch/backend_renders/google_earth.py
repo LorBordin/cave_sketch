@@ -71,19 +71,19 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
 
 
         # --- LINES ---
-        for l in features.get("lines", []):
+        for line_feat in features.get("lines", []):
             placemark = ET.SubElement(folder, "Placemark")
-            ET.SubElement(placemark, "name").text = l.get("popup", "")
+            ET.SubElement(placemark, "name").text = line_feat.get("popup", "")
             style = ET.SubElement(placemark, "Style")
             line_style = ET.SubElement(style, "LineStyle")
             ET.SubElement(line_style, "color").text = rgba_to_kml_color(
-                l.get("color", "black")
+                line_feat.get("color", "black")
             )
-            ET.SubElement(line_style, "width").text = str(l.get("weight", 2))
+            ET.SubElement(line_style, "width").text = str(line_feat.get("weight", 2))
             line = ET.SubElement(placemark, "LineString")
             ET.SubElement(line, "tessellate").text = "1"
             coord_str = " ".join(
-                [f"{lon},{lat},0" for lat, lon in l["coords"]]
+                [f"{lon},{lat},0" for lat, lon in line_feat["coords"]]
             )
             ET.SubElement(line, "coordinates").text = coord_str
 

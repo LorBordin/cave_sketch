@@ -64,7 +64,7 @@ def _df_to_survey(df: pd.DataFrame, name: str) -> CaveSurvey:
     survey = CaveSurvey(name=name)
     for _, row in df.iterrows():
         links_str = row["Links"]
-        links = [l.strip() for l in str(links_str).split("-") if l.strip() and l != "-"]
+        links = [link.strip() for link in str(links_str).split("-") if link.strip() and link != "-"]
         survey.points.append(SurveyPoint(
             id=str(row["Node_Id"]),
             x=float(row["X"]),

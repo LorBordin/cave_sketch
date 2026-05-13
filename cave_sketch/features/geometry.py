@@ -77,7 +77,9 @@ def rotate_cave_map(data, angle_deg, center_lat, center_lon):
 
     # Rotate the center
     if "center" in rotated and "Latitude" in rotated["center"]:
-        new_lat, new_lon = rotate_point(rotated["center"]["Latitude"], rotated["center"]["Longitude"])
+        new_lat, new_lon = rotate_point(
+            rotated["center"]["Latitude"], rotated["center"]["Longitude"]
+        )
         rotated["center"]["Latitude"], rotated["center"]["Longitude"] = new_lat, new_lon
 
     # Rotate nodes

@@ -37,24 +37,24 @@ def render_to_matplotlib(
         ax.add_patch(poly)
 
     # ---- LINES ----
-    for l in features.get("lines", []):
-        coords = np.array(l["coords"], dtype=float)
+    for line in features.get("lines", []):
+        coords = np.array(line["coords"], dtype=float)
         xs = coords[:, 1]
         ys = coords[:, 0]
 
-        base_weight = l.get("weight", 1)
+        base_weight = line.get("weight", 1)
         lw = base_weight * zoom_factor / ref_scale
         lw = np.clip(lw, 0.2, 4)
 
-        dash = l.get("dash")
+        dash = line.get("dash")
         linestyle = (0, tuple(dash)) if dash else "solid"
 
         ax.plot(xs, ys,
-                color=l.get("color", "black"),
+                color=line.get("color", "black"),
                 linewidth=lw,
                 linestyle=linestyle,
                 alpha=0.9,
-                zorder=l.get("zorder", 2))
+                zorder=line.get("zorder", 2))
 
     # ---- POINTS (B_ice, BLOCK, etc.) ----
     for p in features.get("points", []):

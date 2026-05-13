@@ -19,16 +19,16 @@ def render_to_folium(features: Dict[str, list], folium_map, layer_name: str):
         ).add_to(fg)
 
     # ---- LINES ----
-    for l in features.get("lines", []):
+    for line in features.get("lines", []):
         kwargs = dict(
-            locations=l["coords"],
-            color=l.get("color", "black"),
-            weight=l.get("weight", 1),
+            locations=line["coords"],
+            color=line.get("color", "black"),
+            weight=line.get("weight", 1),
             opacity=0.8,
-            popup=l.get("popup", "")
+            popup=line.get("popup", "")
         )
-        if l.get("dash"):
-            kwargs["dashArray"] = ",".join(map(str, l["dash"]))
+        if line.get("dash"):
+            kwargs["dashArray"] = ",".join(map(str, line["dash"]))
         folium.PolyLine(**kwargs).add_to(fg)
 
     # ---- POINTS (B_ice, BLOCK, etc.) ----

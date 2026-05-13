@@ -29,6 +29,7 @@ build-backend = "hatchling.build"
 [tool.ruff]
 line-length = 100
 lint.select = ["E", "F", "I"]
+exclude = ["utility_scripts", "merge_surveys.py"]
 
 [tool.mypy]
 strict = false

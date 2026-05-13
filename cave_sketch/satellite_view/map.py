@@ -29,13 +29,13 @@ def draw_map(
     # Load and process the main map data
     map_df = pd.read_csv(map_path)
     if rotation_angle != 0:
-        if rotation_angle != 0:
-            #center = np.array([map_df["X"].mean(), map_df["Y"].mean()])
-            mask=map_df["Node_Id"]=='13'
-            center = np.array([map_df[mask]["X"].mean(), map_df[mask]["Y"].mean()])
-            map_df[["X", "Y"]] = rotate_points(
-                map_df[["X", "Y"]].values, center, rotation_angle
-            )
+        mask = map_df["Node_Id"] == '13'
+        center_x = map_df[mask]["X"].mean()
+        center_y = map_df[mask]["Y"].mean()
+        center = (float(center_x), float(center_y))
+        map_df[["X", "Y"]] = rotate_points(
+            map_df[["X", "Y"]].values, center, rotation_angle
+        )
     
     map_df = cartesian_to_latlon(map_df, gps_points)
     
