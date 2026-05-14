@@ -1,0 +1,29 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.1
+    hooks:
+    -   id: ruff
+        args: [--fix]
+    -   id: ruff-format
+
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.14.1
+    hooks:
+    -   id: mypy
+        args: [--ignore-missing-imports]
+        files: ^cave_sketch/
+        additional_dependencies:
+        -   ezdxf==1.4.1
+        -   folium==0.19.5
+        -   matplotlib==3.10.3
+        -   numpy==2.2.5
+        -   pandas==2.2.3
+        -   streamlit==1.45.1

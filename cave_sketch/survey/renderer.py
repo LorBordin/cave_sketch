@@ -10,20 +10,20 @@ from cave_sketch.survey.graphics.survey_plot import create_survey
 
 
 def render_survey(
-    survey: CaveSurvey, 
-    config: SurveyConfig, 
+    survey: CaveSurvey,
+    config: SurveyConfig,
     section_survey: Optional[CaveSurvey] = None,
-    excluded_nodes: Optional[List[str]] = None
+    excluded_nodes: Optional[List[str]] = None,
 ) -> Figure:
     """
     Render a cave survey plot (plan and optionally section) using matplotlib.
-    
+
     Args:
         survey: The plan view CaveSurvey.
         config: Rendering configuration.
         section_survey: Optional section view CaveSurvey.
         excluded_nodes: List of node IDs to exclude from rendering.
-        
+
     Returns:
         A matplotlib Figure object.
     """
@@ -41,7 +41,7 @@ def render_survey(
         "marker_zoom": config.marker_zoom,
         "text_zoom": config.text_zoom,
         "line_width_zoom": config.line_width_zoom,
-        "rotation_deg": config.rotation_deg
+        "rotation_deg": config.rotation_deg,
     }
 
     # 1. Section Subplot
@@ -56,7 +56,7 @@ def render_survey(
             excluded_nodes=excluded_nodes,
             rule_orientation="vertical",
             config=config_dict,
-            ax=ax
+            ax=ax,
         )
         ax.set_title("Sezione")
         index += 1
@@ -78,6 +78,7 @@ def render_survey(
     ax.set_title("Pianta")
 
     return fig
+
 
 def _survey_to_df(survey: CaveSurvey) -> pd.DataFrame:
     """Helper to convert CaveSurvey model to DataFrame for legacy rendering."""

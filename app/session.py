@@ -22,6 +22,7 @@ class AppState(TypedDict):
     current_json_path: Optional[Path]
     uploaded_json_paths: List[str]
 
+
 def init_session() -> None:
     """Initialize all session state keys with default values if they are missing."""
     if "files_dir" not in st.session_state:
@@ -41,12 +42,13 @@ def init_session() -> None:
         "html_content": None,
         "html_path": None,
         "current_json_path": None,
-        "uploaded_json_paths": []
+        "uploaded_json_paths": [],
     }
 
     for key, val in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = val
+
 
 def get_state() -> AppState:
     """Type-safe helper to get the session state."""

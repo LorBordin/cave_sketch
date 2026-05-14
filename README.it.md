@@ -7,7 +7,7 @@
 **Disegna le tue poligonali in pochi secondi — direttamente da TopoDroid!**
 Niente più software pesanti, niente più configurazioni complicate. Solo file DXF, un browser e la tua prossima spedizione.
 
-🔗 **Provalo subito**: [CaveSketch Live App](https://cave-sketch.streamlit.app/)  
+🔗 **Provalo subito**: [CaveSketch Live App](https://cave-sketch.streamlit.app/)
 (Sostituisci questo con l'URL reale!)
 
 ## 🚀 Cos'è CaveSketch?
@@ -21,7 +21,7 @@ Che tu sia sul campo o appena tornato al campo base, puoi:
 
 Niente Csurvey, niente QGIS, niente mal di testa.
 
---- 
+---
 
 ## 🧭 Funzionalità
 
@@ -47,10 +47,10 @@ Niente Csurvey, niente QGIS, niente mal di testa.
 - Scegli l'opzione DXF e tocca `Save`.
 - Allo stesso modo esporta anche la sezione della grotta.
 
-<div style="display: flex; gap: 10px; justify-content: space-between;"> 
-    <img src="imgs/map_export.jpg" style="width: 200px;"> 
-    <img src="imgs/export_format.jpg" style="width: 200px;"> 
-    <img src="imgs/section_export.jpg" style="width: 200px;"> 
+<div style="display: flex; gap: 10px; justify-content: space-between;">
+    <img src="imgs/map_export.jpg" style="width: 200px;">
+    <img src="imgs/export_format.jpg" style="width: 200px;">
+    <img src="imgs/section_export.jpg" style="width: 200px;">
 </div>
 
 ### 2. 🗺️ Crea il rilievo su mappa
@@ -64,18 +64,29 @@ Niente Csurvey, niente QGIS, niente mal di testa.
 - Puoi aggiungere quanti punti vuoi (più sono, meglio è).
 - Clicca su **🌍 Generate Geo Map** per generare la mappa con vista satellitare.
 
---- 
+---
 
 ## 💻 Per sviluppatori
 
-### 🔧 Esegui localmente
+### 🔧 Configurazione per lo sviluppo
 
-```bash
-git clone https://github.com/LorBordin/cave_sketch.git
-cd cavesketch
-pip install -r requirements.txt
-streamlit run app.py
-```
+1. **Clona il repository**:
+   ```bash
+   git clone https://github.com/LorBordin/cave_sketch.git
+   cd cave_sketch
+   ```
+2. **Installa le dipendenze**:
+   ```bash
+   uv sync
+   ```
+3. **Installa i pre-commit hook**:
+   ```bash
+   uv run pre-commit install
+   ```
+4. **Esegui l'app**:
+   ```bash
+   uv run streamlit run app/app.py
+   ```
 
 ### 🧑‍💻 Contribuisci
 Hai trovato un bug? Hai un'idea? Le pull request sono benvenute!

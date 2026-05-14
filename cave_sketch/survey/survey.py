@@ -1,10 +1,13 @@
+from pathlib import Path
 from typing import Dict, List, Optional
 
-import matplotlib.pyplot as plt
 import pandas as pd
-from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.figure import Figure
 
-from cave_sketch.survey.graphics import create_survey
+from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
+from cave_sketch.survey.config import SurveyConfig
+from cave_sketch.survey.pdf import export_pdf
+from cave_sketch.survey.renderer import render_survey
 
 
 def draw_survey(
@@ -14,63 +17,64 @@ def draw_survey(
     csv_section_path: Optional[str] = None,
     output_path: Optional[str] = None,
     excluded_nodes: Optional[List] = None,
-    config: Dict = {} 
-) -> plt.Figure:
-    # Load the CSV files
-    map_df, section_df = None, None
+    config: Dict = {},
+) -> Figure:
+    """
+    Backward-compatible shim for drawing a cave survey.
+    """
+    survey = None
+    if csv_map_path:
+        survey = _df_to_survey(pd.read_csv(csv_map_path), title)
 
-    if csv_map_path is not None:
-        map_df = pd.read_csv(csv_map_path)
-    if csv_section_path is not None:
-        section_df = pd.read_csv(csv_section_path)
+    section_survey = None
+    if csv_section_path:
+        section_survey = _df_to_survey(pd.read_csv(csv_section_path), f"{title} Section")
 
-    # Create Fig
-    fig = plt.figure(figsize=(8.27, 11.69))
-    fig.subplots_adjust(top=0.88)  # Leave more space for title
-    fig.suptitle(title, fontsize=16, y=0.95)
+    if not survey and not section_survey:
+        raise ValueError("At least one survey path (map or section) must be provided.")
 
-    n_plots = int(map_df is not None) + int(section_df is not None)
-    rotation_deg = config.get("rotation_deg", 0)
-    index = 1
+    # If only section is provided, use it as primary for render_survey for now
+    if not survey and section_survey:
+        survey = section_survey
+        section_survey = None
 
+    assert survey is not None
 
-    ## 1. Section Subplot
-    if section_df is not None:
-        ax = plt.subplot(n_plots, 1, index)
-        create_survey(
-            section_df, 
-            rule_flag=True, 
-            rule_length=rule_length,
-            north_flag=False,
-            excluded_nodes=excluded_nodes,
-            rule_orientation="vertical",
-            config=config, 
-            ax=ax
-        )
-        ax.set_title("Sezione")
-        index += 1
+    render_config = SurveyConfig(
+        rule_length=rule_length,
+        rotation_deg=config.get("rotation_deg", 0.0),
+        show_details=config.get("show_details", True),
+        marker_zoom=config.get("marker_zoom", 0.0),
+        text_zoom=config.get("text_zoom", 0.0),
+        line_width_zoom=config.get("line_width_zoom", 0.0),
+    )
 
-    ## 2. Map subplot
-    if map_df is not None:
-        ax = plt.subplot(2, 1, index)
-        create_survey(
-            map_df,
-            rule_flag=True,
-            rule_length=rule_length,
-            north_flag=True,
-            excluded_nodes=excluded_nodes,
-            rule_orientation="horizontal", 
-            rotation_deg=rotation_deg,
-            config=config,
-            ax=ax,
-            )
-        ax.set_title("Pianta")
+    fig = render_survey(
+        survey=survey,
+        config=render_config,
+        section_survey=section_survey,
+        excluded_nodes=excluded_nodes,
+    )
 
-    # Adjust layout to prevent overlap
-    #plt.tight_layout()
-    #plt.subplots_adjust(top=.9)
-
-    with PdfPages(output_path) as pdf:
-        pdf.savefig(fig)
+    if output_path:
+        export_pdf(fig, Path(output_path))
 
     return fig
+
+
+def _df_to_survey(df: pd.DataFrame, name: str) -> CaveSurvey:
+    """Helper to convert a survey DataFrame back to a CaveSurvey model."""
+    survey = CaveSurvey(name=name)
+    for _, row in df.iterrows():
+        links_str = row["Links"]
+        links = [link.strip() for link in str(links_str).split("-") if link.strip() and link != "-"]
+        survey.points.append(
+            SurveyPoint(
+                id=str(row["Node_Id"]),
+                x=float(row["X"]),
+                y=float(row["Y"]),
+                point_type=str(row["Type"]),
+                links=links,
+            )
+        )
+    return survey

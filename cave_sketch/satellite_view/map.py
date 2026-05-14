@@ -16,45 +16,46 @@ _F = 1.0 / 298.257223563
 _E2 = _F * (2 - _F)
 _DEG2RAD = np.pi / 180.0
 
+
 def draw_map(
-    map_path: str, 
-    gps_points: List[Dict], 
-    output_path: str, 
-    map_name: str = "Cave", 
+    map_path: str,
+    gps_points: List[Dict],
+    output_path: str,
+    map_name: str = "Cave",
     additional_json_maps: Optional[List[str]] = None,
-    rotation_angle: float = 0):
+    rotation_angle: float = 0,
+):
     """
     Create cave map from CSV data and optionally combine with additional JSON maps
     """
     # Load and process the main map data
     map_df = pd.read_csv(map_path)
     if rotation_angle != 0:
-        mask = map_df["Node_Id"] == '13'
+        mask = map_df["Node_Id"] == "13"
         center_x = map_df[mask]["X"].mean()
         center_y = map_df[mask]["Y"].mean()
         center = (float(center_x), float(center_y))
-        map_df[["X", "Y"]] = rotate_points(
-            map_df[["X", "Y"]].values, center, rotation_angle
-        )
-    
+        map_df[["X", "Y"]] = rotate_points(map_df[["X", "Y"]].values, center, rotation_angle)
+
     map_df = cartesian_to_latlon(map_df, gps_points)
-    
+
     # Export current map as JSON (different path to avoid conflicts)
-    json_output_path = output_path.replace('.html', '.json')
+    json_output_path = output_path.replace(".html", ".json")
     json_path = export_map_data(map_df, map_name, json_output_path)
-    
+
     # Prepare list of all JSON maps to combine
     json_maps_to_combine = [json_path]
     if additional_json_maps:
         json_maps_to_combine.extend(additional_json_maps)
-    
+
     # Create HTML map; only rotate the first JSON (the current one)
     html_map = create_html_map(
-        json_maps_to_combine, 
-        output_path, 
+        json_maps_to_combine,
+        output_path,
     )
 
     return html_map, json_path
+
 
 def _meters_per_degree_wgs84(lat_deg: float):
     """
@@ -66,7 +67,7 @@ def _meters_per_degree_wgs84(lat_deg: float):
     one_minus_e2_sin2 = 1.0 - _E2 * sinlat**2
 
     # meridional radius of curvature
-    M = _A * (1 - _E2) / (one_minus_e2_sin2 ** 1.5)
+    M = _A * (1 - _E2) / (one_minus_e2_sin2**1.5)
     # prime vertical radius of curvature
     N = _A / np.sqrt(one_minus_e2_sin2)
 
@@ -99,7 +100,7 @@ def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
         df[lon_col] = np.nan
 
         # find anchor row (where Node_Id equals the station id)
-        mask_anchor = df['Node_Id'].astype(str) == Idx
+        mask_anchor = df["Node_Id"].astype(str) == Idx
         if not mask_anchor.any():
             # anchor not found: skip this point but keep NaNs
             print(f"[warn] anchor Node_Id {Idx} not found in dataframe — skipping anchor {Idx}")
@@ -107,8 +108,8 @@ def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
 
         # choose the first matching row as offset origin
         anchor_idx = np.flatnonzero(mask_anchor)[0]
-        offset_x = float(df.loc[anchor_idx, 'X'])
-        offset_y = float(df.loc[anchor_idx, 'Y'])
+        offset_x = float(df.loc[anchor_idx, "X"])
+        offset_y = float(df.loc[anchor_idx, "Y"])
 
         # compute local meters-per-degree at lat_0
         m_per_deg_lat, m_per_deg_lon = _meters_per_degree_wgs84(lat_0)
@@ -120,8 +121,8 @@ def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
         # compute lat/lon for all rows using the linear approx
         # dy = Y - offset_y  (north displacement)
         # dx = X - offset_x  (east displacement)
-        dy = df['Y'].to_numpy(dtype=float) - offset_y
-        dx = df['X'].to_numpy(dtype=float) - offset_x
+        dy = df["Y"].to_numpy(dtype=float) - offset_y
+        dx = df["X"].to_numpy(dtype=float) - offset_x
 
         df[lat_col] = lat_0 + (dy / m_per_deg_lat)
         df[lon_col] = lon_0 + (dx / m_per_deg_lon)
@@ -146,70 +147,74 @@ def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
 def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
     """Export map data as JSON for later combination"""
     df["Links"].fillna(" ", inplace=True)
-    
+
     # Prepare data structure
     map_data = {
         "name": map_name,
         "center": df[["Latitude", "Longitude"]].mean().to_dict(),
         "nodes": {},
         "lines": [],
-        "water_polygons": []
+        "water_polygons": [],
     }
-    
+
     # Store nodes
     for _, row in df.iterrows():
-        map_data["nodes"][row['Node_Id']] = {
-            "lat": row['Latitude'],
-            "lon": row['Longitude'],
-            "type": row["Type"]
+        map_data["nodes"][row["Node_Id"]] = {
+            "lat": row["Latitude"],
+            "lon": row["Longitude"],
+            "type": row["Type"],
         }
-    
+
     # Separate water areas from regular lines
     water_df = df[df["Type"] == "A_water"].copy()
     non_water_df = df[df["Type"] != "A_water"].copy()
-    
+
     # Process water polygons
     if not water_df.empty:
         # Group by polygon ID (prefix of Node_Id)
-        water_df['polygon_id'] = water_df['Node_Id'].str.extract(r'^(\d+)P')
-        
-        for polygon_id, group in water_df.groupby('polygon_id'):
+        water_df["polygon_id"] = water_df["Node_Id"].str.extract(r"^(\d+)P")
+
+        for polygon_id, group in water_df.groupby("polygon_id"):
             # Sort by the numeric part after 'P' to maintain order
             group = group.copy()
-            group['sort_key'] = group['Node_Id'].str.extract(r'P(\d+)').astype(int)
-            group = group.sort_values('sort_key')
-            
+            group["sort_key"] = group["Node_Id"].str.extract(r"P(\d+)").astype(int)
+            group = group.sort_values("sort_key")
+
             # Extract coordinates in order
             coordinates = []
             for _, row in group.iterrows():
-                coordinates.append([row['Latitude'], row['Longitude']])
-            
+                coordinates.append([row["Latitude"], row["Longitude"]])
+
             # Ensure polygon is closed (first point = last point)
             if coordinates and coordinates[0] != coordinates[-1]:
                 coordinates.append(coordinates[0])
-            
+
             if len(coordinates) >= 3:  # Valid polygon needs at least 3 points
-                map_data["water_polygons"].append({
-                    "coordinates": coordinates,
-                    "polygon_id": polygon_id
-                })
-    
+                map_data["water_polygons"].append(
+                    {"coordinates": coordinates, "polygon_id": polygon_id}
+                )
+
     # Store regular lines (non-water)
     for _, row in non_water_df.iterrows():
-        lat, lon = row['Latitude'], row['Longitude']
-        for link in row['Links'].split('-'):
+        lat, lon = row["Latitude"], row["Longitude"]
+        for link in row["Links"].split("-"):
             if link and link in map_data["nodes"]:
-                map_data["lines"].append({
-                    "from": {"lat": lat, "lon": lon, "id": row['Node_Id']},
-                    "to": {"lat": map_data["nodes"][link]["lat"], 
-                          "lon": map_data["nodes"][link]["lon"], "id": link},
-                    "type": row["Type"]
-                })
+                map_data["lines"].append(
+                    {
+                        "from": {"lat": lat, "lon": lon, "id": row["Node_Id"]},
+                        "to": {
+                            "lat": map_data["nodes"][link]["lat"],
+                            "lon": map_data["nodes"][link]["lon"],
+                            "id": link,
+                        },
+                        "type": row["Type"],
+                    }
+                )
 
     # Save as JSON
-    with open(output_path, 'w') as f:
+    with open(output_path, "w") as f:
         json.dump(map_data, f, indent=2)
-    
+
     return output_path
 
 
@@ -232,14 +237,16 @@ def create_html_map(
     # ---- Compute overall center (after rotation if applied) ----
     overall_center = [
         sum(c[0] for c in centers) / len(centers),
-        sum(c[1] for c in centers) / len(centers)
+        sum(c[1] for c in centers) / len(centers),
     ]
 
     # ---- Create Folium map ----
     fmap = Map(location=overall_center, zoom_start=15, control_scale=True)
     folium.TileLayer(
-        'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-        attr='Google', name='Google Satellite', overlay=False
+        "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+        attr="Google",
+        name="Google Satellite",
+        overlay=False,
     ).add_to(fmap)
 
     # ---- Render each dataset ----

@@ -1,16 +1,15 @@
-
 import matplotlib.pyplot as plt
 from matplotlib.axes._axes import Axes
 
 
 def _add_rule(
-        ax: Axes,
-        x_start: float,
-        y_start: float,
-        scale_len: float = 20.0,
-        scale_width: float = 0.5,
-        segment_len: float = 4.0,
-        orientation: str = "horizontal"
+    ax: Axes,
+    x_start: float,
+    y_start: float,
+    scale_len: float = 20.0,
+    scale_width: float = 0.5,
+    segment_len: float = 4.0,
+    orientation: str = "horizontal",
 ) -> None:
     # Add rule as a segmented rectangle
     assert scale_len % segment_len == 0, "Scale_length should be evenly divisible by segment_length"
@@ -22,7 +21,7 @@ def _add_rule(
         if orientation == "horizontal":
             dx, dy = segment_len, 0.0
             width, height = segment_len, scale_width
-        
+
         elif orientation == "vertical":
             dx, dy = 0.0, segment_len
             width, height = scale_width, segment_len
@@ -35,38 +34,39 @@ def _add_rule(
                 height,
                 color=segment_color,
                 ec="black",
-                lw=.5
+                lw=0.5,
             )
         )
 
     # Add label
-    if orientation == 'horizontal':
+    if orientation == "horizontal":
         ax.text(
             x_start + scale_len / 2,
             y_start - 2,
-            f'{scale_len} m',
-            ha='center',
-            va='top',
-            fontsize=10
+            f"{scale_len} m",
+            ha="center",
+            va="top",
+            fontsize=10,
         )
     else:
         ax.text(
             x_start - 6,  # distanza dal bordo sinistro della barra
             y_start + scale_len / 2,
-            f'{scale_len} m',
-            ha='center',
-            va='center',
+            f"{scale_len} m",
+            ha="center",
+            va="center",
             fontsize=10,
-            rotation=90
+            rotation=90,
         )
+
 
 def _add_rule_auto(
     ax: Axes,
     x_range: tuple[float, float],
     y_range: tuple[float, float],
     ax_position: str = "bottom",  # or "left"
-    scale_ratio: float = 0.1,     # how much of the x-range the rule should cover
-    segment_len: int = 4
+    scale_ratio: float = 0.1,  # how much of the x-range the rule should cover
+    segment_len: int = 4,
 ):
     # Compute automatic scale length based on the x_range
     x_len = x_range[1] - x_range[0]
@@ -86,7 +86,7 @@ def _add_rule_auto(
         y_start=y_start,
         scale_len=scale_len,
         segment_len=segment_len,
-        orientation="horizontal"
+        orientation="horizontal",
     )
 
     return x_start, y_start, scale_len

@@ -5,10 +5,7 @@ from matplotlib.patches import Polygon as MplPolygon
 
 
 def render_to_matplotlib(
-    features: Dict[str, list],
-    ax,
-    layer_name: str = "",
-    config: Optional[Dict] = None
+    features: Dict[str, list], ax, layer_name: str = "", config: Optional[Dict] = None
 ):
     """
     Render extracted features onto a Matplotlib Axes with stable line scaling.
@@ -49,12 +46,15 @@ def render_to_matplotlib(
         dash = line.get("dash")
         linestyle = (0, tuple(dash)) if dash else "solid"
 
-        ax.plot(xs, ys,
-                color=line.get("color", "black"),
-                linewidth=lw,
-                linestyle=linestyle,
-                alpha=0.9,
-                zorder=line.get("zorder", 2))
+        ax.plot(
+            xs,
+            ys,
+            color=line.get("color", "black"),
+            linewidth=lw,
+            linestyle=linestyle,
+            alpha=0.9,
+            zorder=line.get("zorder", 2),
+        )
 
     # ---- POINTS (B_ice, BLOCK, etc.) ----
     for p in features.get("points", []):
@@ -62,7 +62,7 @@ def render_to_matplotlib(
 
         # interpret 'size' as diameter in points, not area
         size_pts = p.get("size", 6)
-        s_area = size_pts ** 2 * 0.5  # dampen to avoid huge circles
+        s_area = size_pts**2 * 0.5  # dampen to avoid huge circles
 
         marker = p.get("marker", "o")
         color = p.get("color", "black")
@@ -72,24 +72,23 @@ def render_to_matplotlib(
             print("ICE")
 
         ax.scatter(
-            x, y,
+            x,
+            y,
             s=s_area,
             c=color,
             marker=marker,
             edgecolors="none",
             alpha=0.9,
-            zorder=p.get("zorder", 3)
+            zorder=p.get("zorder", 3),
         )
 
         # Optional text label
         if config.get("show_labels", False):
             ax.text(
-                x, y, p.get("popup", ""),
-                fontsize=5, ha="left", va="bottom",
-                color=color, zorder=4
+                x, y, p.get("popup", ""), fontsize=5, ha="left", va="bottom", color=color, zorder=4
             )
 
     if layer_name:
         ax.set_title(layer_name, fontsize=10)
 
-    ax.set_aspect('equal', 'datalim')
+    ax.set_aspect("equal", "datalim")

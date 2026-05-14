@@ -107,3 +107,22 @@
 - GitHub repo owner is `LorBordin` based on `git remote`.
 
 **Next session notes:** Phase 2a complete. Ready for Job 2b (pre-commit).
+
+## [2026-05-14 10:27] Phase 2b — Pre-commit hooks
+**Files:**
+- pyproject.toml
+- uv.lock
+- .pre-commit-config.yaml
+- cave_sketch/survey/survey.py
+- cave_sketch/survey.py (deleted)
+- README.md
+- README.it.md
+- specs/code_refactoring_plan.md
+
+**Deviations from spec:**
+- Resolved a duplicate module conflict by moving the `draw_survey` shim from `cave_sketch/survey.py` to `cave_sketch/survey/survey.py` and deleting the former.
+- Added an assertion in `draw_survey` to satisfy Mypy's type checking.
+- Updated `README.it.md` to use `uv` instead of `pip` for consistency with Phase 0a.
+
+**Assumptions:** None
+**Next session notes:** Phase 2 complete. Ready for Phase 3 (New features).

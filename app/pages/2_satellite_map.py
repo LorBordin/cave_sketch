@@ -1,4 +1,3 @@
-
 import streamlit as st
 from components.gps_points import gps_points_editor_component, validate_known_points
 from session import init_session
@@ -38,7 +37,7 @@ if col1.button("🌍 Generate HTML Map"):
             output_path=str(html_path),
             map_name="Current Cave",
             additional_json_maps=st.session_state.uploaded_json_paths,
-            rotation_angle=rotation_angle
+            rotation_angle=rotation_angle,
         )
         st.session_state.current_json_path = json_path
         st.session_state.html_path = html_path

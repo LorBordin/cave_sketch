@@ -116,15 +116,15 @@ def plot_with_pyvista(points, simplices):
     # Create the PolyData mesh
     # After creating your PyVista mesh
     mesh = pv.PolyData(points, faces)
-    
+
     # Clean and smooth the surface
     mesh = mesh.clean()
     smooth_mesh = mesh.smooth(n_iter=50, relaxation_factor=0.1)
-    
+
     # Compute volume
     volume = smooth_mesh.volume
     print(f"Estimated enclosed volume: {volume:.2f} m³")
-    
+
     # Plot and save a screenshot
     plotter = pv.Plotter()
     plotter.add_mesh(smooth_mesh, color="tan", show_edges=False, smooth_shading=True)

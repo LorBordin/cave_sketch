@@ -9,7 +9,7 @@ def rotate_points(
     points: Union[List[float], List[List[float]], np.ndarray],
     center: Union[List[float], Tuple[float, float]],
     angle_deg: float,
-    mode: str = "cartesian"
+    mode: str = "cartesian",
 ) -> np.ndarray:
     """
     Rotate one or more 2D points around a center by a given angle (degrees).
@@ -47,6 +47,7 @@ def rotate_points(
 
     # Return same shape as input (single point or list of points)
     return result[0] if np.ndim(points) == 1 else result
+
 
 def rotate_cave_map(data, angle_deg, center_lat, center_lon):
     """

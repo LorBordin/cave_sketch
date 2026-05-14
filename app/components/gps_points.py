@@ -5,9 +5,9 @@ def gps_points_editor_component():
     """Component for editing known GPS points."""
     st.markdown("### 📍 Known GPS Points")
     st.markdown("Input known GPS coordinates for known survey stations.")
-    
+
     known_points = st.session_state.known_points
-    
+
     for i, point in enumerate(known_points):
         st.markdown(f"**Known Point {i + 1}**")
         cols = st.columns(3)
@@ -30,6 +30,7 @@ def gps_points_editor_component():
         if st.button("➖ Remove last known point") and len(st.session_state.known_points) > 0:
             st.session_state.known_points.pop()
             st.rerun()
+
 
 def validate_known_points():
     """Validate that all known points have required fields."""

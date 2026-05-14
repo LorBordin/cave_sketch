@@ -170,7 +170,7 @@ if __name__ == "__main__":
     #    sys.exit(1)
 
     #df1_path, df2_path, node_id_df1, node_id_df2, output_path = sys.argv[1:6]
-    
+
     section = True
     suffix = 's' if section else 'p'
     out_suffix = 'sezione' if section else 'pianta'

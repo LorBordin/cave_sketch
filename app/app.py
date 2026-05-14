@@ -6,7 +6,7 @@ init_session()
 
 st.title("🗺️ CaveSketch")
 st.markdown("""
-Welcome to **CaveSketch**, your mobile-friendly tool for generating cave survey plots 
+Welcome to **CaveSketch**, your mobile-friendly tool for generating cave survey plots
 and satellite overlays.
 
 ### 🧭 Navigation
@@ -23,6 +23,7 @@ with st.sidebar:
     st.info("Select a page above to get started.")
     if st.button("🗑️ Clear Session Files"):
         import shutil
+
         shutil.rmtree(st.session_state.files_dir, ignore_errors=True)
         st.session_state.clear()
         st.rerun()

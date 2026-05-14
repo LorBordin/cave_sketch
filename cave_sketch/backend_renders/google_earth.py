@@ -29,7 +29,7 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
         }
         base = color_map.get(color.lower(), "ffffffff")
         alpha = int(opacity * 255)
-        return f"{alpha:02x}{base[2:]}" 
+        return f"{alpha:02x}{base[2:]}"
 
     # Process each JSON
     for map_data in map_list:
@@ -41,34 +41,31 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
         for p in features.get("polygons", []):
             placemark = ET.SubElement(folder, "Placemark")
             ET.SubElement(placemark, "name").text = p.get("popup", "")
-        
+
             # ---- STYLE ----
             style = ET.SubElement(placemark, "Style")
-        
+
             poly_style = ET.SubElement(style, "PolyStyle")
             ET.SubElement(poly_style, "color").text = rgba_to_kml_color(
                 p.get("fill_color", "blue"), p.get("fill_opacity", 0.3)
             )
             ET.SubElement(poly_style, "fill").text = "1"
             ET.SubElement(poly_style, "outline").text = "1"
-        
+
             line_style = ET.SubElement(style, "LineStyle")
             ET.SubElement(line_style, "color").text = rgba_to_kml_color(
                 p.get("edge_color", p.get("fill_color", "blue")), 1.0
             )
             ET.SubElement(line_style, "width").text = "1"
-        
+
             # ---- GEOMETRY ----
             polygon = ET.SubElement(placemark, "Polygon")
             outer = ET.SubElement(polygon, "outerBoundaryIs")
             ring = ET.SubElement(outer, "LinearRing")
-        
-            # Coordinates without altitude (Google Maps hates the ',0')
-            coord_str = " ".join(
-                [f"{lon},{lat}" for lat, lon in p["coords"]]
-            )
-            ET.SubElement(ring, "coordinates").text = coord_str
 
+            # Coordinates without altitude (Google Maps hates the ',0')
+            coord_str = " ".join([f"{lon},{lat}" for lat, lon in p["coords"]])
+            ET.SubElement(ring, "coordinates").text = coord_str
 
         # --- LINES ---
         for line_feat in features.get("lines", []):
@@ -82,9 +79,7 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
             ET.SubElement(line_style, "width").text = str(line_feat.get("weight", 2))
             line = ET.SubElement(placemark, "LineString")
             ET.SubElement(line, "tessellate").text = "1"
-            coord_str = " ".join(
-                [f"{lon},{lat},0" for lat, lon in line_feat["coords"]]
-            )
+            coord_str = " ".join([f"{lon},{lat},0" for lat, lon in line_feat["coords"]])
             ET.SubElement(line, "coordinates").text = coord_str
 
         # --- POINTS ---
@@ -93,9 +88,7 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
             ET.SubElement(placemark, "name").text = p.get("popup", "")
             style = ET.SubElement(placemark, "Style")
             icon_style = ET.SubElement(style, "IconStyle")
-            ET.SubElement(icon_style, "color").text = rgba_to_kml_color(
-                p.get("color", "black")
-            )
+            ET.SubElement(icon_style, "color").text = rgba_to_kml_color(p.get("color", "black"))
             ET.SubElement(icon_style, "scale").text = str(p.get("size", 1) / 4)
             point = ET.SubElement(placemark, "Point")
             lat, lon = p["coords"]

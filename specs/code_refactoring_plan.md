@@ -287,9 +287,9 @@ Add pre-commit configuration to the project.
 ```
 
 **Done when:**
-- [ ] `.pre-commit-config.yaml` exists
-- [ ] `uv run pre-commit run --all-files` exits 0
-- [ ] README updated
+- [x] `.pre-commit-config.yaml` exists
+- [x] `uv run pre-commit run --all-files` exits 0
+- [x] README updated
 
 ---
 

@@ -25,7 +25,7 @@ if st.button("✨ Generate Survey Plot"):
                 csv_map_path=st.session_state.map_csv,
                 csv_section_path=st.session_state.section_csv,
                 output_path=pdf_path,
-                config=settings
+                config=settings,
             )
             st.session_state.cave_survey = fig
             st.session_state.pdf_output_path = pdf_path
@@ -33,10 +33,10 @@ if st.button("✨ Generate Survey Plot"):
         st.warning("⚠️ Please upload at least one file first.")
 
 if st.session_state.cave_survey is not None:
-    st.markdown("### 🗺️ Survey Preview")    
+    st.markdown("### 🗺️ Survey Preview")
     st.pyplot(st.session_state.cave_survey)
     st.success("✅ PDF Created!")
-    
+
     if st.session_state.pdf_output_path and Path(st.session_state.pdf_output_path).exists():
         with open(st.session_state.pdf_output_path, "rb") as f:
             st.download_button("📥 Download PDF", f, file_name="survey.pdf", mime="application/pdf")

@@ -38,8 +38,8 @@ def create_survey(
         df[["X", "Y"]] = rotate_points(points, center, rotation_deg)
 
     # --- Compute scale parameters ---
-    x_span = df['X'].max() - df['X'].min()
-    y_span = df['Y'].max() - df['Y'].min()
+    x_span = df["X"].max() - df["X"].min()
+    y_span = df["Y"].max() - df["Y"].min()
     ref_scale = max(x_span, y_span)
     mz = config.get("marker_zoom", 10)
     tz = config.get("text_zoom", 10)
@@ -54,10 +54,7 @@ def create_survey(
         features,
         ax,
         layer_name="Survey",
-        config={
-            "line_width_zoom": config.get("line_width_zoom", 10),
-            "ref_scale": ref_scale
-        }
+        config={"line_width_zoom": config.get("line_width_zoom", 10), "ref_scale": ref_scale},
     )
 
     # --- Stations ---
@@ -65,32 +62,43 @@ def create_survey(
         for _, row in df.iterrows():
             if row["Type"] == "station" and row["Node_Id"] not in excluded_nodes:
                 ax.scatter(row["X"], row["Y"], s=marker_size, color="red", zorder=5)
-                ax.text(row["X"], row["Y"], row["Node_Id"], fontsize=text_size,
-                        ha="right", va="bottom", color="black")
+                ax.text(
+                    row["X"],
+                    row["Y"],
+                    row["Node_Id"],
+                    fontsize=text_size,
+                    ha="right",
+                    va="bottom",
+                    color="black",
+                )
 
     # --- Rule and North arrow as before ---
     if rule_flag:
-        xs, ys = float(df['X'].min()), float(df['Y'].min())
+        xs, ys = float(df["X"].min()), float(df["Y"].min())
         if rule_orientation == "horizontal":
             ys -= ref_scale * 0.1
         else:
             xs -= ref_scale * 0.03
         rule_w = ref_scale * 0.005
-        _add_rule(ax=ax, x_start=xs, y_start=ys,
-                  orientation=rule_orientation,
-                  scale_len=rule_length,
-                  scale_width=rule_w,
-                  segment_len=rule_length / 5)
+        _add_rule(
+            ax=ax,
+            x_start=xs,
+            y_start=ys,
+            orientation=rule_orientation,
+            scale_len=rule_length,
+            scale_width=rule_w,
+            segment_len=rule_length / 5,
+        )
 
     if north_flag:
         coord: Tuple[float, float] = (
-            float(df['X'].min() + rule_length / 2),
-            float(df['Y'].min() + ref_scale * 0.025)
+            float(df["X"].min() + rule_length / 2),
+            float(df["Y"].min() + ref_scale * 0.025),
         )
         arrow_len = ref_scale * 0.07
         _add_north_arrow(ax=ax, coords=coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
 
-    ax.axis('equal')
+    ax.axis("equal")
     ax.set_xticks([])
     ax.set_yticks([])
     for s in ax.spines.values():

@@ -4,10 +4,10 @@
 
 🌍 Available languages: [🇬🇧 English](README.md) | [🇮🇹 Italiano](README.it.md)
 
-**Draw your cave surveys in seconds — directly from TopoDroid!**  
+**Draw your cave surveys in seconds — directly from TopoDroid!**
 No more heavy tools, no more painful setups. Just DXF files, a browser, and your next expedition.
 
-🔗 **Try it now**: [CaveSketch Live App](https://cave-sketch.streamlit.app/)  
+🔗 **Try it now**: [CaveSketch Live App](https://cave-sketch.streamlit.app/)
 
 ---
 
@@ -67,14 +67,25 @@ No Csurvey, no QGIS, no headaches.
 
 ## 💻 For Developers
 
-### 🔧 Run Locally
+### 🔧 Development Setup
 
-```bash
-git clone https://github.com/LorBordin/cave_sketch.git
-cd cavesketch
-uv sync
-uv run streamlit run app/app.py
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/LorBordin/cave_sketch.git
+   cd cave_sketch
+   ```
+2. **Install dependencies**:
+   ```bash
+   uv sync
+   ```
+3. **Install pre-commit hooks**:
+   ```bash
+   uv run pre-commit install
+   ```
+4. **Run the app**:
+   ```bash
+   uv run streamlit run app/app.py
+   ```
 
 ### 🧑‍💻 Contribute
 Found a bug? Got an idea? PRs welcome!

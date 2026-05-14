@@ -15,7 +15,7 @@ def render_to_folium(features: Dict[str, list], folium_map, layer_name: str):
             weight=0,
             fillColor=p.get("fill_color", "blue"),
             fillOpacity=p.get("fill_opacity", 0.3),
-            popup=p.get("popup")
+            popup=p.get("popup"),
         ).add_to(fg)
 
     # ---- LINES ----
@@ -25,7 +25,7 @@ def render_to_folium(features: Dict[str, list], folium_map, layer_name: str):
             color=line.get("color", "black"),
             weight=line.get("weight", 1),
             opacity=0.8,
-            popup=line.get("popup", "")
+            popup=line.get("popup", ""),
         )
         if line.get("dash"):
             kwargs["dashArray"] = ",".join(map(str, line["dash"]))
@@ -40,7 +40,7 @@ def render_to_folium(features: Dict[str, list], folium_map, layer_name: str):
             fill=True,
             fillColor=p.get("color", "black"),
             fillOpacity=0.9,
-            popup=p.get("popup", "")
+            popup=p.get("popup", ""),
         ).add_to(fg)
 
     fg.add_to(folium_map)
