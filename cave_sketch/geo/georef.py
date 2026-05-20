@@ -89,7 +89,12 @@ def georeference(survey: CaveSurvey, gps_refs: List[GpsRef]) -> List[GeoPoint]:
 
         geo_points.append(
             GeoPoint(
-                station_id=p.id, lat=float(np.mean(lats)), lon=float(np.mean(lons)), x=p.x, y=p.y
+                station_id=p.id,
+                lat=float(np.mean(lats)),
+                lon=float(np.mean(lons)),
+                x=p.x,
+                y=p.y,
+                z=p.z,
             )
         )
 

@@ -19,3 +19,4 @@ class GeoPoint:
     lon: float
     x: float
     y: float
+    z: float = 0.0
