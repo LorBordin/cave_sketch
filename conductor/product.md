@@ -18,9 +18,10 @@ CaveSketch is a lightweight, mobile-friendly application designed to empower cav
 ## Core Features
 - **PDF Survey Rendering**: High-quality plan and section views with configurable scale and styling.
 - **Interactive Satellite Maps**: Georeferenced overlays on satellite imagery using station coordinates.
+- **KML Export**: Export georeferenced cave data for 3D visualization in Google Earth.
 - **Survey Merging**: Capability to combine multiple DXF or JSON survey parts into a single visualization.
 
 ## Future Roadmap
-- **3D Visualization**: Exporting 3D cave meshes (OBJ) and KML for Google Earth.
+- **3D Visualization**: Exporting 3D cave meshes (OBJ).
 - **Offline Capabilities**: Improved support for disconnected use in remote areas.
 - **Direct TopoDroid Integration**: Synchronizing directly with TopoDroid project files to streamline the export step.
