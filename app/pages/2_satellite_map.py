@@ -31,7 +31,7 @@ if col1.button("🌍 Generate HTML Map"):
         st.warning("⚠️ Please load a map in the Survey Plot page first.")
     else:
         html_path = st.session_state.files_dir / "survey.html"
-        html_map, json_path = draw_map(
+        html_map, json_path, kml_path = draw_map(
             map_path=str(st.session_state.map_csv),
             gps_points=st.session_state.known_points,
             output_path=str(html_path),
@@ -41,13 +41,16 @@ if col1.button("🌍 Generate HTML Map"):
         )
         st.session_state.current_json_path = json_path
         st.session_state.html_path = html_path
+        st.session_state.kml_path = kml_path
         with open(html_path, "r") as html_f:
             st.session_state.html_content = html_f.read()
 
 if "html_content" in st.session_state and st.session_state.html_content:
     st.components.v1.html(st.session_state.html_content, height=400)
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with open(st.session_state.html_path, "rb") as html_f_bin:
         col1.download_button("📥 Download HTML Map", html_f_bin, file_name="cave_map.html")
     with open(st.session_state.current_json_path, "rb") as json_f_bin:
         col2.download_button("📥 Download JSON Map", json_f_bin, file_name="cave_map.json")
+    with open(st.session_state.kml_path, "rb") as kml_f_bin:
+        col3.download_button("📥 Download KML Map", kml_f_bin, file_name="cave_map.kml")

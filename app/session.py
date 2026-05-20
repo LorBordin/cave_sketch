@@ -41,6 +41,7 @@ def init_session() -> None:
         "rotation_angle": 0.0,
         "html_content": None,
         "html_path": None,
+        "kml_path": None,
         "current_json_path": None,
         "uploaded_json_paths": [],
     }
