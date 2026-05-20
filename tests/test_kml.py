@@ -1,7 +1,7 @@
-import pytest
-from cave_sketch.dxf.models import CaveSurvey, SurveyPoint, SurveyLine
-from cave_sketch.geo.models import GeoPoint
+from cave_sketch.dxf.models import CaveSurvey, SurveyLine
 from cave_sketch.geo.kml import export_kml
+from cave_sketch.geo.models import GeoPoint
+
 
 def test_export_kml_basic():
     # Setup simple data

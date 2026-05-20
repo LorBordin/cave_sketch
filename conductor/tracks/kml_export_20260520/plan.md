@@ -16,6 +16,6 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: UI Integration' (Protocol in workflow.md) 72e2833
 
 ## Phase 3: Cleanup and Documentation
-- [ ] Task: Run `uv run ruff check . --fix` and `uv run mypy cave_sketch/`.
+- [~] Task: Run `uv run ruff check . --fix` and `uv run mypy cave_sketch/`.
 - [ ] Task: Update `README.md` and `DEVLOG.md` with the new feature details.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Cleanup and Documentation' (Protocol in workflow.md)
