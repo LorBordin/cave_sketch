@@ -1,7 +1,7 @@
 # Implementation Plan: KML Export for Google Earth
 
 ## Phase 1: Core KML Logic
-- [ ] Task: Research KML structure and coordinate mapping for cave centerlines.
+- [x] Task: Research KML structure and coordinate mapping for cave centerlines. d803e6b
 - [ ] Task: Implement KML generation logic in `cave_sketch/geo/kml.py`.
     - [ ] Create base KML template.
     - [ ] Implement coordinate transformation from affine georef to KML points.
