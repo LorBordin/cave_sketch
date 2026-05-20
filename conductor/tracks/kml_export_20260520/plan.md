@@ -9,11 +9,11 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Core KML Logic' (Protocol in workflow.md) d5a8792
 
 ## Phase 2: UI Integration
-- [ ] Task: Integrate KML export into the Streamlit app.
-    - [ ] Add export button to `app/pages/2_satellite_map.py`.
-    - [ ] Implement the download handler in `app/components/file_upload.py` or similar.
-- [ ] Task: Manual verification of the generated KML in a viewer (e.g., Google Earth Web).
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: UI Integration' (Protocol in workflow.md)
+- [x] Task: Integrate KML export into the Streamlit app. 8a0903e
+    - [x] Add export button to `app/pages/2_satellite_map.py`.
+    - [x] Implement the download handler in `app/components/file_upload.py` or similar.
+- [x] Task: Manual verification of the generated KML in a viewer (e.g., Google Earth Web). 8a0903e
+- [~] Task: Conductor - User Manual Verification 'Phase 2: UI Integration' (Protocol in workflow.md)
 
 ## Phase 3: Cleanup and Documentation
 - [ ] Task: Run `uv run ruff check . --fix` and `uv run mypy cave_sketch/`.
