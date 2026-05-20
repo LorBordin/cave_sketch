@@ -4,5 +4,3 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [x] **Track: Implement KML export for Google Earth**
-  *Link: [./tracks/kml_export_20260520/](./tracks/kml_export_20260520/)*
