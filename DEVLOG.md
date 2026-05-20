@@ -126,3 +126,20 @@
 
 **Assumptions:** None
 **Next session notes:** Phase 2 complete. Ready for Phase 3 (New features).
+
+## [2026-05-20 11:30] Track kml_export_20260520 — Implementation
+**Files:**
+- cave_sketch/geo/models.py
+- cave_sketch/geo/georef.py
+- cave_sketch/geo/kml.py
+- tests/test_kml.py
+- app/session.py
+- cave_sketch/satellite_view/map.py
+- app/pages/2_satellite_map.py
+- utility_scripts/test_kml_export.py
+- README.md
+
+**Deviations from spec:** None
+**Assumptions:**
+- Altitude (z) is passed through from DXF to KML, defaulting to 0.0 if not available in the CSV intermediary.
+**Next session notes:** KML export fully implemented and integrated. Ready for more features or merging.

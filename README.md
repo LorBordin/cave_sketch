@@ -34,6 +34,7 @@ No Csurvey, no QGIS, no headaches.
 ### ✅ Draw on Satellite Map
 - Overlay your cave map on a satellite image using entrance GPS points.
 - Export an interactive **.html map** ready to share or view offline.
+- Export a **.kml file** for 3D visualization in Google Earth.
 
 ---
 
@@ -101,6 +102,6 @@ Help us make CaveSketch even better!
 
 - 🎨 Add option to color areas, not just draw lines
 - 🛰️ Improve satellite HTML map rendering
-- 🌍 Add support for .kml export (Google Earth)
+- ✅ Add support for .kml export (Google Earth)
 - ➕ Allow adding surveys to an existing .kml file (merge drawings)
 - 🧊 Draw and export 3D cave models
