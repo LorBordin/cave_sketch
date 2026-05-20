@@ -15,7 +15,7 @@
 - [x] Task: Manual verification of the generated KML in a viewer (e.g., Google Earth Web). 8a0903e
 - [x] Task: Conductor - User Manual Verification 'Phase 2: UI Integration' (Protocol in workflow.md) 72e2833
 
-## Phase 3: Cleanup and Documentation
-- [~] Task: Run `uv run ruff check . --fix` and `uv run mypy cave_sketch/`.
-- [ ] Task: Update `README.md` and `DEVLOG.md` with the new feature details.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Cleanup and Documentation' (Protocol in workflow.md)
+## Phase 3: Cleanup and Documentation [checkpoint: c42c12a]
+- [x] Task: Run `uv run ruff check . --fix` and `uv run mypy cave_sketch/`. 4a19768
+- [x] Task: Update `README.md` and `DEVLOG.md` with the new feature details. c42c12a
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Cleanup and Documentation' (Protocol in workflow.md) c42c12a
