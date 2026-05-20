@@ -2,10 +2,10 @@
 
 ## Phase 1: Core KML Logic
 - [x] Task: Research KML structure and coordinate mapping for cave centerlines. d803e6b
-- [ ] Task: Implement KML generation logic in `cave_sketch/geo/kml.py`.
-    - [ ] Create base KML template.
-    - [ ] Implement coordinate transformation from affine georef to KML points.
-- [ ] Task: Add unit tests for KML generation in `tests/test_kml.py`.
+- [x] Task: Implement KML generation logic in `cave_sketch/geo/kml.py`. 1a7df45
+    - [x] Create base KML template.
+    - [x] Implement coordinate transformation from affine georef to KML points.
+- [x] Task: Add unit tests for KML generation in `tests/test_kml.py`. 1a7df45
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Core KML Logic' (Protocol in workflow.md)
 
 ## Phase 2: UI Integration
