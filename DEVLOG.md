@@ -143,3 +143,11 @@
 **Assumptions:**
 - Altitude (z) is passed through from DXF to KML, defaulting to 0.0 if not available in the CSV intermediary.
 **Next session notes:** KML export fully implemented and integrated. Ready for more features or merging.
+
+## [2026-05-22 09:22] Documentation & Roadmap — Update TODO list
+**Files:**
+- README.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** New priority items added to the roadmap regarding multi-survey documentation and PDF merging.

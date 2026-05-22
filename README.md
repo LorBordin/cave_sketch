@@ -100,6 +100,8 @@ To contribute:
 ### 📋 ToDo List (Open for Contributors)
 Help us make CaveSketch even better!
 
+- 📖 **Document multi-survey satellite map workflow**: Explain how to export a sketch as JSON and re-import it with new surveys to draw multiple sketches on the map.
+- 📄 **Implement multi-survey merging for PDF surveys**: Enable the same merging capabilities found in the satellite view for the PDF survey plot generation.
 - 🎨 Add option to color areas, not just draw lines
 - 🛰️ Improve satellite HTML map rendering
 - ✅ Add support for .kml export (Google Earth)
