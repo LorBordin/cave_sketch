@@ -2,3 +2,7 @@ data/
 __pycache__/
 .DS_Store
 .vscode/
+
+# Outreach and advertising materials
+conductor/outreach/
+conductor/outreach_plan.md
