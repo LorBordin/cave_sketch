@@ -1,14 +1,16 @@
 from pathlib import Path
 
 import streamlit as st
-from components.file_upload import file_uploader_component, child_file_uploader_component
+from components.file_upload import file_uploader_component, child_file_uploader_component, survey_name_component
 from components.settings_panel import settings_panel_component
 from session import init_session
 ...
 st.title("📐 Cave Survey Plot")
-title = file_uploader_component()
+file_uploader_component()
 child_file_uploader_component()
+
 st.markdown("---")
+title = survey_name_component()
 
 merge_valid = True
 if st.session_state.child_map_csv or st.session_state.child_section_csv:

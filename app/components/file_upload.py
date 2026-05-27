@@ -14,28 +14,30 @@ def file_uploader_component():
             "Cave Section (.dxf)", type=["dxf", "csv"], key="section_uploader"
         )
 
-    st.markdown("<h3>📝 Survey name</h3>", unsafe_allow_html=True)
-    title = st.text_input("Survey Name", value="MySurvey", label_visibility="collapsed")
-
     if st.button("📥 Process Main Survey Files"):
         _process_files(map_file, section_file, is_child=False)
 
+def survey_name_component():
+    """Component for entering the survey name."""
+    st.markdown("### 📝 Survey name")
+    title = st.text_input("Survey Name", value="MySurvey", label_visibility="collapsed")
     return title
 
 def child_file_uploader_component():
     """Component for uploading an additional (child) survey to merge."""
-    st.markdown("## 📎 Upload Child Survey (Optional)")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        child_map_file = st.file_uploader("Child Map (.dxf)", type=["dxf", "csv"], key="child_map_uploader")
-    with col2:
-        child_section_file = st.file_uploader(
-            "Child Section (.dxf)", type=["dxf", "csv"], key="child_section_uploader"
-        )
+    with st.expander("➕ Click here to merge another survey (Optional)"):
+        st.markdown("## 📎 Upload Child Survey")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            child_map_file = st.file_uploader("Child Map (.dxf)", type=["dxf", "csv"], key="child_map_uploader")
+        with col2:
+            child_section_file = st.file_uploader(
+                "Child Section (.dxf)", type=["dxf", "csv"], key="child_section_uploader"
+            )
 
-    if st.button("📥 Process Child Survey Files"):
-        _process_files(child_map_file, child_section_file, is_child=True)
+        if st.button("📥 Process Child Survey Files"):
+            _process_files(child_map_file, child_section_file, is_child=True)
 
 def _process_files(map_file, section_file, is_child: bool = False):
     if not (map_file or section_file):
