@@ -23,6 +23,7 @@ if st.button("✨ Generate Survey Plot"):
     if not merge_valid:
         st.error("⚠️ Please resolve the merging errors before generating the plot.")
     elif st.session_state.map_csv or st.session_state.section_csv:
+        from cave_sketch.survey.merger import SectionProtocol
         pdf_path = st.session_state.files_dir / "survey.pdf"
         with st.spinner("🛠️ Creating survey plot..."):
             fig = draw_survey(
@@ -30,6 +31,11 @@ if st.button("✨ Generate Survey Plot"):
                 rule_length=settings.pop("rule_length"),
                 csv_map_path=st.session_state.map_csv,
                 csv_section_path=st.session_state.section_csv,
+                child_csv_map_path=st.session_state.child_map_csv,
+                child_csv_section_path=st.session_state.child_section_csv,
+                parent_station=st.session_state.parent_station,
+                child_station=st.session_state.child_station,
+                section_protocol=SectionProtocol(st.session_state.section_protocol),
                 output_path=pdf_path,
                 config=settings,
             )

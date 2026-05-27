@@ -35,4 +35,10 @@ STYLE_MAP = {
         "markersize": 4,
         "type": "point",
     },
+    "connector": {
+        "color": "gray",
+        "linestyle": "dotted",
+        "type": "line",
+        "weight": 0.5,
+    },
 }

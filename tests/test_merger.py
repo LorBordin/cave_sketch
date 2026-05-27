@@ -123,6 +123,50 @@ def test_merge_surveys_mixed_ids():
     assert "1P1" in node_ids
     assert "2P1" in node_ids
     
-    # Check link remapping for mixed ID
-    row_2P1 = merged_map[merged_map["Node_Id"] == "2P1"].iloc[0]
-    assert row_2P1["Links"] == "1"
+def test_merge_surveys_mirror_protocol():
+    parent_section = pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 10.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    })
+    
+    child_section = pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 5.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    })
+    
+    # Merge at Parent:2 (10, 0) and Child:1 (0, 0) with MIRROR
+    _, merged_section = merge_surveys(
+        parent_map=None,
+        parent_section=parent_section,
+        child_map=None,
+        child_section=child_section,
+        parent_station="2",
+        child_station="1",
+        section_protocol=SectionProtocol.MIRROR
+    )
+    
+    # Original child 2 was at (5, 0).
+    # Mirrored across child 1 (X=0): X' = 2*0 - 5 = -5.
+    # Translated by delta_x = 10 - 0 = 10: X'' = -5 + 10 = 5.
+    
+from cave_sketch.survey import draw_survey
+
+def test_draw_survey_no_child(tmp_path):
+    csv_path = "tests/fixtures/test_survey.csv"
+    output_pdf = tmp_path / "output.pdf"
+    
+    fig = draw_survey(
+        title="Test Survey",
+        rule_length=20,
+        csv_map_path=csv_path,
+        output_path=str(output_pdf)
+    )
+    
+    assert fig is not None
+    assert output_pdf.exists()

@@ -8,6 +8,7 @@ from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
 from cave_sketch.survey.config import SurveyConfig
 from cave_sketch.survey.pdf import export_pdf
 from cave_sketch.survey.renderer import render_survey
+from cave_sketch.survey.merger import merge_surveys, SectionProtocol
 
 
 def draw_survey(
@@ -15,25 +16,48 @@ def draw_survey(
     rule_length: float,
     csv_map_path: Optional[str] = None,
     csv_section_path: Optional[str] = None,
+    child_csv_map_path: Optional[str] = None,
+    child_csv_section_path: Optional[str] = None,
+    parent_station: Optional[str] = None,
+    child_station: Optional[str] = None,
+    section_protocol: SectionProtocol = SectionProtocol.SIMPLE,
     output_path: Optional[str] = None,
     excluded_nodes: Optional[List] = None,
     config: Dict = {},
 ) -> Figure:
     """
-    Backward-compatible shim for drawing a cave survey.
+    Draw a cave survey, optionally merging a child survey.
     """
+    parent_map = pd.read_csv(csv_map_path) if csv_map_path else None
+    parent_section = pd.read_csv(csv_section_path) if csv_section_path else None
+    child_map = pd.read_csv(child_csv_map_path) if child_csv_map_path else None
+    child_section = pd.read_csv(child_csv_section_path) if child_csv_section_path else None
+
+    if (child_map is not None or child_section is not None) and parent_station and child_station:
+        merged_map, merged_section = merge_surveys(
+            parent_map=parent_map,
+            parent_section=parent_section,
+            child_map=child_map,
+            child_section=child_section,
+            parent_station=parent_station,
+            child_station=child_station,
+            section_protocol=section_protocol
+        )
+    else:
+        merged_map, merged_section = parent_map, parent_section
+
     survey = None
-    if csv_map_path:
-        survey = _df_to_survey(pd.read_csv(csv_map_path), title)
+    if merged_map is not None:
+        survey = _df_to_survey(merged_map, title)
 
     section_survey = None
-    if csv_section_path:
-        section_survey = _df_to_survey(pd.read_csv(csv_section_path), f"{title} Section")
+    if merged_section is not None:
+        section_survey = _df_to_survey(merged_section, f"{title} Section")
 
     if not survey and not section_survey:
         raise ValueError("At least one survey path (map or section) must be provided.")
 
-    # If only section is provided, use it as primary for render_survey for now
+    # If only section is provided, use it as primary for render_survey
     if not survey and section_survey:
         survey = section_survey
         section_survey = None

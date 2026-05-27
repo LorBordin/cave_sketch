@@ -69,8 +69,37 @@ def _merge_single_view(
         # Mirror child across its own vertical axis through child_station
         child_df["X"] = 2 * c_row["X"] - child_df["X"]
         # Recalculate delta_x after mirroring (c_row["X"] stays same, but child_df["X"] changed)
-        # Actually, if we mirror across child_station's X, then child_station's X doesn't change.
         delta_x = p_row["X"] - c_row["X"]
+
+    if is_section and section_protocol == SectionProtocol.DISPLACEMENT:
+        # Displacement algorithm: search right first, then below
+        p_max_x = parent_df["X"].max()
+        p_min_y = parent_df["Y"].min()
+        padding = 50.0 # Better padding for displacement
+        
+        # Start by centering child at parent station
+        delta_x = p_row["X"] - c_row["X"]
+        delta_y = p_row["Y"] - c_row["Y"]
+        
+        # Shift child to the right of parent survey
+        # child_df["X"] + delta_x is the position if SIMPLE. 
+        # We want (child_df["X"] + delta_x).min() > p_max_x + padding
+        current_child_min_x = child_df["X"].min() + delta_x
+        additional_shift_x = max(0, (p_max_x + padding) - current_child_min_x)
+        delta_x += additional_shift_x
+        
+        # Add connector node to child_df
+        # This node is at the parent station's absolute coordinates
+        # but relative to the child survey's origin (so after delta shift it lands on parent station)
+        connector_id = "CONN_1"
+        connector_node = pd.DataFrame({
+            "Node_Id": [connector_id],
+            "X": [p_row["X"] - delta_x],
+            "Y": [p_row["Y"] - delta_y],
+            "Links": [child_station],
+            "Type": ["connector"]
+        })
+        child_df = pd.concat([child_df, connector_node], ignore_index=True)
 
     child_df["X"] = child_df["X"] + delta_x
     child_df["Y"] = child_df["Y"] + delta_y
