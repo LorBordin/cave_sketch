@@ -1,11 +1,10 @@
 import streamlit as st
-
+from pathlib import Path
 from cave_sketch.parse_dxf import parse_dxf
 
-
 def file_uploader_component():
-    """Shared component for uploading DXF or CSV files."""
-    st.markdown("## 📄 Upload your files")
+    """Component for uploading the main (parent) survey files."""
+    st.markdown("## 📄 Upload your files (Main Survey)")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -18,46 +17,62 @@ def file_uploader_component():
     st.markdown("<h3>📝 Survey name</h3>", unsafe_allow_html=True)
     title = st.text_input("Survey Name", value="MySurvey", label_visibility="collapsed")
 
-    if st.button("📥 Process Uploaded Files"):
-        _process_files(map_file, section_file)
+    if st.button("📥 Process Main Survey Files"):
+        _process_files(map_file, section_file, is_child=False)
 
     return title
 
+def child_file_uploader_component():
+    """Component for uploading an additional (child) survey to merge."""
+    st.markdown("## 📎 Upload Child Survey (Optional)")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        child_map_file = st.file_uploader("Child Map (.dxf)", type=["dxf", "csv"], key="child_map_uploader")
+    with col2:
+        child_section_file = st.file_uploader(
+            "Child Section (.dxf)", type=["dxf", "csv"], key="child_section_uploader"
+        )
 
-def _process_files(map_file, section_file):
+    if st.button("📥 Process Child Survey Files"):
+        _process_files(child_map_file, child_section_file, is_child=True)
+
+def _process_files(map_file, section_file, is_child: bool = False):
     if not (map_file or section_file):
         st.warning("⚠️ Please upload at least one file.")
         return
 
     files_dir = st.session_state.files_dir
+    prefix = "child_" if is_child else ""
 
     if map_file:
         map_file.seek(0)
         name = map_file.name.lower()
-        map_csv = files_dir / "map.csv"
+        map_csv = files_dir / f"{prefix}map.csv"
 
         if name.endswith(".dxf"):
-            dxf_path = files_dir / "map.dxf"
+            dxf_path = files_dir / f"{prefix}map.dxf"
             dxf_path.write_bytes(map_file.read())
             parse_dxf(input_path=dxf_path, output_path=map_csv)
         elif name.endswith(".csv"):
             map_csv.write_bytes(map_file.read())
 
-        st.session_state.map_csv = map_csv
-        st.session_state.map_loaded = True
-        st.success(f"✅ Map loaded: {map_file.name}")
+        st.session_state[f"{prefix}map_csv"] = map_csv
+        if not is_child:
+            st.session_state.map_loaded = True
+        st.success(f"✅ {'Child ' if is_child else ''}Map loaded: {map_file.name}")
 
     if section_file:
         section_file.seek(0)
         name = section_file.name.lower()
-        section_csv = files_dir / "section.csv"
+        section_csv = files_dir / f"{prefix}section.csv"
 
         if name.endswith(".dxf"):
-            dxf_path = files_dir / "section.dxf"
+            dxf_path = files_dir / f"{prefix}section.dxf"
             dxf_path.write_bytes(section_file.read())
             parse_dxf(input_path=dxf_path, output_path=section_csv)
         elif name.endswith(".csv"):
             section_csv.write_bytes(section_file.read())
 
-        st.session_state.section_csv = section_csv
-        st.success(f"✅ Section loaded: {section_file.name}")
+        st.session_state[f"{prefix}section_csv"] = section_csv
+        st.success(f"✅ {'Child ' if is_child else ''}Section loaded: {section_file.name}")

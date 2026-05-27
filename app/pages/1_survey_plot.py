@@ -1,22 +1,26 @@
 from pathlib import Path
 
 import streamlit as st
-from components.file_upload import file_uploader_component
+from components.file_upload import file_uploader_component, child_file_uploader_component
 from components.settings_panel import settings_panel_component
 from session import init_session
-
-from cave_sketch.survey import draw_survey
-
-st.set_page_config(page_title="Cave Survey Plot", layout="centered")
-init_session()
-
+...
 st.title("📐 Cave Survey Plot")
 title = file_uploader_component()
+child_file_uploader_component()
 st.markdown("---")
+
+merge_valid = True
+if st.session_state.child_map_csv or st.session_state.child_section_csv:
+    from components.merging_controls import merging_controls_component
+    merge_valid = merging_controls_component()
+
 settings = settings_panel_component()
 
 if st.button("✨ Generate Survey Plot"):
-    if st.session_state.map_csv or st.session_state.section_csv:
+    if not merge_valid:
+        st.error("⚠️ Please resolve the merging errors before generating the plot.")
+    elif st.session_state.map_csv or st.session_state.section_csv:
         pdf_path = st.session_state.files_dir / "survey.pdf"
         with st.spinner("🛠️ Creating survey plot..."):
             fig = draw_survey(
