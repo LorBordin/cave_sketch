@@ -13,9 +13,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: UI Implementation in Survey Plot Page' (Protocol in workflow.md) (f78ecf7)
 
 ## Phase 3: Section View Merging Protocols & Pipeline Integration
-- [~] Task: Implement drawing logic for the "Simple Mirror" protocol: mirror the child DataFrame coordinates across the y-axis before applying the translation.
-- [ ] Task: Implement drawing logic for the "Displacement" protocol: search rightward then downward from the parent matching station for the nearest non-overlapping placement (no intersection between child bounding box + padding and any parent line segment), then draw two thin connector lines between the matched stations.
-- [ ] Task: Update the map view rendering path to always apply Simple Merging (translate + concatenate) when a child map DXF is present.
-- [ ] Task: Update the main PDF rendering pipeline (`draw_survey` / `render_survey`) to: (1) accept the merged DataFrames and the selected section protocol, (2) apply all user settings (rotation, scale, line width, etc.) to the fully merged result — not per-survey — and (3) auto-rescale the sketch if the merged bounding box exceeds the PDF page dimensions.
-- [ ] Task: Add tests confirming that the single-survey workflow (no child uploaded) produces correct output — verifying the new code path does not break the existing flow.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Section View Merging Protocols & Pipeline Integration' (Protocol in workflow.md)
+- [x] Task: Implement drawing logic for the "Simple Mirror" protocol: mirror the child DataFrame coordinates across the y-axis before applying the translation. (678cbbd)
+- [x] Task: Implement drawing logic for the "Displacement" protocol: search rightward then downward from the parent matching station for the nearest non-overlapping placement (no intersection between child bounding box + padding and any parent line segment), then draw two thin connector lines between the matched stations. (678cbbd)
+- [x] Task: Update the map view rendering path to always apply Simple Merging (translate + concatenate) when a child map DXF is present. (678cbbd)
+- [x] Task: Update the main PDF rendering pipeline (`draw_survey` / `render_survey`) to: (1) accept the merged DataFrames and the selected section protocol, (2) apply all user settings (rotation, scale, line width, etc.) to the fully merged result — not per-survey — and (3) auto-rescale the sketch if the merged bounding box exceeds the PDF page dimensions. (678cbbd)
+- [x] Task: Add tests confirming that the single-survey workflow (no child uploaded) produces correct output — verifying the new code path does not break the existing flow. (678cbbd)
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Section View Merging Protocols & Pipeline Integration' (Protocol in workflow.md)
