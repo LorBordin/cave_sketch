@@ -6,11 +6,11 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Core Merging Logic' (Protocol in workflow.md) (2e83140)
 
 ## Phase 2: UI Implementation in Survey Plot Page
-- [~] Task: Update `1_survey_plot.py` to include a child survey upload section (child map DXF and child section DXF), mirroring the existing parent upload structure.
-- [ ] Task: Add two plain-text numeric inputs for the matching station IDs (parent station, child station). Validate on submit: reject non-numeric input immediately; if the ID is numeric but not present in the parsed DXF, display `st.error` below the inputs and block PDF generation until resolved.
-- [ ] Task: Add a Section View protocol selector (Simple, Mirror, Displacement) that appears only when a child section DXF is uploaded. Do NOT show a protocol selector for the map view.
-- [ ] Task: Wire session state to store child CSV paths, station ID pair, and selected section protocol.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: UI Implementation in Survey Plot Page' (Protocol in workflow.md)
+- [x] Task: Update `1_survey_plot.py` to include a child survey upload section (child map DXF and child section DXF), mirroring the existing parent upload structure. (7840bbf)
+- [x] Task: Add two plain-text numeric inputs for the matching station IDs (parent station, child station). Validate on submit: reject non-numeric input immediately; if the ID is numeric but not present in the parsed DXF, display `st.error` below the inputs and block PDF generation until resolved. (7840bbf)
+- [x] Task: Add a Section View protocol selector (Simple, Mirror, Displacement) that appears only when a child section DXF is uploaded. Do NOT show a protocol selector for the map view. (7840bbf)
+- [x] Task: Wire session state to store child CSV paths, station ID pair, and selected section protocol. (7840bbf)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: UI Implementation in Survey Plot Page' (Protocol in workflow.md)
 
 ## Phase 3: Section View Merging Protocols & Pipeline Integration
 - [ ] Task: Implement drawing logic for the "Simple Mirror" protocol: mirror the child DataFrame coordinates across the y-axis before applying the translation.
