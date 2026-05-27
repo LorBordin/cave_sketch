@@ -1,0 +1,8 @@
+{
+  "track_id": "station_id_visibility_20260527",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-05-27T10:00:00Z",
+  "updated_at": "2026-05-27T10:00:00Z",
+  "description": "In the pdf generated in the `survey plot` section station numbers are partially hidden by station markers or other lines. Ensure station Ids are always fully visible."
+}
