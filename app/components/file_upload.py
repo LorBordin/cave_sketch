@@ -25,7 +25,13 @@ def survey_name_component():
 
 def child_file_uploader_component():
     """Component for uploading an additional (child) survey to merge."""
-    is_expanded = bool(st.session_state.child_map_csv or st.session_state.child_section_csv)
+    # Keep open if files are loaded OR if files are currently in the uploader
+    is_expanded = bool(
+        st.session_state.child_map_csv or 
+        st.session_state.child_section_csv or
+        st.session_state.get("child_map_uploader") or
+        st.session_state.get("child_section_uploader")
+    )
     with st.expander("➕ Click here to merge another survey (Optional)", expanded=is_expanded):
         st.markdown("## 📎 Upload Child Survey")
         
