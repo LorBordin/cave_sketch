@@ -2,8 +2,8 @@
 
 ## Phase 1: Core Merging Logic
 - [x] Task: Create a new `cave_sketch/survey/merger.py` module implementing the merging logic for a single parent + single child survey. `merge_surveys.py` (root-level utility) may serve as inspiration for the ID remapping approach but is not to be refactored — the new module must handle both map and section DataFrames simultaneously, accept a section protocol parameter, and be designed as a library (no CLI, no `sys.path` manipulation). (5a7fc60)
-- [~] Task: Write failing unit tests for the new merger module — numeric ID offset remapping, Links column remapping, coordinate translation via station matching, and correct handling of non-numeric Node IDs (wall geometry: excluded from offset computation, but their Links references are still remapped).
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Core Merging Logic' (Protocol in workflow.md)
+- [x] Task: Write failing unit tests for the new merger module — numeric ID offset remapping, Links column remapping, coordinate translation via station matching, and correct handling of non-numeric Node IDs (wall geometry: excluded from offset computation, but their Links references are still remapped). (7251785)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Core Merging Logic' (Protocol in workflow.md)
 
 ## Phase 2: UI Implementation in Survey Plot Page
 - [ ] Task: Update `1_survey_plot.py` to include a child survey upload section (child map DXF and child section DXF), mirroring the existing parent upload structure.
