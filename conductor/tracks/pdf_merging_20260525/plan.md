@@ -1,12 +1,12 @@
 # Implementation Plan: Single Child Survey Merging for PDF Surveys
 
-## Phase 1: Core Merging Logic
+## Phase 1: Core Merging Logic [checkpoint: 1f6b497]
 - [x] Task: Create a new `cave_sketch/survey/merger.py` module implementing the merging logic for a single parent + single child survey. `merge_surveys.py` (root-level utility) may serve as inspiration for the ID remapping approach but is not to be refactored — the new module must handle both map and section DataFrames simultaneously, accept a section protocol parameter, and be designed as a library (no CLI, no `sys.path` manipulation). (5a7fc60)
 - [x] Task: Write failing unit tests for the new merger module — numeric ID offset remapping, Links column remapping, coordinate translation via station matching, and correct handling of non-numeric Node IDs (wall geometry: excluded from offset computation, but their Links references are still remapped). (7251785)
-- [~] Task: Conductor - User Manual Verification 'Phase 1: Core Merging Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Core Merging Logic' (Protocol in workflow.md) (2e83140)
 
 ## Phase 2: UI Implementation in Survey Plot Page
-- [ ] Task: Update `1_survey_plot.py` to include a child survey upload section (child map DXF and child section DXF), mirroring the existing parent upload structure.
+- [~] Task: Update `1_survey_plot.py` to include a child survey upload section (child map DXF and child section DXF), mirroring the existing parent upload structure.
 - [ ] Task: Add two plain-text numeric inputs for the matching station IDs (parent station, child station). Validate on submit: reject non-numeric input immediately; if the ID is numeric but not present in the parsed DXF, display `st.error` below the inputs and block PDF generation until resolved.
 - [ ] Task: Add a Section View protocol selector (Simple, Mirror, Displacement) that appears only when a child section DXF is uploaded. Do NOT show a protocol selector for the map view.
 - [ ] Task: Wire session state to store child CSV paths, station ID pair, and selected section protocol.
