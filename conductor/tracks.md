@@ -14,10 +14,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [x] **Track: North Symbol Visibility for Section Renders**
-*Link: [./tracks/north_symbol_section_20260527/](./tracks/north_symbol_section_20260527/)*
-
----
-
 - [ ] **Track: North Symbol Placement Fix**
 *Link: [./tracks/north_symbol_placement_20260527/](./tracks/north_symbol_placement_20260527/)*
