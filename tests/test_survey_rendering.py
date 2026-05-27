@@ -1,11 +1,12 @@
-import pandas as pd
-import pytest
 from unittest.mock import patch
-import matplotlib.pyplot as plt
+
+import pytest
+
+from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
 from cave_sketch.survey import draw_survey
 from cave_sketch.survey.config import SurveyConfig
 from cave_sketch.survey.renderer import render_survey
-from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
+
 
 @pytest.fixture
 def sample_survey():
