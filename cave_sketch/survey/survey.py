@@ -58,9 +58,11 @@ def draw_survey(
         raise ValueError("At least one survey path (map or section) must be provided.")
 
     # If only section is provided, use it as primary for render_survey
+    show_north = config.get("show_north", True)
     if not survey and section_survey:
         survey = section_survey
         section_survey = None
+        show_north = False
 
     assert survey is not None
 
@@ -71,6 +73,7 @@ def draw_survey(
         marker_zoom=config.get("marker_zoom", 0.0),
         text_zoom=config.get("text_zoom", 0.0),
         line_width_zoom=config.get("line_width_zoom", 0.0),
+        show_north=show_north,
     )
 
     fig = render_survey(
