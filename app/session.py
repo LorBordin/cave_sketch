@@ -42,6 +42,7 @@ def init_session() -> None:
         "parent_station": "",
         "child_station": "",
         "section_protocol": "simple",
+        "child_expander_open": False,
         "known_points": [{"station": "", "lat": 0.0, "lon": 0.0}],
         "rotation_angle": 0.0,
         "html_content": None,
