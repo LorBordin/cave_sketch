@@ -5,7 +5,7 @@
 
 ## Core Frameworks & Libraries
 - **Streamlit**: Multi-page web framework for the user interface.
-- **Matplotlib**: Engine for rendering PDF survey plots and previews.
+- **Matplotlib**: Engine for rendering PDF survey plots and previews, supporting conditional layout elements (e.g., north symbol).
 - **Folium**: Library for generating interactive georeferenced satellite maps.
 - **KML**: Manual XML generation for Google Earth 3D exports.
 - **ezdxf**: High-level CAD library for parsing and manipulating TopoDroid DXF exports.
