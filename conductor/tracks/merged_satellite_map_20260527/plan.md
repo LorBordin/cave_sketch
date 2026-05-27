@@ -340,7 +340,7 @@
 
 ---
 
-## Task 5: Conductor — User Manual Verification
+## [x] Task 5: Conductor — User Manual Verification
 
 - [ ] Run the app and load a parent survey in the Survey Plot page.
 - [ ] Upload a child survey, set merge stations, click "Generate Survey Plot".
