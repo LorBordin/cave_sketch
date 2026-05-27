@@ -1,0 +1,8 @@
+{
+  "track_id": "pdf_merging_20260525",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-05-25T12:00:00Z",
+  "updated_at": "2026-05-25T12:00:00Z",
+  "description": "Implement multi-survey merging for PDF surveys"
+}
