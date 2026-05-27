@@ -1,0 +1,8 @@
+{
+  "track_id": "clear_session_files_20260527",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-05-27T10:00:00Z",
+  "updated_at": "2026-05-27T10:00:00Z",
+  "description": "The Clear Session Files button, visible on the left in the left side bar should always be visible and working, also if the user is working in the survey plot or satellite map sections"
+}
