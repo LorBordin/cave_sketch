@@ -32,7 +32,7 @@ if col1.button("🌍 Generate HTML Map"):
     else:
         html_path = st.session_state.files_dir / "survey.html"
         html_map, json_path, kml_path = draw_map(
-            map_path=str(st.session_state.map_csv),
+            map_path=str(st.session_state.merged_map_csv or st.session_state.map_csv),
             gps_points=st.session_state.known_points,
             output_path=str(html_path),
             map_name="Current Cave",
