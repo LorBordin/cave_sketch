@@ -163,7 +163,7 @@
 
 ---
 
-## Task 3: Update `1_survey_plot.py` to save merged map
+## [x] Task 3: Update `1_survey_plot.py` to save merged map e87ec21
 
 **Files:**
 - Modify: `app/pages/1_survey_plot.py`
