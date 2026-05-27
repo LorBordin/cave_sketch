@@ -36,6 +36,7 @@ def init_session() -> None:
         "pdf_output_path": None,
         "map_loaded": False,
         "map_csv": None,
+        "merged_map_csv": None,
         "section_csv": None,
         "child_map_csv": None,
         "child_section_csv": None,

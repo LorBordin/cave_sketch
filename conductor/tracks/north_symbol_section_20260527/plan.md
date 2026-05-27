@@ -1,18 +1,26 @@
 # Implementation Plan: North Symbol Visibility for Section Renders
 
+## Key Files
+- `cave_sketch/survey/config.py` — `SurveyConfig` dataclass (add `show_north` field here)
+- `cave_sketch/survey/survey.py` — `draw_survey()` lines 60-63 (section-only reassignment, set `show_north=False` here)
+- `cave_sketch/survey/renderer.py` — `render_survey()` (use `config.show_north` instead of hardcoded `True`; also fix subplot title)
+- `tests/test_renderer.py` or `tests/test_survey.py` — write tests here
+
 ## Phase 1: Investigation and Testing
-- [ ] Task: Identify the rendering module and function responsible for drawing the north symbol (likely in `cave_sketch/survey/graphics/north.py` or `cave_sketch/survey/renderer.py`).
-- [ ] Task: Identify where the view selection (plan vs. section) is evaluated during PDF generation.
-- [ ] Task: Write failing unit test(s) verifying that the north symbol drawing function is bypassed or returns early when only the section view is requested.
-    - [ ] Locate or create the test file for the relevant rendering module (e.g., `tests/test_renderer.py`).
-    - [ ] Create a test case simulating a PDF generation with `plan_view=False` and `section_view=True`.
-    - [ ] Assert that the north symbol is not present in the output or that the rendering function is not called.
+- [ ] Task: Confirm the root cause — in `cave_sketch/survey/survey.py:60-63`, `section_survey` is reassigned to `survey` (losing section-only context), so `renderer.py` renders it as a plan subplot with `north_flag=True`.
+- [ ] Task: Write failing unit tests verifying section-only renders have no north symbol and title `"Sezione"`.
+    - [ ] Locate or create the test file (e.g., `tests/test_renderer.py` or `tests/test_survey.py`).
+    - [ ] Test 1: Call `draw_survey(csv_map_path=None, csv_section_path=<fixture_path>, rule_length=50, title="Test")`. Assert the returned figure's subplot title is `"Sezione"`.
+    - [ ] Test 2: Call `render_survey(survey=section_data, config=SurveyConfig(show_north=False), section_survey=None)`. Assert that `_add_north_arrow` is not called (mock it) or that no north arrow artist is present.
+    - [ ] Test 3: Regression — `draw_survey(csv_map_path=<path>, ...)` still renders with `north_flag=True` on plan subplot.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Investigation and Testing' (Protocol in workflow.md)
 
 ## Phase 2: Implementation
-- [ ] Task: Modify the backend rendering logic to conditionally draw the north symbol.
-    - [ ] Update the drawing routine to check the current view configuration.
-    - [ ] Ensure the north symbol is skipped if the configuration indicates a section-only render.
+- [ ] Task: Add `show_north: bool = True` field to `SurveyConfig` in `cave_sketch/survey/config.py`.
+- [ ] Task: In `cave_sketch/survey/survey.py`, within the section-only branch (lines 60-63), set `show_north=False` on `render_config` after the `SurveyConfig` is constructed.
+    - Note: `render_config` is built *after* this branch, so either move config construction above it, or pass `show_north` as a local flag and apply it to `render_config` before calling `render_survey()`.
+- [ ] Task: In `cave_sketch/survey/renderer.py`, replace the hardcoded `north_flag=True` on the plan subplot (line 72) with `north_flag=config.show_north`.
+- [ ] Task: In `cave_sketch/survey/renderer.py`, when `section_survey` is `None` and `config.show_north` is `False`, set the subplot title to `"Sezione"` instead of `"Pianta"`.
 - [ ] Task: Run all automated tests (`uv run pytest`) and ensure the newly written tests pass (Green Phase).
 - [ ] Task: Run linting and static analysis (`uv run ruff check .` and `uv run mypy cave_sketch/`) to ensure code quality.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Implementation' (Protocol in workflow.md)
