@@ -10,7 +10,7 @@
 
 ---
 
-## Task 1: Add `merged_map_csv` to session state
+## [x] Task 1: Add `merged_map_csv` to session state 711eeeb
 
 **Files:**
 - Modify: `app/session.py:34-53` (`defaults` dict and `AppState` TypedDict)
@@ -31,7 +31,7 @@
       ...
   ```
 
-- [ ] **Step 2: Add default value in `init_session`**
+- [x] **Step 2: Add default value in `init_session`**
 
   In the `defaults` dict inside `init_session`, add after the `"map_csv"` entry:
 
@@ -347,3 +347,4 @@
 - [ ] Navigate to the Satellite Map page, add GPS points, click "Generate HTML Map".
 - [ ] Confirm the rendered map shows the merged survey (both parent and child stations visible), not only the parent.
 - [ ] Go back to Survey Plot, click "Generate Survey Plot" again **without** a child survey loaded (remove child file). Navigate to Satellite Map and confirm it falls back to parent-only map.
+ly map.
