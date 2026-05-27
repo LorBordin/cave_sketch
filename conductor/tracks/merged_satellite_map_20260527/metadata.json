@@ -1,0 +1,8 @@
+{
+  "track_id": "merged_satellite_map_20260527",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-05-27T12:00:00Z",
+  "updated_at": "2026-05-27T12:00:00Z",
+  "description": "If two surveys get merged in the survey plot section, then once in the satellite map section it should plot the merged map, not the parent only. Notice that: 1. you must not change the function but just pass a different argument. 2. Do not change the UI. 3. Implement only the minimal changes to achieve the goal, stay simple."
+}
