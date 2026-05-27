@@ -1,0 +1,8 @@
+{
+  "track_id": "north_symbol_section_20260527",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-05-27T10:00:00Z",
+  "updated_at": "2026-05-27T10:00:00Z",
+  "description": "The north symbol should not be drawn in the survey pdf if only the section of the cave is sketched."
+}
