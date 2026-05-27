@@ -9,7 +9,7 @@
 - **Folium**: Library for generating interactive georeferenced satellite maps.
 - **KML**: Manual XML generation for Google Earth 3D exports.
 - **ezdxf**: High-level CAD library for parsing and manipulating TopoDroid DXF exports.
-- **NumPy & Pandas**: Data manipulation and numerical operations for georeferencing and station processing.
+- **NumPy & Pandas**: Data manipulation for georeferencing, station remapping, and coordinate transformations (merging).
 
 ## Infrastructure & Tools
 - **uv**: Modern Python package and environment manager.
