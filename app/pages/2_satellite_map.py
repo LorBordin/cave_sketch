@@ -10,6 +10,11 @@ init_session()
 st.title("🌍 Satellite Map")
 gps_points_editor_component()
 
+merge_valid = True
+if st.session_state.child_map_csv:
+    from components.merging_controls import merging_controls_component
+    merge_valid = merging_controls_component()
+
 rotation_angle = st.number_input("🧭 Map rotation angle (°)", value=st.session_state.rotation_angle)
 st.session_state.rotation_angle = rotation_angle
 
@@ -25,7 +30,9 @@ if uploaded_json:
 
 col1, col2 = st.columns(2)
 if col1.button("🌍 Generate HTML Map"):
-    if not validate_known_points():
+    if not merge_valid:
+        st.error("⚠️ Please resolve the merging errors before generating the map.")
+    elif not validate_known_points():
         st.warning("⚠️ Please fill in all GPS point fields.")
     elif not st.session_state.map_loaded:
         st.warning("⚠️ Please load a map in the Survey Plot page first.")
@@ -35,6 +42,9 @@ if col1.button("🌍 Generate HTML Map"):
             map_path=str(st.session_state.map_csv),
             gps_points=st.session_state.known_points,
             output_path=str(html_path),
+            child_map_path=str(st.session_state.child_map_csv) if st.session_state.child_map_csv else None,
+            parent_station=st.session_state.parent_station,
+            child_station=st.session_state.child_station,
             map_name="Current Cave",
             additional_json_maps=st.session_state.uploaded_json_paths,
             rotation_angle=rotation_angle,
