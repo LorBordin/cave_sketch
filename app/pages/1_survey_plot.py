@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pandas as pd
 import streamlit as st
 from components.file_upload import (
     child_file_uploader_component,
@@ -32,7 +33,7 @@ if st.button("✨ Generate Survey Plot"):
     if not merge_valid:
         st.error("⚠️ Please resolve the merging errors before generating the plot.")
     elif st.session_state.map_csv or st.session_state.section_csv:
-        from cave_sketch.survey.merger import SectionProtocol
+        from cave_sketch.survey.merger import SectionProtocol, merge_surveys
         pdf_path = st.session_state.files_dir / "survey.pdf"
         with st.spinner("🛠️ Creating survey plot..."):
             fig = draw_survey(
@@ -50,6 +51,27 @@ if st.button("✨ Generate Survey Plot"):
             )
             st.session_state.cave_survey = fig
             st.session_state.pdf_output_path = pdf_path
+            if (
+                st.session_state.child_map_csv
+                and st.session_state.parent_station
+                and st.session_state.child_station
+            ):
+                _parent_df = pd.read_csv(st.session_state.map_csv)
+                _child_df = pd.read_csv(st.session_state.child_map_csv)
+                _merged_df, _ = merge_surveys(
+                    parent_map=_parent_df,
+                    parent_section=None,
+                    child_map=_child_df,
+                    child_section=None,
+                    parent_station=st.session_state.parent_station,
+                    child_station=st.session_state.child_station,
+                    section_protocol=SectionProtocol(st.session_state.section_protocol),
+                )
+                _merged_path = st.session_state.files_dir / "merged_map.csv"
+                _merged_df.to_csv(_merged_path, index=False)
+                st.session_state.merged_map_csv = _merged_path
+            else:
+                st.session_state.merged_map_csv = None
     else:
         st.warning("⚠️ Please upload at least one file first.")
 
