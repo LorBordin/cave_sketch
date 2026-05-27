@@ -54,7 +54,7 @@
 
 ---
 
-## Task 2: Write failing tests
+## [x] Task 2: Write failing tests b0c790b
 
 **Files:**
 - Create: `tests/test_satellite_map.py`
