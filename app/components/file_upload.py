@@ -1,6 +1,8 @@
+
 import streamlit as st
-from pathlib import Path
+
 from cave_sketch.parse_dxf import parse_dxf
+
 
 def file_uploader_component():
     """Component for uploading the main (parent) survey files."""
@@ -37,7 +39,9 @@ def child_file_uploader_component():
         
         col1, col2 = st.columns(2)
         with col1:
-            child_map_file = st.file_uploader("Child Map (.dxf)", type=["dxf", "csv"], key="child_map_uploader")
+            child_map_file = st.file_uploader(
+                "Child Map (.dxf)", type=["dxf", "csv"], key="child_map_uploader"
+            )
         with col2:
             child_section_file = st.file_uploader(
                 "Child Section (.dxf)", type=["dxf", "csv"], key="child_section_uploader"

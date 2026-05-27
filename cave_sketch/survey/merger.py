@@ -1,7 +1,9 @@
-import pandas as pd
 import re
 from enum import Enum
-from typing import Optional, Tuple, Set, Dict
+from typing import Dict, Optional, Set, Tuple
+
+import pandas as pd
+
 
 class SectionProtocol(Enum):
     SIMPLE = "simple"
@@ -74,7 +76,6 @@ def _merge_single_view(
     if is_section and section_protocol == SectionProtocol.DISPLACEMENT:
         # Displacement algorithm: search right first, then below
         p_max_x = parent_df["X"].max()
-        p_min_y = parent_df["Y"].min()
         padding = 50.0 # Better padding for displacement
         
         # Start by centering child at parent station
@@ -90,7 +91,8 @@ def _merge_single_view(
         
         # Add connector node to child_df
         # This node is at the parent station's absolute coordinates
-        # but relative to the child survey's origin (so after delta shift it lands on parent station)
+        # but relative to the child survey's origin 
+        # (so after delta shift it lands on parent station)
         connector_id = "CONN_1"
         connector_node = pd.DataFrame({
             "Node_Id": [connector_id],
@@ -141,7 +143,9 @@ def _merge_single_view(
         return nid
 
     # Remove coincident node from child AFTER computing mapping/offset
-    not_coincident_indices = [i for i, nid in enumerate(child_df["Node_Id"]) if nid != child_station]
+    not_coincident_indices = [
+        i for i, nid in enumerate(child_df["Node_Id"]) if nid != child_station
+    ]
     child_df = child_df.iloc[not_coincident_indices].reset_index(drop=True)
     
     child_df["Node_Id"] = child_df["Node_Id"].apply(remap_id)
@@ -149,7 +153,7 @@ def _merge_single_view(
     def remap_links(link_str: str) -> str:
         if pd.isna(link_str) or not link_str:
             return link_str
-        return "-".join(remap_id(l) for l in link_str.split("-"))
+        return "-".join(remap_id(link) for link in link_str.split("-"))
     
     child_df["Links"] = child_df["Links"].apply(remap_links)
 

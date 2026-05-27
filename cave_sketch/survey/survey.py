@@ -6,9 +6,9 @@ from matplotlib.figure import Figure
 
 from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
 from cave_sketch.survey.config import SurveyConfig
+from cave_sketch.survey.merger import SectionProtocol, merge_surveys
 from cave_sketch.survey.pdf import export_pdf
 from cave_sketch.survey.renderer import render_survey
-from cave_sketch.survey.merger import merge_surveys, SectionProtocol
 
 
 def draw_survey(

@@ -1,6 +1,8 @@
-import streamlit as st
-import pandas as pd
 import re
+
+import pandas as pd
+import streamlit as st
+
 
 def merging_controls_component():
     """Component for station matching and section protocol selection."""
