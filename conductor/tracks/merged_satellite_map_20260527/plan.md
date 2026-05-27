@@ -289,7 +289,7 @@
 
 ---
 
-## Task 4: Update `2_satellite_map.py` to use merged map
+## [x] Task 4: Update `2_satellite_map.py` to use merged map 5ef9b4a
 
 **Files:**
 - Modify: `app/pages/2_satellite_map.py:34-41`
