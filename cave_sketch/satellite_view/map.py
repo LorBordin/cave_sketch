@@ -17,18 +17,13 @@ from cave_sketch.geo.models import GeoPoint
 _A = 6378137.0
 _F = 1.0 / 298.257223563
 _E2 = _F * (2 - _F)
-from cave_sketch.geo.models import GeoPoint
-from cave_sketch.survey.merger import merge_surveys, SectionProtocol
+_DEG2RAD = np.pi / 180.0
 
-# WGS84 constants
-...
+
 def draw_map(
     map_path: str,
     gps_points: List[Dict],
     output_path: str,
-    child_map_path: Optional[str] = None,
-    parent_station: Optional[str] = None,
-    child_station: Optional[str] = None,
     map_name: str = "Cave",
     additional_json_maps: Optional[List[str]] = None,
     rotation_angle: float = 0,
@@ -37,26 +32,13 @@ def draw_map(
     Create cave map from CSV data and optionally combine with additional JSON maps
     """
     # Load and process the main map data
-    parent_map = pd.read_csv(map_path)
-
-    if child_map_path and parent_station and child_station:
-        child_map = pd.read_csv(child_map_path)
-        map_df, _ = merge_surveys(
-            parent_map=parent_map,
-            parent_section=None,
-            child_map=child_map,
-            child_section=None,
-            parent_station=parent_station,
-            child_station=child_station
-        )
-    else:
-        map_df = parent_map
-
+    map_df = pd.read_csv(map_path)
     if rotation_angle != 0:
-        # For rotation, we need a center. Use the first station or mean.
-        points = map_df[["X", "Y"]].values
-        center = (float(map_df["X"].mean()), float(map_df["Y"].mean()))
-        map_df[["X", "Y"]] = rotate_points(points, center, rotation_angle)
+        mask = map_df["Node_Id"] == "13"
+        center_x = map_df[mask]["X"].mean()
+        center_y = map_df[mask]["Y"].mean()
+        center = (float(center_x), float(center_y))
+        map_df[["X", "Y"]] = rotate_points(map_df[["X", "Y"]].values, center, rotation_angle)
 
     map_df = cartesian_to_latlon(map_df, gps_points)
 
