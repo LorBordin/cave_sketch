@@ -68,14 +68,15 @@ def render_survey(
         map_df,
         rule_flag=True,
         rule_length=config.rule_length,
-        north_flag=True,
+        north_flag=config.show_north,
         excluded_nodes=excluded_nodes,
         rule_orientation="horizontal",
         rotation_deg=config.rotation_deg,
         config=config_dict,
         ax=ax,
     )
-    ax.set_title("Pianta")
+    title = "Pianta" if config.show_north or section_survey is not None else "Sezione"
+    ax.set_title(title)
 
     return fig
 
