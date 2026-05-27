@@ -7,8 +7,8 @@
 - `tests/test_renderer.py` or `tests/test_survey.py` — write tests here
 
 ## Phase 1: Investigation and Testing
-- [x] Task: Confirm the root cause — in `cave_sketch/survey/survey.py:60-63`, `section_survey` is reassigned to `survey` (losing section-only context), so `renderer.py` renders it as a plan subplot with `north_flag=True`.
-- [x] Task: Write failing unit tests verifying section-only renders have no north symbol and title `"Sezione"`.
+- [x] Task: Confirm the root cause — in `cave_sketch/survey/survey.py:60-63`, `section_survey` is reassigned to `survey` (losing section-only context), so `renderer.py` renders it as a plan subplot with `north_flag=True`. 717a6e2
+- [x] Task: Write failing unit tests verifying section-only renders have no north symbol and title `"Sezione"`. 717a6e2
     - [ ] Locate or create the test file (e.g., `tests/test_renderer.py` or `tests/test_survey.py`).
     - [ ] Test 1: Call `draw_survey(csv_map_path=None, csv_section_path=<fixture_path>, rule_length=50, title="Test")`. Assert the returned figure's subplot title is `"Sezione"`.
     - [ ] Test 2: Call `render_survey(survey=section_data, config=SurveyConfig(show_north=False), section_survey=None)`. Assert that `_add_north_arrow` is not called (mock it) or that no north arrow artist is present.
