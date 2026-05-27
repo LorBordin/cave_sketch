@@ -21,6 +21,6 @@
     - Note: `render_config` is built *after* this branch, so either move config construction above it, or pass `show_north` as a local flag and apply it to `render_config` before calling `render_survey()`.
 - [x] Task: In `cave_sketch/survey/renderer.py`, replace the hardcoded `north_flag=True` on the plan subplot (line 72) with `north_flag=config.show_north`. 09718bd
 - [x] Task: In `cave_sketch/survey/renderer.py`, when `section_survey` is `None` and `config.show_north` is `False`, set the subplot title to `"Sezione"` instead of `"Pianta"`. 09718bd
-- [~] Task: Run all automated tests (`uv run pytest`) and ensure the newly written tests pass (Green Phase).
-- [ ] Task: Run linting and static analysis (`uv run ruff check .` and `uv run mypy cave_sketch/`) to ensure code quality.
+- [x] Task: Run all automated tests (`uv run pytest`) and ensure the newly written tests pass (Green Phase). 09718bd
+- [x] Task: Run linting and static analysis (`uv run ruff check .` and `uv run mypy cave_sketch/`) to ensure code quality. 09718bd
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Implementation' (Protocol in workflow.md)
