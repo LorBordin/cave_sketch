@@ -1,6 +1,6 @@
 # Implementation Plan: North Symbol Placement Fix
 
-## Phase 1: Bounding Box and Corner Analysis
+## Phase 1: Bounding Box and Corner Analysis [checkpoint: 8c54a03]
 - [x] Task: Add failing tests for corner analysis cdca7b1
     - [x] Sub-task: Test `find_best_corner(x_coords, y_coords)` — given post-rotation X/Y arrays, returns one of `{"top-left", "top-right", "bottom-left", "bottom-right"}`.
     - [x] Sub-task: Test the tie-breaking priority (bottom-left > bottom-right > top-left > top-right).
@@ -11,7 +11,7 @@
     - [x] Sub-task: Implement `find_best_corner(x, y) -> str` — selects winner using score + tie-break priority.
     - [x] Sub-task: Implement `corner_anchor(corner, x_min, x_max, y_min, y_max, inset_fraction=0.02) -> (float, float)` — returns the anchor coordinate for the symbol.
     - [x] Sub-task: Implement `is_fallback_needed(scores) -> bool` — returns True when all corners exceed the 50% density threshold.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Bounding Box and Corner Analysis' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Bounding Box and Corner Analysis' (Protocol in workflow.md) 8c54a03
 
 ## Phase 2: North Symbol Integration
 - [ ] Task: Add failing tests for North symbol placement
