@@ -5,7 +5,7 @@ def compute_data_bbox(x, y):
         return 0, 0, 0, 0
     return float(np.min(x)), float(np.max(x)), float(np.min(y)), float(np.max(y))
 
-def score_corners(x, y, zone_fraction=0.20, padding_fraction=0.0):
+def score_corners(x, y, zone_fraction=0.20, padding_fraction=0.0, padding_x_units=None, padding_y_units=None):
     x_min, x_max, y_min, y_max = compute_data_bbox(x, y)
     width = x_max - x_min
     height = y_max - y_min
@@ -17,8 +17,15 @@ def score_corners(x, y, zone_fraction=0.20, padding_fraction=0.0):
     zone_w = width * zone_fraction
     zone_h = height * zone_fraction
     
-    padding_x = width * padding_fraction
-    padding_y = height * padding_fraction
+    if padding_x_units is not None:
+        padding_x = padding_x_units
+    else:
+        padding_x = width * padding_fraction
+        
+    if padding_y_units is not None:
+        padding_y = padding_y_units
+    else:
+        padding_y = height * padding_fraction
     
     zones = {
         "bottom-left": (x_min, x_min + zone_w, y_min, y_min + zone_h),
@@ -41,7 +48,7 @@ def score_corners(x, y, zone_fraction=0.20, padding_fraction=0.0):
         count = np.sum((x >= x0) & (x <= x1) & (y >= y0) & (y <= y1))
         
         # If padding is requested, significantly penalize if any point is within padding
-        if padding_fraction > 0:
+        if padding_fraction > 0 or padding_x_units is not None or padding_y_units is not None:
             px0, px1, py0, py1 = padded_zones[name]
             padded_count = np.sum((x >= px0) & (x <= px1) & (y >= py0) & (y <= py1))
             if padded_count > 0:
@@ -52,10 +59,15 @@ def score_corners(x, y, zone_fraction=0.20, padding_fraction=0.0):
     return scores
 
 def find_best_corner(x, y):
-    return find_best_corner_with_padding(x, y, padding_fraction=0.0)
+    return find_best_corner_with_padding(x, y, padding_fraction=0.03)
 
-def find_best_corner_with_padding(x, y, padding_fraction=0.03):
-    scores = score_corners(x, y, padding_fraction=padding_fraction)
+def find_best_corner_with_padding(x, y, padding_fraction=0.03, padding_x_units=None, padding_y_units=None):
+    scores = score_corners(
+        x, y, 
+        padding_fraction=padding_fraction, 
+        padding_x_units=padding_x_units, 
+        padding_y_units=padding_y_units
+    )
     
     # Priority: bottom-left > bottom-right > top-left > top-right
     priority = ["bottom-left", "bottom-right", "top-left", "top-right"]
@@ -104,7 +116,8 @@ def corner_anchor(corner, x_min, x_max, y_min, y_max, inset_fraction=0.02):
 def get_dual_placement(
     corner, x_min, x_max, y_min, y_max, 
     rule_width, arrow_height, 
-    inset_fraction=0.02, vertical_gap=2.0
+    inset_fraction=0.02, vertical_gap=2.0,
+    ref_scale=None
 ):
     """
     Compute coordinates for both North arrow and scale rule.
@@ -115,25 +128,102 @@ def get_dual_placement(
     inset_x = width * inset_fraction
     inset_y = height * inset_fraction
     
-    # Rule height is small, assume ~2 units for center calculation if needed
-    rule_height_est = 2.0 
+    # Scale dependent values
+    if ref_scale is not None:
+        rule_height = ref_scale * 0.01
+        gap = ref_scale * 0.02
+    else:
+        rule_height = 2.0 # Default fallback
+        gap = vertical_gap
     
     if corner == "bottom-left":
         rule_pos = (x_min + inset_x, y_min + inset_y)
     elif corner == "bottom-right":
         rule_pos = (x_max - inset_x - rule_width, y_min + inset_y)
     elif corner == "top-left":
-        rule_pos = (x_min + inset_x, y_max - inset_y - rule_height_est - vertical_gap - arrow_height)
+        rule_pos = (x_min + inset_x, y_max - inset_y - rule_height - gap - arrow_height)
     elif corner == "top-right":
-        rule_pos = (x_max - inset_x - rule_width, y_max - inset_y - rule_height_est - vertical_gap - arrow_height)
+        rule_pos = (x_max - inset_x - rule_width, y_max - inset_y - rule_height - gap - arrow_height)
     else:
         rule_pos = (x_min + inset_x, y_min + inset_y)
         
     # Arrow is centered on rule
     arrow_x = rule_pos[0] + rule_width / 2
     # Arrow is above rule
-    arrow_y = rule_pos[1] + rule_height_est + vertical_gap + arrow_height / 2
+    arrow_y = rule_pos[1] + rule_height + gap + arrow_height / 2
     
     arrow_pos = (arrow_x, arrow_y)
     
     return arrow_pos, rule_pos
+
+def compute_dual_layout(x, y, rule_length, arrow_len, ref_scale):
+    """
+    High-level placement function that handles scaling, footprint calculation,
+    corner selection, and fallback expansion.
+    """
+    x_min, x_max, y_min, y_max = compute_data_bbox(x, y)
+    x_span = x_max - x_min
+    y_span = y_max - y_min
+    
+    # 1. Compute scaled gaps and heights
+    vertical_gap = ref_scale * 0.02
+    rule_height = ref_scale * 0.01
+    
+    # 2. Compute element footprint
+    # Total width is max of rule and arrow
+    elem_w = max(rule_length, arrow_len)
+    # Total height is arrow + gap + rule
+    elem_h = arrow_len + vertical_gap + rule_height
+    
+    # 3. Add 3% margin of axes range as padding
+    margin_x = x_span * 0.03 if x_span > 0 else ref_scale * 0.03
+    margin_y = y_span * 0.03 if y_span > 0 else ref_scale * 0.03
+    
+    padding_x_units = elem_w + margin_x
+    padding_y_units = elem_h + margin_y
+    
+    # 4. Find best corner
+    scores = score_corners(x, y, padding_x_units=padding_x_units, padding_y_units=padding_y_units)
+    
+    # Check if all corners are penalized
+    if all(count >= 1000000 for count in scores.values()):
+        # Fallback needed
+        if x_span >= y_span:
+            # Wide cave: expand bottom
+            extra_space = elem_h + margin_y
+            new_y_min = y_min - extra_space
+            # Place at bottom-left of expanded strip
+            arrow_pos, rule_pos = get_dual_placement(
+                "bottom-left", x_min, x_max, new_y_min, y_max,
+                rule_width=rule_length, arrow_height=arrow_len,
+                ref_scale=ref_scale
+            )
+            return arrow_pos, rule_pos, {"y_min": new_y_min}
+        else:
+            # Tall cave: expand left
+            extra_space = elem_w + margin_x
+            new_x_min = x_min - extra_space
+            # Place at bottom-left of expanded strip
+            arrow_pos, rule_pos = get_dual_placement(
+                "bottom-left", new_x_min, x_max, y_min, y_max,
+                rule_width=rule_length, arrow_height=arrow_len,
+                ref_scale=ref_scale
+            )
+            return arrow_pos, rule_pos, {"x_min": new_x_min}
+    
+    # No fallback needed
+    priority = ["bottom-left", "bottom-right", "top-left", "top-right"]
+    best_corner = priority[0]
+    min_score = scores[best_corner]
+    for corner in priority[1:]:
+        if scores[corner] < min_score:
+            min_score = scores[corner]
+            best_corner = corner
+            
+    arrow_pos, rule_pos = get_dual_placement(
+        best_corner, x_min, x_max, y_min, y_max,
+        rule_width=rule_length, arrow_height=arrow_len,
+        ref_scale=ref_scale
+    )
+    
+    return arrow_pos, rule_pos, None

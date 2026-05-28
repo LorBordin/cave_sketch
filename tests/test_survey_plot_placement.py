@@ -15,15 +15,13 @@ def sample_df():
 
 @patch("cave_sketch.survey.graphics.survey_plot._add_north_arrow")
 @patch("cave_sketch.survey.graphics.survey_plot._add_rule")
-@patch("cave_sketch.survey.graphics.survey_plot.find_best_corner")
-@patch("cave_sketch.survey.graphics.survey_plot.corner_anchor")
-@patch("cave_sketch.survey.graphics.survey_plot.is_fallback_needed")
+@patch("cave_sketch.survey.graphics.survey_plot.compute_dual_layout")
 def test_create_survey_uses_dynamic_placement(
-    mock_fallback, mock_anchor, mock_find_corner, mock_add_rule, mock_add_north, sample_df
+    mock_compute_layout, mock_add_rule, mock_add_north, sample_df
 ):
-    mock_find_corner.return_value = "top-right"
-    mock_anchor.return_value = (98, 98)
-    mock_fallback.return_value = False
+    arrow_pos = (98, 98)
+    rule_pos = (90, 90)
+    mock_compute_layout.return_value = (arrow_pos, rule_pos, None)
     
     config = {"marker_zoom": 10, "text_zoom": 10}
     
@@ -37,28 +35,27 @@ def test_create_survey_uses_dynamic_placement(
         ax=ax
     )
     
-    # Verify find_best_corner was called with rotated X/Y
-    # (In this case rotation=0, so original X/Y)
-    mock_find_corner.assert_called()
+    # Verify compute_dual_layout was called
+    mock_compute_layout.assert_called_once()
     
-    # Verify North arrow is placed at the anchor
-    mock_add_north.assert_called()
+    # Verify North arrow is placed at the coord from compute_dual_layout
+    mock_add_north.assert_called_once()
     args, kwargs = mock_add_north.call_args
-    assert kwargs["coords"] == (98, 98)
+    assert kwargs["coords"] == arrow_pos
     
-    # Verify Rule is placed in the same corner (side-by-side)
-    mock_add_rule.assert_called()
-    # Check that it's near (98, 98)
+    # Verify Rule is placed at the coord from compute_dual_layout
+    mock_add_rule.assert_called_once()
     args, kwargs = mock_add_rule.call_args
-    # Current implementation will fail because it doesn't use these mocks yet
-    assert abs(kwargs["x_start"] - 98) < 10
-    assert abs(kwargs["y_start"] - 98) < 10
+    assert kwargs["x_start"] == rule_pos[0]
+    assert kwargs["y_start"] == rule_pos[1]
 
-@patch("cave_sketch.survey.graphics.survey_plot.is_fallback_needed")
+@patch("cave_sketch.survey.graphics.survey_plot.compute_dual_layout")
 @patch("matplotlib.axes.Axes.set_xlim")
 @patch("matplotlib.axes.Axes.set_ylim")
-def test_create_survey_fallback_behavior(mock_set_ylim, mock_set_xlim, mock_fallback, sample_df):
-    mock_fallback.return_value = True
+def test_create_survey_fallback_behavior(mock_set_ylim, mock_set_xlim, mock_compute_layout, sample_df):
+    arrow_pos = (10, -10)
+    rule_pos = (10, -20)
+    mock_compute_layout.return_value = (arrow_pos, rule_pos, {"y_min": -30})
     
     config = {"marker_zoom": 10, "text_zoom": 10}
     
@@ -73,5 +70,6 @@ def test_create_survey_fallback_behavior(mock_set_ylim, mock_set_xlim, mock_fall
     )
     
     # Fallback should extend limits
-    # Exact values depend on implementation, but at least one of set_xlim/ylim should be called
-    assert ax.set_xlim.called or ax.set_ylim.called
+    ax.set_ylim.assert_called()
+    args, _ = ax.set_ylim.call_args
+    assert args[0] == -30

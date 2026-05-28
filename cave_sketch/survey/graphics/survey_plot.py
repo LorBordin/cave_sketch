@@ -9,9 +9,7 @@ from cave_sketch.features.render_features import extract_features_from_df
 from cave_sketch.survey.graphics.north import _add_north_arrow
 from cave_sketch.survey.graphics.placement import (
     compute_data_bbox,
-    corner_anchor,
-    find_best_corner,
-    is_fallback_needed,
+    compute_dual_layout,
 )
 from cave_sketch.survey.graphics.rule import _add_rule
 
@@ -85,27 +83,23 @@ def create_survey(
     # --- Rule and North arrow ---
     if rule_flag or north_flag:
         arrow_len = ref_scale * 0.07
-        if is_fallback_needed(x_coords, y_coords):
-            # Fallback: Extend bottom
-            y_min_new = y_min - arrow_len * 2
-            ax.set_ylim(y_min_new, y_max)
-            north_coord = (x_min + x_span * 0.02, y_min_new + arrow_len * 1.2)
-            rule_x, rule_y = x_min + x_span * 0.02, y_min_new + arrow_len * 0.4
-        else:
-            best_corner = find_best_corner(x_coords, y_coords)
-            north_coord = corner_anchor(best_corner, x_min, x_max, y_min, y_max)
-            rule_x, rule_y = north_coord
-            if "bottom" in best_corner:
-                rule_y -= ref_scale * 0.04
-            else:
-                rule_y += ref_scale * 0.04
+        arrow_coord, rule_pos, axes_expansion = compute_dual_layout(
+            x_coords, y_coords, rule_length, arrow_len, ref_scale
+        )
+        
+        # Apply axis expansion if triggered by fallback
+        if axes_expansion:
+            if "y_min" in axes_expansion:
+                ax.set_ylim(axes_expansion["y_min"], y_max)
+            if "x_min" in axes_expansion:
+                ax.set_xlim(axes_expansion["x_min"], x_max)
 
         if rule_flag:
             rule_w = ref_scale * 0.005
             _add_rule(
                 ax=ax,
-                x_start=rule_x,
-                y_start=rule_y,
+                x_start=rule_pos[0],
+                y_start=rule_pos[1],
                 orientation=rule_orientation,
                 scale_len=rule_length,
                 scale_width=rule_w,
@@ -113,7 +107,7 @@ def create_survey(
             )
 
         if north_flag:
-            _add_north_arrow(ax=ax, coords=north_coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
+            _add_north_arrow(ax=ax, coords=arrow_coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
 
     ax.axis("equal")
     ax.set_xticks([])
@@ -122,4 +116,5 @@ def create_survey(
         s.set_visible(False)
 
     return ax
+
 
