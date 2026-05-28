@@ -1,16 +1,16 @@
 # Implementation Plan: North Symbol Placement Fix
 
 ## Phase 1: Bounding Box and Corner Analysis
-- [ ] Task: Add failing tests for corner analysis
-    - [ ] Sub-task: Test `find_best_corner(x_coords, y_coords)` — given post-rotation X/Y arrays, returns one of `{"top-left", "top-right", "bottom-left", "bottom-right"}`.
-    - [ ] Sub-task: Test the tie-breaking priority (bottom-left > bottom-right > top-left > top-right).
-    - [ ] Sub-task: Test that the fallback case is triggered when all corners exceed the 50% density threshold.
-- [ ] Task: Implement corner analysis logic in `cave_sketch/survey/graphics/placement.py` (new file)
-    - [ ] Sub-task: Implement `compute_data_bbox(x, y) -> (x_min, x_max, y_min, y_max)`.
-    - [ ] Sub-task: Implement `score_corners(x, y, zone_fraction=0.20) -> dict[str, float]` — returns a free-space score per corner.
-    - [ ] Sub-task: Implement `find_best_corner(x, y) -> str` — selects winner using score + tie-break priority.
-    - [ ] Sub-task: Implement `corner_anchor(corner, x_min, x_max, y_min, y_max, inset_fraction=0.02) -> (float, float)` — returns the anchor coordinate for the symbol.
-    - [ ] Sub-task: Implement `is_fallback_needed(scores) -> bool` — returns True when all corners exceed the 50% density threshold.
+- [x] Task: Add failing tests for corner analysis cdca7b1
+    - [x] Sub-task: Test `find_best_corner(x_coords, y_coords)` — given post-rotation X/Y arrays, returns one of `{"top-left", "top-right", "bottom-left", "bottom-right"}`.
+    - [x] Sub-task: Test the tie-breaking priority (bottom-left > bottom-right > top-left > top-right).
+    - [x] Sub-task: Test that the fallback case is triggered when all corners exceed the 50% density threshold.
+- [x] Task: Implement corner analysis logic in `cave_sketch/survey/graphics/placement.py` (new file) cdca7b1
+    - [x] Sub-task: Implement `compute_data_bbox(x, y) -> (x_min, x_max, y_min, y_max)`.
+    - [x] Sub-task: Implement `score_corners(x, y, zone_fraction=0.20) -> dict[str, float]` — returns a free-space score per corner.
+    - [x] Sub-task: Implement `find_best_corner(x, y) -> str` — selects winner using score + tie-break priority.
+    - [x] Sub-task: Implement `corner_anchor(corner, x_min, x_max, y_min, y_max, inset_fraction=0.02) -> (float, float)` — returns the anchor coordinate for the symbol.
+    - [x] Sub-task: Implement `is_fallback_needed(scores) -> bool` — returns True when all corners exceed the 50% density threshold.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Bounding Box and Corner Analysis' (Protocol in workflow.md)
 
 ## Phase 2: North Symbol Integration
