@@ -14,5 +14,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: North Symbol Placement Fix**
+- [~] **Track: North Symbol Placement Fix**
 *Link: [./tracks/north_symbol_placement_20260527/](./tracks/north_symbol_placement_20260527/)*
