@@ -1,6 +1,11 @@
 import numpy as np
-import pytest
-from cave_sketch.survey.graphics.placement import find_best_corner, is_fallback_needed, corner_anchor
+
+from cave_sketch.survey.graphics.placement import (
+    corner_anchor,
+    find_best_corner,
+    is_fallback_needed,
+)
+
 
 def test_find_best_corner_top_right_empty():
     # Data points concentrated in top-left, bottom-left, bottom-right

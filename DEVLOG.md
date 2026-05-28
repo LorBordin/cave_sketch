@@ -144,10 +144,15 @@
 - Altitude (z) is passed through from DXF to KML, defaulting to 0.0 if not available in the CSV intermediary.
 **Next session notes:** KML export fully implemented and integrated. Ready for more features or merging.
 
-## [2026-05-22 09:22] Documentation & Roadmap — Update TODO list
+## [2026-05-28 15:45] CI Fix — Ruff Linting Errors
 **Files:**
-- README.md
+- cave_sketch/survey/graphics/placement.py
+- cave_sketch/survey/graphics/survey_plot.py
+- tests/test_placement.py
+- tests/test_placement_refined.py
+- tests/test_survey_plot_placement.py
 
 **Deviations from spec:** None
 **Assumptions:** None
-**Next session notes:** New priority items added to the roadmap regarding multi-survey documentation and PDF merging.
+**Next session notes:** Linting errors fixed, CI should pass. All tests are green.
+

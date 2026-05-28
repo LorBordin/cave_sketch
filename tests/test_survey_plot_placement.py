@@ -1,7 +1,10 @@
+from unittest.mock import MagicMock, patch
+
 import pandas as pd
 import pytest
-from unittest.mock import patch, MagicMock
+
 from cave_sketch.survey.graphics.survey_plot import create_survey
+
 
 @pytest.fixture
 def sample_df():
@@ -52,7 +55,9 @@ def test_create_survey_uses_dynamic_placement(
 @patch("cave_sketch.survey.graphics.survey_plot.compute_dual_layout")
 @patch("matplotlib.axes.Axes.set_xlim")
 @patch("matplotlib.axes.Axes.set_ylim")
-def test_create_survey_fallback_behavior(mock_set_ylim, mock_set_xlim, mock_compute_layout, sample_df):
+def test_create_survey_fallback_behavior(
+    mock_set_ylim, mock_set_xlim, mock_compute_layout, sample_df
+):
     arrow_pos = (10, -10)
     rule_pos = (10, -20)
     mock_compute_layout.return_value = (arrow_pos, rule_pos, {"y_min": -30})

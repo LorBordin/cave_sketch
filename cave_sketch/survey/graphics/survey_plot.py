@@ -107,7 +107,9 @@ def create_survey(
             )
 
         if north_flag:
-            _add_north_arrow(ax=ax, coords=arrow_coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
+            _add_north_arrow(
+                ax=ax, coords=arrow_coord, arrow_len=arrow_len, rotation_deg=rotation_deg
+            )
 
     ax.axis("equal")
     ax.set_xticks([])

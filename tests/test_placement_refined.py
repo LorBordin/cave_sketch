@@ -1,20 +1,21 @@
 import numpy as np
-import pytest
-from cave_sketch.survey.graphics.placement import get_dual_placement, find_best_corner_with_padding
+
+from cave_sketch.survey.graphics.placement import find_best_corner_with_padding, get_dual_placement
+
 
 def test_dual_placement_vertical_stack():
     # Arrow above Rule, Arrow centered on Rule
     x_min, x_max, y_min, y_max = 0, 100, 0, 100
     rule_width = 20
     rule_height = 2
-    arrow_width = 5
     arrow_height = 10
     
     # Test bottom-left
     # Expected: 
     # Rule at (inset, inset)
     # Arrow at (inset + rule_width/2, inset + rule_height + vertical_gap + arrow_height/2)
-    # Wait, the anchor for rule and arrow might be different depending on how _add_rule and _add_north_arrow work.
+    # Wait, the anchor for rule and arrow might be different depending on how
+    # _add_rule and _add_north_arrow work.
     # _add_rule(x_start, y_start, ...)
     # _add_north_arrow(coords=(x,y), ...)
     
@@ -140,7 +141,9 @@ def test_compute_dual_layout_returns_best_corner():
     arrow_len = 10
     ref_scale = 100
     
-    arrow_pos, rule_pos, axes_expansion = compute_dual_layout(x, y, rule_length, arrow_len, ref_scale)
+    arrow_pos, rule_pos, axes_expansion = compute_dual_layout(
+        x, y, rule_length, arrow_len, ref_scale
+    )
     
     assert axes_expansion is None
     # Should pick one of the clear corners
@@ -157,7 +160,9 @@ def test_compute_dual_layout_fallback_wide_cave():
     arrow_len = 10
     ref_scale = 100
     
-    arrow_pos, rule_pos, axes_expansion = compute_dual_layout(x, y, rule_length, arrow_len, ref_scale)
+    arrow_pos, rule_pos, axes_expansion = compute_dual_layout(
+        x, y, rule_length, arrow_len, ref_scale
+    )
     
     assert axes_expansion is not None
     assert "y_min" in axes_expansion
@@ -173,7 +178,9 @@ def test_compute_dual_layout_fallback_tall_cave():
     arrow_len = 10
     ref_scale = 100
     
-    arrow_pos, rule_pos, axes_expansion = compute_dual_layout(x, y, rule_length, arrow_len, ref_scale)
+    arrow_pos, rule_pos, axes_expansion = compute_dual_layout(
+        x, y, rule_length, arrow_len, ref_scale
+    )
     
     assert axes_expansion is not None
     assert "x_min" in axes_expansion
@@ -186,18 +193,18 @@ def test_compute_data_bbox_empty():
 def test_is_fallback_needed_variations():
     from cave_sketch.survey.graphics.placement import is_fallback_needed
     # No data
-    assert is_fallback_needed(np.array([]), np.array([])) == False
+    assert not is_fallback_needed(np.array([]), np.array([]))
     
     # Dense data
     x = np.array([0, 100, 0, 100, 50])
     y = np.array([0, 0, 100, 100, 50])
-    assert is_fallback_needed(x, y) == True
+    assert is_fallback_needed(x, y)
     
     # Clear corner
     x = np.array([0, 100, 100])
     y = np.array([0, 0, 100])
     # bottom-left, bottom-right, top-right are occupied. top-left is clear.
-    assert is_fallback_needed(x, y) == False
+    assert not is_fallback_needed(x, y)
 
 def test_corner_anchor_all_corners():
     from cave_sketch.survey.graphics.placement import corner_anchor

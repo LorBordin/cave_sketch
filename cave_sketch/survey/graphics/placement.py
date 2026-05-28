@@ -1,18 +1,23 @@
 import numpy as np
 
+
 def compute_data_bbox(x, y):
     if len(x) == 0:
         return 0, 0, 0, 0
     return float(np.min(x)), float(np.max(x)), float(np.min(y)), float(np.max(y))
 
-def score_corners(x, y, zone_fraction=0.20, padding_fraction=0.0, padding_x_units=None, padding_y_units=None):
+def score_corners(
+    x, y, zone_fraction=0.20, padding_fraction=0.0, padding_x_units=None, padding_y_units=None
+):
     x_min, x_max, y_min, y_max = compute_data_bbox(x, y)
     width = x_max - x_min
     height = y_max - y_min
     
     # Avoid division by zero or tiny zones if data is point-like
-    if width == 0: width = 1.0
-    if height == 0: height = 1.0
+    if width == 0:
+        width = 1.0
+    if height == 0:
+        height = 1.0
     
     zone_w = width * zone_fraction
     zone_h = height * zone_fraction
@@ -61,7 +66,9 @@ def score_corners(x, y, zone_fraction=0.20, padding_fraction=0.0, padding_x_unit
 def find_best_corner(x, y):
     return find_best_corner_with_padding(x, y, padding_fraction=0.03)
 
-def find_best_corner_with_padding(x, y, padding_fraction=0.03, padding_x_units=None, padding_y_units=None):
+def find_best_corner_with_padding(
+    x, y, padding_fraction=0.03, padding_x_units=None, padding_y_units=None
+):
     scores = score_corners(
         x, y, 
         padding_fraction=padding_fraction, 
@@ -143,7 +150,10 @@ def get_dual_placement(
     elif corner == "top-left":
         rule_pos = (x_min + inset_x, y_max - inset_y - rule_height - gap - arrow_height)
     elif corner == "top-right":
-        rule_pos = (x_max - inset_x - rule_width, y_max - inset_y - rule_height - gap - arrow_height)
+        rule_pos = (
+            x_max - inset_x - rule_width,
+            y_max - inset_y - rule_height - gap - arrow_height,
+        )
     else:
         rule_pos = (x_min + inset_x, y_min + inset_y)
         
