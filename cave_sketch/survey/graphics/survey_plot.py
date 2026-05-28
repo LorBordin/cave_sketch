@@ -7,6 +7,12 @@ from cave_sketch.backend_renders import render_to_matplotlib
 from cave_sketch.features.geometry import rotate_points
 from cave_sketch.features.render_features import extract_features_from_df
 from cave_sketch.survey.graphics.north import _add_north_arrow
+from cave_sketch.survey.graphics.placement import (
+    compute_data_bbox,
+    corner_anchor,
+    find_best_corner,
+    is_fallback_needed,
+)
 from cave_sketch.survey.graphics.rule import _add_rule
 
 
@@ -38,8 +44,12 @@ def create_survey(
         df[["X", "Y"]] = rotate_points(points, center, rotation_deg)
 
     # --- Compute scale parameters ---
-    x_span = df["X"].max() - df["X"].min()
-    y_span = df["Y"].max() - df["Y"].min()
+    x_coords = df["X"].values
+    y_coords = df["Y"].values
+    x_min, x_max, y_min, y_max = compute_data_bbox(x_coords, y_coords)
+
+    x_span = x_max - x_min
+    y_span = y_max - y_min
     ref_scale = max(x_span, y_span)
     mz = config.get("marker_zoom", 10)
     tz = config.get("text_zoom", 10)
@@ -72,31 +82,38 @@ def create_survey(
                     color="black",
                 )
 
-    # --- Rule and North arrow as before ---
-    if rule_flag:
-        xs, ys = float(df["X"].min()), float(df["Y"].min())
-        if rule_orientation == "horizontal":
-            ys -= ref_scale * 0.1
-        else:
-            xs -= ref_scale * 0.03
-        rule_w = ref_scale * 0.005
-        _add_rule(
-            ax=ax,
-            x_start=xs,
-            y_start=ys,
-            orientation=rule_orientation,
-            scale_len=rule_length,
-            scale_width=rule_w,
-            segment_len=rule_length / 5,
-        )
-
-    if north_flag:
-        coord: Tuple[float, float] = (
-            float(df["X"].min() + rule_length / 2),
-            float(df["Y"].min() + ref_scale * 0.025),
-        )
+    # --- Rule and North arrow ---
+    if rule_flag or north_flag:
         arrow_len = ref_scale * 0.07
-        _add_north_arrow(ax=ax, coords=coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
+        if is_fallback_needed(x_coords, y_coords):
+            # Fallback: Extend bottom
+            y_min_new = y_min - arrow_len * 2
+            ax.set_ylim(y_min_new, y_max)
+            north_coord = (x_min + x_span * 0.02, y_min_new + arrow_len * 1.2)
+            rule_x, rule_y = x_min + x_span * 0.02, y_min_new + arrow_len * 0.4
+        else:
+            best_corner = find_best_corner(x_coords, y_coords)
+            north_coord = corner_anchor(best_corner, x_min, x_max, y_min, y_max)
+            rule_x, rule_y = north_coord
+            if "bottom" in best_corner:
+                rule_y -= ref_scale * 0.04
+            else:
+                rule_y += ref_scale * 0.04
+
+        if rule_flag:
+            rule_w = ref_scale * 0.005
+            _add_rule(
+                ax=ax,
+                x_start=rule_x,
+                y_start=rule_y,
+                orientation=rule_orientation,
+                scale_len=rule_length,
+                scale_width=rule_w,
+                segment_len=rule_length / 5,
+            )
+
+        if north_flag:
+            _add_north_arrow(ax=ax, coords=north_coord, arrow_len=arrow_len, rotation_deg=rotation_deg)
 
     ax.axis("equal")
     ax.set_xticks([])
@@ -105,3 +122,4 @@ def create_survey(
         s.set_visible(False)
 
     return ax
+
