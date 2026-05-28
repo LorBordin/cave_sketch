@@ -19,5 +19,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: North Arrow and Rule Overlap Fix**
+- [x] **Track: North Arrow and Rule Overlap Fix**
 *Link: [./tracks/north_arrow_rule_overlap_fix_20260528/](./tracks/north_arrow_rule_overlap_fix_20260528/)*
