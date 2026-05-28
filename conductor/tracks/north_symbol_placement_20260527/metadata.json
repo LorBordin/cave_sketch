@@ -1,8 +1,0 @@
-{
-  "track_id": "north_symbol_placement_20260527",
-  "type": "bug",
-  "status": "new",
-  "created_at": "2026-05-27T12:00:00Z",
-  "updated_at": "2026-05-27T12:00:00Z",
-  "description": "Sometimes the North symbol in the pdf generated in the survey plot section is rendered above the cave sketch. Thsi should never happens, you need to make sure the symbol is always rendered on a empty space."
-}
