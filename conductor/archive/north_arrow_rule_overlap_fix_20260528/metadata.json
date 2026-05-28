@@ -1,0 +1,8 @@
+{
+  "track_id": "north_arrow_rule_overlap_fix_20260528",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-05-28T10:00:00Z",
+  "updated_at": "2026-05-28T10:00:00Z",
+  "description": "The current implementation of the North arrow introduced a new bug: sometimes the arrow lies on the length rule. We need to make sure this never happens. Both the arrow and rule should never overlap with the sketch and among themselves. Ideally the N arrow is aligned with the center of the rule."
+}
