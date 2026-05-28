@@ -11,7 +11,7 @@
     - [x] Task: Implement vertical center alignment logic.
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Logic Refinement' (Protocol in workflow.md)
 
-## Phase 2: Integration & Fallback
+## Phase 2: Integration & Fallback [checkpoint: 3d648bb]
 
 ### 2a: Update `placement.py`
 - [x] Task: Update `get_dual_placement` signature [cd0aa5d]
