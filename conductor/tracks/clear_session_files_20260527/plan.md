@@ -26,33 +26,9 @@
 **Files:**
 - Create: `app/components/sidebar.py`
 
-- [ ] **Step 1: Write the file with the `render_sidebar` function**
-
-```python
-# app/components/sidebar.py
-import shutil
-
-import streamlit as st
-
-
-def render_sidebar() -> None:
-    with st.sidebar:
-        if st.button("🗑️ Clear Session Files"):
-            shutil.rmtree(st.session_state.files_dir, ignore_errors=True)
-            st.session_state.clear()
-            st.toast("Session cleared!", icon="✅")
-            st.rerun()
-```
-
-- [ ] **Step 2: Verify the file exists and imports cleanly**
-
-```bash
-cd app && python -c "from components.sidebar import render_sidebar; print('OK')"
-```
-
-Expected output: `OK`
-
-- [ ] **Step 3: Commit**
+- [x] **Step 1: Write the file with the `render_sidebar` function** d7fb8db
+- [x] **Step 2: Verify the file exists and imports cleanly**
+- [x] **Step 3: Commit**
 
 ```bash
 git add app/components/sidebar.py
