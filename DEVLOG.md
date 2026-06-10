@@ -164,3 +164,16 @@
 **Assumptions:** None
 **Next session notes:** Fixed linting errors in `tests/test_sidebar.py` (unused imports and formatting). Verified with `ruff`, `mypy`, and `pytest`. CI should pass now.
 
+## [2026-06-10 23:15] Track station_id_visibility_20260527 — Implementation
+**Files:**
+- tests/test_survey_plot.py
+- cave_sketch/survey/graphics/survey_plot.py
+- conductor/archive/station_id_visibility_20260527/plan.md
+- conductor/archive/station_id_visibility_20260527/spec.md
+- conductor/archive/station_id_visibility_20260527/index.md
+- conductor/archive/station_id_visibility_20260527/metadata.json
+- conductor/tracks.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** The track is complete. All station text labels are rendered with zorder=10 and relative coordinate offsets. All tests pass and the code is Ruff-compliant.
