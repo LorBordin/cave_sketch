@@ -42,66 +42,9 @@ git commit -m "feat: add shared sidebar component with clear-session button and 
 **Files:**
 - Modify: `app/app.py`
 
-- [ ] **Step 1: Replace the inline sidebar block with `render_sidebar()`**
-
-Current `app/app.py` (lines 22–29):
-```python
-with st.sidebar:
-    st.info("Select a page above to get started.")
-    if st.button("🗑️ Clear Session Files"):
-        import shutil
-
-        shutil.rmtree(st.session_state.files_dir, ignore_errors=True)
-        st.session_state.clear()
-        st.rerun()
-```
-
-Replace with:
-```python
-from components.sidebar import render_sidebar
-
-render_sidebar()
-```
-
-Add the import at the top of the file alongside the other imports:
-```python
-import streamlit as st
-from components.sidebar import render_sidebar
-from session import init_session
-
-st.set_page_config(page_title="CaveSketch", layout="centered")
-init_session()
-
-st.title("🗺️ CaveSketch")
-st.markdown("""
-Welcome to **CaveSketch**, your mobile-friendly tool for generating cave survey plots
-and satellite overlays.
-
-### 🧭 Navigation
-Use the sidebar to navigate between features:
-
-1. **📐 Survey Plot**: Generate clean PDF maps and sections from your TopoDroid DXF exports.
-2. **🌍 Satellite Map**: Georeference your cave and overlay it on satellite imagery.
-
----
-*Created for cavers, by cavers.*
-""")
-
-render_sidebar()
-```
-
-- [ ] **Step 2: Run the app and manually verify the button appears on the main page**
-
-```bash
-streamlit run app/app.py
-```
-
-Open http://localhost:8501. Confirm:
-- The sidebar shows the `🗑️ Clear Session Files` button
-- Clicking it shows a green `✅ Session cleared!` toast
-- Page reloads cleanly (no error)
-
-- [ ] **Step 3: Commit**
+- [x] **Step 1: Replace the inline sidebar block with `render_sidebar()`** 8573aa6
+- [x] **Step 2: Run the app and manually verify the button appears on the main page**
+- [x] **Step 3: Commit**
 
 ```bash
 git add app/app.py
