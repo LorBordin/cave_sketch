@@ -29,10 +29,18 @@ Users are field researchers, often on mobile with limited connectivity.
 
 ## Code standards
 - Python 3.11+, full type annotations on all public functions
-- `uv run ruff check . --fix` before finishing any task
-- `uv run mypy cave_sketch/` must pass
-- No bare `except:` — always catch specific exception types
-- No `st.stop()` inside button handlers — use else-branch patterns
+- **Mandatory:** `uv run ruff check .` must pass without errors before finishing any task. Use `--fix` to resolve auto-fixable issues, but manually fix the rest.
+- `uv run mypy cave_sketch/` must pass.
+- No bare `except:` — always catch specific exception types.
+- No `st.stop()` inside button handlers — use else-branch patterns.
+
+## Mandatory Verification
+Before claiming any task is complete or reporting success, you MUST execute and confirm the following:
+1. `uv run ruff check .` (Must output "All checks passed!")
+2. `uv run mypy cave_sketch/` (Must output "Success: no issues found")
+3. `uv run pytest` (All tests must pass)
+
+Failure to run these and verify their success is a violation of project standards.
 
 ## Key domain knowledge
 - DXF files come from TopoDroid and have a specific layer naming convention (check parse_dxf.py)
@@ -45,7 +53,7 @@ Users are field researchers, often on mobile with limited connectivity.
 2. Read the specific source files listed under "Read first" in `specs/code_refactoring_plan.md`
 3. Read `DEVLOG.md`, it contains decisions from previous sessions that override the spec where they conflict.
 4. Check `tests/` for relevant existing tests
-5. Implement, then run: `uv run ruff check . --fix && uv run mypy cave_sketch/ && uv run pytest`
+5. Implement, then perform **Mandatory Verification** as described above.
 6. After every meaningful code change, append an entry to `DEVLOG.md`:
 
 ## [YYYY-MM-DD HH:MM] <phase> — <action>
