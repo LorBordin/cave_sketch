@@ -8,12 +8,14 @@ from components.file_upload import (
     survey_name_component,
 )
 from components.settings_panel import settings_panel_component
+from components.sidebar import render_sidebar
 from session import init_session
 
 from cave_sketch.survey import draw_survey
 
 st.set_page_config(page_title="Cave Survey Plot", layout="centered")
 init_session()
+render_sidebar()
 
 st.title("📐 Cave Survey Plot")
 file_uploader_component()
