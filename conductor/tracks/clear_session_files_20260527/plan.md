@@ -58,42 +58,9 @@ git commit -m "refactor: use shared render_sidebar() in app.py"
 **Files:**
 - Modify: `app/pages/1_survey_plot.py`
 
-- [ ] **Step 1: Add `render_sidebar()` call after `init_session()`**
-
-In `app/pages/1_survey_plot.py`, add the import and call:
-
-```python
-from pathlib import Path
-
-import streamlit as st
-from components.file_upload import (
-    child_file_uploader_component,
-    file_uploader_component,
-    survey_name_component,
-)
-from components.settings_panel import settings_panel_component
-from components.sidebar import render_sidebar
-from session import init_session
-
-from cave_sketch.survey import draw_survey
-
-st.set_page_config(page_title="Cave Survey Plot", layout="centered")
-init_session()
-render_sidebar()
-
-# ... rest of file unchanged ...
-```
-
-- [ ] **Step 2: Navigate to the Survey Plot page and verify the button**
-
-With the app running (`streamlit run app/app.py`), navigate to the Survey Plot page.
-
-Confirm:
-- `🗑️ Clear Session Files` button appears in the sidebar
-- Uploading a DXF file, then clicking the button clears the file state and returns to the initial state
-- Toast `✅ Session cleared!` appears
-
-- [ ] **Step 3: Commit**
+- [x] **Step 1: Add `render_sidebar()` call after `init_session()`** fb0a445
+- [x] **Step 2: Navigate to the Survey Plot page and verify the button**
+- [x] **Step 3: Commit**
 
 ```bash
 git add app/pages/1_survey_plot.py
