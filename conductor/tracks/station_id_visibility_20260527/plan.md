@@ -9,4 +9,4 @@
     - [x] In `cave_sketch/survey/graphics/survey_plot.py` (line ~67), update the `ax.text()` call for station IDs:
         - Set `zorder=10` (above the scatter marker's `zorder=5`).
         - Apply a small data-unit offset to `x` and `y` so the label is nudged away from the marker center (e.g., `x + offset, y + offset` where `offset` is proportional to `text_size` or a fixed fraction of the axis scale).
-- [~] Task: Conductor - User Manual Verification 'Implement Z-Order and Fixed-Offset Placement for Station IDs' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Implement Z-Order and Fixed-Offset Placement for Station IDs' (Protocol in workflow.md) [c9917cc]
