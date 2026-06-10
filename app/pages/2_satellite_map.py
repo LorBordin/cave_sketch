@@ -1,11 +1,13 @@
 import streamlit as st
 from components.gps_points import gps_points_editor_component, validate_known_points
+from components.sidebar import render_sidebar
 from session import init_session
 
 from cave_sketch.satellite_view import draw_map
 
 st.set_page_config(page_title="Satellite Map", layout="centered")
 init_session()
+render_sidebar()
 
 st.title("🌍 Satellite Map")
 gps_points_editor_component()
