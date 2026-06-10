@@ -156,3 +156,11 @@
 **Assumptions:** None
 **Next session notes:** Linting errors fixed, CI should pass. All tests are green.
 
+## [2026-06-10 16:30] CI Fix — Ruff Linting in tests
+**Files:**
+- tests/test_sidebar.py
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Fixed linting errors in `tests/test_sidebar.py` (unused imports and formatting). Verified with `ruff`, `mypy`, and `pytest`. CI should pass now.
+

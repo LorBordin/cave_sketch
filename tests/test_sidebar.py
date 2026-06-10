@@ -1,10 +1,11 @@
-import unittest
 from unittest.mock import MagicMock, patch
+
 
 def test_render_sidebar_imports():
     """Test that the sidebar component can be imported."""
     try:
         from app.components.sidebar import render_sidebar
+        assert render_sidebar is not None
     except ImportError:
         assert False, "Could not import render_sidebar"
 
