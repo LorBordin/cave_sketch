@@ -74,35 +74,9 @@ git commit -m "feat: add persistent clear-session sidebar to Survey Plot page"
 **Files:**
 - Modify: `app/pages/2_satellite_map.py`
 
-- [ ] **Step 1: Add `render_sidebar()` call after `init_session()`**
-
-In `app/pages/2_satellite_map.py`, add the import and call:
-
-```python
-import streamlit as st
-from components.gps_points import gps_points_editor_component, validate_known_points
-from components.sidebar import render_sidebar
-from session import init_session
-
-from cave_sketch.satellite_view import draw_map
-
-st.set_page_config(page_title="Satellite Map", layout="centered")
-init_session()
-render_sidebar()
-
-# ... rest of file unchanged ...
-```
-
-- [ ] **Step 2: Navigate to the Satellite Map page and verify the button**
-
-With the app running, navigate to the Satellite Map page.
-
-Confirm:
-- `🗑️ Clear Session Files` button appears in the sidebar
-- After generating an HTML map, clicking the button clears `html_content`, `html_path`, `kml_path`, and all other state
-- Toast `✅ Session cleared!` appears
-
-- [ ] **Step 3: Commit**
+- [x] **Step 1: Add `render_sidebar()` call after `init_session()`** d7724a7
+- [x] **Step 2: Navigate to the Satellite Map page and verify the button**
+- [x] **Step 3: Commit**
 
 ```bash
 git add app/pages/2_satellite_map.py
