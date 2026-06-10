@@ -1,4 +1,5 @@
 import streamlit as st
+from components.sidebar import render_sidebar
 from session import init_session
 
 st.set_page_config(page_title="CaveSketch", layout="centered")
@@ -19,11 +20,4 @@ Use the sidebar to navigate between features:
 *Created for cavers, by cavers.*
 """)
 
-with st.sidebar:
-    st.info("Select a page above to get started.")
-    if st.button("🗑️ Clear Session Files"):
-        import shutil
-
-        shutil.rmtree(st.session_state.files_dir, ignore_errors=True)
-        st.session_state.clear()
-        st.rerun()
+render_sidebar()
