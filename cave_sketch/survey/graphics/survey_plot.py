@@ -67,17 +67,19 @@ def create_survey(
 
     # --- Stations ---
     if config.get("show_details", True):
+        offset = ref_scale * 0.005 if ref_scale > 0 else 0.1
         for _, row in df.iterrows():
             if row["Type"] == "station" and row["Node_Id"] not in excluded_nodes:
                 ax.scatter(row["X"], row["Y"], s=marker_size, color="red", zorder=5)
                 ax.text(
-                    row["X"],
-                    row["Y"],
+                    row["X"] - offset,
+                    row["Y"] + offset,
                     row["Node_Id"],
                     fontsize=text_size,
                     ha="right",
                     va="bottom",
                     color="black",
+                    zorder=10,
                 )
 
     # --- Rule and North arrow ---
