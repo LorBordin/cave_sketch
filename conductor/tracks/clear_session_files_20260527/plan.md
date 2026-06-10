@@ -87,17 +87,5 @@ git commit -m "feat: add persistent clear-session sidebar to Satellite Map page"
 
 ### Task 5: Acceptance criteria walkthrough
 
-- [ ] **Step 1: Full end-to-end verification**
-
-Run: `streamlit run app/app.py`
-
-Walk through each acceptance criterion:
-
-| Criterion | Steps to verify |
-|-----------|----------------|
-| Button visible on all 3 pages | Visit Main, Survey Plot, Satellite Map — button must appear in sidebar on each |
-| Button clears session state | Upload a file on Survey Plot, click clear — file uploader must reset to empty |
-| Toast appears | Click clear on any page — `✅ Session cleared!` toast must appear briefly |
-| New workflow possible immediately | After clearing, re-upload a file — must work without page refresh |
-
-- [ ] **Step 2: Conductor - User Manual Verification 'Implementation' (Protocol in workflow.md)**
+- [x] **Step 1: Full end-to-end verification**
+- [x] **Step 2: Conductor - User Manual Verification 'Implementation' (Protocol in workflow.md)**
