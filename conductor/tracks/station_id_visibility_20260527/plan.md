@@ -1,8 +1,8 @@
 # Implementation Plan: Ensure Station ID Visibility
 
 ## Phase 1: Implement Z-Order and Fixed-Offset Placement for Station IDs
-- [ ] Task: Write failing tests for station ID z-order and offset
-    - [ ] Create `tests/test_survey_plot.py` with tests that render a minimal survey figure and inspect the matplotlib text artists:
+- [x] Task: Write failing tests for station ID z-order and offset [34ab652]
+    - [x] Create `tests/test_survey_plot.py` with tests that render a minimal survey figure and inspect the matplotlib text artists:
         - Verify each station ID text artist has `get_zorder() >= 10`.
         - Verify each station ID text artist's position is offset from the station marker coordinates (i.e., `x_text != x_station` or `y_text != y_station`).
 - [ ] Task: Implement Z-Order and fixed-offset fixes
