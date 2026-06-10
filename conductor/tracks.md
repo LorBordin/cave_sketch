@@ -4,6 +4,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Ensure station Ids are always fully visible**
+- [x] **Track: Ensure station Ids are always fully visible**
 *Link: [./tracks/station_id_visibility_20260527/](./tracks/station_id_visibility_20260527/)*
 
