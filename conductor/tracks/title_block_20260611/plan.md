@@ -44,7 +44,7 @@
     - [x] Update any existing tests that construct `SurveyConfig` if needed
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Title Block Rendering' (Protocol in workflow.md) (a07b17f)
 
-## Phase 3: Pipeline Integration
+## Phase 3: Pipeline Integration [checkpoint: b592bef]
 
 - [x] Task: Write integration tests for `draw_survey()` with title block (b35b134)
     - [x] Test: `draw_survey()` with map + section produces a figure containing the title block
