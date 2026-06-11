@@ -42,7 +42,7 @@
 - [x] Task: Extend `SurveyConfig` with `surveyor_name: str = ""` (a07b17f)
     - [x] Update `cave_sketch/survey/config.py`
     - [x] Update any existing tests that construct `SurveyConfig` if needed
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Title Block Rendering' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Title Block Rendering' (Protocol in workflow.md) (a07b17f)
 
 ## Phase 3: Pipeline Integration
 
