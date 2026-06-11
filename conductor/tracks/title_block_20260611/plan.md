@@ -25,7 +25,7 @@
     - [x] Return `max(Y) - min(Y)` as `float`, or `None` if no section data
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Survey Metrics Computation' (Protocol in workflow.md) (ac4e1ba)
 
-## Phase 2: Title Block Rendering (Library)
+## Phase 2: Title Block Rendering (Library) [checkpoint: 5c5b40a]
 
 - [x] Task: Write tests for `draw_title_block()` (a07b17f)
     - [x] Create `tests/test_title_block.py`
