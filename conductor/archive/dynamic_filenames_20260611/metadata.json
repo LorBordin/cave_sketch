@@ -1,0 +1,8 @@
+{
+  "track_id": "dynamic_filenames_20260611",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-06-11T09:19:00+02:00",
+  "updated_at": "2026-06-11T09:19:00+02:00",
+  "description": "Use survey name as default download filename instead of hardcoded cave_map"
+}
