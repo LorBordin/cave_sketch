@@ -60,7 +60,7 @@
     - [x] Ensure metrics are computed **after** merge when child survey is present
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Pipeline Integration' (Protocol in workflow.md) (b35b134)
 
-## Phase 4: Streamlit UI
+## Phase 4: Streamlit UI [checkpoint: ab2e7d8]
 
 - [x] Task: Add "Surveyor Name" text input to `app/pages/1_survey_plot.py` (2da9c01)
     - [x] Place the input below the existing "Survey Name" field
