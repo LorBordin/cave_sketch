@@ -223,3 +223,17 @@
 
 **Assumptions:** None
 **Next session notes:** The PDF title block feature is complete. Tests and static checkers are fully passing. The next step is to run `/conductor:review` to verify the completed track.
+
+## [2026-06-11 12:00] Track title_block_20260611 — Refinement and Bug Fixes
+**Files:**
+- cave_sketch/survey/graphics/title_block.py
+- tests/test_title_block.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+
+**Assumptions:**
+- Cave names exceeding 35 characters are split into at most 2 lines, and any additional characters beyond the second line's 35-character budget are truncated with an ellipsis to guarantee no overlap with the top-right title block.
+
+**Next session notes:** None
+

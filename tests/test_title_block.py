@@ -88,3 +88,28 @@ def test_draw_title_block_empty_surveyor():
     assert "Grotta Senza Nome" in joined_text
     assert "50.0 m" in joined_text
     assert "10.0 m" in joined_text
+
+
+def test_wrap_text_logic():
+    from cave_sketch.survey.graphics.title_block import wrap_text
+    # Under limit
+    assert wrap_text("Short Name", max_chars=20) == "Short Name"
+    # Over limit
+    long_name = "This is a very long name that exceeds the character limit"
+    wrapped = wrap_text(long_name, max_chars=20)
+    assert wrapped == "This is a very long\nname that exceeds..."
+
+
+def test_draw_title_block_long_cave_name_wrapping():
+    fig = plt.figure(figsize=(8.27, 11.69))
+    draw_title_block(
+        fig=fig,
+        cave_name="Abisso di Frasassi con Sviluppo Eccezionale e Molto Lungo",
+        surveyor_name="Explorer",
+        total_length=120.0,
+        total_depth=30.0,
+    )
+    texts = [t.get_text() for t in fig.texts]
+    joined_fig_text = " ".join(texts)
+    # Checks that it was split into lines
+    assert "Abisso di Frasassi con Sviluppo\nEccezionale e Molto Lungo" in joined_fig_text
