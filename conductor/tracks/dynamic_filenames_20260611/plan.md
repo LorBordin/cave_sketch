@@ -1,6 +1,6 @@
 # Plan: Dynamic Download Filenames from Survey Name
 
-## Phase 1: Sanitize Filename Utility
+## Phase 1: Sanitize Filename Utility [checkpoint: 9ad0962]
 
 - [x] Task: Write tests for `sanitize_filename()` (2185051)
     - [x] Create `tests/test_sanitize_filename.py`
@@ -19,7 +19,7 @@
     - [x] Full type annotations
     - [x] Run tests and confirm they pass (Green phase)
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Sanitize Filename Utility' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Sanitize Filename Utility' (Protocol in workflow.md)
 
 ## Phase 2: Session State & UI Integration
 
