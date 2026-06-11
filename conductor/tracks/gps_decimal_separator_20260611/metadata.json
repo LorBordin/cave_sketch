@@ -1,0 +1,8 @@
+{
+  "track_id": "gps_decimal_separator_20260611",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-06-11T10:18:00+02:00",
+  "updated_at": "2026-06-11T10:18:00+02:00",
+  "description": "GPS coordinate fields should accept both comma and dot as decimal separators"
+}
