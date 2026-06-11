@@ -1,6 +1,6 @@
 # Plan: PDF Survey Title Block
 
-## Phase 1: Survey Metrics Computation (Library)
+## Phase 1: Survey Metrics Computation (Library) [checkpoint: 2fb77e2]
 
 - [x] Task: Write tests for `compute_total_length()` (ac4e1ba)
     - [x] Create `tests/test_survey_metrics.py`
