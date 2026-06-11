@@ -58,7 +58,7 @@
 - [x] Task: Update `draw_survey()` in `cave_sketch/survey/survey.py` (b35b134)
     - [x] Accept `surveyor_name` parameter and pass it into `SurveyConfig`
     - [x] Ensure metrics are computed **after** merge when child survey is present
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Pipeline Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Pipeline Integration' (Protocol in workflow.md) (b35b134)
 
 ## Phase 4: Streamlit UI
 
