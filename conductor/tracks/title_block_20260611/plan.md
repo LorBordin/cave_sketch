@@ -23,7 +23,7 @@
     - [x] Accept an optional section DataFrame
     - [x] Filter to numeric-only station IDs
     - [x] Return `max(Y) - min(Y)` as `float`, or `None` if no section data
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Survey Metrics Computation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Survey Metrics Computation' (Protocol in workflow.md) (ac4e1ba)
 
 ## Phase 2: Title Block Rendering (Library)
 
