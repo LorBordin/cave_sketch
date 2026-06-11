@@ -10,7 +10,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Dynamic Download Filenames from Survey Name**
+- [x] **Track: Dynamic Download Filenames from Survey Name**
 *Link: [./tracks/dynamic_filenames_20260611/](./tracks/dynamic_filenames_20260611/)*
 
 ---
