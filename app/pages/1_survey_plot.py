@@ -24,7 +24,7 @@ child_file_uploader_component()
 st.markdown("---")
 title = survey_name_component()
 
-st.markdown("### 👤 Nome rilevatore / Surveyor name")
+st.markdown("#### 👤 Surveyor name")
 surveyor_name = st.text_input(
     "Surveyor Name",
     value=st.session_state.surveyor_name,

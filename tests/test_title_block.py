@@ -26,7 +26,7 @@ def test_draw_title_block_all_fields():
     assert title_ax is not None, "Title block axes not found at the top of the figure"
 
     # Verify texts
-    texts = [t.get_text() for t in title_ax.texts]
+    texts = [t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts]
     joined_text = " ".join(texts)
 
     assert "Grotta del Vento" in joined_text
@@ -55,7 +55,7 @@ def test_draw_title_block_omits_depth_when_none():
 
     assert title_ax is not None
 
-    texts = [t.get_text() for t in title_ax.texts]
+    texts = [t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts]
     joined_text = " ".join(texts)
 
     assert "154.3 m" in joined_text
@@ -82,7 +82,7 @@ def test_draw_title_block_empty_surveyor():
 
     assert title_ax is not None
 
-    texts = [t.get_text() for t in title_ax.texts]
+    texts = [t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts]
     joined_text = " ".join(texts)
 
     assert "Grotta Senza Nome" in joined_text

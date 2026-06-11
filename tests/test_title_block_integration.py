@@ -40,7 +40,7 @@ def test_draw_survey_with_map_and_section_shows_title_block(tmp_path):
             break
 
     assert title_ax is not None
-    texts = " ".join([t.get_text() for t in title_ax.texts])
+    texts = " ".join([t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts])
 
     assert "Integration Cave" in texts
     assert "Alice Smith" in texts
@@ -75,7 +75,7 @@ def test_draw_survey_without_section_omits_depth(tmp_path):
             break
 
     assert title_ax is not None
-    texts = " ".join([t.get_text() for t in title_ax.texts])
+    texts = " ".join([t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts])
 
     assert "Plan Only Cave" in texts
     assert "Bob Jones" in texts
@@ -154,7 +154,7 @@ def test_draw_survey_with_merged_surveys_computes_merged_metrics(tmp_path):
             break
 
     assert title_ax is not None
-    texts = " ".join([t.get_text() for t in title_ax.texts])
+    texts = " ".join([t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts])
 
     assert "Merged Cave" in texts
     assert "Charlie Brown" in texts
