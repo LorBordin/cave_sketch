@@ -18,6 +18,8 @@ def sanitize_filename(name: str) -> str:
     # Replace spaces and sequences of non-alphanumeric (except hyphens and
     # underscores) with a single underscore.
     name = re.sub(r"[^\w-]+", "_", name)
+    # Strip leading/trailing underscores and hyphens
+    name = name.strip("_-")
 
     # If the result is empty after sanitization, fall back to "my_survey"
     if not name:
