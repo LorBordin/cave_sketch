@@ -2,27 +2,27 @@
 
 ## Phase 1: Survey Metrics Computation (Library)
 
-- [ ] Task: Write tests for `compute_total_length()`
-    - [ ] Create `tests/test_survey_metrics.py`
-    - [ ] Test: two connected numeric stations → correct Euclidean distance
-    - [ ] Test: three-station chain (A→B→C) → sum of two legs
-    - [ ] Test: polyline nodes (`xxPyy`) and block features are excluded from computation
-    - [ ] Test: bidirectional links (A→B and B→A) count the leg only once
-    - [ ] Test: empty or single-station DataFrame returns 0.0
-- [ ] Task: Implement `compute_total_length()` in `cave_sketch/survey/metrics.py`
-    - [ ] Accept a DataFrame with columns `Node_Id`, `Links`, `X`, `Y`, `Type`
-    - [ ] Filter to numeric-only station IDs (`^\d+$`)
-    - [ ] Iterate connected pairs, compute Euclidean distance, deduplicate legs
-    - [ ] Return total length as `float`
-- [ ] Task: Write tests for `compute_total_depth()`
-    - [ ] Test: three numeric stations at different Y values → correct max−min
-    - [ ] Test: polyline nodes excluded from min/max computation
-    - [ ] Test: empty or single-station DataFrame returns 0.0
-    - [ ] Test: returns `None` when no section data is provided
-- [ ] Task: Implement `compute_total_depth()` in `cave_sketch/survey/metrics.py`
-    - [ ] Accept an optional section DataFrame
-    - [ ] Filter to numeric-only station IDs
-    - [ ] Return `max(Y) - min(Y)` as `float`, or `None` if no section data
+- [x] Task: Write tests for `compute_total_length()` (ac4e1ba)
+    - [x] Create `tests/test_survey_metrics.py`
+    - [x] Test: two connected numeric stations → correct Euclidean distance
+    - [x] Test: three-station chain (A→B→C) → sum of two legs
+    - [x] Test: polyline nodes (`xxPyy`) and block features are excluded from computation
+    - [x] Test: bidirectional links (A→B and B→A) count the leg only once
+    - [x] Test: empty or single-station DataFrame returns 0.0
+- [x] Task: Implement `compute_total_length()` in `cave_sketch/survey/metrics.py` (ac4e1ba)
+    - [x] Accept a DataFrame with columns `Node_Id`, `Links`, `X`, `Y`, `Type`
+    - [x] Filter to numeric-only station IDs (`^\d+$`)
+    - [x] Iterate connected pairs, compute Euclidean distance, deduplicate legs
+    - [x] Return total length as `float`
+- [x] Task: Write tests for `compute_total_depth()` (ac4e1ba)
+    - [x] Test: three numeric stations at different Y values → correct max−min
+    - [x] Test: polyline nodes excluded from min/max computation
+    - [x] Test: empty or single-station DataFrame returns 0.0
+    - [x] Test: returns `None` when no section data is provided
+- [x] Task: Implement `compute_total_depth()` in `cave_sketch/survey/metrics.py` (ac4e1ba)
+    - [x] Accept an optional section DataFrame
+    - [x] Filter to numeric-only station IDs
+    - [x] Return `max(Y) - min(Y)` as `float`, or `None` if no section data
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Survey Metrics Computation' (Protocol in workflow.md)
 
 ## Phase 2: Title Block Rendering (Library)
