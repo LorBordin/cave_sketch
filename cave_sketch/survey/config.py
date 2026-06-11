@@ -12,3 +12,4 @@ class SurveyConfig:
     text_zoom: float = 0.0
     line_width_zoom: float = 0.0
     show_north: bool = True
+    surveyor_name: str = ""
