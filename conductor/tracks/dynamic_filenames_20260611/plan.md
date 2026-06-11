@@ -2,16 +2,16 @@
 
 ## Phase 1: Sanitize Filename Utility
 
-- [ ] Task: Write tests for `sanitize_filename()`
-    - [ ] Create `tests/test_sanitize_filename.py`
-    - [ ] Test normal input (e.g. `"My Cave"` → `"my_cave"`)
-    - [ ] Test special characters (e.g. `"Test!@#Survey"` → `"test_survey"`)
-    - [ ] Test leading/trailing whitespace is stripped
-    - [ ] Test multiple consecutive spaces/special chars collapse to single underscore
-    - [ ] Test empty string falls back to `"my_survey"`
-    - [ ] Test whitespace-only input falls back to `"my_survey"`
-    - [ ] Test hyphens and underscores are preserved
-    - [ ] Run tests and confirm they fail (Red phase)
+- [x] Task: Write tests for `sanitize_filename()` (2185051)
+    - [x] Create `tests/test_sanitize_filename.py`
+    - [x] Test normal input (e.g. `"My Cave"` → `"my_cave"`)
+    - [x] Test special characters (e.g. `"Test!@#Survey"` → `"test_survey"`)
+    - [x] Test leading/trailing whitespace is stripped
+    - [x] Test multiple consecutive spaces/special chars collapse to single underscore
+    - [x] Test empty string falls back to `"my_survey"`
+    - [x] Test whitespace-only input falls back to `"my_survey"`
+    - [x] Test hyphens and underscores are preserved
+    - [x] Run tests and confirm they fail (Red phase)
 
 - [ ] Task: Implement `sanitize_filename()`
     - [ ] Create `cave_sketch/utils/filename.py` with the `sanitize_filename(name: str) -> str` function

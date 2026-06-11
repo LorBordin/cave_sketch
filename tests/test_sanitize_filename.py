@@ -21,4 +21,4 @@ def test_sanitize_filename_whitespace_only():
 
 def test_sanitize_filename_preserve_hyphens_underscores():
     assert sanitize_filename("my-cave_survey") == "my-cave_survey"
-    assert sanitize_filename("my-_-cave---survey") == "my_cave_survey"
+    assert sanitize_filename("my-_-cave---survey") == "my-_-cave---survey"
