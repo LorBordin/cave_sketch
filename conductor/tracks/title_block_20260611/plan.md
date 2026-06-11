@@ -46,18 +46,18 @@
 
 ## Phase 3: Pipeline Integration
 
-- [ ] Task: Write integration tests for `draw_survey()` with title block
-    - [ ] Test: `draw_survey()` with map + section produces a figure containing the title block
-    - [ ] Test: `draw_survey()` with merged surveys computes metrics from merged data
-    - [ ] Test: `draw_survey()` without section omits depth in title block
-- [ ] Task: Integrate metrics + title block into `render_survey()` in `cave_sketch/survey/renderer.py`
-    - [ ] Replace `fig.suptitle()` with `draw_title_block()` call
-    - [ ] Compute `total_length` from map DataFrame, `total_depth` from section DataFrame
-    - [ ] Adjust `fig.subplots_adjust(top=...)` to accommodate the title block height
-    - [ ] Pass `surveyor_name` from `SurveyConfig`
-- [ ] Task: Update `draw_survey()` in `cave_sketch/survey/survey.py`
-    - [ ] Accept `surveyor_name` parameter and pass it into `SurveyConfig`
-    - [ ] Ensure metrics are computed **after** merge when child survey is present
+- [x] Task: Write integration tests for `draw_survey()` with title block (b35b134)
+    - [x] Test: `draw_survey()` with map + section produces a figure containing the title block
+    - [x] Test: `draw_survey()` with merged surveys computes metrics from merged data
+    - [x] Test: `draw_survey()` without section omits depth in title block
+- [x] Task: Integrate metrics + title block into `render_survey()` in `cave_sketch/survey/renderer.py` (b35b134)
+    - [x] Replace `fig.suptitle()` with `draw_title_block()` call
+    - [x] Compute `total_length` from map DataFrame, `total_depth` from section DataFrame
+    - [x] Adjust `fig.subplots_adjust(top=...)` to accommodate the title block height
+    - [x] Pass `surveyor_name` from `SurveyConfig`
+- [x] Task: Update `draw_survey()` in `cave_sketch/survey/survey.py` (b35b134)
+    - [x] Accept `surveyor_name` parameter and pass it into `SurveyConfig`
+    - [x] Ensure metrics are computed **after** merge when child survey is present
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Pipeline Integration' (Protocol in workflow.md)
 
 ## Phase 4: Streamlit UI
