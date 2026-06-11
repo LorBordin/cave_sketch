@@ -17,11 +17,11 @@
     - [x] Test multiple commas returns `None` (e.g. `"45,67,89"`)
     - [x] Run tests and confirm they fail (Red phase)
 
-- [ ] Task: Implement `parse_coordinate()`
-    - [ ] Create `cave_sketch/geo/coordinates.py` with `parse_coordinate(value: str) -> float | None`
-    - [ ] Ensure no Streamlit imports
-    - [ ] Full type annotations
-    - [ ] Run tests and confirm they pass (Green phase)
+- [x] Task: Implement `parse_coordinate()` [12525f8]
+    - [x] Create `cave_sketch/geo/coordinates.py` with `parse_coordinate(value: str) -> float | None`
+    - [x] Ensure no Streamlit imports
+    - [x] Full type annotations
+    - [x] Run tests and confirm they pass (Green phase)
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Parse Coordinate Utility' (Protocol in workflow.md)
 
