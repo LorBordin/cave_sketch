@@ -27,14 +27,14 @@
 
 ## Phase 2: UI Integration & Validation
 
-- [ ] Task: Replace `number_input` with `text_input` in GPS component
-    - [ ] Modify `app/components/gps_points.py` to use `st.text_input` for Latitude and Longitude
-    - [ ] Import and use `parse_coordinate()` from `cave_sketch.geo.coordinates`
-    - [ ] Store parsed `float` values in `known_points` session state
-    - [ ] Default display value for new points: `"0.000000"`
+- [x] Task: Replace `number_input` with `text_input` in GPS component [8ac4c4d]
+    - [x] Modify `app/components/gps_points.py` to use `st.text_input` for Latitude and Longitude
+    - [x] Import and use `parse_coordinate()` from `cave_sketch.geo.coordinates`
+    - [x] Store parsed `float` values in `known_points` session state
+    - [x] Default display value for new points: `"0.000000"`
 
-- [ ] Task: Add inline validation feedback
-    - [ ] Show inline error (e.g. `st.caption` with red styling or `st.error`) below each field when `parse_coordinate()` returns `None`
-    - [ ] Update `validate_known_points()` to reject points with unparseable coordinates
+- [x] Task: Add inline validation feedback [8ac4c4d]
+    - [x] Show inline error (e.g. `st.caption` with red styling or `st.error`) below each field when `parse_coordinate()` returns `None`
+    - [x] Update `validate_known_points()` to reject points with unparseable coordinates
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: UI Integration & Validation' (Protocol in workflow.md)
