@@ -197,3 +197,29 @@
 
 **Assumptions:** None
 **Next session notes:** The dynamic filenames track is fully implemented, verified, and archived. All tests and linters pass successfully.
+
+## [2026-06-11 11:51] Track title_block_20260611 — Implementation
+**Files:**
+- cave_sketch/survey/metrics.py
+- cave_sketch/survey/graphics/title_block.py
+- cave_sketch/survey/config.py
+- cave_sketch/survey/survey.py
+- cave_sketch/survey/renderer.py
+- cave_sketch/survey/merger.py
+- app/pages/1_survey_plot.py
+- app/session.py
+- tests/test_survey_metrics.py
+- tests/test_title_block.py
+- tests/test_title_block_integration.py
+- tests/test_survey_rendering.py
+- conductor/tracks.md
+- DEVLOG.md
+
+**Deviations from spec:**
+- Refined the title block layout according to user feedback: the cave name is rendered large and bold in the center of the top margin (no border), and the metadata box is placed in the top right.
+- Changed metadata box texts to Italian by default (no double language) and vertically aligned the fields (Rilevatore, Data, Sviluppo, Dislivello) to avoid horizontal text overlaps.
+- Made the Streamlit UI label "Surveyor name" smaller (H4 size) and English-only.
+- Robustified the survey merging code (`merger.py`) to properly coerce node IDs and links to strings to prevent pandas from throwing errors when it infers numeric types from CSV inputs.
+
+**Assumptions:** None
+**Next session notes:** The PDF title block feature is complete. Tests and static checkers are fully passing. The next step is to run `/conductor:review` to verify the completed track.
