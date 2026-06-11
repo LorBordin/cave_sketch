@@ -177,3 +177,23 @@
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** The track is complete. All station text labels are rendered with zorder=10 and relative coordinate offsets. All tests pass and the code is Ruff-compliant.
+
+## [2026-06-11 10:43] Track dynamic_filenames_20260611 — Implementation
+**Files:**
+- cave_sketch/utils/__init__.py
+- cave_sketch/utils/filename.py
+- tests/test_sanitize_filename.py
+- app/session.py
+- app/components/file_upload.py
+- app/pages/1_survey_plot.py
+- app/pages/2_satellite_map.py
+- conductor/tracks.md
+- DEVLOG.md
+
+**Deviations from spec:**
+- Stripped leading/trailing underscores and hyphens in `sanitize_filename` to prevent inputs like `"My Cave Survey!"` from resulting in a trailing underscore (e.g., `"my_cave_survey_"` -> `"my_cave_survey"`), aligning with the specification example.
+- Fixed a minor preexisting mypy union type warning in `app/pages/1_survey_plot.py` regarding `_merged_df`.
+- Implemented persistent survey name state sync across pages by decoupling the streamlit widget key from the state key, preventing Streamlit from cleaning up the key on page unmounts.
+
+**Assumptions:** None
+**Next session notes:** The dynamic filenames track is fully implemented, verified, and archived. All tests and linters pass successfully.
