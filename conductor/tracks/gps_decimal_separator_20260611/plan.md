@@ -2,20 +2,20 @@
 
 ## Phase 1: Parse Coordinate Utility
 
-- [ ] Task: Write tests for `parse_coordinate()`
-    - [ ] Create `tests/test_parse_coordinate.py`
-    - [ ] Test dot decimal input (e.g. `"45.678901"` → `45.678901`)
-    - [ ] Test comma decimal input (e.g. `"45,678901"` → `45.678901`)
-    - [ ] Test negative coordinate with dot (e.g. `"-7.654321"` → `-7.654321`)
-    - [ ] Test negative coordinate with comma (e.g. `"-7,654321"` → `-7.654321`)
-    - [ ] Test integer input (e.g. `"45"` → `45.0`)
-    - [ ] Test input with leading/trailing whitespace
-    - [ ] Test empty string returns `None`
-    - [ ] Test whitespace-only input returns `None`
-    - [ ] Test letters input returns `None` (e.g. `"abc"`)
-    - [ ] Test multiple dots returns `None` (e.g. `"45.67.89"`)
-    - [ ] Test multiple commas returns `None` (e.g. `"45,67,89"`)
-    - [ ] Run tests and confirm they fail (Red phase)
+- [x] Task: Write tests for `parse_coordinate()` [d296a19]
+    - [x] Create `tests/test_parse_coordinate.py`
+    - [x] Test dot decimal input (e.g. `"45.678901"` → `45.678901`)
+    - [x] Test comma decimal input (e.g. `"45,678901"` → `45.678901`)
+    - [x] Test negative coordinate with dot (e.g. `"-7.654321"` → `-7.654321`)
+    - [x] Test negative coordinate with comma (e.g. `"-7,654321"` → `-7.654321`)
+    - [x] Test integer input (e.g. `"45"` → `45.0`)
+    - [x] Test input with leading/trailing whitespace
+    - [x] Test empty string returns `None`
+    - [x] Test whitespace-only input returns `None`
+    - [x] Test letters input returns `None` (e.g. `"abc"`)
+    - [x] Test multiple dots returns `None` (e.g. `"45.67.89"`)
+    - [x] Test multiple commas returns `None` (e.g. `"45,67,89"`)
+    - [x] Run tests and confirm they fail (Red phase)
 
 - [ ] Task: Implement `parse_coordinate()`
     - [ ] Create `cave_sketch/geo/coordinates.py` with `parse_coordinate(value: str) -> float | None`
