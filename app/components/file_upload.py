@@ -22,7 +22,10 @@ def file_uploader_component():
 def survey_name_component() -> str:
     """Component for entering the survey name."""
     st.markdown("### 📝 Survey name")
-    title = st.text_input("Survey Name", key="survey_name", label_visibility="collapsed")
+    title = st.text_input(
+        "Survey Name", value=st.session_state.survey_name, label_visibility="collapsed"
+    )
+    st.session_state.survey_name = title
     return title
 
 def child_file_uploader_component():
