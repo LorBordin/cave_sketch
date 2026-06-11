@@ -23,21 +23,21 @@
 
 ## Phase 2: Session State & UI Integration
 
-- [ ] Task: Add `survey_name` to session state
-    - [ ] Add `survey_name: str` to `AppState` TypedDict in `app/session.py`
-    - [ ] Add `"survey_name": "MySurvey"` to the defaults dict in `init_session()`
+- [x] Task: Add `survey_name` to session state (d99d218)
+    - [x] Add `survey_name: str` to `AppState` TypedDict in `app/session.py`
+    - [x] Add `"survey_name": "MySurvey"` to the defaults dict in `init_session()`
 
-- [ ] Task: Update `survey_name_component()` to use session state
-    - [ ] Modify `app/components/file_upload.py` so `survey_name_component()` reads from and writes to `st.session_state.survey_name`
-    - [ ] Use `st.text_input` with `key="survey_name"` to auto-sync with session state
+- [x] Task: Update `survey_name_component()` to use session state (d99d218)
+    - [x] Modify `app/components/file_upload.py` so `survey_name_component()` reads from and writes to `st.session_state.survey_name`
+    - [x] Use `st.text_input` with `key="survey_name"` to auto-sync with session state
 
-- [ ] Task: Add survey name component to Satellite Map page
-    - [ ] Import `survey_name_component` in `app/pages/2_satellite_map.py`
-    - [ ] Place the widget in an appropriate location on the page
+- [x] Task: Add survey name component to Satellite Map page (d99d218)
+    - [x] Import `survey_name_component` in `app/pages/2_satellite_map.py`
+    - [x] Place the widget in an appropriate location on the page
 
-- [ ] Task: Update download buttons to use sanitized survey name
-    - [ ] In `app/pages/1_survey_plot.py`: change `file_name="survey.pdf"` to use sanitized survey name
-    - [ ] In `app/pages/2_satellite_map.py`: change all three `file_name="cave_map.*"` to use sanitized survey name
-    - [ ] Import `sanitize_filename` from `cave_sketch.utils.filename` in both pages
+- [x] Task: Update download buttons to use sanitized survey name (d99d218)
+    - [x] In `app/pages/1_survey_plot.py`: change `file_name="survey.pdf"` to use sanitized survey name
+    - [x] In `app/pages/2_satellite_map.py`: change all three `file_name="cave_map.*"` to use sanitized survey name
+    - [x] Import `sanitize_filename` from `cave_sketch.utils.filename` in both pages
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Session State & UI Integration' (Protocol in workflow.md)
