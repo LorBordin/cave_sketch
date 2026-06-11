@@ -237,3 +237,19 @@
 
 **Next session notes:** None
 
+## [2026-06-11 15:21] Track gps_decimal_separator_20260611 — Implementation
+**Files:**
+- cave_sketch/geo/coordinates.py
+- app/components/gps_points.py
+- tests/test_parse_coordinate.py
+- tests/test_gps_points.py
+- conductor/tracks.md
+- DEVLOG.md
+
+**Deviations from spec:** None
+
+**Assumptions:** None
+
+**Next session notes:** The gps_decimal_separator track is fully implemented, tested, and archived. All tests and linters pass. Ready for next tracks.
+
+
