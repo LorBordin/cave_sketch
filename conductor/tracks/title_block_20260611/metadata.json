@@ -1,0 +1,8 @@
+{
+  "track_id": "title_block_20260611",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-06-11T08:56:00+02:00",
+  "updated_at": "2026-06-11T08:56:00+02:00",
+  "description": "Add a technical title block (cartouche) to the PDF survey output with surveyor name, date, total length, and depth."
+}
