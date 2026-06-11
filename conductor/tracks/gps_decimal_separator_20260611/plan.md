@@ -25,7 +25,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Parse Coordinate Utility' (Protocol in workflow.md) [5556092]
 
-## Phase 2: UI Integration & Validation
+## Phase 2: UI Integration & Validation [checkpoint: ba168ed]
 
 - [x] Task: Replace `number_input` with `text_input` in GPS component [8ac4c4d]
     - [x] Modify `app/components/gps_points.py` to use `st.text_input` for Latitude and Longitude
@@ -37,4 +37,4 @@
     - [x] Show inline error (e.g. `st.caption` with red styling or `st.error`) below each field when `parse_coordinate()` returns `None`
     - [x] Update `validate_known_points()` to reject points with unparseable coordinates
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: UI Integration & Validation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: UI Integration & Validation' (Protocol in workflow.md) [ba168ed]
