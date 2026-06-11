@@ -24,6 +24,14 @@ child_file_uploader_component()
 st.markdown("---")
 title = survey_name_component()
 
+st.markdown("### 👤 Nome rilevatore / Surveyor name")
+surveyor_name = st.text_input(
+    "Surveyor Name",
+    value=st.session_state.surveyor_name,
+    label_visibility="collapsed",
+)
+st.session_state.surveyor_name = surveyor_name
+
 merge_valid = True
 if st.session_state.child_map_csv or st.session_state.child_section_csv:
     from components.merging_controls import merging_controls_component
@@ -49,6 +57,7 @@ if st.button("✨ Generate Survey Plot"):
                 child_station=st.session_state.child_station,
                 section_protocol=SectionProtocol(st.session_state.section_protocol),
                 output_path=pdf_path,
+                surveyor_name=surveyor_name,
                 config=settings,
             )
             st.session_state.cave_survey = fig

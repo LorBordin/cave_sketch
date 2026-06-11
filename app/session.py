@@ -53,6 +53,7 @@ def init_session() -> None:
         "current_json_path": None,
         "uploaded_json_paths": [],
         "survey_name": "MySurvey",
+        "surveyor_name": "",
     }
 
     for key, val in defaults.items():
