@@ -21,7 +21,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Sanitize Filename Utility' (Protocol in workflow.md)
 
-## Phase 2: Session State & UI Integration
+## Phase 2: Session State & UI Integration [checkpoint: c486267]
 
 - [x] Task: Add `survey_name` to session state (d99d218)
     - [x] Add `survey_name: str` to `AppState` TypedDict in `app/session.py`
@@ -40,4 +40,4 @@
     - [x] In `app/pages/2_satellite_map.py`: change all three `file_name="cave_map.*"` to use sanitized survey name
     - [x] Import `sanitize_filename` from `cave_sketch.utils.filename` in both pages
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Session State & UI Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Session State & UI Integration' (Protocol in workflow.md)
