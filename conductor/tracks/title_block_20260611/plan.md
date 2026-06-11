@@ -66,4 +66,4 @@
     - [x] Place the input below the existing "Survey Name" field
     - [x] Pass the value to `draw_survey()` as `surveyor_name` parameter
 - [x] Task: Verify end-to-end: upload DXF → fill surveyor name → generate PDF → title block appears with all fields (2da9c01)
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Streamlit UI' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Streamlit UI' (Protocol in workflow.md) (5b1b19a)
