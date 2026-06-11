@@ -7,6 +7,7 @@ from matplotlib.figure import Figure
 from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
 from cave_sketch.survey.config import SurveyConfig
 from cave_sketch.survey.merger import SectionProtocol, merge_surveys
+from cave_sketch.survey.metrics import compute_total_depth, compute_total_length
 from cave_sketch.survey.pdf import export_pdf
 from cave_sketch.survey.renderer import render_survey
 
@@ -23,6 +24,7 @@ def draw_survey(
     section_protocol: SectionProtocol = SectionProtocol.SIMPLE,
     output_path: Optional[str] = None,
     excluded_nodes: Optional[List] = None,
+    surveyor_name: str = "",
     config: Dict = {},
 ) -> Figure:
     """
@@ -45,6 +47,10 @@ def draw_survey(
         )
     else:
         merged_map, merged_section = parent_map, parent_section
+
+    # Compute metrics after merge
+    total_length = compute_total_length(merged_map)
+    total_depth = compute_total_depth(merged_section)
 
     survey = None
     if merged_map is not None:
@@ -74,6 +80,7 @@ def draw_survey(
         text_zoom=config.get("text_zoom", 0.0),
         line_width_zoom=config.get("line_width_zoom", 0.0),
         show_north=show_north,
+        surveyor_name=surveyor_name,
     )
 
     fig = render_survey(
@@ -81,6 +88,8 @@ def draw_survey(
         config=render_config,
         section_survey=section_survey,
         excluded_nodes=excluded_nodes,
+        total_length=total_length,
+        total_depth=total_depth,
     )
 
     if output_path:

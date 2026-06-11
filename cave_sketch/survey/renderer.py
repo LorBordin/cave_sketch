@@ -7,6 +7,7 @@ from matplotlib.figure import Figure
 from cave_sketch.dxf.models import CaveSurvey
 from cave_sketch.survey.config import SurveyConfig
 from cave_sketch.survey.graphics.survey_plot import create_survey
+from cave_sketch.survey.graphics.title_block import draw_title_block
 
 
 def render_survey(
@@ -14,6 +15,8 @@ def render_survey(
     config: SurveyConfig,
     section_survey: Optional[CaveSurvey] = None,
     excluded_nodes: Optional[List[str]] = None,
+    total_length: float = 0.0,
+    total_depth: Optional[float] = None,
 ) -> Figure:
     """
     Render a cave survey plot (plan and optionally section) using matplotlib.
@@ -23,14 +26,22 @@ def render_survey(
         config: Rendering configuration.
         section_survey: Optional section view CaveSurvey.
         excluded_nodes: List of node IDs to exclude from rendering.
+        total_length: Total length of the cave survey in meters.
+        total_depth: Total depth range in meters, or None.
 
     Returns:
         A matplotlib Figure object.
     """
     # Create Fig
     fig = plt.figure(figsize=(8.27, 11.69))
-    fig.subplots_adjust(top=0.88)
-    fig.suptitle(survey.name, fontsize=16, y=0.95)
+    fig.subplots_adjust(top=0.86)
+    draw_title_block(
+        fig=fig,
+        cave_name=survey.name,
+        surveyor_name=config.surveyor_name,
+        total_length=total_length,
+        total_depth=total_depth,
+    )
 
     n_plots = 1 + (1 if section_survey else 0)
     index = 1

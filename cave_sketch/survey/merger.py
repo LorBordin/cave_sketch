@@ -132,27 +132,33 @@ def _merge_single_view(
         min_c_pref = min(child_prefixes)
         pref_offset = max_p_pref + 1 - min_c_pref
 
-    def remap_id(nid: str) -> str:
-        if nid in mapping:
-            return mapping[nid]
-        m = re.match(r"(\d+)P(\d+)", nid)
+    def remap_id(nid) -> str:
+        nid_str = str(nid)
+        if nid_str.endswith(".0"):
+            nid_str = nid_str[:-2]
+        if nid_str in mapping:
+            return mapping[nid_str]
+        m = re.match(r"(\d+)P(\d+)", nid_str)
         if m:
             base, suffix = int(m.group(1)), m.group(2)
             new_base = base + pref_offset
             return f"{new_base}P{suffix}"
-        return nid
+        return nid_str
 
     # Remove coincident node from child AFTER computing mapping/offset
     not_coincident_indices = [
-        i for i, nid in enumerate(child_df["Node_Id"]) if nid != child_station
+        i for i, nid in enumerate(child_df["Node_Id"]) if str(nid) != child_station
     ]
     child_df = child_df.iloc[not_coincident_indices].reset_index(drop=True)
     
     child_df["Node_Id"] = child_df["Node_Id"].apply(remap_id)
     
-    def remap_links(link_str: str) -> str:
-        if pd.isna(link_str) or not link_str:
-            return link_str
+    def remap_links(link_val) -> str:
+        if pd.isna(link_val) or not link_val or link_val == "-":
+            return "-"
+        link_str = str(link_val)
+        if link_str.endswith(".0"):
+            link_str = link_str[:-2]
         return "-".join(remap_id(link) for link in link_str.split("-"))
     
     child_df["Links"] = child_df["Links"].apply(remap_links)

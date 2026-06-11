@@ -32,7 +32,8 @@ def test_draw_survey_section_only_title_and_no_north(tmp_path):
             output_path=str(output_pdf)
         )
         
-        axes = fig.get_axes()
+        # Filter out the title block axes (positioned at y >= 0.8)
+        axes = [ax for ax in fig.get_axes() if ax.get_position().y0 < 0.8]
         assert len(axes) == 1
         # Currently this will FAIL: title is "Pianta"
         assert axes[0].get_title() == "Sezione"
@@ -57,7 +58,8 @@ def test_draw_survey_plan_only_title_and_north(tmp_path):
             output_path=str(output_pdf)
         )
         
-        axes = fig.get_axes()
+        # Filter out the title block axes
+        axes = [ax for ax in fig.get_axes() if ax.get_position().y0 < 0.8]
         assert len(axes) == 1
         assert axes[0].get_title() == "Pianta"
         
