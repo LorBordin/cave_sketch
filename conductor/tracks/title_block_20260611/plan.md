@@ -27,21 +27,21 @@
 
 ## Phase 2: Title Block Rendering (Library)
 
-- [ ] Task: Write tests for `draw_title_block()`
-    - [ ] Create `tests/test_title_block.py`
-    - [ ] Test: title block renders all 5 fields (cave name, surveyor, date, length, depth) when all data present
-    - [ ] Test: title block omits depth field when `total_depth` is `None`
-    - [ ] Test: title block renders within the expected figure region (top margin), no overlap with subplot area
-    - [ ] Test: empty surveyor name renders gracefully (blank field or placeholder)
-- [ ] Task: Implement `draw_title_block()` in `cave_sketch/survey/graphics/title_block.py`
-    - [ ] Create a bordered rectangle in the top margin of the figure
-    - [ ] Render cave name in a prominent (larger) font
-    - [ ] Render metadata fields (surveyor, date, length, depth) in a structured grid layout
-    - [ ] Use `fig.text()` or a dedicated `Axes` for precise positioning
-    - [ ] Ensure legibility at A4 print size
-- [ ] Task: Extend `SurveyConfig` with `surveyor_name: str = ""`
-    - [ ] Update `cave_sketch/survey/config.py`
-    - [ ] Update any existing tests that construct `SurveyConfig` if needed
+- [x] Task: Write tests for `draw_title_block()` (a07b17f)
+    - [x] Create `tests/test_title_block.py`
+    - [x] Test: title block renders all 5 fields (cave name, surveyor, date, length, depth) when all data present
+    - [x] Test: title block omits depth field when `total_depth` is `None`
+    - [x] Test: title block renders within the expected figure region (top margin), no overlap with subplot area
+    - [x] Test: empty surveyor name renders gracefully (blank field or placeholder)
+- [x] Task: Implement `draw_title_block()` in `cave_sketch/survey/graphics/title_block.py` (a07b17f)
+    - [x] Create a bordered rectangle in the top margin of the figure
+    - [x] Render cave name in a prominent (larger) font
+    - [x] Render metadata fields (surveyor, date, length, depth) in a structured grid layout
+    - [x] Use `fig.text()` or a dedicated `Axes` for precise positioning
+    - [x] Ensure legibility at A4 print size
+- [x] Task: Extend `SurveyConfig` with `surveyor_name: str = ""` (a07b17f)
+    - [x] Update `cave_sketch/survey/config.py`
+    - [x] Update any existing tests that construct `SurveyConfig` if needed
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Title Block Rendering' (Protocol in workflow.md)
 
 ## Phase 3: Pipeline Integration
