@@ -13,11 +13,11 @@
     - [x] Test hyphens and underscores are preserved
     - [x] Run tests and confirm they fail (Red phase)
 
-- [ ] Task: Implement `sanitize_filename()`
-    - [ ] Create `cave_sketch/utils/filename.py` with the `sanitize_filename(name: str) -> str` function
-    - [ ] Ensure no Streamlit imports in the library layer
-    - [ ] Full type annotations
-    - [ ] Run tests and confirm they pass (Green phase)
+- [x] Task: Implement `sanitize_filename()` (fd54bf1)
+    - [x] Create `cave_sketch/utils/filename.py` with the `sanitize_filename(name: str) -> str` function
+    - [x] Ensure no Streamlit imports in the library layer
+    - [x] Full type annotations
+    - [x] Run tests and confirm they pass (Green phase)
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Sanitize Filename Utility' (Protocol in workflow.md)
 
