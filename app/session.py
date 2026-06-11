@@ -21,6 +21,7 @@ class AppState(TypedDict):
     html_path: Optional[Path]
     current_json_path: Optional[Path]
     uploaded_json_paths: List[str]
+    survey_name: str
 
 
 def init_session() -> None:
@@ -51,6 +52,7 @@ def init_session() -> None:
         "kml_path": None,
         "current_json_path": None,
         "uploaded_json_paths": [],
+        "survey_name": "MySurvey",
     }
 
     for key, val in defaults.items():

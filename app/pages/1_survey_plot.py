@@ -70,8 +70,11 @@ if st.button("✨ Generate Survey Plot"):
                     section_protocol=SectionProtocol(st.session_state.section_protocol),
                 )
                 _merged_path = st.session_state.files_dir / "merged_map.csv"
-                _merged_df.to_csv(_merged_path, index=False)
-                st.session_state.merged_map_csv = _merged_path
+                if _merged_df is not None:
+                    _merged_df.to_csv(_merged_path, index=False)
+                    st.session_state.merged_map_csv = _merged_path
+                else:
+                    st.session_state.merged_map_csv = None
             else:
                 st.session_state.merged_map_csv = None
     else:
@@ -83,5 +86,9 @@ if st.session_state.cave_survey is not None:
     st.success("✅ PDF Created!")
 
     if st.session_state.pdf_output_path and Path(st.session_state.pdf_output_path).exists():
+        from cave_sketch.utils.filename import sanitize_filename
+        sanitized_name = sanitize_filename(st.session_state.survey_name)
         with open(st.session_state.pdf_output_path, "rb") as f:
-            st.download_button("📥 Download PDF", f, file_name="survey.pdf", mime="application/pdf")
+            st.download_button(
+                "📥 Download PDF", f, file_name=f"{sanitized_name}.pdf", mime="application/pdf"
+            )

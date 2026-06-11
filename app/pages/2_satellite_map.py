@@ -1,4 +1,5 @@
 import streamlit as st
+from components.file_upload import survey_name_component
 from components.gps_points import gps_points_editor_component, validate_known_points
 from components.sidebar import render_sidebar
 from session import init_session
@@ -11,6 +12,7 @@ render_sidebar()
 
 st.title("🌍 Satellite Map")
 gps_points_editor_component()
+survey_name_component()
 
 rotation_angle = st.number_input("🧭 Map rotation angle (°)", value=st.session_state.rotation_angle)
 st.session_state.rotation_angle = rotation_angle
@@ -50,9 +52,17 @@ if col1.button("🌍 Generate HTML Map"):
 if "html_content" in st.session_state and st.session_state.html_content:
     st.components.v1.html(st.session_state.html_content, height=400)
     col1, col2, col3 = st.columns(3)
+    from cave_sketch.utils.filename import sanitize_filename
+    sanitized_name = sanitize_filename(st.session_state.survey_name)
     with open(st.session_state.html_path, "rb") as html_f_bin:
-        col1.download_button("📥 Download HTML Map", html_f_bin, file_name="cave_map.html")
+        col1.download_button(
+            "📥 Download HTML Map", html_f_bin, file_name=f"{sanitized_name}.html"
+        )
     with open(st.session_state.current_json_path, "rb") as json_f_bin:
-        col2.download_button("📥 Download JSON Map", json_f_bin, file_name="cave_map.json")
+        col2.download_button(
+            "📥 Download JSON Map", json_f_bin, file_name=f"{sanitized_name}.json"
+        )
     with open(st.session_state.kml_path, "rb") as kml_f_bin:
-        col3.download_button("📥 Download KML Map", kml_f_bin, file_name="cave_map.kml")
+        col3.download_button(
+            "📥 Download KML Map", kml_f_bin, file_name=f"{sanitized_name}.kml"
+        )

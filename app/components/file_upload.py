@@ -19,10 +19,10 @@ def file_uploader_component():
     if st.button("📥 Process Main Survey Files"):
         _process_files(map_file, section_file, is_child=False)
 
-def survey_name_component():
+def survey_name_component() -> str:
     """Component for entering the survey name."""
     st.markdown("### 📝 Survey name")
-    title = st.text_input("Survey Name", value="MySurvey", label_visibility="collapsed")
+    title = st.text_input("Survey Name", key="survey_name", label_visibility="collapsed")
     return title
 
 def child_file_uploader_component():
