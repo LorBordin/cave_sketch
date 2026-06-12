@@ -1,0 +1,8 @@
+{
+  "track_id": "offline_kmz_export_20260612",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-06-12T15:30:00Z",
+  "updated_at": "2026-06-12T15:30:00Z",
+  "description": "Replace the satellite map's per-segment KML download with a compact, full-fidelity KMZ that loads fast in offline apps (OsmAnd, Locus Map) by chaining survey segments into polylines"
+}
