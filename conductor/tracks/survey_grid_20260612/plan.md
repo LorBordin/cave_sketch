@@ -17,7 +17,7 @@
     - [x] Draw horizontal and vertical dotted light-gray lines at lowest z-order
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Grid Rendering Module' (Protocol in workflow.md)
 
-## Phase 2: Integration into Survey Plot Pipeline
+## Phase 2: Integration into Survey Plot Pipeline [checkpoint: 4824c3d]
 
 - [x] Task: Write tests for grid integration in `create_survey` (f133e4d)
     - [x] Add tests in `tests/test_grid.py` (or `tests/test_survey_plot.py`) verifying that `create_survey` calls `_add_grid` when `show_grid=True`
