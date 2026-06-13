@@ -185,3 +185,25 @@ def test_draw_survey_passes_show_grid_to_config():
         config = kwargs.get("config") or args[1]
         assert config.show_grid is False
 
+
+@patch("app.components.settings_panel.st")
+def test_settings_panel_component_returns_show_grid(mock_st):
+    from unittest.mock import MagicMock
+
+    from app.components.settings_panel import settings_panel_component
+    class MockSessionState(dict):
+        def __getattr__(self, name):
+            return self[name]
+        def __setattr__(self, name, value):
+            self[name] = value
+
+    mock_st.session_state = MockSessionState(show_grid=True)
+    mock_col = MagicMock()
+    mock_st.columns.return_value = [mock_col, mock_col]
+    mock_st.checkbox.return_value = True
+    mock_st.number_input.return_value = 0.0
+    
+    res = settings_panel_component()
+    assert "show_grid" in res
+    assert res["show_grid"] is True
+
