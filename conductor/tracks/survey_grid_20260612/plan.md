@@ -2,19 +2,19 @@
 
 ## Phase 1: Grid Rendering Module
 
-- [ ] Task: Write tests for `_add_grid`
-    - [ ] Create `tests/test_grid.py`
-    - [ ] Test that `_add_grid` draws horizontal and vertical lines on an Axes
-    - [ ] Test that grid spacing equals `rule_length / 2`
-    - [ ] Test that grid lines are aligned to clean multiples of the spacing (e.g., 0, 10, 20 for spacing=10)
-    - [ ] Test that grid lines use light gray dotted style (`color='lightgray'`, `linestyle=':'`)
-    - [ ] Test that grid lines have lowest z-order (zorder=0)
-    - [ ] Test that grid covers the full data extent
-- [ ] Task: Implement `_add_grid` in `cave_sketch/survey/graphics/grid.py`
-    - [ ] Create new module `cave_sketch/survey/graphics/grid.py`
-    - [ ] Implement `_add_grid(ax, x_min, x_max, y_min, y_max, grid_spacing)` function
-    - [ ] Compute grid line positions snapped to multiples of `grid_spacing`
-    - [ ] Draw horizontal and vertical dotted light-gray lines at lowest z-order
+- [x] Task: Write tests for `_add_grid` (ba50a25)
+    - [x] Create `tests/test_grid.py`
+    - [x] Test that `_add_grid` draws horizontal and vertical lines on an Axes
+    - [x] Test that grid spacing equals `rule_length / 2`
+    - [x] Test that grid lines are aligned to clean multiples of the spacing (e.g., 0, 10, 20 for spacing=10)
+    - [x] Test that grid lines use light gray dotted style (`color='lightgray'`, `linestyle=':'`)
+    - [x] Test that grid lines have lowest z-order (zorder=0)
+    - [x] Test that grid covers the full data extent
+- [x] Task: Implement `_add_grid` in `cave_sketch/survey/graphics/grid.py` (6c54f47)
+    - [x] Create new module `cave_sketch/survey/graphics/grid.py`
+    - [x] Implement `_add_grid(ax, x_min, x_max, y_min, y_max, grid_spacing)` function
+    - [x] Compute grid line positions snapped to multiples of `grid_spacing`
+    - [x] Draw horizontal and vertical dotted light-gray lines at lowest z-order
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Grid Rendering Module' (Protocol in workflow.md)
 
 ## Phase 2: Integration into Survey Plot Pipeline
