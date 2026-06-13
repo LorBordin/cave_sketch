@@ -16,7 +16,7 @@ CaveSketch is a lightweight, mobile-friendly application designed to empower cav
 - **Geospatial Context**: Easy georeferencing to see the cave "in place" on satellite imagery.
 
 ## Core Features
-- **PDF Survey Rendering**: High-quality plan and section views with configurable scale and styling.
+- **PDF Survey Rendering**: High-quality plan and section views with configurable scale, styling, and proportional grid overlay.
 - **Interactive Satellite Maps**: Georeferenced overlays of single or merged surveys on satellite imagery using station coordinates.
 - **KML Export**: Export georeferenced cave data for 3D visualization in Google Earth.
 - **Multi-Survey Merging**: Support for merging parent and child surveys using station matching, with specialized section protocols like Mirror and Displacement.
