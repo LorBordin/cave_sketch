@@ -15,7 +15,7 @@
     - [x] Implement `_add_grid(ax, x_min, x_max, y_min, y_max, grid_spacing)` function
     - [x] Compute grid line positions snapped to multiples of `grid_spacing`
     - [x] Draw horizontal and vertical dotted light-gray lines at lowest z-order
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Grid Rendering Module' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Grid Rendering Module' (Protocol in workflow.md)
 
 ## Phase 2: Integration into Survey Plot Pipeline
 
