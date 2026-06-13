@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 import matplotlib.pyplot as plt
 import pytest
 
@@ -151,4 +153,35 @@ def test_render_survey_respects_show_grid():
         fig = render_survey(survey=survey, config=config_enabled, section_survey=None)
         mock_grid.assert_called()
         plt.close(fig)
+
+
+@patch("app.session.st")
+def test_init_session_sets_show_grid_default(mock_st):
+    from app.session import init_session
+    class MockSessionState(dict):
+        def __getattr__(self, name):
+            return self[name]
+        def __setattr__(self, name, value):
+            self[name] = value
+
+    mock_st.session_state = MockSessionState()
+    init_session()
+    assert mock_st.session_state.get("show_grid") is True
+
+
+def test_draw_survey_passes_show_grid_to_config():
+    from unittest.mock import patch
+
+    from cave_sketch.survey import draw_survey
+    
+    with patch("cave_sketch.survey.survey.render_survey") as mock_render:
+        draw_survey(
+            title="Test UI Grid",
+            rule_length=20,
+            csv_map_path="tests/fixtures/test_survey.csv",
+            config={"show_grid": False}
+        )
+        args, kwargs = mock_render.call_args
+        config = kwargs.get("config") or args[1]
+        assert config.show_grid is False
 
