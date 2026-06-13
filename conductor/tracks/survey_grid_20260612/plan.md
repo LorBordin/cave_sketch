@@ -19,15 +19,15 @@
 
 ## Phase 2: Integration into Survey Plot Pipeline
 
-- [ ] Task: Write tests for grid integration in `create_survey`
-    - [ ] Add tests in `tests/test_grid.py` (or `tests/test_survey_plot.py`) verifying that `create_survey` calls `_add_grid` when `show_grid=True`
-    - [ ] Test that grid is NOT drawn when `show_grid=False`
-    - [ ] Test that grid spacing adapts to different `rule_length` values
-- [ ] Task: Add `show_grid` to `SurveyConfig` and wire through the pipeline
-    - [ ] Add `show_grid: bool = True` field to `SurveyConfig` in `cave_sketch/survey/config.py`
-    - [ ] Pass `show_grid` from `SurveyConfig` through `render_survey()` into `create_survey()` via `config_dict`
-    - [ ] Call `_add_grid()` in `create_survey()` after computing data bbox and before rendering features
-    - [ ] Grid spacing = `rule_length / 2`
+- [x] Task: Write tests for grid integration in `create_survey` (f133e4d)
+    - [x] Add tests in `tests/test_grid.py` (or `tests/test_survey_plot.py`) verifying that `create_survey` calls `_add_grid` when `show_grid=True`
+    - [x] Test that grid is NOT drawn when `show_grid=False`
+    - [x] Test that grid spacing adapts to different `rule_length` values
+- [x] Task: Add `show_grid` to `SurveyConfig` and wire through the pipeline (c93224b)
+    - [x] Add `show_grid: bool = True` field to `SurveyConfig` in `cave_sketch/survey/config.py`
+    - [x] Pass `show_grid` from `SurveyConfig` through `render_survey()` into `create_survey()` via `config_dict`
+    - [x] Call `_add_grid()` in `create_survey()` after computing data bbox and before rendering features
+    - [x] Grid spacing = `rule_length / 2`
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Integration into Survey Plot Pipeline' (Protocol in workflow.md)
 
 ## Phase 3: Streamlit UI Toggle
