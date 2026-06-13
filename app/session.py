@@ -22,6 +22,7 @@ class AppState(TypedDict):
     current_json_path: Optional[Path]
     uploaded_json_paths: List[str]
     survey_name: str
+    show_grid: bool
 
 
 def init_session() -> None:
@@ -54,6 +55,7 @@ def init_session() -> None:
         "uploaded_json_paths": [],
         "survey_name": "MySurvey",
         "surveyor_name": "",
+        "show_grid": True,
     }
 
     for key, val in defaults.items():

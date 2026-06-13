@@ -80,6 +80,7 @@ def draw_survey(
         text_zoom=config.get("text_zoom", 0.0),
         line_width_zoom=config.get("line_width_zoom", 0.0),
         show_north=show_north,
+        show_grid=config.get("show_grid", True),
         surveyor_name=surveyor_name,
     )
 

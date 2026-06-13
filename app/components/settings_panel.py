@@ -14,6 +14,8 @@ def settings_panel_component():
             "🧭 Map rotation (°)", min_value=-180, max_value=180, step=1, value=0
         )
         show_details = st.checkbox("Show Stations Markers", value=True)
+        show_grid = st.checkbox("Show grid", value=st.session_state.get("show_grid", True))
+        st.session_state.show_grid = show_grid
 
     with col2:
         marker_zoom = st.number_input(
@@ -30,6 +32,7 @@ def settings_panel_component():
         "rule_length": rule_length,
         "rotation_deg": rotation_deg,
         "show_details": show_details,
+        "show_grid": show_grid,
         "marker_zoom": marker_zoom,
         "text_zoom": text_zoom,
         "line_width_zoom": line_width_zoom,
