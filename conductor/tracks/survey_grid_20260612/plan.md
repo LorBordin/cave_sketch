@@ -30,7 +30,7 @@
     - [x] Grid spacing = `rule_length / 2`
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Integration into Survey Plot Pipeline' (Protocol in workflow.md)
 
-## Phase 3: Streamlit UI Toggle
+## Phase 3: Streamlit UI Toggle [checkpoint: bd02af4]
 
 - [x] Task: Write tests for UI toggle state (3a5e783)
     - [x] Add test verifying `show_grid` default is `True` in session state
