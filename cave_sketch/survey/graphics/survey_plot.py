@@ -46,11 +46,6 @@ def create_survey(
     x_coords = df["X"].values
     y_coords = df["Y"].values
     x_min, x_max, y_min, y_max = compute_data_bbox(x_coords, y_coords)
-
-    # --- Grid overlay ---
-    if config.get("show_grid", True):
-        _add_grid(ax, x_min, x_max, y_min, y_max, rule_length / 2)
-
     x_span = x_max - x_min
     y_span = y_max - y_min
     ref_scale = max(x_span, y_span)
@@ -123,6 +118,12 @@ def create_survey(
     ax.set_yticks([])
     for s in ax.spines.values():
         s.set_visible(False)
+
+    # --- Grid overlay (covers the full visible extent of the axes) ---
+    if config.get("show_grid", True):
+        xlim = ax.get_xlim()
+        ylim = ax.get_ylim()
+        _add_grid(ax, xlim[0], xlim[1], ylim[0], ylim[1], rule_length / 2)
 
     return ax
 
