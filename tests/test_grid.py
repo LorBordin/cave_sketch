@@ -57,3 +57,73 @@ def test_add_grid_invalid_spacing():
     with pytest.raises(ValueError):
         _add_grid(ax, x_min=0, x_max=10, y_min=0, y_max=10, grid_spacing=-5)
     plt.close(fig)
+
+
+@pytest.fixture
+def sample_df():
+    import pandas as pd
+    return pd.DataFrame({
+        "X": [0.0, 10.0, 20.0],
+        "Y": [0.0, 10.0, 20.0],
+        "Type": ["station", "station", "station"],
+        "Node_Id": ["A", "B", "C"],
+        "Links": ["-", "-", "-"]
+    })
+
+
+def test_create_survey_shows_grid_by_default(sample_df):
+    from cave_sketch.survey.graphics.survey_plot import create_survey
+    fig, ax = plt.subplots()
+    create_survey(
+        df=sample_df,
+        rule_flag=False,
+        north_flag=False,
+        config={},
+        rule_length=20,
+        ax=ax
+    )
+    lines = [
+        line for line in ax.lines
+        if line.get_color() == "lightgray" and line.get_linestyle() == ":"
+    ]
+    assert len(lines) == 6, f"Expected 6 grid lines, got {len(lines)}"
+    plt.close(fig)
+
+
+def test_create_survey_no_grid_when_disabled(sample_df):
+    from cave_sketch.survey.graphics.survey_plot import create_survey
+    fig, ax = plt.subplots()
+    create_survey(
+        df=sample_df,
+        rule_flag=False,
+        north_flag=False,
+        config={"show_grid": False},
+        rule_length=20,
+        ax=ax
+    )
+    lines = [
+        line for line in ax.lines
+        if line.get_color() == "lightgray" and line.get_linestyle() == ":"
+    ]
+    assert len(lines) == 0, f"Expected 0 grid lines, got {len(lines)}"
+    plt.close(fig)
+
+
+def test_create_survey_grid_spacing_adapts(sample_df):
+    from cave_sketch.survey.graphics.survey_plot import create_survey
+    fig, ax = plt.subplots()
+    create_survey(
+        df=sample_df,
+        rule_flag=False,
+        north_flag=False,
+        config={"show_grid": True},
+        rule_length=40,
+        ax=ax
+    )
+    lines = [
+        line for line in ax.lines
+        if line.get_color() == "lightgray" and line.get_linestyle() == ":"
+    ]
+    assert len(lines) == 4, f"Expected 4 grid lines, got {len(lines)}"
+    plt.close(fig)
+
