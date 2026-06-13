@@ -252,4 +252,27 @@
 
 **Next session notes:** The gps_decimal_separator track is fully implemented, tested, and archived. All tests and linters pass. Ready for next tracks.
 
+## [2026-06-13 12:54] Track survey_grid_20260612 — Implementation
+**Files:**
+- cave_sketch/survey/graphics/grid.py
+- cave_sketch/survey/graphics/survey_plot.py
+- cave_sketch/survey/config.py
+- cave_sketch/survey/renderer.py
+- cave_sketch/survey/survey.py
+- app/session.py
+- app/components/settings_panel.py
+- tests/test_grid.py
+- conductor/tracks.md
+- conductor/tracks/survey_grid_20260612/plan.md
+- conductor/product.md
+- DEVLOG.md
+
+**Deviations from spec:**
+- Moved the `_add_grid` call from the middle of `create_survey` to the end of `create_survey` to extract the final visual axis limits. This ensures that the grid covers the entire visible area (full grid) of the subplots rather than just the strict coordinates bounding box of the data points, addressing direct user feedback.
+
+**Assumptions:** None
+
+**Next session notes:** The Survey Grid Overlay track is fully implemented, verified, and committed. All linters and tests pass successfully.
+
+
 
