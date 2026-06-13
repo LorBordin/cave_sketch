@@ -28,7 +28,7 @@
     - [x] Pass `show_grid` from `SurveyConfig` through `render_survey()` into `create_survey()` via `config_dict`
     - [x] Call `_add_grid()` in `create_survey()` after computing data bbox and before rendering features
     - [x] Grid spacing = `rule_length / 2`
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Integration into Survey Plot Pipeline' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Integration into Survey Plot Pipeline' (Protocol in workflow.md)
 
 ## Phase 3: Streamlit UI Toggle
 
