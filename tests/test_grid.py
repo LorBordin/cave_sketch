@@ -127,3 +127,28 @@ def test_create_survey_grid_spacing_adapts(sample_df):
     assert len(lines) == 4, f"Expected 4 grid lines, got {len(lines)}"
     plt.close(fig)
 
+
+def test_render_survey_respects_show_grid():
+    from unittest.mock import patch
+
+    from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
+    from cave_sketch.survey.config import SurveyConfig
+    from cave_sketch.survey.renderer import render_survey
+
+    survey = CaveSurvey(name="Sample", points=[
+        SurveyPoint(id="1", x=0, y=0, links=["2"], point_type="station"),
+        SurveyPoint(id="2", x=10, y=0, links=["1"], point_type="station"),
+    ])
+    config = SurveyConfig(rule_length=20, show_grid=False)
+    
+    with patch("cave_sketch.survey.graphics.survey_plot._add_grid") as mock_grid:
+        fig = render_survey(survey=survey, config=config, section_survey=None)
+        mock_grid.assert_not_called()
+        plt.close(fig)
+
+    config_enabled = SurveyConfig(rule_length=20, show_grid=True)
+    with patch("cave_sketch.survey.graphics.survey_plot._add_grid") as mock_grid:
+        fig = render_survey(survey=survey, config=config_enabled, section_survey=None)
+        mock_grid.assert_called()
+        plt.close(fig)
+
