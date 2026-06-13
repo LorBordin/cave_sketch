@@ -32,11 +32,11 @@
 
 ## Phase 3: Streamlit UI Toggle
 
-- [ ] Task: Write tests for UI toggle state
-    - [ ] Add test verifying `show_grid` default is `True` in session state
-    - [ ] Add test verifying `show_grid` is passed to `SurveyConfig`
-- [ ] Task: Add "Show grid" checkbox to the Streamlit survey settings panel
-    - [ ] Add `show_grid` to `app/session.py` session state initialization
-    - [ ] Add a `st.checkbox("Show grid", ...)` in `app/pages/1_survey_plot.py` settings area
-    - [ ] Pass the value through to `SurveyConfig` when constructing the config for rendering
+- [x] Task: Write tests for UI toggle state (3a5e783)
+    - [x] Add test verifying `show_grid` default is `True` in session state
+    - [x] Add test verifying `show_grid` is passed to `SurveyConfig`
+- [x] Task: Add "Show grid" checkbox to the Streamlit survey settings panel (2a3c6ee)
+    - [x] Add `show_grid` to `app/session.py` session state initialization
+    - [x] Add a `st.checkbox("Show grid", ...)` in `app/pages/1_survey_plot.py` settings area
+    - [x] Pass the value through to `SurveyConfig` when constructing the config for rendering
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Streamlit UI Toggle' (Protocol in workflow.md)
