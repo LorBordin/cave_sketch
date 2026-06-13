@@ -6,6 +6,7 @@ import pandas as pd
 from cave_sketch.backend_renders import render_to_matplotlib
 from cave_sketch.features.geometry import rotate_points
 from cave_sketch.features.render_features import extract_features_from_df
+from cave_sketch.survey.graphics.grid import _add_grid
 from cave_sketch.survey.graphics.north import _add_north_arrow
 from cave_sketch.survey.graphics.placement import (
     compute_data_bbox,
@@ -45,6 +46,10 @@ def create_survey(
     x_coords = df["X"].values
     y_coords = df["Y"].values
     x_min, x_max, y_min, y_max = compute_data_bbox(x_coords, y_coords)
+
+    # --- Grid overlay ---
+    if config.get("show_grid", True):
+        _add_grid(ax, x_min, x_max, y_min, y_max, rule_length / 2)
 
     x_span = x_max - x_min
     y_span = y_max - y_min
