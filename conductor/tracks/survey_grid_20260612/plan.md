@@ -39,4 +39,4 @@
     - [x] Add `show_grid` to `app/session.py` session state initialization
     - [x] Add a `st.checkbox("Show grid", ...)` in `app/pages/1_survey_plot.py` settings area
     - [x] Pass the value through to `SurveyConfig` when constructing the config for rendering
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Streamlit UI Toggle' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Streamlit UI Toggle' (Protocol in workflow.md)
