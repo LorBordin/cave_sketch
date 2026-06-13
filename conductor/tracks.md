@@ -10,6 +10,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Survey Grid Overlay**
+- [x] **Track: Survey Grid Overlay**
 *Link: [./tracks/survey_grid_20260612/](./tracks/survey_grid_20260612/)*
 
