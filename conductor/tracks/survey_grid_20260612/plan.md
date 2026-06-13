@@ -1,6 +1,6 @@
 # Implementation Plan: Survey Grid Overlay
 
-## Phase 1: Grid Rendering Module
+## Phase 1: Grid Rendering Module [checkpoint: 55f3fb9]
 
 - [x] Task: Write tests for `_add_grid` (ba50a25)
     - [x] Create `tests/test_grid.py`
