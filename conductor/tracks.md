@@ -15,5 +15,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Align Scale Bar to Grid Lines**
+- [x] **Track: Align Scale Bar to Grid Lines**
 *Link: [./tracks/rule_grid_alignment_20260615/](./tracks/rule_grid_alignment_20260615/)*
