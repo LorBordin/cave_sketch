@@ -10,11 +10,11 @@
     - [x] Test edge cases: position already on a grid line, position exactly between two grid lines
     - [x] Run tests and confirm they fail (Red Phase)
 
-- [ ] Task: Implement Grid-Snap Helper
-    - [ ] Add a `snap_rule_to_grid(rule_pos, grid_spacing, rule_orientation)` function in `cave_sketch/survey/graphics/grid.py` (or a suitable location)
-    - [ ] For horizontal orientation: snap `rule_pos[0]` (x) to nearest multiple of `grid_spacing`
-    - [ ] For vertical orientation: snap `rule_pos[1]` (y) to nearest multiple of `grid_spacing`
-    - [ ] Run tests and confirm they pass (Green Phase)
+- [x] Task: Implement Grid-Snap Helper (5125a81)
+    - [x] Add a `snap_rule_to_grid(rule_pos, grid_spacing, rule_orientation)` function in `cave_sketch/survey/graphics/grid.py` (or a suitable location)
+    - [x] For horizontal orientation: snap `rule_pos[0]` (x) to nearest multiple of `grid_spacing`
+    - [x] For vertical orientation: snap `rule_pos[1]` (y) to nearest multiple of `grid_spacing`
+    - [x] Run tests and confirm they pass (Green Phase)
 
 - [ ] Task: Write Integration Tests for Grid-Aligned Rule in `create_survey`
     - [ ] In `tests/test_rule_grid_snap.py`, add integration tests that call `create_survey` with `show_grid=True` and verify the ruler's start position aligns to a grid line
