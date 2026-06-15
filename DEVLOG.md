@@ -272,7 +272,24 @@
 
 **Assumptions:** None
 
-**Next session notes:** The Survey Grid Overlay track is fully implemented, verified, and committed. All linters and tests pass successfully.
+## [2026-06-15 08:18] Track offline_kmz_export_20260612 — Implementation
+**Files:**
+- cave_sketch/backend_renders/__init__.py
+- cave_sketch/backend_renders/google_earth.py
+- cave_sketch/features/chaining.py
+- cave_sketch/satellite_view/map.py
+- cave_sketch/geo/kml.py (deleted)
+- app/pages/2_satellite_map.py
+- tests/test_chaining.py
+- tests/test_kmz_export.py
+- tests/test_kml.py (deleted)
+- utility_scripts/test_kml_export.py (deleted)
 
+**Deviations from spec:**
+- Normalized `map_data["nodes"]` access in `google_earth.py` to handle both lists and dicts, preventing an `AttributeError` when generating KMZs in the Streamlit app.
+- Fixed a `FutureWarning` in `map.py` regarding inplace modification of Pandas DataFrames.
+
+**Assumptions:** None
+**Next session notes:** The track is fully complete, tests pass, and obsolete code is deleted.
 
 
