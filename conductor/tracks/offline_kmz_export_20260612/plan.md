@@ -53,7 +53,7 @@
     - [ ] Commit: `feat(kml): add render_to_kmz zip wrapper`
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Compact KML + KMZ Export' (Protocol in workflow.md) [07de82b]
 
-## Phase 3: Satellite Pipeline & UI Integration
+## Phase 3: Satellite Pipeline & UI Integration [checkpoint: 726c9a9]
 
 - [x] Task: Rewire `draw_map` to export KMZ [feb5ad1]
     - [ ] In `cave_sketch/satellite_view/map.py`, replace the `geo.kml`/`GeoPoint`/`CaveSurvey`/`SurveyLine` imports with `from cave_sketch.backend_renders import render_to_folium, render_to_kmz`
@@ -68,7 +68,7 @@
     - [ ] Change the button to `"📥 Download KMZ Map"` with `file_name=f"{sanitized_name}.kmz"`
     - [ ] Confirm the file parses: `uv run python -c "import ast; ast.parse(open('app/pages/2_satellite_map.py').read()); print('ok')"`
     - [ ] Commit: `feat(ui): replace KML download with KMZ on satellite map page`
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Satellite Pipeline & UI Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Satellite Pipeline & UI Integration' (Protocol in workflow.md) [726c9a9]
 
 ## Phase 4: Cleanup & Verification
 
