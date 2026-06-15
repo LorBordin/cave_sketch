@@ -10,7 +10,7 @@
 
 ## Phase 1: Segment Chaining
 
-- [ ] Task: Write tests for `chain_segments_by_type`
+- [x] Task: Write tests for `chain_segments_by_type` [9591501]
     - [ ] Create `tests/test_chaining.py`
     - [ ] Straight line of N nodes → 1 polyline with N vertices
     - [ ] Reverse-duplicate edges (`a→b` and `b→a`) → counted once (no duplicate vertex)
@@ -18,7 +18,7 @@
     - [ ] Closed loop → 1 closed polyline (first vertex == last)
     - [ ] Mixed types → grouped independently per type
     - [ ] Run `uv run pytest tests/test_chaining.py -v` and confirm they FAIL (module missing)
-- [ ] Task: Implement `chain_segments_by_type` in `cave_sketch/features/chaining.py`
+- [x] Task: Implement `chain_segments_by_type` in `cave_sketch/features/chaining.py` [9591501]
     - [ ] Create new pure module (no I/O), sibling to `features/geometry.py`
     - [ ] Signature: `chain_segments_by_type(lines) -> {type: [polyline,...]}` where a polyline is `[[lat, lon], ...]`
     - [ ] Input line shape: `{"from": {"id","lat","lon"}, "to": {"id","lat","lon"}, "type": str}`
