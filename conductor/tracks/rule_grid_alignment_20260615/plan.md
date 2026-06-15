@@ -2,13 +2,13 @@
 
 ## Phase 1: Grid-Snap Logic and Tests
 
-- [ ] Task: Write Tests for Grid-Snap Helper
-    - [ ] Create `tests/test_rule_grid_snap.py` with tests for a new `snap_to_grid` helper function
-    - [ ] Test snapping a horizontal ruler position to nearest grid line (rounding to nearest multiple of `grid_spacing`)
-    - [ ] Test snapping a vertical ruler position similarly
-    - [ ] Test that snapping is a no-op when `show_grid=False` (function not called)
-    - [ ] Test edge cases: position already on a grid line, position exactly between two grid lines
-    - [ ] Run tests and confirm they fail (Red Phase)
+- [x] Task: Write Tests for Grid-Snap Helper (348157c)
+    - [x] Create `tests/test_rule_grid_snap.py` with tests for a new `snap_to_grid` helper function
+    - [x] Test snapping a horizontal ruler position to nearest grid line (rounding to nearest multiple of `grid_spacing`)
+    - [x] Test snapping a vertical ruler position similarly
+    - [x] Test that snapping is a no-op when `show_grid=False` (function not called)
+    - [x] Test edge cases: position already on a grid line, position exactly between two grid lines
+    - [x] Run tests and confirm they fail (Red Phase)
 
 - [ ] Task: Implement Grid-Snap Helper
     - [ ] Add a `snap_rule_to_grid(rule_pos, grid_spacing, rule_orientation)` function in `cave_sketch/survey/graphics/grid.py` (or a suitable location)
