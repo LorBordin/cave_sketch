@@ -31,27 +31,27 @@
 
 ## Phase 2: Compact KML + KMZ Export
 
-- [ ] Task: Write tests for the upgraded `render_to_kml`
+- [x] Task: Write tests for the upgraded `render_to_kml` [affa383]
     - [ ] Create `tests/test_kmz_export.py` with a sample map JSON (lines of one type + a water polygon + a BLOCK point node)
     - [ ] Two same-type segments → exactly ONE `<MultiGeometry>` placemark containing one chained `<LineString>`
     - [ ] Shared `<Style id="line_L_wall">` defined once and referenced via `<styleUrl>#line_L_wall`
     - [ ] Water polygon → one `<Polygon>`; BLOCK node → one `<Point>`
     - [ ] Output is well-formed XML and total placemark count ≪ segment count
     - [ ] Run and confirm FAIL (current renderer is per-segment)
-- [ ] Task: Rewrite `render_to_kml` in `cave_sketch/backend_renders/google_earth.py`
+- [x] Task: Rewrite `render_to_kml` in `cave_sketch/backend_renders/google_earth.py` [affa383]
     - [ ] Lines: call `chain_segments_by_type(map_data["lines"])`; emit one MultiGeometry placemark per type with shared `<Style id="line_{type}">` (color/weight from `STYLE_MAP`)
     - [ ] Polygons: reuse `extract_features_from_json` water polygons as individual placemarks (existing inline-style logic)
     - [ ] Points: iterate `map_data["nodes"]`; for nodes whose `STYLE_MAP[type]["type"] == "point"`, emit `<Point>` placemarks with shared `<Style id="point_{type}">`
     - [ ] Extend the color map to cover all `STYLE_MAP` colors (indigo, deepskyblue, aliceblue, saddlebrown)
     - [ ] Run `uv run pytest tests/test_kmz_export.py -v` and confirm PASS
     - [ ] Commit: `feat(kml): emit compact MultiGeometry KML with shared styles and points`
-- [ ] Task: Add `render_to_kmz` wrapper
+- [x] Task: Add `render_to_kmz` wrapper [affa383]
     - [ ] Add failing test: `render_to_kmz(map_list, output_path)` writes a zip containing `doc.kml` with `<kml`/`MultiGeometry` content
     - [ ] Implement `render_to_kmz` in `google_earth.py` using `zipfile.ZipFile(..., ZIP_DEFLATED)` writing `doc.kml`; returns the output path
     - [ ] Export it from `cave_sketch/backend_renders/__init__.py`
     - [ ] Run `uv run pytest tests/test_kmz_export.py -v` and confirm PASS
     - [ ] Commit: `feat(kml): add render_to_kmz zip wrapper`
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Compact KML + KMZ Export' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Compact KML + KMZ Export' (Protocol in workflow.md)
 
 ## Phase 3: Satellite Pipeline & UI Integration
 
