@@ -21,10 +21,10 @@
     - [x] Add a test with `show_grid=False` verifying the ruler position is unchanged
     - [x] Run tests and confirm they fail (Red Phase)
 
-- [ ] Task: Integrate Grid-Snap into `create_survey`
-    - [ ] In `cave_sketch/survey/graphics/survey_plot.py`, after `compute_dual_layout` returns `rule_pos`, apply `snap_rule_to_grid` when `config["show_grid"]` is `True`
-    - [ ] Adjust the north arrow position accordingly (offset from the snapped rule position)
-    - [ ] Run full test suite and confirm all tests pass (Green Phase)
+- [x] Task: Integrate Grid-Snap into `create_survey` (48e7a12)
+    - [x] In `cave_sketch/survey/graphics/survey_plot.py`, after `compute_dual_layout` returns `rule_pos`, apply `snap_rule_to_grid` when `config["show_grid"]` is `True`
+    - [x] Adjust the north arrow position accordingly (offset from the snapped rule position)
+    - [x] Run full test suite and confirm all tests pass (Green Phase)
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Grid-Snap Logic and Tests' (Protocol in workflow.md)
 
