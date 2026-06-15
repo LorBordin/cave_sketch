@@ -35,7 +35,7 @@ if col1.button("🌍 Generate HTML Map"):
         st.warning("⚠️ Please load a map in the Survey Plot page first.")
     else:
         html_path = st.session_state.files_dir / "survey.html"
-        html_map, json_path, kml_path = draw_map(
+        html_map, json_path, kmz_path = draw_map(
             map_path=str(st.session_state.merged_map_csv or st.session_state.map_csv),
             gps_points=st.session_state.known_points,
             output_path=str(html_path),
@@ -45,7 +45,7 @@ if col1.button("🌍 Generate HTML Map"):
         )
         st.session_state.current_json_path = json_path
         st.session_state.html_path = html_path
-        st.session_state.kml_path = kml_path
+        st.session_state.kmz_path = kmz_path
         with open(html_path, "r") as html_f:
             st.session_state.html_content = html_f.read()
 
@@ -62,7 +62,7 @@ if "html_content" in st.session_state and st.session_state.html_content:
         col2.download_button(
             "📥 Download JSON Map", json_f_bin, file_name=f"{sanitized_name}.json"
         )
-    with open(st.session_state.kml_path, "rb") as kml_f_bin:
+    with open(st.session_state.kmz_path, "rb") as kmz_f_bin:
         col3.download_button(
-            "📥 Download KML Map", kml_f_bin, file_name=f"{sanitized_name}.kml"
+            "📥 Download KMZ Map", kmz_f_bin, file_name=f"{sanitized_name}.kmz"
         )
