@@ -157,7 +157,7 @@ def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
 
 def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
     """Export map data as JSON for later combination"""
-    df["Links"].fillna(" ", inplace=True)
+    df["Links"] = df["Links"].fillna(" ")
 
     # Prepare data structure
     map_data = {

@@ -117,12 +117,17 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
                 ET.SubElement(ls, "coordinates").text = coord_str
 
         # --- POINTS ---
-        for n in map_data.get("nodes", []):
+        nodes_data = map_data.get("nodes", [])
+        nodes_list = nodes_data if isinstance(nodes_data, list) else [
+            {"id": k, **v} for k, v in nodes_data.items()
+        ]
+        
+        for n in nodes_list:
             ntype = n.get("type", "")
             style_info = STYLE_MAP.get(ntype)
             if style_info and style_info.get("type") == "point":
                 placemark = ET.SubElement(folder, "Placemark")
-                ET.SubElement(placemark, "name").text = n.get("id", "")
+                ET.SubElement(placemark, "name").text = str(n.get("id", ""))
                 
                 # Reference shared style
                 ET.SubElement(placemark, "styleUrl").text = f"#point_{ntype}"
