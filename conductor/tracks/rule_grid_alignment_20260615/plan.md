@@ -16,10 +16,10 @@
     - [x] For vertical orientation: snap `rule_pos[1]` (y) to nearest multiple of `grid_spacing`
     - [x] Run tests and confirm they pass (Green Phase)
 
-- [ ] Task: Write Integration Tests for Grid-Aligned Rule in `create_survey`
-    - [ ] In `tests/test_rule_grid_snap.py`, add integration tests that call `create_survey` with `show_grid=True` and verify the ruler's start position aligns to a grid line
-    - [ ] Add a test with `show_grid=False` verifying the ruler position is unchanged
-    - [ ] Run tests and confirm they fail (Red Phase)
+- [x] Task: Write Integration Tests for Grid-Aligned Rule in `create_survey` (829a421)
+    - [x] In `tests/test_rule_grid_snap.py`, add integration tests that call `create_survey` with `show_grid=True` and verify the ruler's start position aligns to a grid line
+    - [x] Add a test with `show_grid=False` verifying the ruler position is unchanged
+    - [x] Run tests and confirm they fail (Red Phase)
 
 - [ ] Task: Integrate Grid-Snap into `create_survey`
     - [ ] In `cave_sketch/survey/graphics/survey_plot.py`, after `compute_dual_layout` returns `rule_pos`, apply `snap_rule_to_grid` when `config["show_grid"]` is `True`
