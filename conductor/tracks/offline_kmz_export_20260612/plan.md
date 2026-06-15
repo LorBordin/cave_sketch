@@ -70,18 +70,18 @@
     - [ ] Commit: `feat(ui): replace KML download with KMZ on satellite map page`
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Satellite Pipeline & UI Integration' (Protocol in workflow.md) [726c9a9]
 
-## Phase 4: Cleanup & Verification
+## Phase 4: Cleanup & Verification [checkpoint: ee01589]
 
-- [ ] Task: Remove the obsolete weak KML path
+- [x] Task: Remove the obsolete weak KML path [621e0fb]
     - [ ] Confirm no remaining importers: `grep -rn "geo.kml\|export_kml" --include="*.py" . | grep -v "/.venv/"` (only the files about to be deleted)
     - [ ] `git rm cave_sketch/geo/kml.py tests/test_kml.py utility_scripts/test_kml_export.py`
     - [ ] Run `uv run pytest -q` and confirm all pass with no import errors
     - [ ] Commit: `chore: remove obsolete per-segment KML exporter`
-- [ ] Task: Full verification
+- [x] Task: Full verification [808e20c]
     - [ ] `uv run ruff check cave_sketch app tests` → clean
     - [ ] `uv run mypy cave_sketch` → clean (project is `strict = false`)
     - [ ] `uv run pytest -q` → all pass
     - [ ] Regenerate the previously-problematic survey's KMZ in the app, then `unzip -p <file>.kmz doc.kml | grep -c '<Placemark'` → small number (not thousands)
     - [ ] Field test: load the `.kmz` in Locus (fast, full fidelity incl. filled water + points) and OsmAnd (fast, lines + points; water may be outline-only — accepted)
     - [ ] Record outcome in `DEVLOG.md`
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Cleanup & Verification' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Cleanup & Verification' (Protocol in workflow.md) [ee01589]
