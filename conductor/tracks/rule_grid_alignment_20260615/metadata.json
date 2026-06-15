@@ -1,0 +1,8 @@
+{
+  "track_id": "rule_grid_alignment_20260615",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-06-15T14:37:00Z",
+  "updated_at": "2026-06-15T14:37:00Z",
+  "description": "Align scale bar (ruler) to grid lines so it visually spans exactly two grid squares"
+}
