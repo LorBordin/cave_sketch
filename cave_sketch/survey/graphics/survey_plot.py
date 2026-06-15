@@ -6,7 +6,7 @@ import pandas as pd
 from cave_sketch.backend_renders import render_to_matplotlib
 from cave_sketch.features.geometry import rotate_points
 from cave_sketch.features.render_features import extract_features_from_df
-from cave_sketch.survey.graphics.grid import _add_grid
+from cave_sketch.survey.graphics.grid import _add_grid, snap_rule_to_grid
 from cave_sketch.survey.graphics.north import _add_north_arrow
 from cave_sketch.survey.graphics.placement import (
     compute_data_bbox,
@@ -88,6 +88,14 @@ def create_survey(
         arrow_coord, rule_pos, axes_expansion = compute_dual_layout(
             x_coords, y_coords, rule_length, arrow_len, ref_scale
         )
+
+        if config.get("show_grid", True):
+            grid_spacing = rule_length / 2
+            rule_pos_snapped = snap_rule_to_grid(rule_pos, grid_spacing, rule_orientation)
+            dx = rule_pos_snapped[0] - rule_pos[0]
+            dy = rule_pos_snapped[1] - rule_pos[1]
+            rule_pos = rule_pos_snapped
+            arrow_coord = (arrow_coord[0] + dx, arrow_coord[1] + dy)
         
         # Apply axis expansion if triggered by fallback
         if axes_expansion:
