@@ -6,12 +6,9 @@ import numpy as np
 import pandas as pd
 from folium import Map
 
-from cave_sketch.backend_renders import render_to_folium
-from cave_sketch.dxf.models import CaveSurvey, SurveyLine
+from cave_sketch.backend_renders import render_to_folium, render_to_kmz
 from cave_sketch.features.geometry import rotate_points
 from cave_sketch.features.render_features import extract_features_from_json
-from cave_sketch.geo.kml import export_kml
-from cave_sketch.geo.models import GeoPoint
 
 # WGS84 constants
 _A = 6378137.0
@@ -46,14 +43,18 @@ def draw_map(
     json_output_path = output_path.replace(".html", ".json")
     json_path = export_map_data(map_df, map_name, json_output_path)
 
-    # Export KML
-    kml_output_path = output_path.replace(".html", ".kml")
-    kml_path = _export_to_kml(map_df, map_name, kml_output_path)
-
     # Prepare list of all JSON maps to combine
     json_maps_to_combine = [json_path]
     if additional_json_maps:
         json_maps_to_combine.extend(additional_json_maps)
+
+    # Export KMZ with all combined maps
+    kmz_output_path = output_path.replace(".html", ".kmz")
+    all_data = []
+    for p in json_maps_to_combine:
+        with open(p, "r", encoding="utf-8") as f:
+            all_data.append(json.load(f))
+    kmz_path = render_to_kmz(all_data, kmz_output_path, layer_name=map_name)
 
     # Create HTML map; only rotate the first JSON (the current one)
     html_map = create_html_map(
@@ -61,39 +62,10 @@ def draw_map(
         output_path,
     )
 
-    return html_map, json_path, kml_path
+    return html_map, json_path, kmz_path
 
 
-def _export_to_kml(df: pd.DataFrame, map_name: str, output_path: str) -> str:
-    """Helper to convert georeferenced DataFrame to KML file."""
-    geo_points = []
-    for _, row in df.iterrows():
-        geo_points.append(
-            GeoPoint(
-                station_id=str(row["Node_Id"]),
-                lat=row["Latitude"],
-                lon=row["Longitude"],
-                x=row["X"],
-                y=row["Y"],
-                z=0.0,  # Default to 0 for now as CSV doesn't have Z yet
-            )
-        )
 
-    # Reconstruct lines for the KML exporter
-    lines = []
-    df["Links"].fillna(" ", inplace=True)
-    for _, row in df.iterrows():
-        for link in str(row["Links"]).split("-"):
-            if link and any(p.station_id == link for p in geo_points):
-                lines.append(SurveyLine(from_id=str(row["Node_Id"]), to_id=link))
-
-    survey = CaveSurvey(name=map_name, lines=lines)
-    kml_content = export_kml(survey, geo_points)
-
-    with open(output_path, "w") as f:
-        f.write(kml_content)
-
-    return output_path
 
 
 def _meters_per_degree_wgs84(lat_deg: float):
