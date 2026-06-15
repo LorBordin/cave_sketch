@@ -54,7 +54,10 @@ Failure to run these and verify their success is a violation of project standard
 3. Read `DEVLOG.md`, it contains decisions from previous sessions that override the spec where they conflict.
 4. Check `tests/` for relevant existing tests
 5. Implement, then perform **Mandatory Verification** as described above.
-6. After every meaningful code change, append an entry to `DEVLOG.md`:
+6. After every meaningful code change, append an entry to the relevant DEVLOG
+   (format below). **Two logs:** the root `DEVLOG.md` covers the Python project
+   (`cave_sketch` core + Streamlit web app); the Android mobile app logs to
+   `android/DEVLOG.md`. See `docs/mobile-app/` for the mobile initiative.
 
 ## [YYYY-MM-DD HH:MM] <phase> — <action>
 **Files:** <list of files created or modified, one per line>

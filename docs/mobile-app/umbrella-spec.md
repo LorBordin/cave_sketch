@@ -51,20 +51,20 @@ runtime via [Chaquopy](https://chaquo.com/chaquopy/), calling the untouched
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Android UI (Kotlin + Jetpack Compose)        │  NEW
-│  Survey Plot screen · Satellite Map screen     │
-└───────────────────┬───────────────────────────┘
-                     │ passes file paths, reads back output paths
+│  Android UI (Kotlin + Jetpack Compose)      │  NEW
+│  Survey Plot screen · Satellite Map screen  │
+└───────────────────┬─────────────────────────┘
+                    │ passes file paths, reads back output paths
 ┌───────────────────▼───────────────────────────┐
-│  Bridge layer (thin Kotlin ↔ Python glue)      │  NEW (small)
-│  copy picked files in · call core fns · return  │
-│  output paths (pdf / html / json / kmz)         │
+│  Bridge layer (thin Kotlin ↔ Python glue)     │  NEW (small)
+│  copy picked files in · call core fns · return│
+│  output paths (pdf / html / json / kmz)       │
 └───────────────────┬───────────────────────────┘
-                     │ Chaquopy (embedded CPython + deps in the .apk)
-┌───────────────────▼───────────────────────────┐
+                    │ Chaquopy (embedded CPython + deps in the .apk)
+┌───────────────────▼────────────────────────────┐
 │  cave_sketch  (UNTOUCHED, shared with web)     │  EXISTING
 │  ezdxf · matplotlib · numpy · pandas · folium  │
-└─────────────────────────────────────────────┘
+└────────────────────────────────────────────────┘
 ```
 
 **Why Python-on-device is the crux (not the UI):** a phone app is a
@@ -189,4 +189,6 @@ Each phase maps to one **conductor track** for `agy` (see `GEMINI.md`).
 - Python project managed with **`uv`** (never bare `pip`); commit `uv.lock`.
 - Verification gates before "done": `uv run ruff check .`,
   `uv run mypy cave_sketch/`, `uv run pytest` all pass.
-- Append a `DEVLOG.md` entry after meaningful changes (per root `GEMINI.md`).
+- **Two DEVLOGs.** The root `DEVLOG.md` covers the Python project (the
+  `cave_sketch` core + the Streamlit web app). Mobile work logs to a separate
+  `android/DEVLOG.md` (created in Phase 0). Use the same entry format for both.

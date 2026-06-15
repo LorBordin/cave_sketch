@@ -14,7 +14,9 @@ repo-root `GEMINI.md` or `conductor/workflow.md` — it sits on top of them.
 3. `docs/mobile-app/umbrella-spec.md` — the **source of truth** for this
    initiative's architecture, scope, risks, and phase boundaries.
 4. The current phase's `spec.md` + `plan.md` under `docs/mobile-app/phases/`.
-5. `DEVLOG.md` — decisions from previous sessions override specs on conflict.
+5. Both DEVLOGs — decisions from previous sessions override specs on conflict.
+   Root `DEVLOG.md` (Python project) for shared-core context, and
+   `android/DEVLOG.md` for mobile-app history (exists from Phase 0 onward).
 
 ## What we are building
 
@@ -59,8 +61,9 @@ and `cave_sketch` keep working unchanged. Full rationale: `umbrella-spec.md`.
   the existing `uv` + pytest gates.
 - Mandatory Python gates before "done": `uv run ruff check .`,
   `uv run mypy cave_sketch/`, `uv run pytest` all pass.
-- Append a `DEVLOG.md` entry after each meaningful change (root `GEMINI.md`
-  format).
+- Append a DEVLOG entry after each meaningful change (root `GEMINI.md` format).
+  **Mobile-app work goes in `android/DEVLOG.md`, not the root `DEVLOG.md`.** The
+  root log is for the Python project (`cave_sketch` core + Streamlit web app).
 
 ## Notes specific to this initiative
 
