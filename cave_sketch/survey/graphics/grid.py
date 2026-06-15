@@ -33,3 +33,29 @@ def _add_grid(
     for k in range(start_k_y, end_k_y + 1):
         y = k * grid_spacing
         ax.axhline(y, color="lightgray", linestyle=":", zorder=0)
+
+
+def snap_rule_to_grid(
+    rule_pos: tuple[float, float],
+    grid_spacing: float,
+    rule_orientation: str,
+) -> tuple[float, float]:
+    """
+    Snap the leading coordinate of the ruler to the nearest multiple of grid_spacing.
+
+    For horizontal rulers, snaps the X coordinate.
+    For vertical rulers, snaps the Y coordinate.
+    """
+    if rule_orientation not in ("horizontal", "vertical"):
+        raise ValueError(
+            f"Invalid rule_orientation '{rule_orientation}'. "
+            "Must be 'horizontal' or 'vertical'."
+        )
+
+    x, y = rule_pos
+    if rule_orientation == "horizontal":
+        x = round(x / grid_spacing) * grid_spacing
+    elif rule_orientation == "vertical":
+        y = round(y / grid_spacing) * grid_spacing
+
+    return (x, y)
