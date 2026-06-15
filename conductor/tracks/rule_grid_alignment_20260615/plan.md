@@ -30,10 +30,10 @@
 
 ## Phase 2: Verification and Polish
 
-- [ ] Task: Run Full Quality Gates
-    - [ ] Run `uv run ruff check .` and fix any linting errors
-    - [ ] Run `uv run mypy cave_sketch/` and fix any type errors
-    - [ ] Run `uv run pytest` and confirm all tests pass
-    - [ ] Review code for clarity and add/update docstrings as needed
+- [x] Task: Run Full Quality Gates (973cc78)
+    - [x] Run `uv run ruff check .` and fix any linting errors
+    - [x] Run `uv run mypy cave_sketch/` and fix any type errors
+    - [x] Run `uv run pytest` and confirm all tests pass
+    - [x] Review code for clarity and add/update docstrings as needed
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Verification and Polish' (Protocol in workflow.md)
