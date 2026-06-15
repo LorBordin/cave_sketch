@@ -1,38 +1,56 @@
+from unittest.mock import MagicMock, patch
+
+import pandas as pd
 import pytest
+
 from cave_sketch.survey.graphics.grid import snap_rule_to_grid
+from cave_sketch.survey.graphics.survey_plot import create_survey
+
 
 def test_snap_rule_to_grid_horizontal():
     # spacing = 10.0
-    # Rule position: (12.3, 5.0) -> (10.0, 5.0) since rule is horizontal and x=12.3 snaps to nearest 10.0
-    assert snap_rule_to_grid((12.3, 5.0), grid_spacing=10.0, rule_orientation="horizontal") == (10.0, 5.0)
-    # Rule position: (17.8, 5.0) -> (20.0, 5.0)
-    assert snap_rule_to_grid((17.8, 5.0), grid_spacing=10.0, rule_orientation="horizontal") == (20.0, 5.0)
+    # Rule: (12.3, 5.0) -> (10.0, 5.0) as horizontal ruler snaps X to nearest 10.0
+    assert snap_rule_to_grid(
+        (12.3, 5.0), grid_spacing=10.0, rule_orientation="horizontal"
+    ) == (10.0, 5.0)
+    # Rule: (17.8, 5.0) -> (20.0, 5.0)
+    assert snap_rule_to_grid(
+        (17.8, 5.0), grid_spacing=10.0, rule_orientation="horizontal"
+    ) == (20.0, 5.0)
+
 
 def test_snap_rule_to_grid_vertical():
     # spacing = 10.0
-    # Rule position: (5.0, 12.3) -> (5.0, 10.0) since rule is vertical and y=12.3 snaps to nearest 10.0
-    assert snap_rule_to_grid((5.0, 12.3), grid_spacing=10.0, rule_orientation="vertical") == (5.0, 10.0)
-    # Rule position: (5.0, 17.8) -> (5.0, 20.0)
-    assert snap_rule_to_grid((5.0, 17.8), grid_spacing=10.0, rule_orientation="vertical") == (5.0, 20.0)
+    # Rule: (5.0, 12.3) -> (5.0, 10.0) as vertical ruler snaps Y to nearest 10.0
+    assert snap_rule_to_grid(
+        (5.0, 12.3), grid_spacing=10.0, rule_orientation="vertical"
+    ) == (5.0, 10.0)
+    # Rule: (5.0, 17.8) -> (5.0, 20.0)
+    assert snap_rule_to_grid(
+        (5.0, 17.8), grid_spacing=10.0, rule_orientation="vertical"
+    ) == (5.0, 20.0)
+
 
 def test_snap_rule_to_grid_exact_multiples():
     # If already on grid line, should remain unchanged
-    assert snap_rule_to_grid((10.0, 5.0), grid_spacing=10.0, rule_orientation="horizontal") == (10.0, 5.0)
-    assert snap_rule_to_grid((5.0, 20.0), grid_spacing=10.0, rule_orientation="vertical") == (5.0, 20.0)
+    assert snap_rule_to_grid(
+        (10.0, 5.0), grid_spacing=10.0, rule_orientation="horizontal"
+    ) == (10.0, 5.0)
+    assert snap_rule_to_grid(
+        (5.0, 20.0), grid_spacing=10.0, rule_orientation="vertical"
+    ) == (5.0, 20.0)
+
 
 def test_snap_rule_to_grid_edge_cases():
     # Exactly between: 15.0 with spacing 10.0 should round to 10.0 or 20.0
     res_h = snap_rule_to_grid((15.0, 5.0), grid_spacing=10.0, rule_orientation="horizontal")
     assert res_h in [(10.0, 5.0), (20.0, 5.0)]
 
+
 def test_snap_rule_to_grid_invalid_orientation():
     with pytest.raises(ValueError):
         snap_rule_to_grid((12.3, 5.0), grid_spacing=10.0, rule_orientation="invalid")
 
-
-from unittest.mock import patch, MagicMock
-import pandas as pd
-from cave_sketch.survey.graphics.survey_plot import create_survey
 
 @pytest.fixture
 def sample_df():
@@ -43,6 +61,7 @@ def sample_df():
         "Node_Id": ["A", "B"],
         "Links": ["-", "-"]
     })
+
 
 @patch("cave_sketch.survey.graphics.survey_plot._add_north_arrow")
 @patch("cave_sketch.survey.graphics.survey_plot._add_rule")
@@ -76,6 +95,7 @@ def test_create_survey_snaps_rule_when_grid_enabled(
     _, kwargs_north = mock_add_north.call_args
     assert kwargs_north["coords"] == (20.0, 20.0)
 
+
 @patch("cave_sketch.survey.graphics.survey_plot._add_north_arrow")
 @patch("cave_sketch.survey.graphics.survey_plot._add_rule")
 @patch("cave_sketch.survey.graphics.survey_plot.compute_dual_layout")
@@ -105,4 +125,3 @@ def test_create_survey_no_snap_when_grid_disabled(
     mock_add_north.assert_called_once()
     _, kwargs_north = mock_add_north.call_args
     assert kwargs_north["coords"] == (22.3, 20.0)
-
