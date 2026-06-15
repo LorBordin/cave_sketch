@@ -8,7 +8,7 @@
 
 ---
 
-## Phase 1: Segment Chaining
+## Phase 1: Segment Chaining [checkpoint: 105f546]
 
 - [x] Task: Write tests for `chain_segments_by_type` [9591501]
     - [ ] Create `tests/test_chaining.py`
@@ -27,7 +27,7 @@
     - [ ] Emit leftover all-degree-2 components as closed polylines
     - [ ] Run `uv run pytest tests/test_chaining.py -v` and confirm PASS
     - [ ] Commit: `feat(features): chain survey segments into polylines by type`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Segment Chaining' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Segment Chaining' (Protocol in workflow.md) [105f546]
 
 ## Phase 2: Compact KML + KMZ Export
 
