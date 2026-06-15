@@ -29,7 +29,7 @@
     - [ ] Commit: `feat(features): chain survey segments into polylines by type`
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Segment Chaining' (Protocol in workflow.md) [105f546]
 
-## Phase 2: Compact KML + KMZ Export
+## Phase 2: Compact KML + KMZ Export [checkpoint: 07de82b]
 
 - [x] Task: Write tests for the upgraded `render_to_kml` [affa383]
     - [ ] Create `tests/test_kmz_export.py` with a sample map JSON (lines of one type + a water polygon + a BLOCK point node)
@@ -51,7 +51,7 @@
     - [ ] Export it from `cave_sketch/backend_renders/__init__.py`
     - [ ] Run `uv run pytest tests/test_kmz_export.py -v` and confirm PASS
     - [ ] Commit: `feat(kml): add render_to_kmz zip wrapper`
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Compact KML + KMZ Export' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Compact KML + KMZ Export' (Protocol in workflow.md) [07de82b]
 
 ## Phase 3: Satellite Pipeline & UI Integration
 
