@@ -55,7 +55,7 @@
 
 ## Phase 3: Satellite Pipeline & UI Integration
 
-- [ ] Task: Rewire `draw_map` to export KMZ
+- [x] Task: Rewire `draw_map` to export KMZ [feb5ad1]
     - [ ] In `cave_sketch/satellite_view/map.py`, replace the `geo.kml`/`GeoPoint`/`CaveSurvey`/`SurveyLine` imports with `from cave_sketch.backend_renders import render_to_folium, render_to_kmz`
     - [ ] Build `json_maps_to_combine` (current + additional) BEFORE the KMZ export
     - [ ] Load each combined JSON and call `render_to_kmz(combined_data, output_path.replace(".html",".kmz"), layer_name=map_name)`
@@ -63,7 +63,7 @@
     - [ ] Delete the obsolete `_export_to_kml` helper function
     - [ ] Run `uv run pytest tests/test_satellite_map.py -v`; update any test referencing `_export_to_kml`/`.kml`
     - [ ] Commit: `feat(satellite): export combined KMZ instead of per-segment KML`
-- [ ] Task: Update the satellite-map page download button
+- [x] Task: Update the satellite-map page download button [5ce58bf]
     - [ ] In `app/pages/2_satellite_map.py`, rename the unpacked `kml_path` → `kmz_path` and the session key to `st.session_state.kmz_path`
     - [ ] Change the button to `"📥 Download KMZ Map"` with `file_name=f"{sanitized_name}.kmz"`
     - [ ] Confirm the file parses: `uv run python -c "import ast; ast.parse(open('app/pages/2_satellite_map.py').read()); print('ok')"`
