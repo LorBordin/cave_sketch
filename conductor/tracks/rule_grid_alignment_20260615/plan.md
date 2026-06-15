@@ -1,6 +1,6 @@
 # Plan: Align Scale Bar to Grid Lines
 
-## Phase 1: Grid-Snap Logic and Tests
+## Phase 1: Grid-Snap Logic and Tests [checkpoint: 8bd0f00]
 
 - [x] Task: Write Tests for Grid-Snap Helper (348157c)
     - [x] Create `tests/test_rule_grid_snap.py` with tests for a new `snap_to_grid` helper function
@@ -26,7 +26,7 @@
     - [x] Adjust the north arrow position accordingly (offset from the snapped rule position)
     - [x] Run full test suite and confirm all tests pass (Green Phase)
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Grid-Snap Logic and Tests' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Grid-Snap Logic and Tests' (Protocol in workflow.md)
 
 ## Phase 2: Verification and Polish
 
