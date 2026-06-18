@@ -42,16 +42,8 @@ android {
     composeOptions { kotlinCompilerExtensionVersion "1.5.14" }
 }
 
-// Make the UNTOUCHED repo-root cave_sketch importable from Python.
-// srcDir points at the repo root (../../ from android/app); cave_sketch is
-// imported at runtime. No copy, no duplication of the core.
-chaquopy {
-    sourceSets {
-        getByName("main") {
-            srcDir "../.."
-        }
-    }
-}
+// The untouched repo-root cave_sketch is imported via a relative symlink in src/main/python/cave_sketch.
+
 
 dependencies {
     implementation "androidx.core:core-ktx:1.13.1"
