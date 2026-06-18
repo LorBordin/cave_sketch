@@ -20,3 +20,10 @@
 ## Deployment
 - **Streamlit Cloud**: Primary target for the live application.
 - **GitHub Actions**: CI/CD for linting, type checking, and testing.
+
+## Mobile App Tech Stack (Spike Verified)
+- **Kotlin**: Programming language for the Android application.
+- **Jetpack Compose**: Declarative UI toolkit for building native Android interfaces.
+- **Chaquopy (17.0)**: Python SDK for Android, embedding a Python 3.13 interpreter.
+- **Android PdfRenderer**: Native tool for rendering PDF vector graphics to displayable bitmaps.
+
