@@ -564,13 +564,13 @@ From the status line in Step 2, record the elapsed milliseconds. If it varies, r
 Run: `adb logcat -d | grep -iE "python|chaquopy|AndroidRuntime" | tail -50`
 Record any Python traceback in the DEVLOG before attempting a fix.
 
-### Task B8: Record findings, difficulty verdict, and flip status
+### Task B8: Record findings, difficulty verdict, and flip status [4df2f5d]
 
 **Files:**
 - Create: `android/DEVLOG.md`
 - Modify: `docs/mobile-app/README.md`
 
-- [ ] **Step 1: Write the first `android/DEVLOG.md` entry**
+- [x] **Step 1: Write the first `android/DEVLOG.md` entry**
 
 Create `android/DEVLOG.md` with the findings (fill the bracketed values from the run):
 
@@ -579,7 +579,7 @@ Create `android/DEVLOG.md` with the findings (fill the bracketed values from the
 
 (Mobile-app history. Root `DEVLOG.md` covers the Python project / web app.)
 
-## 2026-06-16 — Phase 0 spike complete
+## 2026-06-18 — Phase 0 spike complete
 
 **Gate A (desktop relaxed pins):** existing pytest suite [PASSED/FAILED] under
 Python [3.13.x], numpy 1.26.2, pandas 2.1.3, matplotlib 3.8.4, ezdxf 1.4.1,
@@ -598,14 +598,14 @@ justification grounded in the above: e.g. "GREEN: stack runs unchanged, render
 time acceptable at N ms, no pin surprises; remaining work is UI wiring."].
 ```
 
-- [ ] **Step 2: Flip the Phase 0 status in the initiative README**
+- [x] **Step 2: Flip the Phase 0 status in the initiative README**
 
 In `docs/mobile-app/README.md`, change the Phase 0 row from `⬜ Not started` to `✅ Done` (and the Gate-A/Gate-B outcome if you wish to note it).
 
 Verify: `grep -A1 "Phase 0" docs/mobile-app/README.md`
 Expected: shows the updated status.
 
-- [ ] **Step 3: Commit the findings**
+- [x] **Step 3: Commit the findings**
 
 ```bash
 git add android/DEVLOG.md docs/mobile-app/README.md
