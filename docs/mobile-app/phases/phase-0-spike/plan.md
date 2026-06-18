@@ -299,13 +299,13 @@ git add android/settings.gradle android/build.gradle android/gradle.properties a
 git commit -m "feat(android): scaffold Chaquopy spike Gradle project"
 ```
 
-### Task B3: Add the Python glue and the sample input
+### Task B3: Add the Python glue and the sample input [2ce9c14]
 
 **Files:**
 - Create: `android/app/src/main/python/spike.py`
 - Create: `android/app/src/main/assets/sample.dxf`
 
-- [ ] **Step 1: Write `spike.py` (thin glue, no business logic)**
+- [x] **Step 1: Write `spike.py` (thin glue, no business logic)**
 
 ```python
 """Phase 0 spike glue. Calls the UNTOUCHED cave_sketch core, mirroring the web
@@ -335,7 +335,7 @@ def render_sample_pdf(dxf_path: str, work_dir: str) -> str:
     return str(pdf_path)
 ```
 
-- [ ] **Step 2: Copy the fixture DXF into the app assets**
+- [x] **Step 2: Copy the fixture DXF into the app assets**
 
 Run: `mkdir -p android/app/src/main/assets && cp tests/fixtures/sample.dxf android/app/src/main/assets/sample.dxf`
 Expected: `android/app/src/main/assets/sample.dxf` exists.
@@ -343,7 +343,7 @@ Expected: `android/app/src/main/assets/sample.dxf` exists.
 Verify: `test -s android/app/src/main/assets/sample.dxf && echo OK`
 Expected: `OK`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add android/app/src/main/python/spike.py android/app/src/main/assets/sample.dxf
