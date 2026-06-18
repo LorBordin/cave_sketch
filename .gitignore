@@ -8,3 +8,9 @@ conductor/outreach/
 conductor/outreach_plan.md
 
 .venv-mobile/
+
+# Android build and local files
+android/local.properties
+android/.gradle/
+android/build/
+android/app/build/
