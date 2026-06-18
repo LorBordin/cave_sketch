@@ -18,7 +18,7 @@ def render_sample_pdf(dxf_path: str, work_dir: str) -> str:
     # CSV -> PDF (rule_length is a sample value; spike only proves rendering)
     draw_survey(
         title="Phase 0 Spike",
-        rule_length=1.0,
+        rule_length=20.0,
         csv_map_path=str(csv_path),
         output_path=str(pdf_path),
     )
