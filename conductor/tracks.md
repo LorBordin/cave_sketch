@@ -12,3 +12,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [x] **Track: Offline-ready KMZ Export**
 *Link: [./archive/offline_kmz_export_20260612/](./archive/offline_kmz_export_20260612/)*
+
+---
+
+- [x] **Track: Phase 0 Spike**
+*Link: [../docs/mobile-app/phases/phase-0-spike/](../docs/mobile-app/phases/phase-0-spike/)*
+
