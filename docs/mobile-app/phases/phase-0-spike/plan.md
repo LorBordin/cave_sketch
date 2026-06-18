@@ -171,7 +171,7 @@ On the phone: Settings → About → tap Build Number 7× → Developer options 
 Run: `adb devices`
 Expected: the phone's serial listed with status `device` (not `unauthorized`/`offline`). This is the device Gate B must run on — emulator does not count.
 
-### Task B2: Scaffold the `android/` Gradle project with Chaquopy
+### Task B2: Scaffold the `android/` Gradle project with Chaquopy [9cd5f60]
 
 **Files:**
 - Create: `android/settings.gradle`
@@ -185,7 +185,7 @@ Expected: the phone's serial listed with status `device` (not `unauthorized`/`of
 > the official example for the installed Chaquopy version wins — record any
 > deviation in the DEVLOG.
 
-- [ ] **Step 1: Write `android/settings.gradle`**
+- [x] **Step 1: Write `android/settings.gradle`**
 
 ```groovy
 pluginManagement {
@@ -205,7 +205,7 @@ rootProject.name = "CaveSketchSpike"
 include ":app"
 ```
 
-- [ ] **Step 2: Write `android/build.gradle` (top-level)**
+- [x] **Step 2: Write `android/build.gradle` (top-level)**
 
 ```groovy
 plugins {
@@ -215,7 +215,7 @@ plugins {
 }
 ```
 
-- [ ] **Step 3: Write `android/gradle.properties`**
+- [x] **Step 3: Write `android/gradle.properties`**
 
 ```properties
 org.gradle.jvmargs=-Xmx2048m
@@ -223,7 +223,7 @@ android.useAndroidX=true
 kotlin.code.style=official
 ```
 
-- [ ] **Step 4: Write `android/app/build.gradle`**
+- [x] **Step 4: Write `android/app/build.gradle`**
 
 ```groovy
 plugins {
@@ -292,7 +292,7 @@ dependencies {
 }
 ```
 
-- [ ] **Step 5: Commit the scaffold**
+- [x] **Step 5: Commit the scaffold**
 
 ```bash
 git add android/settings.gradle android/build.gradle android/gradle.properties android/app/build.gradle
