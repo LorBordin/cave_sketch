@@ -6,3 +6,5 @@ __pycache__/
 # Outreach and advertising materials
 conductor/outreach/
 conductor/outreach_plan.md
+
+.venv-mobile/
