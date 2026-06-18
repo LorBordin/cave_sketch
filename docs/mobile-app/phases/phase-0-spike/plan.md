@@ -1,4 +1,4 @@
-# Phase 0 — Spike (De-risk) — Implementation Plan
+# Phase 0 — Spike (De-risk) — Implementation Plan [checkpoint: 990d133]
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
