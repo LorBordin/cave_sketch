@@ -117,29 +117,29 @@ git add requirements-mobile.txt scripts/check_mobile_env.sh .gitignore
 git commit -m "feat(mobile): add Gate A relaxed-pin env + check script"
 ```
 
-### Task A2: Run the existing suite under the relaxed pins (the Gate A test)
+### Task A2: Run the existing suite under the relaxed pins (the Gate A test) [a962935]
 
 **Files:**
 - Test: the existing `tests/` suite (no new tests — this gate verifies the unchanged core under downgraded deps).
 
-- [ ] **Step 1: Run the Gate A check**
+- [x] **Step 1: Run the Gate A check**
 
 Run: `./scripts/check_mobile_env.sh`
 Expected: pytest summary ends in `passed` with **0 failed**, then a version block printing `numpy 1.26.2`, `pandas 2.1.3`, `matplotlib 3.8.4`, Python `3.13.x`.
 
-- [ ] **Step 2: If any test fails, diagnose before proceeding**
+- [x] **Step 2: If any test fails, diagnose before proceeding**
 
 If the run is NOT green, do NOT start Gate B. For each failure, decide whether it is:
   - a deps-version behaviour change (record it; if a fix is needed in `cave_sketch`, the fix MUST stay Streamlit/Android-free AND keep the web-app env green — re-run `uv run pytest` on the main env to confirm), or
   - environment noise (e.g. a missing matplotlib font/backend) — set `MPLBACKEND=Agg` and re-run.
 Record the failure and resolution verbatim for the DEVLOG (Task B8). Expected (per the spec's API grep): **green with no code changes.**
 
-- [ ] **Step 3: Confirm the web-app env is untouched**
+- [x] **Step 3: Confirm the web-app env is untouched**
 
 Run: `git status --porcelain pyproject.toml uv.lock`
 Expected: **no output** (the web app's pins are unchanged).
 
-- [ ] **Step 4: Capture the version block for the DEVLOG**
+- [x] **Step 4: Capture the version block for the DEVLOG**
 
 Copy the printed version block from Step 1 into a scratch note; it becomes part of the Gate A findings in Task B8.
 
