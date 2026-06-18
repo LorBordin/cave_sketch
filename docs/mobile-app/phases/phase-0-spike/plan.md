@@ -513,20 +513,20 @@ git add android/app/src/main/java/com/cavesketch/spike/MainActivity.kt
 git commit -m "feat(android): Compose UI + bridge + PdfRenderer on-screen preview"
 ```
 
-### Task B6: Build the debug APK (build-success checkpoint)
+### Task B6: Build the debug APK (build-success checkpoint) [14ef731]
 
 **Files:** none (build).
 
-- [ ] **Step 1: Assemble the debug APK**
+- [x] **Step 1: Assemble the debug APK**
 
 Run (from `android/`): `./gradlew :app:assembleDebug`
 Expected: `BUILD SUCCESSFUL`. The first run downloads Chaquopy's native wheels for `numpy`/`pandas`/`matplotlib` (arm64-v8a + x86_64) — slow the first time.
 
-- [ ] **Step 2: If the build fails on a dependency, record and adjust**
+- [x] **Step 2: If the build fails on a dependency, record and adjust**
 
 If Chaquopy reports a package/ABI it cannot satisfy at the pinned version, note the exact message in the DEVLOG, then pick the nearest available version from `https://chaquo.com/pypi-13.1/<pkg>/` and re-run. Re-run Gate A (`./scripts/check_mobile_env.sh` with the adjusted pin) before accepting any changed pin, so the laptop proof stays honest.
 
-- [ ] **Step 3: Note the APK size (a findings metric)**
+- [x] **Step 3: Note the APK size (a findings metric)**
 
 Run: `ls -lh android/app/build/outputs/apk/debug/app-debug.apk`
 Expected: a file in the tens-of-MB range. Record the size for Task B8.
