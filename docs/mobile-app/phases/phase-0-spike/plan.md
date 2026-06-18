@@ -41,13 +41,13 @@
 
 # GATE A — Desktop relaxed-pin proof
 
-### Task A1: Pin the Chaquopy-compatible mobile dependency set
+### Task A1: Pin the Chaquopy-compatible mobile dependency set [8a43188]
 
 **Files:**
 - Create: `requirements-mobile.txt`
 - Create: `scripts/check_mobile_env.sh`
 
-- [ ] **Step 1: Write the relaxed-pins requirements file**
+- [x] **Step 1: Write the relaxed-pins requirements file**
 
 Create `requirements-mobile.txt`:
 
@@ -66,7 +66,7 @@ folium==0.19.5
 pytest>=8
 ```
 
-- [ ] **Step 2: Write the env-check script**
+- [x] **Step 2: Write the env-check script**
 
 Create `scripts/check_mobile_env.sh`:
 
@@ -99,18 +99,18 @@ print('matplotlib', matplotlib.__version__); print('ezdxf', ezdxf.__version__); 
 print('folium', folium.__version__)"
 ```
 
-- [ ] **Step 3: Make the script executable**
+- [x] **Step 3: Make the script executable**
 
 Run: `chmod +x scripts/check_mobile_env.sh`
 Expected: no output, exit 0.
 
-- [ ] **Step 4: Add `.venv-mobile` to .gitignore**
+- [x] **Step 4: Add `.venv-mobile` to .gitignore**
 
 Append `.venv-mobile/` to the repo `.gitignore` (the venv is a build artifact, not source).
 Run: `grep -q '.venv-mobile' .gitignore && echo OK`
 Expected: `OK`
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add requirements-mobile.txt scripts/check_mobile_env.sh .gitignore
