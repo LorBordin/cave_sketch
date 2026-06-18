@@ -403,12 +403,12 @@ git add android/app/src/main/AndroidManifest.xml android/app/src/main/java/com/c
 git commit -m "feat(android): manifest + Python runtime startup"
 ```
 
-### Task B5: The Compose screen — button → bridge → PDF → on-screen image
+### Task B5: The Compose screen — button → bridge → PDF → on-screen image [f238b48]
 
 **Files:**
 - Create: `android/app/src/main/java/com/cavesketch/spike/MainActivity.kt`
 
-- [ ] **Step 1: Write `MainActivity.kt`**
+- [x] **Step 1: Write `MainActivity.kt`**
 
 ```kotlin
 package com.cavesketch.spike
@@ -506,7 +506,7 @@ class MainActivity : ComponentActivity() {
 }
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/spike/MainActivity.kt
