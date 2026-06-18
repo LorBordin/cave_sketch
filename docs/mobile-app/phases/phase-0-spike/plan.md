@@ -531,21 +531,21 @@ If Chaquopy reports a package/ABI it cannot satisfy at the pinned version, note 
 Run: `ls -lh android/app/build/outputs/apk/debug/app-debug.apk`
 Expected: a file in the tens-of-MB range. Record the size for Task B8.
 
-### Task B7: Run on the real phone and verify the PDF (manual device verification)
+### Task B7: Run on the real phone and verify the PDF (manual device verification) [e19eed0]
 
 **Files:** none (on-device).
 
-- [ ] **Step 1: Install and launch on the connected phone**
+- [x] **Step 1: Install and launch on the connected phone**
 
 Run (from `android/`): `./gradlew :app:installDebug`
 Then launch "CaveSketch Spike" from the phone's app drawer (or `adb shell monkey -p com.cavesketch.spike 1`).
 Expected: app opens showing the "Run spike" button.
 
-- [ ] **Step 2: Run the spike on-device**
+- [x] **Step 2: Run the spike on-device**
 
 Tap **Run spike**. Expected: status changes to `OK — rendered in <N> ms` and a survey plot image appears below the button.
 
-- [ ] **Step 3: Verify correctness against the desktop output**
+- [x] **Step 3: Verify correctness against the desktop output**
 
 Generate the desktop reference from the Gate A env for the same fixture:
 
@@ -555,11 +555,11 @@ Generate the desktop reference from the Gate A env for the same fixture:
 
 Open `/tmp/spike_desktop.pdf` and eyeball-compare it to the on-phone image: same survey geometry, stations, and layout. Expected: **visually equivalent** (minor font/anti-aliasing differences are acceptable; the plot must be the same survey).
 
-- [ ] **Step 4: Record the on-device render time**
+- [x] **Step 4: Record the on-device render time**
 
 From the status line in Step 2, record the elapsed milliseconds. If it varies, run 3× and record the range. This is the §6 render-time metric.
 
-- [ ] **Step 5: If it fails on-device, capture logs**
+- [x] **Step 5: If it fails on-device, capture logs**
 
 Run: `adb logcat -d | grep -iE "python|chaquopy|AndroidRuntime" | tail -50`
 Record any Python traceback in the DEVLOG before attempting a fix.
