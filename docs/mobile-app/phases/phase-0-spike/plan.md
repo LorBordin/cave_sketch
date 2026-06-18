@@ -350,13 +350,13 @@ git add android/app/src/main/python/spike.py android/app/src/main/assets/sample.
 git commit -m "feat(android): add spike.py glue + sample.dxf asset"
 ```
 
-### Task B4: Manifest + Python runtime startup
+### Task B4: Manifest + Python runtime startup [4bbd172]
 
 **Files:**
 - Create: `android/app/src/main/AndroidManifest.xml`
 - Create: `android/app/src/main/java/com/cavesketch/spike/SpikeApplication.kt`
 
-- [ ] **Step 1: Write the manifest**
+- [x] **Step 1: Write the manifest**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -377,7 +377,7 @@ git commit -m "feat(android): add spike.py glue + sample.dxf asset"
 </manifest>
 ```
 
-- [ ] **Step 2: Write the Application that starts Python**
+- [x] **Step 2: Write the Application that starts Python**
 
 ```kotlin
 package com.cavesketch.spike
@@ -396,7 +396,7 @@ class SpikeApplication : Application() {
 }
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add android/app/src/main/AndroidManifest.xml android/app/src/main/java/com/cavesketch/spike/SpikeApplication.kt
