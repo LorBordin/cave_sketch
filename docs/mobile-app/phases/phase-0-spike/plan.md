@@ -149,24 +149,24 @@ Copy the printed version block from Step 1 into a scratch note; it becomes part 
 
 # GATE B — On-device proof (real arm64 phone)
 
-### Task B1: Install and verify the Android toolchain
+### Task B1: Install and verify the Android toolchain [3bf0478]
 
 **Files:** none (local toolchain).
 
-- [ ] **Step 1: Install Android Studio + SDK + JDK 17**
+- [x] **Step 1: Install Android Studio + SDK + JDK 17**
 
 Install Android Studio (bundles the SDK and a compatible JDK). On macOS: `brew install --cask android-studio`, then launch once and complete the SDK setup wizard (install "Android SDK Platform 34" and "Android SDK Build-Tools").
 
-- [ ] **Step 2: Verify the SDK command-line tools are on PATH**
+- [x] **Step 2: Verify the SDK command-line tools are on PATH**
 
 Run: `sdkmanager --version` (or `~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --version`)
 Expected: a version number prints (e.g. `12.0` or similar), exit 0.
 
-- [ ] **Step 3: Enable USB debugging on the phone and connect it**
+- [x] **Step 3: Enable USB debugging on the phone and connect it**
 
 On the phone: Settings → About → tap Build Number 7× → Developer options → enable "USB debugging". Connect via USB and accept the RSA prompt.
 
-- [ ] **Step 4: Verify the real device is visible to adb**
+- [x] **Step 4: Verify the real device is visible to adb**
 
 Run: `adb devices`
 Expected: the phone's serial listed with status `device` (not `unauthorized`/`offline`). This is the device Gate B must run on — emulator does not count.
