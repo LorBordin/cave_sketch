@@ -123,7 +123,7 @@ git commit -m "chore(mobile-app): instrument cold-start breakdown (Phase 1 measu
 
 ---
 
-### Task 2: Python bridge — input resolution
+### [x] Task 2: Python bridge — input resolution · 755af5f
 
 Start the real bridge module. `resolve_input` turns a picked path into a CSV path: DXF → parsed CSV, CSV → passthrough, empty → None. Pure logic, TDD on the laptop.
 
@@ -135,7 +135,7 @@ Start the real bridge module. `resolve_input` turns a picked path into a CSV pat
 - Consumes: `cave_sketch.dxf.parser.parse_dxf(input_path: Path, output_path: Optional[Path]) -> CaveSurvey`.
 - Produces: `resolve_input(input_path: Optional[str], work_dir: str, stem: str) -> Optional[str]`.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Create `tests/test_survey_bridge.py`:
 
@@ -172,12 +172,12 @@ def test_resolve_input_parses_dxf_to_csv(tmp_path):
     assert Path(out).exists()
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `.venv-mobile/bin/python -m pytest tests/test_survey_bridge.py -v`
 Expected: FAIL — `ModuleNotFoundError: No module named 'survey_bridge'`.
 
-- [ ] **Step 3: Write the minimal implementation**
+- [x] **Step 3: Write the minimal implementation**
 
 Create `android/app/src/main/python/survey_bridge.py`:
 
@@ -207,12 +207,12 @@ def resolve_input(input_path: Optional[str], work_dir: str, stem: str) -> Option
     return str(src)
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `.venv-mobile/bin/python -m pytest tests/test_survey_bridge.py -v`
 Expected: 3 passed.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/python/survey_bridge.py tests/test_survey_bridge.py
