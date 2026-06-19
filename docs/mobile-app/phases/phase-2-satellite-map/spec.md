@@ -23,8 +23,9 @@ leaving the existing `AppNavHost` bottom-bar navigation unchanged.
 ## 2. Parity scope (mirror the web page)
 
 - **GPS points editor** — add/remove rows of `(station, lat, lon)`; coordinates
-  parsed via the core `cave_sketch.geo.coordinates.parse_coordinate` (decimal and
-  DMS forms). Per-field inline error when a coordinate cannot be parsed.
+  parsed via the core `cave_sketch.geo.coordinates.parse_coordinate` (decimal,
+  accepting `.` or `,` as the separator). Per-field inline error when a
+  coordinate cannot be parsed.
 - **Survey name** — text field, prefilled from the shared store (see §4).
 - **Map rotation angle** — numeric input (°), default from the shared store / 0.
 - **Additional JSON maps** — multi-select `.json` file picker; imported maps are
