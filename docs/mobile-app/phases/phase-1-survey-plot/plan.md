@@ -612,7 +612,7 @@ git commit -m "feat(mobile-app): app foundation — com.cavesketch.app, Python p
 
 ---
 
-### Task 6: Navigation skeleton + Satellite stub
+### [x] Task 6: Navigation skeleton + Satellite stub · fdd35fd
 
 Add a two-destination nav graph so Phase 2 adds a screen rather than restructuring. Survey Plot is the start destination; Satellite is a stub.
 
@@ -626,7 +626,7 @@ Add a two-destination nav graph so Phase 2 adds a screen rather than restructuri
 - Consumes: `App()` composable entrypoint (Task 5).
 - Produces: `AppNavHost()` composable; routes `"survey_plot"` and `"satellite"`; `SurveyPlotScreen()` and `SatelliteStubScreen()` composables.
 
-- [ ] **Step 1: Create `SatelliteStubScreen.kt`**
+- [x] **Step 1: Create `SatelliteStubScreen.kt`**
 
 ```kotlin
 package com.cavesketch.app.ui
@@ -648,7 +648,7 @@ fun SatelliteStubScreen() {
 }
 ```
 
-- [ ] **Step 2: Create a placeholder `SurveyPlotScreen.kt`**
+- [x] **Step 2: Create a placeholder `SurveyPlotScreen.kt`**
 
 ```kotlin
 package com.cavesketch.app.ui
@@ -670,7 +670,7 @@ fun SurveyPlotScreen() {
 }
 ```
 
-- [ ] **Step 3: Create `AppNavHost.kt`**
+- [x] **Step 3: Create `AppNavHost.kt`**
 
 ```kotlin
 package com.cavesketch.app.ui
@@ -721,7 +721,7 @@ fun AppNavHost() {
 }
 ```
 
-- [ ] **Step 4: Wire `App()` to the nav host**
+- [x] **Step 4: Wire `App()` to the nav host**
 
 In `MainActivity.kt`, replace the `App()` body:
 
@@ -732,12 +732,12 @@ fun App() {
 }
 ```
 
-- [ ] **Step 5: Build and verify on the real phone**
+- [x] **Step 5: Build and verify on the real phone**
 
 Run: `cd android && JAVA_HOME="…" ./gradlew :app:installDebug`
 Expected: BUILD SUCCESSFUL. On-device: bottom bar with "Survey" and "Satellite"; tapping switches between the "Survey Plot" placeholder and the "coming in Phase 2" stub.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app
