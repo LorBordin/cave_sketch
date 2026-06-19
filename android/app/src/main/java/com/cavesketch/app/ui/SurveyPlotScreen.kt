@@ -94,6 +94,16 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
             }
             is PlotState.Success -> {
                 PdfPreview(s.pdfPath)
+                Spacer(Modifier.height(8.dp))
+                Button(
+                    onClick = {
+                        val name = inputs.surveyName.ifBlank { "survey" } + ".pdf"
+                        com.cavesketch.app.util.sharePdf(context, s.pdfPath, name)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Save / Share PDF")
+                }
             }
             PlotState.Idle -> {}
         }
