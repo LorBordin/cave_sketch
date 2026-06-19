@@ -746,7 +746,7 @@ git commit -m "feat(mobile-app): navigation skeleton + Satellite stub"
 
 ---
 
-### Task 7: `PythonBridge` + `SurveyPlotViewModel` (+ JVM unit test)
+### [x] Task 7: `PythonBridge` + `SurveyPlotViewModel` (+ JVM unit test) · 65c6577
 
 Add the Kotlin↔Python wrapper behind an interface (so it can be faked), and the ViewModel that owns UI state + the async Generate. Unit-test the state machine on the JVM.
 
@@ -765,7 +765,7 @@ Add the Kotlin↔Python wrapper behind an interface (so it can be faked), and th
   - `sealed interface PlotState { Idle; Generating(phase: String); Success(pdfPath: String); Error(message: String) }`
   - `class SurveyPlotViewModel(bridge: SurveyBridge, workDir: String, io: CoroutineDispatcher) { val state: StateFlow<PlotState>; fun generate(inputs: SurveyInputs) }`
 
-- [ ] **Step 1: Write the failing ViewModel test**
+- [x] **Step 1: Write the failing ViewModel test**
 
 Create `android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt`:
 
@@ -816,12 +816,12 @@ class SurveyPlotViewModelTest {
 }
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `cd android && JAVA_HOME="…" ./gradlew :app:testDebugUnitTest`
 Expected: compilation failure — `SurveyBridge` / `SurveyPlotViewModel` unresolved.
 
-- [ ] **Step 3: Create the bridge interface and inputs**
+- [x] **Step 3: Create the bridge interface and inputs**
 
 `android/app/src/main/java/com/cavesketch/app/bridge/SurveyBridge.kt`:
 
@@ -854,7 +854,7 @@ class PythonBridge(private val io: CoroutineDispatcher) : SurveyBridge {
 }
 ```
 
-- [ ] **Step 4: Create the ViewModel, state, and inputs→JSON**
+- [x] **Step 4: Create the ViewModel, state, and inputs→JSON**
 
 `android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt`:
 
@@ -954,12 +954,12 @@ Note: `viewModelScope` uses `Dispatchers.Main` by default; the test injects `Sta
 @org.junit.After fun tearDown() = kotlinx.coroutines.Dispatchers.resetMain()
 ```
 
-- [ ] **Step 5: Run the test to verify it passes**
+- [x] **Step 5: Run the test to verify it passes**
 
 Run: `cd android && JAVA_HOME="…" ./gradlew :app:testDebugUnitTest`
 Expected: 2 tests pass. (If you hit the Main-dispatcher error, apply the `setUp`/`tearDown` from Step 4, then re-run.)
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/bridge android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt android/app/src/test
