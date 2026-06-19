@@ -968,7 +968,7 @@ git commit -m "feat(mobile-app): PythonBridge + SurveyPlotViewModel with unit te
 
 ---
 
-### Task 8: Survey Plot screen — file pickers, settings form, name fields
+### [x] Task 8: Survey Plot screen — file pickers, settings form, name fields · f069f4c
 
 Build the real input UI: SAF pickers for main map/section, the settings form at web-parity ranges, and the name fields, all bound to a `SurveyInputs` held in screen state.
 
@@ -986,7 +986,7 @@ Build the real input UI: SAF pickers for main map/section, the settings form at 
   - `SettingsForm(inputs, onChange)` composable.
   - `SurveyPlotScreen` holding `SurveyInputs` state and rendering pickers + settings + names.
 
-- [ ] **Step 1: Create `FileCopy.kt`**
+- [x] **Step 1: Create `FileCopy.kt`**
 
 ```kotlin
 package com.cavesketch.app.util
@@ -1015,7 +1015,7 @@ fun extensionOf(context: Context, uri: Uri): String {
 }
 ```
 
-- [ ] **Step 2: Create `FilePickerRow.kt`**
+- [x] **Step 2: Create `FilePickerRow.kt`**
 
 ```kotlin
 package com.cavesketch.app.ui.components
@@ -1048,7 +1048,7 @@ fun FilePickerRow(label: String, fileName: String?, onPick: (Uri) -> Unit) {
 
 (Note: TopoDroid DXF/CSV often report generic MIME types, so the picker filter is `*/*`; the extension is resolved from the display name in `extensionOf`.)
 
-- [ ] **Step 3: Create `SettingsForm.kt` (web-parity ranges)**
+- [x] **Step 3: Create `SettingsForm.kt` (web-parity ranges)**
 
 ```kotlin
 package com.cavesketch.app.ui.components
@@ -1107,7 +1107,7 @@ private fun ZoomSlider(label: String, value: Double, onChange: (Double) -> Unit)
 }
 ```
 
-- [ ] **Step 4: Build the `SurveyPlotScreen` body**
+- [x] **Step 4: Build the `SurveyPlotScreen` body**
 
 Replace `SurveyPlotScreen.kt`:
 
@@ -1169,12 +1169,12 @@ fun SurveyPlotScreen() {
 private fun extOf(path: String) = if (path.lowercase().endsWith(".dxf")) ".dxf" else ".csv"
 ```
 
-- [ ] **Step 5: Build and verify on the real phone**
+- [x] **Step 5: Build and verify on the real phone**
 
 Run: `cd android && JAVA_HOME="…" ./gradlew :app:installDebug`
 Expected: BUILD SUCCESSFUL. On-device: the Survey screen scrolls; tapping "Pick Cave Map"/"Pick Cave Section" opens the system file picker and the chosen file name appears; name fields accept text; sliders/checkboxes move and rule-length snaps to multiples of 5.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui android/app/src/main/java/com/cavesketch/app/util
