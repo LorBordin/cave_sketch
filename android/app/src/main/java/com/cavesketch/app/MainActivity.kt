@@ -17,5 +17,5 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    Surface { Text("CaveSketch — foundation OK") }
+    com.cavesketch.app.ui.AppNavHost()
 }
