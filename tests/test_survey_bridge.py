@@ -28,3 +28,21 @@ def test_resolve_input_parses_dxf_to_csv(tmp_path):
     out = survey_bridge.resolve_input(dxf, str(tmp_path), "map")
     assert out == str(tmp_path / "map.csv")
     assert Path(out).exists()
+
+
+def test_validate_merge_rejects_non_numeric():
+    csv = str(FIXTURES / "test_survey.csv")
+    err = survey_bridge.validate_merge(csv, csv, "12P4", "1")
+    assert err is not None and "numeric" in err.lower()
+
+
+def test_validate_merge_rejects_missing_station():
+    csv = str(FIXTURES / "test_survey.csv")  # has Node_Id 1, 2
+    err = survey_bridge.validate_merge(csv, csv, "999", "1")
+    assert err is not None and "999" in err
+
+
+def test_validate_merge_accepts_valid():
+    csv = str(FIXTURES / "test_survey.csv")
+    assert survey_bridge.validate_merge(csv, csv, "1", "2") is None
+
