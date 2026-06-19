@@ -17,5 +17,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    com.cavesketch.app.ui.AppNavHost()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val viewModel = androidx.lifecycle.viewmodel.compose.viewModel<com.cavesketch.app.ui.SurveyPlotViewModel>(
+        factory = object : androidx.lifecycle.ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T =
+                com.cavesketch.app.ui.SurveyPlotViewModel(
+                    com.cavesketch.app.bridge.PythonBridge(kotlinx.coroutines.Dispatchers.IO),
+                    context.filesDir.absolutePath,
+                    kotlinx.coroutines.Dispatchers.IO,
+                ) as T
+        }
+    )
+    com.cavesketch.app.ui.AppNavHost(viewModel)
 }
