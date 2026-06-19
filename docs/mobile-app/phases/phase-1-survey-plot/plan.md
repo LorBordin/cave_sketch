@@ -302,7 +302,7 @@ git commit -m "feat(mobile-app): survey_bridge merge validation (web parity)"
 
 ---
 
-### Task 4: Python bridge — `generate_survey_plot` entrypoint + `prewarm`
+### [x] Task 4: Python bridge — `generate_survey_plot` entrypoint + `prewarm` · 9c904a2
 
 Tie resolution + validation + `draw_survey` together behind one JSON-in / JSON-out call, with all failures converted to structured errors. Add `prewarm()` for the cold-start strategy.
 
@@ -316,7 +316,7 @@ Tie resolution + validation + `draw_survey` together behind one JSON-in / JSON-o
   - `generate_survey_plot(inputs_json: str, work_dir: str) -> str` — returns JSON `{"pdf_path": ...}` or `{"error": <type>, "detail": <msg>}`. `inputs_json` keys: `map_path`, `section_path`, `child_map_path`, `child_section_path` (str|null), `survey_name`, `surveyor_name` (str), `parent_station`, `child_station` (str), `section_protocol` ("simple"|"mirror"|"displacement"), `settings` (object: `rule_length`, `rotation_deg`, `show_details`, `show_grid`, `marker_zoom`, `text_zoom`, `line_width_zoom`).
   - `prewarm() -> None` — pays the one-time import + matplotlib font-cache cost.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `tests/test_survey_bridge.py`:
 
@@ -360,12 +360,12 @@ def test_prewarm_does_not_raise():
     survey_bridge.prewarm()
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `.venv-mobile/bin/python -m pytest tests/test_survey_bridge.py -k "generate or prewarm" -v`
 Expected: FAIL — `AttributeError: module 'survey_bridge' has no attribute 'generate_survey_plot'`.
 
-- [ ] **Step 3: Write the minimal implementation**
+- [x] **Step 3: Write the minimal implementation**
 
 Add to `survey_bridge.py` (add `import json` to imports):
 
@@ -441,12 +441,12 @@ def prewarm() -> None:
     plt.close(fig)
 ```
 
-- [ ] **Step 4: Run the full bridge suite to verify it passes**
+- [x] **Step 4: Run the full bridge suite to verify it passes**
 
 Run: `.venv-mobile/bin/python -m pytest tests/test_survey_bridge.py -v`
 Expected: 10 passed.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/python/survey_bridge.py tests/test_survey_bridge.py
