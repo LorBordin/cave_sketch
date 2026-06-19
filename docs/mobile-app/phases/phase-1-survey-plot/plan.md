@@ -34,7 +34,7 @@
 
 ---
 
-### Task 1: Measurement spike — break down the ~70s cold render
+### [x] Task 1: Measurement spike — break down the ~70s cold render · 74c5866
 
 This is **throwaway instrumentation** reusing the Phase 0 spike. Its deliverable is a recorded breakdown + a chosen cold-start strategy, not kept code. It **gates** the rest of the phase (Task 10 uses its decision).
 
@@ -46,7 +46,7 @@ This is **throwaway instrumentation** reusing the Phase 0 spike. Its deliverable
 **Interfaces:**
 - Produces: a DEVLOG entry with import/parse/draw timings (cold + warm) and a one-line strategy decision consumed narratively by Task 5 (pre-warm) and Task 10 (progress messaging).
 
-- [ ] **Step 1: Add per-stage timing to `spike.py`**
+- [x] **Step 1: Add per-stage timing to `spike.py`**
 
 Replace `render_sample_pdf` with a timed version that returns the breakdown as a JSON string:
 
@@ -83,7 +83,7 @@ def render_sample_pdf_timed(dxf_path: str, work_dir: str) -> str:
     })
 ```
 
-- [ ] **Step 2: Display the breakdown in `MainActivity.kt`**
+- [x] **Step 2: Display the breakdown in `MainActivity.kt`**
 
 In `runSpike()`, call the timed function and surface the JSON. Change the call site to:
 
@@ -96,7 +96,7 @@ val pdfPath = org.json.JSONObject(resultJson).getString("pdf_path")
 ```
 Append `resultJson` to the on-screen `status` text so it is readable on-device without a cable.
 
-- [ ] **Step 3: Build and install on the real phone**
+- [x] **Step 3: Build and install on the real phone**
 
 Run:
 ```bash
@@ -104,17 +104,17 @@ cd android && JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/
 ```
 Expected: BUILD SUCCESSFUL; app installs on the connected device.
 
-- [ ] **Step 4: Measure cold + warm**
+- [x] **Step 4: Measure cold + warm**
 
 Cold: force-stop the app, launch, tap "Run spike" once, record the JSON. Warm: tap "Run spike" a second time in the same session, record again. (Cold = first call after process start; warm = second call.)
 
-- [ ] **Step 5: Record findings and decide the strategy**
+- [x] **Step 5: Record findings and decide the strategy**
 
 Add a dated entry to `android/DEVLOG.md` with the cold and warm `import_ms` / `parse_ms` / `draw_ms`, and a one-line decision:
 - if `import_ms` (+ first-run draw font-cache) dominates and warm `draw_ms` is small → **strategy: pre-warm imports at launch** (Task 5 already does this; expected outcome);
 - if `draw_ms` dominates even when warm → **strategy: also optimize the draw path** — record this as added scope to revisit after Task 10.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add android/app/src/main/python/spike.py android/app/src/main/java/com/cavesketch/spike/MainActivity.kt android/DEVLOG.md
