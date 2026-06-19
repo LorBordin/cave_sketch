@@ -455,7 +455,7 @@ git commit -m "feat(mobile-app): survey_bridge generate_survey_plot entrypoint +
 
 ---
 
-### Task 5: App foundation — Gradle namespace, Application (Python + pre-warm), FileProvider
+### [x] Task 5: App foundation — Gradle namespace, Application (Python + pre-warm), FileProvider · 02a6347
 
 Create the real app package alongside the dormant spike. Switch the manifest to a new Application + Activity, start Python and kick off pre-warm at launch, and register a `FileProvider` for sharing.
 
@@ -469,7 +469,7 @@ Create the real app package alongside the dormant spike. Switch the manifest to 
 **Interfaces:**
 - Produces: a launching app with package `com.cavesketch.app`, Python started + `survey_bridge.prewarm()` running on a background thread at startup, and a `FileProvider` authority `com.cavesketch.app.fileprovider`.
 
-- [ ] **Step 1: Update `build.gradle`**
+- [x] **Step 1: Update `build.gradle`**
 
 Set `namespace` and `applicationId` to `com.cavesketch.app`, bump `versionName` to `0.2-phase1`, and add the navigation + lifecycle + coroutines-test dependencies. Replace the `namespace`/`applicationId`/`versionName` lines and the `dependencies { }` block:
 
@@ -498,7 +498,7 @@ dependencies {
 }
 ```
 
-- [ ] **Step 2: Create `CaveSketchApplication.kt`**
+- [x] **Step 2: Create `CaveSketchApplication.kt`**
 
 ```kotlin
 package com.cavesketch.app
@@ -524,7 +524,7 @@ class CaveSketchApplication : Application() {
 }
 ```
 
-- [ ] **Step 3: Create a minimal `MainActivity.kt`**
+- [x] **Step 3: Create a minimal `MainActivity.kt`**
 
 (The nav host is added in Task 6; for now show a placeholder so the app launches.)
 
@@ -552,7 +552,7 @@ fun App() {
 }
 ```
 
-- [ ] **Step 4: Create `res/xml/file_paths.xml`**
+- [x] **Step 4: Create `res/xml/file_paths.xml`**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -562,7 +562,7 @@ fun App() {
 </paths>
 ```
 
-- [ ] **Step 5: Update `AndroidManifest.xml`**
+- [x] **Step 5: Update `AndroidManifest.xml`**
 
 Point the application at the new components and register the FileProvider:
 
@@ -595,7 +595,7 @@ Point the application at the new components and register the FileProvider:
 </manifest>
 ```
 
-- [ ] **Step 6: Build and launch on the real phone**
+- [x] **Step 6: Build and launch on the real phone**
 
 Run:
 ```bash
@@ -603,7 +603,7 @@ cd android && JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/
 ```
 Expected: BUILD SUCCESSFUL. Launch the app: it shows "CaveSketch — foundation OK". In `adb logcat`, confirm no crash and that the Python runtime started.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add android/app/build.gradle android/app/src/main/AndroidManifest.xml android/app/src/main/java/com/cavesketch/app android/app/src/main/res/xml/file_paths.xml
