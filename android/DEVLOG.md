@@ -16,3 +16,23 @@
 
 **Difficulty verdict for Phases 1–3:** YELLOW
 Grounded in the findings: The Python scientific stack runs and packages successfully on the device, producing a visually correct PDF with zero core library changes required. However, the first-run/cold render time of 70.6 seconds is high. We will need to investigate preloading imports, keeping the runtime warm, and/or providing progress feedback to the user in the upcoming UI integration phases.
+
+## [2026-06-19 14:18] Phase 1 — Measurement spike complete
+**Files:**
+- android/app/src/main/python/spike.py
+- android/app/src/main/java/com/cavesketch/spike/MainActivity.kt
+- android/DEVLOG.md
+
+**Deviations from spec:**
+None.
+
+**Assumptions:**
+None.
+
+**Next session notes:**
+Timings measured on SM-S901B:
+- Cold: import_ms=3250, parse_ms=4215, draw_ms=60406
+- Warm: import_ms=0, parse_ms=4529, draw_ms=60624
+Decision: draw_survey compute dominates the runtime even when warm (taking ~60 seconds).
+Strategy: pre-warm imports at launch (reloading the cache), and manage user expectations with a staged progress indicator ("Starting engine..." -> "Rendering survey..."). We will investigate draw path optimizations after Task 10.
+

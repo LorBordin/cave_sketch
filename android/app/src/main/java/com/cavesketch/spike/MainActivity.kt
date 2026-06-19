@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                         try {
                             val result = withContext(Dispatchers.IO) { runSpike() }
                             bitmap = result.first
-                            status = "OK — rendered in ${result.second} ms"
+                            status = "OK: ${result.second}"
                         } catch (e: Throwable) {
                             status = "FAILED: ${e.message}"
                         } finally {
@@ -68,17 +68,17 @@ class MainActivity : ComponentActivity() {
     }
 
     /** Copies the sample DXF out of assets, calls Python to make the PDF,
-     *  renders page 1 to a Bitmap. Returns (bitmap, elapsedMillis). */
-    private fun runSpike(): Pair<Bitmap, Long> {
+     *  renders page 1 to a Bitmap. Returns (bitmap, timingsJson). */
+    private fun runSpike(): Pair<Bitmap, String> {
         val dxf = File(filesDir, "sample.dxf")
         assets.open("sample.dxf").use { input -> dxf.outputStream().use { input.copyTo(it) } }
 
-        val start = System.nanoTime()
         val py = Python.getInstance()
-        val pdfPath = py.getModule("spike")
-            .callAttr("render_sample_pdf", dxf.absolutePath, filesDir.absolutePath)
+        val resultJson = py.getModule("spike")
+            .callAttr("render_sample_pdf_timed", dxf.absolutePath, filesDir.absolutePath)
             .toString()
-        val elapsedMs = (System.nanoTime() - start) / 1_000_000
+        android.util.Log.i("SpikeTiming", resultJson)
+        val pdfPath = org.json.JSONObject(resultJson).getString("pdf_path")
 
         val pfd = ParcelFileDescriptor.open(File(pdfPath), ParcelFileDescriptor.MODE_READ_ONLY)
         PdfRenderer(pfd).use { renderer ->
@@ -86,7 +86,7 @@ class MainActivity : ComponentActivity() {
                 val bmp = Bitmap.createBitmap(page.width * 2, page.height * 2, Bitmap.Config.ARGB_8888)
                 bmp.eraseColor(Color.WHITE)
                 page.render(bmp, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-                return Pair(bmp, elapsedMs)
+                return Pair(bmp, resultJson)
             }
         }
     }
