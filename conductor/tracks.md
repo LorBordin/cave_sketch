@@ -18,3 +18,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: Phase 0 Spike**
 *Link: [../docs/mobile-app/phases/phase-0-spike/](../docs/mobile-app/phases/phase-0-spike/)*
 
+---
+
+- [x] **Track: Phase 1 Survey Plot**
+*Link: [../docs/mobile-app/phases/phase-1-survey-plot/](../docs/mobile-app/phases/phase-1-survey-plot/)*
+
+

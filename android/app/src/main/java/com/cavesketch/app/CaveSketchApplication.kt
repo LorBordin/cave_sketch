@@ -7,6 +7,11 @@ import com.chaquo.python.android.AndroidPlatform
 class CaveSketchApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        // Per-session cleanup: remove last run's intermediate CSVs + PDF.
+        listOf("map.csv", "section.csv", "child_map.csv", "child_section.csv", "survey.pdf")
+            .forEach { java.io.File(filesDir, it).delete() }
+
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(this))
         }

@@ -1183,7 +1183,7 @@ git commit -m "feat(mobile-app): Survey Plot inputs — file pickers, settings f
 
 ---
 
-### Task 9: Merge controls UI
+### [x] Task 9: Merge controls UI · d71f1bc
 
 Add the optional child-survey pickers, the station-ID fields, and the section-protocol selector — shown only when a child file is present, mirroring the web's conditional reveal.
 
@@ -1195,7 +1195,7 @@ Add the optional child-survey pickers, the station-ID fields, and the section-pr
 - Consumes: `SurveyInputs` (Task 7), `FilePickerRow` (Task 8).
 - Produces: `MergeControls(inputs, context, onChange)` composable.
 
-- [ ] **Step 1: Create `MergeControls.kt`**
+- [x] **Step 1: Create `MergeControls.kt`**
 
 ```kotlin
 package com.cavesketch.app.ui.components
@@ -1208,6 +1208,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.cavesketch.app.ui.SurveyInputs
 import com.cavesketch.app.util.copyUriToDir
 import com.cavesketch.app.util.extensionOf
@@ -1253,9 +1254,7 @@ fun MergeControls(inputs: SurveyInputs, context: Context, onChange: (SurveyInput
 }
 ```
 
-(Add the missing import `import androidx.compose.ui.Modifier` to the file.)
-
-- [ ] **Step 2: Insert `MergeControls` into `SurveyPlotScreen`**
+- [x] **Step 2: Insert `MergeControls` into `SurveyPlotScreen`**
 
 In `SurveyPlotScreen.kt`, after the section picker and before the name fields, add:
 
@@ -1263,12 +1262,12 @@ In `SurveyPlotScreen.kt`, after the section picker and before the name fields, a
         com.cavesketch.app.ui.components.MergeControls(inputs, context) { inputs = it }
 ```
 
-- [ ] **Step 3: Build and verify on the real phone**
+- [x] **Step 3: Build and verify on the real phone**
 
 Run: `cd android && JAVA_HOME="…" ./gradlew :app:installDebug`
 Expected: BUILD SUCCESSFUL. On-device: child pickers appear; after picking a child file, the station-ID fields appear; picking a child *section* additionally reveals the Simple/Mirror/Displacement selector.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui
@@ -1290,7 +1289,7 @@ Wire the screen to the ViewModel: a Generate button that runs async with staged 
 - Consumes: `SurveyPlotViewModel`, `PlotState`, `SurveyInputs` (Task 7); `PythonBridge` (Task 7).
 - Produces: `renderPdfFirstPage(pdfPath: String): Bitmap`; `PdfPreview(pdfPath)` composable; a Generate button bound to `viewModel.generate(inputs)`.
 
-- [ ] **Step 1: Create `PdfPreview.kt`**
+- [x] **Step 1: Create `PdfPreview.kt`**
 
 ```kotlin
 package com.cavesketch.app.ui
@@ -1328,7 +1327,7 @@ fun PdfPreview(pdfPath: String) {
 }
 ```
 
-- [ ] **Step 2: Provide the ViewModel from `MainActivity`**
+- [x] **Step 2: Provide the ViewModel from `MainActivity`**
 
 Replace `App()` in `MainActivity.kt` to build the bridge + ViewModel and pass it down:
 
@@ -1362,7 +1361,7 @@ fun AppNavHost(viewModel: SurveyPlotViewModel) {
 }
 ```
 
-- [ ] **Step 3: Add Generate + progress + preview to `SurveyPlotScreen`**
+- [x] **Step 3: Add Generate + progress + preview to `SurveyPlotScreen`**
 
 Change the signature to `SurveyPlotScreen(viewModel: SurveyPlotViewModel)`, collect state, and append below `SettingsForm`:
 
@@ -1386,7 +1385,7 @@ Change the signature to `SurveyPlotScreen(viewModel: SurveyPlotViewModel)`, coll
 
 Add imports: `androidx.compose.material3.Button`, `androidx.compose.material3.CircularProgressIndicator`, `androidx.compose.runtime.collectAsState`, `androidx.compose.runtime.getValue`.
 
-- [ ] **Step 4: Apply the Task 1 cold-start strategy**
+- [x] **Step 4: Apply the Task 1 cold-start strategy**
 
 Pre-warm is already wired in `CaveSketchApplication` (Task 5). Stage the progress label so the wait is legible: in `SurveyPlotViewModel.generate`, the initial label is "Starting engine…"; immediately before calling the bridge, set `_state.value = PlotState.Generating("Rendering survey…")`. If Task 1 found `draw_ms` dominates even warm, also record the optimisation follow-up in `android/DEVLOG.md` (added scope), but still ship this UI.
 
@@ -1400,12 +1399,12 @@ Pre-warm is already wired in `CaveSketchApplication` (Task 5). Stage the progres
                 // …unchanged parsing…
 ```
 
-- [ ] **Step 5: Build, install, and verify on the real phone**
+- [x] **Step 5: Build, install, and verify on the real phone**
 
 Run: `cd android && JAVA_HOME="…" ./gradlew :app:installDebug`
 Expected: BUILD SUCCESSFUL. On-device: pick `sample.dxf` (push it with `adb push tests/fixtures/sample.dxf /sdcard/Download/`), tap Generate → progress shows, then a survey plot preview appears. **Eyeball-compare** it to the web output for the same file (run the Streamlit app on the laptop). Record the cold + warm render times in `android/DEVLOG.md`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app android/DEVLOG.md
@@ -1426,7 +1425,7 @@ Replace the web download with an Android share sheet (and "Open with"), so the P
 - Consumes: the `FileProvider` authority `com.cavesketch.app.fileprovider` (Task 5); `PlotState.Success.pdfPath` (Task 7).
 - Produces: `sharePdf(context, pdfPath, displayName)`.
 
-- [ ] **Step 1: Create `Share.kt`**
+- [x] **Step 1: Create `Share.kt`**
 
 ```kotlin
 package com.cavesketch.app.util
@@ -1450,7 +1449,7 @@ fun sharePdf(context: Context, pdfPath: String, displayName: String) {
 }
 ```
 
-- [ ] **Step 2: Add a Share button to the Success state**
+- [x] **Step 2: Add a Share button to the Success state**
 
 In `SurveyPlotScreen.kt`, change the `PlotState.Success` branch:
 
@@ -1464,12 +1463,12 @@ In `SurveyPlotScreen.kt`, change the `PlotState.Success` branch:
             }
 ```
 
-- [ ] **Step 3: Build, install, and verify on the real phone**
+- [x] **Step 3: Build, install, and verify on the real phone**
 
 Run: `cd android && JAVA_HOME="…" ./gradlew :app:installDebug`
 Expected: BUILD SUCCESSFUL. On-device: after generating, tap "Save / Share PDF" → the system share sheet opens; share to a PDF viewer / Files and confirm the PDF opens correctly. (This also covers "Save to device" via the sheet's "Save to Files".)
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/util/Share.kt android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
@@ -1491,7 +1490,7 @@ Finalise: clean per-session temp files, delete the throwaway spike, run all gate
 - Consumes: everything above.
 - Produces: a clean, parity-complete app; no `com.cavesketch.spike` code remains.
 
-- [ ] **Step 1: Clear stale outputs at launch**
+- [x] **Step 1: Clear stale outputs at launch**
 
 In `CaveSketchApplication.onCreate`, before starting the pre-warm thread, delete previous-session artefacts so a fresh run never shows a stale PDF:
 
@@ -1501,7 +1500,7 @@ In `CaveSketchApplication.onCreate`, before starting the pre-warm thread, delete
             .forEach { java.io.File(filesDir, it).delete() }
 ```
 
-- [ ] **Step 2: Delete the throwaway spike**
+- [x] **Step 2: Delete the throwaway spike**
 
 Run:
 ```bash
@@ -1510,7 +1509,7 @@ git rm android/app/src/main/java/com/cavesketch/spike/MainActivity.kt \
        android/app/src/main/python/spike.py
 ```
 
-- [ ] **Step 3: Run the Python gates**
+- [x] **Step 3: Run the Python gates**
 
 Run:
 ```bash
@@ -1521,7 +1520,7 @@ uv run pytest -q
 ```
 Expected: ruff clean, mypy clean, the web/core pytest suite green, and the 10 bridge tests pass. (`survey_bridge.py` is excluded from `mypy cave_sketch/` since it lives under `android/`; if `ruff` flags it, it follows the same E/F/I rules — fix any findings.)
 
-- [ ] **Step 4: Run the Kotlin gate and build**
+- [x] **Step 4: Run the Kotlin gate and build**
 
 Run:
 ```bash
@@ -1529,7 +1528,7 @@ cd android && JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/
 ```
 Expected: unit tests pass; BUILD SUCCESSFUL; no references to `com.cavesketch.spike` remain (the build would fail otherwise).
 
-- [ ] **Step 5: On-device parity sweep**
+- [x] **Step 5: On-device parity sweep**
 
 Install (`./gradlew :app:installDebug`) and verify against the web Survey Plot page:
 1. Single map DXF → Generate → preview matches web; share works.
@@ -1538,11 +1537,11 @@ Install (`./gradlew :app:installDebug`) and verify against the web Survey Plot p
 4. Settings: change rule length, rotation, zooms, toggles → reflected in the output.
 Record pass/fail for each.
 
-- [ ] **Step 6: Update `android/DEVLOG.md`**
+- [x] **Step 6: Update `android/DEVLOG.md`**
 
 Add a dated Phase 1 entry: the cold-start breakdown + chosen strategy (from Task 1), final cold/warm render times, the parity-sweep results, and any surprises.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A

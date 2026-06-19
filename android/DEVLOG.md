@@ -36,3 +36,26 @@ Timings measured on SM-S901B:
 Decision: draw_survey compute dominates the runtime even when warm (taking ~60 seconds).
 Strategy: pre-warm imports at launch (reloading the cache), and manage user expectations with a staged progress indicator ("Starting engine..." -> "Rendering survey..."). We will investigate draw path optimizations after Task 10.
 
+## [2026-06-19 14:35] Phase 1 — Implementation complete
+**Files:**
+- android/app/src/main/java/com/cavesketch/app/CaveSketchApplication.kt
+- android/app/src/main/java/com/cavesketch/app/MainActivity.kt
+- android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/PdfPreview.kt
+- android/app/src/main/java/com/cavesketch/app/util/Share.kt
+- android/DEVLOG.md
+- android/app/src/main/java/com/cavesketch/spike/MainActivity.kt (deleted)
+- android/app/src/main/java/com/cavesketch/spike/SpikeApplication.kt (deleted)
+- android/app/src/main/python/spike.py (deleted)
+
+**Deviations from spec:**
+None.
+
+**Assumptions:**
+None.
+
+**Next session notes:**
+Phase 1 complete. Staged progress, PDF generation preview, and Save/Share sheet all implemented and verified. All unit/bridge tests passing, ruff and mypy passing. Ready for Phase 2.
+
+

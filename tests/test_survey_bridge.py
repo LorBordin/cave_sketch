@@ -2,8 +2,6 @@ import json
 import sys
 from pathlib import Path
 
-import pytest
-
 # survey_bridge.py lives in the android source tree, outside the importable package.
 ANDROID_PY = Path(__file__).resolve().parents[1] / "android/app/src/main/python"
 sys.path.insert(0, str(ANDROID_PY))
