@@ -221,7 +221,7 @@ git commit -m "feat(mobile-app): survey_bridge input resolution (dxf->csv / csv 
 
 ---
 
-### Task 3: Python bridge — merge validation
+### [x] Task 3: Python bridge — merge validation · 66e10f4
 
 Mirror the web's merge validation (`app/components/merging_controls.py`): station IDs must be numeric and exist in the referenced survey. Returns an error message or `None`.
 
@@ -232,7 +232,7 @@ Mirror the web's merge validation (`app/components/merging_controls.py`): statio
 **Interfaces:**
 - Produces: `validate_merge(parent_csv: Optional[str], child_csv: Optional[str], parent_station: str, child_station: str) -> Optional[str]` (error message or None).
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `tests/test_survey_bridge.py`:
 
@@ -254,12 +254,12 @@ def test_validate_merge_accepts_valid():
     assert survey_bridge.validate_merge(csv, csv, "1", "2") is None
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `.venv-mobile/bin/python -m pytest tests/test_survey_bridge.py -k validate_merge -v`
 Expected: FAIL — `AttributeError: module 'survey_bridge' has no attribute 'validate_merge'`.
 
-- [ ] **Step 3: Write the minimal implementation**
+- [x] **Step 3: Write the minimal implementation**
 
 Add to `survey_bridge.py` (add `import re` and `import pandas as pd` to the imports):
 
@@ -288,12 +288,12 @@ def validate_merge(parent_csv: Optional[str], child_csv: Optional[str],
     return None
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `.venv-mobile/bin/python -m pytest tests/test_survey_bridge.py -v`
 Expected: 6 passed.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/python/survey_bridge.py tests/test_survey_bridge.py
