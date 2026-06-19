@@ -37,6 +37,8 @@ fun SurveyPlotScreen() {
             inputs = inputs.copy(sectionPath = path)
         }
 
+        com.cavesketch.app.ui.components.MergeControls(inputs, context) { inputs = it }
+
         OutlinedTextField(
             value = inputs.surveyName,
             onValueChange = { inputs = inputs.copy(surveyName = it) },
