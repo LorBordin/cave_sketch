@@ -4,6 +4,7 @@ draw_survey, return the output PDF path. Lives under android/, never imported by
 cave_sketch. Single entrypoint: generate_survey_plot(inputs_json, work_dir)."""
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Optional
@@ -11,6 +12,8 @@ from typing import Optional
 import pandas as pd
 
 from cave_sketch.dxf.parser import parse_dxf
+from cave_sketch.survey.merger import SectionProtocol
+from cave_sketch.survey.survey import draw_survey
 
 
 def resolve_input(input_path: Optional[str], work_dir: str, stem: str) -> Optional[str]:
@@ -43,4 +46,70 @@ def validate_merge(parent_csv: Optional[str], child_csv: Optional[str],
         if child_station not in df["Node_Id"].astype(str).values:
             return f"Station '{child_station}' not found in the child survey."
     return None
+
+
+def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
+    """Entrypoint mirroring app/pages/1_survey_plot.py. See module/Interfaces for
+    the inputs_json shape. Returns JSON {"pdf_path": ...} or {"error", "detail"}."""
+    try:
+        data = json.loads(inputs_json)
+        settings = data.get("settings", {})
+
+        map_csv = resolve_input(data.get("map_path"), work_dir, "map")
+        section_csv = resolve_input(data.get("section_path"), work_dir, "section")
+        child_map_csv = resolve_input(data.get("child_map_path"), work_dir, "child_map")
+        child_section_csv = resolve_input(data.get("child_section_path"), work_dir, "child_section")
+
+        if not map_csv and not section_csv:
+            return json.dumps({"error": "no_input",
+                               "detail": "Select at least one map or section file."})
+
+        parent_station = data.get("parent_station") or ""
+        child_station = data.get("child_station") or ""
+        has_child = bool(child_map_csv or child_section_csv)
+        if has_child and parent_station and child_station:
+            err = validate_merge(map_csv or section_csv,
+                                 child_map_csv or child_section_csv,
+                                 parent_station, child_station)
+            if err:
+                return json.dumps({"error": "merge_invalid", "detail": err})
+
+        pdf_path = str(Path(work_dir) / "survey.pdf")
+        fig = draw_survey(
+            title=data.get("survey_name", ""),
+            rule_length=float(settings.get("rule_length", 100)),
+            csv_map_path=map_csv,
+            csv_section_path=section_csv,
+            child_csv_map_path=child_map_csv,
+            child_csv_section_path=child_section_csv,
+            parent_station=parent_station or None,
+            child_station=child_station or None,
+            section_protocol=SectionProtocol(data.get("section_protocol", "simple")),
+            output_path=pdf_path,
+            surveyor_name=data.get("surveyor_name", ""),
+            config={
+                "rotation_deg": settings.get("rotation_deg", 0.0),
+                "show_details": settings.get("show_details", True),
+                "show_grid": settings.get("show_grid", True),
+                "marker_zoom": settings.get("marker_zoom", 0.0),
+                "text_zoom": settings.get("text_zoom", 0.0),
+                "line_width_zoom": settings.get("line_width_zoom", 0.0),
+            },
+        )
+        import matplotlib.pyplot as plt
+        plt.close(fig)  # release the figure; mobile renders the PDF, not the figure
+        return json.dumps({"pdf_path": pdf_path})
+    except Exception as e:  # noqa: BLE001 — the bridge converts all failures to structured errors
+        return json.dumps({"error": "render_failed", "detail": str(e)})
+
+
+def prewarm() -> None:
+    """Pay the one-time import + matplotlib font-cache cost off the critical path."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    fig = plt.figure()
+    fig.text(0.5, 0.5, "warm")  # forces the font manager to initialise
+    plt.close(fig)
+
 

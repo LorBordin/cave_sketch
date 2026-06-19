@@ -46,3 +46,43 @@ def test_validate_merge_accepts_valid():
     csv = str(FIXTURES / "test_survey.csv")
     assert survey_bridge.validate_merge(csv, csv, "1", "2") is None
 
+
+def _inputs(**kw):
+    base = {
+        "map_path": str(FIXTURES / "test_survey.csv"),
+        "section_path": None, "child_map_path": None, "child_section_path": None,
+        "survey_name": "Test Cave", "surveyor_name": "Tester",
+        "parent_station": "", "child_station": "", "section_protocol": "simple",
+        "settings": {"rule_length": 100, "rotation_deg": 0.0, "show_details": True,
+                     "show_grid": True, "marker_zoom": 0.0, "text_zoom": 0.0,
+                     "line_width_zoom": 0.0},
+    }
+    base.update(kw)
+    return json.dumps(base)
+
+
+def test_generate_creates_pdf(tmp_path):
+    out = json.loads(survey_bridge.generate_survey_plot(_inputs(), str(tmp_path)))
+    assert "pdf_path" in out
+    assert Path(out["pdf_path"]).exists()
+
+
+def test_generate_no_input_returns_error(tmp_path):
+    out = json.loads(survey_bridge.generate_survey_plot(
+        _inputs(map_path=None, section_path=None), str(tmp_path)))
+    assert out["error"] == "no_input"
+
+
+def test_generate_bad_file_returns_structured_error(tmp_path):
+    bad = tmp_path / "broken.csv"
+    bad.write_text("not,a,survey\n1,2,3\n")
+    out = json.loads(survey_bridge.generate_survey_plot(
+        _inputs(map_path=str(bad)), str(tmp_path)))
+    assert out["error"] == "render_failed"
+    assert "detail" in out
+
+
+def test_prewarm_does_not_raise():
+    survey_bridge.prewarm()
+
+
