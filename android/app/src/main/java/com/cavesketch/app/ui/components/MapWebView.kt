@@ -16,6 +16,11 @@ fun MapWebView(htmlPath: String, modifier: Modifier = Modifier) {
                 @Suppress("SetJavaScriptEnabled")
                 settings.javaScriptEnabled = true
                 settings.allowFileAccess = true
+                settings.domStorageEnabled = true
+                @Suppress("DEPRECATION")
+                settings.allowFileAccessFromFileURLs = true
+                @Suppress("DEPRECATION")
+                settings.allowUniversalAccessFromFileURLs = true
                 loadUrl("file://$htmlPath")
             }
         },
