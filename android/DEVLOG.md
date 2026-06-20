@@ -72,3 +72,39 @@ None
 
 **Next session notes:**
 Added docs/mobile-app/phases/phase-1-survey-plot/review.md detailing Phase 1 review, latency metrics, deferred optimizations, and recommendations/scope for Phase 2.
+
+## [2026-06-20 11:25] Phase 2 — Implementation complete
+**Files:**
+- android/app/src/main/python/satellite_bridge.py
+- tests/test_satellite_bridge.py
+- android/app/src/main/python/survey_bridge.py
+- tests/test_survey_bridge.py
+- android/app/src/main/java/com/cavesketch/app/data/SurveyResultStore.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt
+- android/app/src/main/java/com/cavesketch/app/MainActivity.kt
+- android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt
+- android/app/src/main/java/com/cavesketch/app/bridge/SatelliteBridge.kt
+- android/app/src/main/java/com/cavesketch/app/bridge/PythonBridge.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SatelliteViewModel.kt
+- android/app/src/test/java/com/cavesketch/app/SatelliteViewModelTest.kt
+- android/app/src/main/java/com/cavesketch/app/util/Share.kt
+- android/app/src/main/java/com/cavesketch/app/util/Connectivity.kt
+- android/app/src/main/AndroidManifest.xml
+- android/app/src/main/java/com/cavesketch/app/ui/components/GpsPointsEditor.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/MapWebView.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt
+- android/app/src/main/java/com/cavesketch/app/CaveSketchApplication.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SatelliteStubScreen.kt (deleted)
+- android/DEVLOG.md
+- .gitignore
+
+**Deviations from spec:**
+None.
+
+**Assumptions:**
+None.
+
+**Next session notes:**
+Phase 2 complete. The Satellite Map screen is fully implemented with GPS point georeferencing, optional rotation, additional JSON map imports, offline-ready KMZ + JSON generation, and online HTML WebView preview. All Python checks, Kotlin unit tests, and compilation steps are passing cleanly.
+
