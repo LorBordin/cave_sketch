@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     val context = androidx.compose.ui.platform.LocalContext.current
+    val store = androidx.compose.runtime.remember { com.cavesketch.app.data.SurveyResultStore() }
     val viewModel = androidx.lifecycle.viewmodel.compose.viewModel<com.cavesketch.app.ui.SurveyPlotViewModel>(
         factory = object : androidx.lifecycle.ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
@@ -26,6 +27,7 @@ fun App() {
                     com.cavesketch.app.bridge.PythonBridge(kotlinx.coroutines.Dispatchers.IO),
                     context.filesDir.absolutePath,
                     kotlinx.coroutines.Dispatchers.IO,
+                    store,
                 ) as T
         }
     )

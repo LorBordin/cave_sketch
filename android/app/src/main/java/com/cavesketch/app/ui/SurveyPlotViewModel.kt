@@ -63,6 +63,7 @@ class SurveyPlotViewModel(
     private val bridge: SurveyBridge,
     private val workDir: String,
     private val io: CoroutineDispatcher,
+    private val store: com.cavesketch.app.data.SurveyResultStore,
 ) : ViewModel() {
     private val _state = MutableStateFlow<PlotState>(PlotState.Idle)
     val state: StateFlow<PlotState> = _state.asStateFlow()
@@ -75,6 +76,13 @@ class SurveyPlotViewModel(
                 val resultJson = bridge.generate(inputs.toJson(), workDir)
                 val obj = JSONObject(resultJson)
                 _state.value = if (obj.has("pdf_path")) {
+                    if (obj.has("map_csv_path")) {
+                        store.publish(
+                            com.cavesketch.app.data.SurveyResult(
+                                obj.getString("map_csv_path"), inputs.surveyName
+                            )
+                        )
+                    }
                     PlotState.Success(obj.getString("pdf_path"))
                 } else {
                     PlotState.Error(obj.optString("detail", obj.optString("error", "Unknown error")))

@@ -19,8 +19,10 @@ import org.junit.Test
 class SurveyPlotViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
 
+    private val store = com.cavesketch.app.data.SurveyResultStore()
+
     private fun vm(bridge: SurveyBridge) =
-        SurveyPlotViewModel(bridge, "/tmp", testDispatcher)
+        SurveyPlotViewModel(bridge, "/tmp", testDispatcher, store)
 
     private val inputs = SurveyInputs(mapPath = "/tmp/map.csv")
 
@@ -47,5 +49,19 @@ class SurveyPlotViewModelTest {
         model.generate(inputs)
         advanceUntilIdle()
         assertTrue((model.state.value as PlotState.Error).message.contains("boom"))
+    }
+
+    @Test
+    fun success_with_map_csv_publishes_to_store() = runTest(testDispatcher) {
+        val model = vm(object : SurveyBridge {
+            override suspend fun generate(inputsJson: String, workDir: String) =
+                """{"pdf_path":"/tmp/survey.pdf","map_csv_path":"/tmp/map.csv"}"""
+        })
+        model.generate(SurveyInputs(mapPath = "/tmp/map.csv", surveyName = "Cave"))
+        advanceUntilIdle()
+        assertEquals(
+            com.cavesketch.app.data.SurveyResult("/tmp/map.csv", "Cave"),
+            store.result.value,
+        )
     }
 }
