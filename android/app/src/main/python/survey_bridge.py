@@ -48,6 +48,33 @@ def validate_merge(parent_csv: Optional[str], child_csv: Optional[str],
     return None
 
 
+def effective_map_csv(map_csv: Optional[str], child_map_csv: Optional[str],
+                      parent_station: str, child_station: str,
+                      section_protocol: SectionProtocol,
+                      work_dir: str) -> Optional[str]:
+    """Return the map CSV the Satellite view should use: the merged CSV when a
+    valid merge was requested (mirrors app/pages/1_survey_plot.py glue), else the
+    parsed map CSV, or None when no map was provided."""
+    if not map_csv:
+        return None
+    if child_map_csv and parent_station and child_station:
+        from cave_sketch.survey.merger import merge_surveys
+        merged_df, _ = merge_surveys(
+            parent_map=pd.read_csv(map_csv),
+            parent_section=None,
+            child_map=pd.read_csv(child_map_csv),
+            child_section=None,
+            parent_station=parent_station,
+            child_station=child_station,
+            section_protocol=section_protocol,
+        )
+        if merged_df is not None:
+            merged_path = Path(work_dir) / "merged_map.csv"
+            merged_df.to_csv(merged_path, index=False)
+            return str(merged_path)
+    return map_csv
+
+
 def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
     """Entrypoint mirroring app/pages/1_survey_plot.py. See module/Interfaces for
     the inputs_json shape. Returns JSON {"pdf_path": ...} or {"error", "detail"}."""
@@ -98,7 +125,14 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
         )
         import matplotlib.pyplot as plt
         plt.close(fig)  # release the figure; mobile renders the PDF, not the figure
-        return json.dumps({"pdf_path": pdf_path})
+        result = {"pdf_path": pdf_path}
+        eff_map_csv = effective_map_csv(
+            map_csv, child_map_csv, parent_station or "", child_station or "",
+            SectionProtocol(data.get("section_protocol", "simple")), work_dir,
+        )
+        if eff_map_csv:
+            result["map_csv_path"] = eff_map_csv
+        return json.dumps(result)
     except Exception as e:  # noqa: BLE001 — the bridge converts all failures to structured errors
         return json.dumps({"error": "render_failed", "detail": str(e)})
 
