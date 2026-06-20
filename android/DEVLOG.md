@@ -100,7 +100,7 @@ Added docs/mobile-app/phases/phase-1-survey-plot/review.md detailing Phase 1 rev
 - .gitignore
 
 **Deviations from spec:**
-None.
+- Had to enable `domStorageEnabled`, `allowFileAccessFromFileURLs`, and `allowUniversalAccessFromFileURLs` in WebView configuration to allow Leaflet/Folium scripts to render and access tiles successfully.
 
 **Assumptions:**
 None.
