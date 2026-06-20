@@ -23,4 +23,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: Phase 1 Survey Plot**
 *Link: [../docs/mobile-app/phases/phase-1-survey-plot/](../docs/mobile-app/phases/phase-1-survey-plot/)*
 
+---
+
+- [x] **Track: Phase 2 Satellite Map**
+*Link: [../docs/mobile-app/phases/phase-2-satellite-map/](../docs/mobile-app/phases/phase-2-satellite-map/)*
+
 
