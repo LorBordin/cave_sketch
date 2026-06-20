@@ -19,17 +19,28 @@ class MainActivity : ComponentActivity() {
 fun App() {
     val context = androidx.compose.ui.platform.LocalContext.current
     val store = androidx.compose.runtime.remember { com.cavesketch.app.data.SurveyResultStore() }
-    val viewModel = androidx.lifecycle.viewmodel.compose.viewModel<com.cavesketch.app.ui.SurveyPlotViewModel>(
+    val bridge = androidx.compose.runtime.remember {
+        com.cavesketch.app.bridge.PythonBridge(kotlinx.coroutines.Dispatchers.IO)
+    }
+    val filesDir = context.filesDir.absolutePath
+
+    val surveyViewModel = androidx.lifecycle.viewmodel.compose.viewModel<com.cavesketch.app.ui.SurveyPlotViewModel>(
         factory = object : androidx.lifecycle.ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T =
                 com.cavesketch.app.ui.SurveyPlotViewModel(
-                    com.cavesketch.app.bridge.PythonBridge(kotlinx.coroutines.Dispatchers.IO),
-                    context.filesDir.absolutePath,
-                    kotlinx.coroutines.Dispatchers.IO,
-                    store,
+                    bridge, filesDir, kotlinx.coroutines.Dispatchers.IO, store,
                 ) as T
         }
     )
-    com.cavesketch.app.ui.AppNavHost(viewModel)
+    val satelliteViewModel = androidx.lifecycle.viewmodel.compose.viewModel<com.cavesketch.app.ui.SatelliteViewModel>(
+        factory = object : androidx.lifecycle.ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T =
+                com.cavesketch.app.ui.SatelliteViewModel(
+                    bridge, store, filesDir, kotlinx.coroutines.Dispatchers.IO,
+                ) { com.cavesketch.app.util.isOnline(context) } as T
+        }
+    )
+    com.cavesketch.app.ui.AppNavHost(surveyViewModel, satelliteViewModel)
 }

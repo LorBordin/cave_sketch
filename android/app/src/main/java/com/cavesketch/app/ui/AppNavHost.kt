@@ -17,7 +17,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun AppNavHost(viewModel: SurveyPlotViewModel) {
+fun AppNavHost(surveyViewModel: SurveyPlotViewModel, satelliteViewModel: SatelliteViewModel) {
     val nav = rememberNavController()
     val current = nav.currentBackStackEntryAsState().value?.destination?.route
     Scaffold(
@@ -39,8 +39,8 @@ fun AppNavHost(viewModel: SurveyPlotViewModel) {
         }
     ) { padding ->
         NavHost(nav, startDestination = "survey_plot", modifier = Modifier.padding(padding)) {
-            composable("survey_plot") { SurveyPlotScreen(viewModel) }
-            composable("satellite") { SatelliteStubScreen() }
+            composable("survey_plot") { SurveyPlotScreen(surveyViewModel) }
+            composable("satellite") { SatelliteScreen(satelliteViewModel) }
         }
     }
 }

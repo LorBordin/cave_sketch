@@ -8,9 +8,13 @@ class CaveSketchApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Per-session cleanup: remove last run's intermediate CSVs + PDF.
-        listOf("map.csv", "section.csv", "child_map.csv", "child_section.csv", "survey.pdf")
-            .forEach { java.io.File(filesDir, it).delete() }
+        // Per-session cleanup: remove last run's intermediate + output files.
+        listOf(
+            "map.csv", "section.csv", "child_map.csv", "child_section.csv",
+            "merged_map.csv", "survey.pdf", "survey.html", "survey.json", "survey.kmz",
+        ).forEach { java.io.File(filesDir, it).delete() }
+        // Imported JSON maps from the previous session.
+        filesDir.listFiles { f -> f.name.startsWith("additional_") }?.forEach { it.delete() }
 
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(this))
