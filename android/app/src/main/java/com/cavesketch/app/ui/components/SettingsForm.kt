@@ -17,31 +17,61 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.platform.testTag
 import com.cavesketch.app.ui.SurveyInputs
 
 @Composable
 fun SettingsForm(inputs: SurveyInputs, onChange: (SurveyInputs) -> Unit) {
-    Text("Survey settings")
+    Column {
+        Text("Survey settings")
 
-    // Rule length: 5..1000, step 5 (multiple-of-5 constraint).
+    // Rule length: 5..100, step 5. Keep as Slider.
     Text("Rule length (m): ${inputs.ruleLength}")
     Slider(
         value = inputs.ruleLength.toFloat(),
         onValueChange = { onChange(inputs.copy(ruleLength = (Math.round(it / 5f) * 5))) },
-        valueRange = 5f..1000f,
+        valueRange = 5f..100f,
     )
 
-    // Map rotation: -180..180, step 1.
-    Text("Map rotation (°): ${inputs.rotationDeg}")
-    Slider(
-        value = inputs.rotationDeg.toFloat(),
-        onValueChange = { onChange(inputs.copy(rotationDeg = Math.round(it))) },
-        valueRange = -180f..180f,
+    StepperControl(
+        label = "Map rotation (°)",
+        value = inputs.rotationDeg,
+        min = -180,
+        max = 180,
+        step = 5,
+        formatter = { "${it.toInt()}°" },
+        onChange = { onChange(inputs.copy(rotationDeg = it.toInt())) }
     )
 
-    ZoomSlider("Marker zoom", inputs.markerZoom) { onChange(inputs.copy(markerZoom = it)) }
-    ZoomSlider("Text zoom", inputs.textZoom) { onChange(inputs.copy(textZoom = it)) }
-    ZoomSlider("Line width zoom", inputs.lineWidthZoom) { onChange(inputs.copy(lineWidthZoom = it)) }
+    StepperControl(
+        label = "Marker zoom [-1, 1]",
+        value = inputs.markerZoom,
+        min = -1.0,
+        max = 1.0,
+        step = 0.1,
+        formatter = { "%.1f".format(it.toDouble()) },
+        onChange = { onChange(inputs.copy(markerZoom = it.toDouble())) }
+    )
+
+    StepperControl(
+        label = "Text zoom [-1, 1]",
+        value = inputs.textZoom,
+        min = -1.0,
+        max = 1.0,
+        step = 0.1,
+        formatter = { "%.1f".format(it.toDouble()) },
+        onChange = { onChange(inputs.copy(textZoom = it.toDouble())) }
+    )
+
+    StepperControl(
+        label = "Line width zoom [-1, 1]",
+        value = inputs.lineWidthZoom,
+        min = -1.0,
+        max = 1.0,
+        step = 0.1,
+        formatter = { "%.1f".format(it.toDouble()) },
+        onChange = { onChange(inputs.copy(lineWidthZoom = it.toDouble())) }
+    )
 
     Row(Modifier.fillMaxWidth()) {
         Checkbox(inputs.showDetails, { onChange(inputs.copy(showDetails = it)) })
@@ -51,16 +81,7 @@ fun SettingsForm(inputs: SurveyInputs, onChange: (SurveyInputs) -> Unit) {
         Checkbox(inputs.showGrid, { onChange(inputs.copy(showGrid = it)) })
         Text("Show grid")
     }
-}
-
-@Composable
-private fun ZoomSlider(label: String, value: Double, onChange: (Double) -> Unit) {
-    Text("$label [-1, 1]: ${"%.1f".format(value)}")
-    Slider(
-        value = value.toFloat(),
-        onValueChange = { onChange((Math.round(it * 10f) / 10f).toDouble()) },
-        valueRange = -1f..1f,
-    )
+    }
 }
 
 @Composable
@@ -103,7 +124,7 @@ fun StepperControl(
         onChange(castedValue)
     }
 
-    Column {
+    Column(Modifier.testTag(label)) {
         Text(label)
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -112,7 +133,9 @@ fun StepperControl(
             IconButton(
                 onClick = { updateValue(false) },
                 enabled = canDecrease,
-                modifier = Modifier.semantics { contentDescription = "−" }
+                modifier = Modifier
+                    .semantics { contentDescription = "−" }
+                    .testTag("${label}_−")
             ) {
                 Icon(Icons.Filled.Remove, contentDescription = "Decrease")
             }
@@ -123,7 +146,9 @@ fun StepperControl(
             IconButton(
                 onClick = { updateValue(true) },
                 enabled = canIncrease,
-                modifier = Modifier.semantics { contentDescription = "+" }
+                modifier = Modifier
+                    .semantics { contentDescription = "+" }
+                    .testTag("${label}_+")
             ) {
                 Icon(Icons.Filled.Add, contentDescription = "Increase")
             }
