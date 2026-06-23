@@ -2,22 +2,22 @@
 
 ## Phase 1: Stepper Composable
 
-- [ ] Task: Write Tests — StepperControl composable
-    - [ ] Create `app/src/test/java/com/cavesketch/app/ui/components/SettingsFormTest.kt`
-    - [ ] Test: stepper displays label and formatted value
-    - [ ] Test: tapping `+` increases value by step
-    - [ ] Test: tapping `−` decreases value by step
-    - [ ] Test: `+` button disabled at max boundary
-    - [ ] Test: `−` button disabled at min boundary
-    - [ ] Test: value clamps to min/max and does not exceed bounds
+- [x] Task: Write Tests — StepperControl composable [b0824cc]
+    - [x] Create `app/src/test/java/com/cavesketch/app/ui/components/SettingsFormTest.kt`
+    - [x] Test: stepper displays label and formatted value
+    - [x] Test: tapping `+` increases value by step
+    - [x] Test: tapping `−` decreases value by step
+    - [x] Test: `+` button disabled at max boundary
+    - [x] Test: `−` button disabled at min boundary
+    - [x] Test: value clamps to min/max and does not exceed bounds
 
-- [ ] Task: Implement — StepperControl composable
-    - [ ] Create a reusable `StepperControl` `@Composable` in `SettingsForm.kt`
-    - [ ] Parameters: label (`String`), value (`Number`), min, max, step, formatter (`(Number) -> String`), onChange
-    - [ ] Layout: `Label` row above, `[−] value [+]` compact inline row below
-    - [ ] Use Material 3 `IconButton` with `Icons.Filled.Remove` / `Icons.Filled.Add`
-    - [ ] Disable `−` when value ≤ min, `+` when value ≥ max
-    - [ ] Ensure touch targets ≥ 44dp
+- [x] Task: Implement — StepperControl composable [b0824cc]
+    - [x] Create a reusable `StepperControl` `@Composable` in `SettingsForm.kt`
+    - [x] Parameters: label (`String`), value (`Number`), min, max, step, formatter (`(Number) -> String`), onChange
+    - [x] Layout: `Label` row above, `[−] value [+]` compact inline row below
+    - [x] Use Material 3 `IconButton` with `Icons.Filled.Remove` / `Icons.Filled.Add`
+    - [x] Disable `−` when value ≤ min, `+` when value ≥ max
+    - [x] Ensure touch targets ≥ 44dp
 
 - [ ] Task: Conductor - User Manual Verification 'Stepper Composable' (Protocol in workflow.md)
 
