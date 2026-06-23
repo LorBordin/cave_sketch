@@ -135,3 +135,14 @@ Phase 2 complete. The Satellite Map screen is fully implemented with GPS point g
 **Next session notes:** Latency optimizations successfully reduced the warm draw_survey time on Samsung S22 from ~60.6s to ~3.0s, and parse_dxf time from ~4.5s to ~1.2s. The PDF render on-screen continues to display pixel-identically and correctly.
 
 
+## [2026-06-23 15:10] Survey Settings UI Refinement — Implementation Complete
+**Files:**
+- android/app/build.gradle
+- android/app/src/main/AndroidManifest.xml
+- android/app/src/main/java/com/cavesketch/app/ui/components/SettingsForm.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/SettingsFormTest.kt
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** None
+
+
