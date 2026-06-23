@@ -3,11 +3,20 @@ package com.cavesketch.app.ui.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.cavesketch.app.ui.SurveyInputs
 
 @Composable
@@ -52,4 +61,72 @@ private fun ZoomSlider(label: String, value: Double, onChange: (Double) -> Unit)
         onValueChange = { onChange((Math.round(it * 10f) / 10f).toDouble()) },
         valueRange = -1f..1f,
     )
+}
+
+@Composable
+fun StepperControl(
+    label: String,
+    value: Number,
+    min: Number,
+    max: Number,
+    step: Number,
+    formatter: (Number) -> String,
+    onChange: (Number) -> Unit
+) {
+    val valDouble = value.toDouble()
+    val minDouble = min.toDouble()
+    val maxDouble = max.toDouble()
+    val stepDouble = step.toDouble()
+
+    val canDecrease = valDouble > minDouble + 0.0001
+    val canIncrease = valDouble < maxDouble - 0.0001
+
+    fun updateValue(isIncrement: Boolean) {
+        val delta = if (isIncrement) stepDouble else -stepDouble
+        var nextVal = valDouble + delta
+        if (isIncrement) {
+            if (nextVal > maxDouble) {
+                nextVal = maxDouble
+            }
+        } else {
+            if (nextVal < minDouble) {
+                nextVal = minDouble
+            }
+        }
+
+        val castedValue: Number = when (value) {
+            is Int -> nextVal.toInt()
+            is Long -> nextVal.toLong()
+            is Float -> nextVal.toFloat()
+            else -> nextVal
+        }
+        onChange(castedValue)
+    }
+
+    Column {
+        Text(label)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            IconButton(
+                onClick = { updateValue(false) },
+                enabled = canDecrease,
+                modifier = Modifier.semantics { contentDescription = "−" }
+            ) {
+                Icon(Icons.Filled.Remove, contentDescription = "Decrease")
+            }
+            Text(
+                text = formatter(value),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            IconButton(
+                onClick = { updateValue(true) },
+                enabled = canIncrease,
+                modifier = Modifier.semantics { contentDescription = "+" }
+            ) {
+                Icon(Icons.Filled.Add, contentDescription = "Increase")
+            }
+        }
+    }
 }
