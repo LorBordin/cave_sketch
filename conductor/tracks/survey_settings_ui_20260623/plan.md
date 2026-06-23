@@ -1,6 +1,6 @@
 # Plan: Survey Settings UI Refinement
 
-## Phase 1: Stepper Composable
+## Phase 1: Stepper Composable [checkpoint: eeea642]
 
 - [x] Task: Write Tests — StepperControl composable [b0824cc]
     - [x] Create `app/src/test/java/com/cavesketch/app/ui/components/SettingsFormTest.kt`
@@ -19,7 +19,7 @@
     - [x] Disable `−` when value ≤ min, `+` when value ≥ max
     - [x] Ensure touch targets ≥ 44dp
 
-- [ ] Task: Conductor - User Manual Verification 'Stepper Composable' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Stepper Composable' (Protocol in workflow.md) [eeea642]
 
 ## Phase 2: Replace Sliders with Steppers
 
