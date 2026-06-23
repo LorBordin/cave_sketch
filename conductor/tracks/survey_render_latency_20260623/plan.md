@@ -42,21 +42,21 @@ later phase can prove it did not change the output. The title block embeds
 to each helper. Output identical — covered by `tests/test_dxf_parser.py` and the
 Phase 1 regression test.
 
-- [ ] Task: Confirm safety net is green before refactor
-    - [ ] Run `uv run pytest tests/test_dxf_parser.py tests/test_render_regression.py -v`; all PASS.
-- [ ] Task: Read the DXF once and thread `msp` through the helpers
-    - [ ] In `cave_sketch/dxf/parser.py`, read once in `parse_dxf`
+- [x] Task: Confirm safety net is green before refactor [42f9983]
+    - [x] Run `uv run pytest tests/test_dxf_parser.py tests/test_render_regression.py -v`; all PASS.
+- [x] Task: Read the DXF once and thread `msp` through the helpers [42f9983]
+    - [x] In `cave_sketch/dxf/parser.py`, read once in `parse_dxf`
       (`doc = ezdxf.readfile(input_str); msp = doc.modelspace()`) and call
       `_get_stations(msp)`, `_parse_polylines(msp, filter_layers=["SCRAP_0"])`,
       `_get_offset(msp, offset_idx=0)`, `_get_features(msp)`.
-    - [ ] Change the four helper signatures from `(input_dxf_file: str, ...)` to
+    - [x] Change the four helper signatures from `(input_dxf_file: str, ...)` to
       `(msp, ...)` and delete their `ezdxf.readfile(...)` / `.modelspace()`
       lines. Leave every loop body, filter, and return value unchanged.
-- [ ] Task: Verify and commit
-    - [ ] Run `uv run pytest tests/test_dxf_parser.py tests/test_render_regression.py -v`; all PASS.
-    - [ ] Run `uv run mypy cave_sketch/ && uv run ruff check .`; no errors.
-    - [ ] Commit (`perf(dxf): read DXF file once instead of four times in parse_dxf`).
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: De-duplicate DXF File Reads' (Protocol in workflow.md)
+- [x] Task: Verify and commit [42f9983]
+    - [x] Run `uv run pytest tests/test_dxf_parser.py tests/test_render_regression.py -v`; all PASS.
+    - [x] Run `uv run mypy cave_sketch/ && uv run ruff check .`; no errors.
+    - [x] Commit (`perf(dxf): read DXF file once instead of four times in parse_dxf`).
+- [~] Task: Conductor - User Manual Verification 'Phase 2: De-duplicate DXF File Reads' (Protocol in workflow.md)
 
 ## Phase 3: Eliminate the O(n²) Neighbour Lookup
 
