@@ -58,7 +58,7 @@ Phase 1 regression test.
     - [x] Commit (`perf(dxf): read DXF file once instead of four times in parse_dxf`).
 - [x] Task: Conductor - User Manual Verification 'Phase 2: De-duplicate DXF File Reads' (Protocol in workflow.md) [25fe4e6]
 
-## Phase 3: Eliminate the O(n²) Neighbour Lookup
+## Phase 3: Eliminate the O(n²) Neighbour Lookup [checkpoint: 13a544d]
 
 Replace the per-node `df[df["Node_Id"] == nbr]` scan with a one-time coordinate
 index. Lock the exact output with a feature-equality test (the second
@@ -86,8 +86,8 @@ safety-net tier).
     - [x] Run `uv run pytest tests/test_render_features.py tests/test_render_regression.py -v`; all PASS.
     - [x] Run `uv run mypy cave_sketch/ && uv run ruff check .`; no errors.
     - [x] Commit (`perf(render): replace O(n^2) neighbour scan with coordinate index`).
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Eliminate O(n^2) Lookup' (Protocol in workflow.md)
-    - [ ] As part of verification, regenerate a survey PDF on the S22 and record
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Eliminate O(n^2) Lookup' (Protocol in workflow.md) [13a544d]
+    - [x] As part of verification, regenerate a survey PDF on the S22 and record
       the warm `draw_survey` time for the before/after comparison.
 
 ## Phase 4: Batch Matplotlib Artists & Remove Debug Prints
