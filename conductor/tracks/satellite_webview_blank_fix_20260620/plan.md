@@ -50,18 +50,18 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Observe the Real Cause on Device' (Protocol in workflow.md)
 
-## Phase 3: Apply the Targeted Fix (Conditional on Phase 2 Diagnosis)
+## Phase 3: Apply the Targeted Fix (Conditional on Phase 2 Diagnosis) [checkpoint: ae2e73d]
 
 > **Branch selection:** Execute **exactly one** of the branches below based on the Phase 2 classification. If diagnosis was `OTHER`, re-run Phase 2 Chrome DevTools and bring the specific evidence back before editing.
 
-- [ ] Task: Apply fix branch C1 — `ZERO_HEIGHT`: force container height and reflow Leaflet
+- [x] Task: Apply fix branch C1 — `ZERO_HEIGHT`: force container height and reflow Leaflet [9bedac9]
     - **Condition:** Apply only if Phase 2 classified `ZERO_HEIGHT`
-    - [ ] In `MapWebView.kt`, replace the `onPageFinished` body with:
+    - [x] In `MapWebView.kt`, replace the `onPageFinished` body with:
         1. A `evaluateJavascript` call that injects CSS (`html,body{height:100%;margin:0;padding:0;}` + `.folium-map{position:absolute;top:0;bottom:0;left:0;right:0;height:100%!important;width:100%!important;}`) and dispatches `window.resize`
         2. A second `evaluateJavascript` re-probe that logs `post-fix probe=` with corrected sizes
-    - [ ] Rebuild and reinstall: `./gradlew :app:installDebug`
-    - [ ] Re-trigger generation; confirm Logcat shows `post-fix probe={"bodyH":<positive>,"mapH":<positive>}` and map renders
-    - [ ] Commit:
+    - [x] Rebuild and reinstall: `./gradlew :app:installDebug`
+    - [x] Re-trigger generation; confirm Logcat shows `post-fix probe={"bodyH":<positive>,"mapH":<positive>}` and map renders
+    - [x] Commit:
         ```
         fix(mobile-app): force folium container height + Leaflet reflow in WebView
 
@@ -97,7 +97,7 @@
         fix(mobile-app): load folium HTML from a clean local origin in WebView
         ```
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Apply the Targeted Fix' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Apply the Targeted Fix' (Protocol in workflow.md)
 
 ## Phase 4: Verify End-to-End and Clean Up Temporary Probes
 
