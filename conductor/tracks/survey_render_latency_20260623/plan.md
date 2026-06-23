@@ -36,7 +36,7 @@ later phase can prove it did not change the output. The title block embeds
       (`test: add survey render image-regression baseline`).
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Image-Regression Safety Net' (Protocol in workflow.md) [126edd4]
 
-## Phase 2: De-duplicate DXF File Reads in parse_dxf
+## Phase 2: De-duplicate DXF File Reads in parse_dxf [checkpoint: 25fe4e6]
 
 `parse_dxf` calls `ezdxf.readfile()` four times. Read once, pass the modelspace
 to each helper. Output identical — covered by `tests/test_dxf_parser.py` and the
@@ -56,7 +56,7 @@ Phase 1 regression test.
     - [x] Run `uv run pytest tests/test_dxf_parser.py tests/test_render_regression.py -v`; all PASS.
     - [x] Run `uv run mypy cave_sketch/ && uv run ruff check .`; no errors.
     - [x] Commit (`perf(dxf): read DXF file once instead of four times in parse_dxf`).
-- [~] Task: Conductor - User Manual Verification 'Phase 2: De-duplicate DXF File Reads' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: De-duplicate DXF File Reads' (Protocol in workflow.md) [25fe4e6]
 
 ## Phase 3: Eliminate the O(n²) Neighbour Lookup
 
