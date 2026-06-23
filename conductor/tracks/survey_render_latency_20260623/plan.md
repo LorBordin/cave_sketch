@@ -90,7 +90,7 @@ safety-net tier).
     - [x] As part of verification, regenerate a survey PDF on the S22 and record
       the warm `draw_survey` time for the before/after comparison.
 
-## Phase 4: Batch Matplotlib Artists & Remove Debug Prints
+## Phase 4: Batch Matplotlib Artists & Remove Debug Prints [checkpoint: a3ae1ad]
 
 Replace per-segment `ax.plot` with a single `LineCollection`, per-point
 `ax.scatter` with one `scatter` per marker, batch the station scatter, and delete
@@ -121,7 +121,7 @@ the leftover `print()` calls. The Phase 1 image-regression test is the gate.
 - [x] Task: Full gates and commit [822d8dc]
     - [x] Run `uv run pytest && uv run mypy cave_sketch/ && uv run ruff check .`; all PASS.
     - [x] Commit (`perf(render): batch matplotlib artists and drop debug prints`).
-- [~] Task: Conductor - User Manual Verification 'Phase 4: Batch Artists & Remove Prints' (Protocol in workflow.md)
-    - [ ] Regenerate a survey PDF on the S22, confirm it looks correct, record the
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Batch Artists & Remove Prints' (Protocol in workflow.md) [a3ae1ad]
+    - [x] Regenerate a survey PDF on the S22, confirm it looks correct, record the
       warm `draw_survey` before/after timing, and append a DEVLOG entry to both
       `DEVLOG.md` (core) and `android/DEVLOG.md` (device impact).
