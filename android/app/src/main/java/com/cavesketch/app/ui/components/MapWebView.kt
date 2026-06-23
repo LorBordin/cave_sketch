@@ -65,7 +65,20 @@ fun MapWebView(htmlPath: String, modifier: Modifier = Modifier) {
 
                     override fun onPageFinished(view: WebView?, url: String?) {
                         Log.d(TAG, "onPageFinished: $url")
-                        // Probe body size and .folium-map computed size
+                        // Injects CSS and dispatches window resize event
+                        view?.evaluateJavascript(
+                            """
+                            (function() {
+                                var style = document.createElement('style');
+                                style.innerHTML = 'html,body{height:100%;margin:0;padding:0;} .folium-map{position:absolute;top:0;bottom:0;left:0;right:0;height:100%!important;width:100%!important;}';
+                                document.head.appendChild(style);
+                                window.dispatchEvent(new Event('resize'));
+                            })()
+                            """.trimIndent(),
+                            null
+                        )
+
+                        // Re-probe to log post-fix sizes
                         view?.evaluateJavascript(
                             """
                             (function() {
@@ -88,7 +101,7 @@ fun MapWebView(htmlPath: String, modifier: Modifier = Modifier) {
                             })()
                             """.trimIndent()
                         ) { result ->
-                            Log.d(TAG, "probeResult: $result")
+                            Log.d(TAG, "post-fix probeResult: $result")
                         }
                     }
                 }
