@@ -99,27 +99,27 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Apply the Targeted Fix' (Protocol in workflow.md)
 
-## Phase 4: Verify End-to-End and Clean Up Temporary Probes
+## Phase 4: Verify End-to-End and Clean Up Temporary Probes [checkpoint: e3ea355]
 
-- [ ] Task: Full manual verification and probe cleanup
-    - [ ] On device, online: Survey → generate plot → Satellite → valid GPS point → **Generate Satellite Map**. Confirm:
+- [x] Task: Full manual verification and probe cleanup [af1eabf, 91d1065]
+    - [x] On device, online: Survey → generate plot → Satellite → valid GPS point → **Generate Satellite Map**. Confirm:
         - Satellite imagery **and** the cave overlay render in the inline preview
         - Pan/zoom works
         - **Save / Share HTML**, **Save / Share JSON**, **Save / Share KMZ** each open the share sheet
-    - [ ] Turn off Wi-Fi/data, generate again. Confirm the offline banner shows and Save/Share buttons still work
-    - [ ] In `MapWebView.kt`, delete the temporary size-probe `evaluateJavascript` block(s) from `onPageFinished`:
+    - [x] Turn off Wi-Fi/data, generate again. Confirm the offline banner shows and Save/Share buttons still work
+    - [x] In `MapWebView.kt`, delete the temporary size-probe `evaluateJavascript` block(s) from `onPageFinished`:
         - Keep `onConsoleMessage`, `onReceivedError`, `onReceivedHttpError` (durable diagnostics)
         - If C1 applied: keep the CSS-inject + `resize` dispatch (that is the fix)
         - Keep `setWebContentsDebuggingEnabled(true)` but add `// TODO: guard behind debug build`
-    - [ ] Rebuild and reinstall: `./gradlew :app:installDebug`. Re-trigger; confirm map still renders (probe removal must not regress the fix)
-    - [ ] Commit:
+    - [x] Rebuild and reinstall: `./gradlew :app:installDebug`. Re-trigger; confirm map still renders (probe removal must not regress the fix)
+    - [x] Commit:
         ```
         chore(mobile-app): remove temporary WebView size probe; keep diagnostics
         ```
-    - [ ] Update `docs/mobile-app/phases/phase-2-satellite-map/to_fix.md`:
+    - [x] Update `docs/mobile-app/phases/phase-2-satellite-map/to_fix.md`:
         ```
         RESOLVED 2026-06-20: <branch C1/C2/C3> — <one-line root cause>. Preview renders on device.
         ```
-    - [ ] Commit: `docs(mobile-app): mark satellite WebView blank-render fixed`
+    - [x] Commit: `docs(mobile-app): mark satellite WebView blank-render fixed`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Verify End-to-End and Clean Up Temporary Probes' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Verify End-to-End and Clean Up Temporary Probes' (Protocol in workflow.md)
