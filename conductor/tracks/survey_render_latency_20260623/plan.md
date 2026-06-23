@@ -8,7 +8,7 @@
 > verified against it. Measure on the S22 during the Phase 3 and Phase 4 manual
 > verification steps.
 
-## Phase 1: Image-Regression Safety Net
+## Phase 1: Image-Regression Safety Net [checkpoint: 126edd4]
 
 Build the PNG baseline gate FIRST, from the current (unoptimized) code, so every
 later phase can prove it did not change the output. The title block embeds
@@ -34,7 +34,7 @@ later phase can prove it did not change the output. The title block embeds
       `[plan_only]` and `[dual]` PASS.
     - [x] Commit test + committed baseline PNGs
       (`test: add survey render image-regression baseline`).
-- [~] Task: Conductor - User Manual Verification 'Phase 1: Image-Regression Safety Net' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Image-Regression Safety Net' (Protocol in workflow.md) [126edd4]
 
 ## Phase 2: De-duplicate DXF File Reads in parse_dxf
 
