@@ -21,7 +21,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Stepper Composable' (Protocol in workflow.md) [eeea642]
 
-## Phase 2: Replace Sliders with Steppers
+## Phase 2: Replace Sliders with Steppers [checkpoint: 6d5d2e3]
 
 - [x] Task: Write Tests — SettingsForm integration [ef1788a]
     - [x] Test: Rule Length slider has range 5–100 (not 1000)
@@ -36,4 +36,4 @@
     - [x] Replace the three `ZoomSlider` calls with `StepperControl` (step=0.1, range=-1.0..1.0, formatter with 1 decimal)
     - [x] Remove the now-unused `ZoomSlider` private composable
 
-- [ ] Task: Conductor - User Manual Verification 'Replace Sliders with Steppers' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Replace Sliders with Steppers' (Protocol in workflow.md) [6d5d2e3]
