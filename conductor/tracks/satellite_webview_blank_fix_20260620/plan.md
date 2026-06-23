@@ -4,8 +4,8 @@
 
 ## Phase 1: Instrument MapWebView for Observability
 
-- [ ] Task: Instrument MapWebView with diagnostics
-    - [ ] Overwrite `android/app/src/main/java/com/cavesketch/app/ui/components/MapWebView.kt` with the instrumented version:
+- [x] Task: Instrument MapWebView with diagnostics [f305bd0]
+    - [x] Overwrite `android/app/src/main/java/com/cavesketch/app/ui/components/MapWebView.kt` with the instrumented version:
         - Add `WebView.setWebContentsDebuggingEnabled(true)` (enables `chrome://inspect`)
         - Add `WebChromeClient.onConsoleMessage` → forward every JS console message to Logcat under tag `MapWebView`
         - Add `WebViewClient.onReceivedError` → log failed main-frame and subresource loads (URL + error code + description)
@@ -13,8 +13,8 @@
         - Add `WebViewClient.onPageFinished` → inject JS probe that reports `document.body` size and `.folium-map` computed width/height to Logcat
         - Extract `loadHtml(webView, htmlPath)` private function shared by `factory` and `update` (DRY)
         - Keep same public signature: `MapWebView(htmlPath: String, modifier: Modifier = Modifier)`
-    - [ ] Build on the device laptop (`./gradlew :app:assembleDebug`); confirm `BUILD SUCCESSFUL`
-    - [ ] Commit:
+    - [x] Build on the device laptop (`./gradlew :app:assembleDebug`); confirm `BUILD SUCCESSFUL`
+    - [x] Commit:
         ```
         fix(mobile-app): instrument MapWebView with console/error diagnostics
 
