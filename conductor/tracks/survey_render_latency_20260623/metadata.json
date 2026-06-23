@@ -1,0 +1,8 @@
+{
+  "track_id": "survey_render_latency_20260623",
+  "type": "performance",
+  "status": "new",
+  "created_at": "2026-06-23T10:30:00Z",
+  "updated_at": "2026-06-23T10:30:00Z",
+  "description": "Reduce survey PDF render latency (~60s draw_survey) with lossless, pixel-identical changes: kill O(n^2) lookup, batch matplotlib artists, remove debug prints, single DXF read"
+}
