@@ -30,6 +30,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Satellite WebView Blank-Render Fix**
+- [~] **Track: Satellite WebView Blank-Render Fix**
 *Link: [./tracks/satellite_webview_blank_fix_20260620/](./tracks/satellite_webview_blank_fix_20260620/)*
 

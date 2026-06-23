@@ -2,7 +2,7 @@
 
 > **TDD Deviation:** WebView rendering of a network-dependent folium map cannot be unit-tested on the JVM. All verification is manual, on-device. No test files are produced by this plan. This deviation is documented in `spec.md`.
 
-## Phase 1: Instrument MapWebView for Observability
+## Phase 1: Instrument MapWebView for Observability [checkpoint: becf1a3]
 
 - [x] Task: Instrument MapWebView with diagnostics [f305bd0]
     - [x] Overwrite `android/app/src/main/java/com/cavesketch/app/ui/components/MapWebView.kt` with the instrumented version:
@@ -23,7 +23,7 @@
         satellite preview can be diagnosed on-device. DRYs the load logic into loadHtml().
         ```
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Instrument MapWebView for Observability' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Instrument MapWebView for Observability' (Protocol in workflow.md)
 
 ## Phase 2: Observe the Real Cause on Device
 
