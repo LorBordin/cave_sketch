@@ -119,3 +119,19 @@ Phase 2 complete. The Satellite Map screen is fully implemented with GPS point g
 
 **Next session notes:** None
 
+## [2026-06-23 12:20] Phase 3 & 4 — Survey Plot Rendering Latency Optimizations
+**Files:**
+- cave_sketch/dxf/parser.py
+- cave_sketch/features/render_features.py
+- cave_sketch/backend_renders/matplotlib.py
+- cave_sketch/survey/graphics/survey_plot.py
+- tests/test_render_regression.py
+- tests/test_render_features.py
+
+**Deviations from spec:** None
+
+**Assumptions:** None
+
+**Next session notes:** Latency optimizations successfully reduced the warm draw_survey time on Samsung S22 from ~60.6s to ~3.0s, and parse_dxf time from ~4.5s to ~1.2s. The PDF render on-screen continues to display pixel-identically and correctly.
+
+
