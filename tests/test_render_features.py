@@ -1,6 +1,7 @@
 import pandas as pd
-import pytest
+
 from cave_sketch.features.render_features import extract_features_from_df
+
 
 def test_extract_features_basic():
     df = pd.DataFrame([

@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 
@@ -65,9 +65,15 @@ def extract_features_from_df(
 
     features: Dict[str, list] = {"lines": [], "polygons": [], "points": []}  # <-- added points
 
+    # Build coordinate index with first-occurrence-wins semantics
+    coord_index: Dict[Any, Tuple[float, float]] = {}
+    for row in df.itertuples(index=False):
+        if row.Node_Id not in coord_index:
+            coord_index[row.Node_Id] = (row.X, row.Y)
+
     # --- 1️⃣ Handle standard line features (walls, shots, etc.) ---
-    for _, row in df.iterrows():
-        nid, x, y, links, typ = row["Node_Id"], row["X"], row["Y"], row["Links"], row["Type"]
+    for row in df.itertuples(index=False):
+        nid, x, y, links, typ = row.Node_Id, row.X, row.Y, row.Links, row.Type
 
         if nid in excluded_nodes or typ.startswith("A_"):
             continue
@@ -93,10 +99,9 @@ def extract_features_from_df(
                 nbr.strip() for nbr in links.split("-") if nbr.strip() and nbr not in excluded_nodes
             ]
             for nbr in neighbors:
-                nbr_row = df[df["Node_Id"] == nbr]
-                if nbr_row.empty:
+                if nbr not in coord_index:
                     continue
-                x2, y2 = nbr_row.iloc[0][["X", "Y"]]
+                x2, y2 = coord_index[nbr]
 
                 if style_type == "line":
                     style = STYLE_MAP.get(typ, STYLE_MAP["L_wall"])
