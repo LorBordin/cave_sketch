@@ -64,16 +64,16 @@ Replace the per-node `df[df["Node_Id"] == nbr]` scan with a one-time coordinate
 index. Lock the exact output with a feature-equality test (the second
 safety-net tier).
 
-- [ ] Task: Write the feature-equality characterization test (passes on current code)
-    - [ ] Create `tests/test_render_features.py` with a small 3-node `L_wall`
+- [x] Task: Write the feature-equality characterization test (passes on current code) [1da3bd5]
+    - [x] Create `tests/test_render_features.py` with a small 3-node `L_wall`
       DataFrame (Node_Id/Links as strings, mirroring `renderer._survey_to_df`).
-    - [ ] Assert the exact `extract_features_from_df` output: 4 line dicts with
+    - [x] Assert the exact `extract_features_from_df` output: 4 line dicts with
       keys `coords`/`color`/`weight`/`dash`/`popup`, empty `polygons`/`points`.
-    - [ ] Add a test that `excluded_nodes=["B"]` removes every segment touching B,
+    - [x] Add a test that `excluded_nodes=["B"]` removes every segment touching B,
       and a test that a missing neighbour (`Links="Z"`) yields no line.
-    - [ ] Run `uv run pytest tests/test_render_features.py -v`; confirm PASS on the
+    - [x] Run `uv run pytest tests/test_render_features.py -v`; confirm PASS on the
       current (un-refactored) implementation — this is the contract to preserve.
-- [ ] Task: Refactor to a coordinate index (O(n))
+- [~] Task: Refactor to a coordinate index (O(n))
     - [ ] In `cave_sketch/features/render_features.py`, build `coord_index` once
       via `df.itertuples(index=False)` with **first-occurrence-wins** semantics
       (`if row.Node_Id not in coord_index:`), and replace the inner DataFrame
