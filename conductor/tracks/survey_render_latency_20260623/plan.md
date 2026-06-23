@@ -73,20 +73,20 @@ safety-net tier).
       and a test that a missing neighbour (`Links="Z"`) yields no line.
     - [x] Run `uv run pytest tests/test_render_features.py -v`; confirm PASS on the
       current (un-refactored) implementation — this is the contract to preserve.
-- [~] Task: Refactor to a coordinate index (O(n))
-    - [ ] In `cave_sketch/features/render_features.py`, build `coord_index` once
+- [x] Task: Refactor to a coordinate index (O(n)) [a313f5a]
+    - [x] In `cave_sketch/features/render_features.py`, build `coord_index` once
       via `df.itertuples(index=False)` with **first-occurrence-wins** semantics
       (`if row.Node_Id not in coord_index:`), and replace the inner DataFrame
       scan with `coord_index[nbr]` (skip when `nbr not in coord_index`).
-    - [ ] Replace `df.iterrows()` with `df.itertuples(index=False)` in the main
+    - [x] Replace `df.iterrows()` with `df.itertuples(index=False)` in the main
       loop; preserve the `excluded` set, the `A_`/point/line branching, the dash
       logic, and the unchanged `# 2️⃣ Handle area features` polygon block.
-    - [ ] Ensure `Any` is imported in the typing import line.
-- [ ] Task: Verify and commit
-    - [ ] Run `uv run pytest tests/test_render_features.py tests/test_render_regression.py -v`; all PASS.
-    - [ ] Run `uv run mypy cave_sketch/ && uv run ruff check .`; no errors.
-    - [ ] Commit (`perf(render): replace O(n^2) neighbour scan with coordinate index`).
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Eliminate O(n^2) Lookup' (Protocol in workflow.md)
+    - [x] Ensure `Any` is imported in the typing import line.
+- [x] Task: Verify and commit [a313f5a]
+    - [x] Run `uv run pytest tests/test_render_features.py tests/test_render_regression.py -v`; all PASS.
+    - [x] Run `uv run mypy cave_sketch/ && uv run ruff check .`; no errors.
+    - [x] Commit (`perf(render): replace O(n^2) neighbour scan with coordinate index`).
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Eliminate O(n^2) Lookup' (Protocol in workflow.md)
     - [ ] As part of verification, regenerate a survey PDF on the S22 and record
       the warm `draw_survey` time for the before/after comparison.
 
