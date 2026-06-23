@@ -14,27 +14,27 @@ Build the PNG baseline gate FIRST, from the current (unoptimized) code, so every
 later phase can prove it did not change the output. The title block embeds
 `datetime.date.today()`, so the date must be pinned for deterministic images.
 
-- [ ] Task: Write the image-regression test (Red/characterization)
-    - [ ] Create `tests/test_render_regression.py` using `matplotlib.use("Agg")`,
+- [x] Task: Write the image-regression test (Red/characterization) [93a5b02]
+    - [x] Create `tests/test_render_regression.py` using `matplotlib.use("Agg")`,
       `matplotlib.testing.compare.compare_images`, and a `fixed_date` fixture
       that monkeypatches `cave_sketch.survey.graphics.title_block.datetime.date`
       to a fixed `date(2026, 1, 1)`.
-    - [ ] Parametrize two scenarios over the dense `tests/fixtures/sample.dxf`:
+    - [x] Parametrize two scenarios over the dense `tests/fixtures/sample.dxf`:
       `plan_only` (`draw_survey(csv_map_path=...)`) and `dual`
       (`draw_survey(csv_map_path=..., csv_section_path=...)`, reusing the same
       parsed CSV for both). Render to PNG at `dpi=100`, compare with `tol=1.0`.
-    - [ ] Gate baseline generation behind env var
+    - [x] Gate baseline generation behind env var
       `CAVE_SKETCH_GENERATE_BASELINES` (generate + `pytest.skip` when set).
-- [ ] Task: Generate baselines from current code
-    - [ ] Run `CAVE_SKETCH_GENERATE_BASELINES=1 uv run pytest tests/test_render_regression.py -v`
-    - [ ] Confirm `tests/fixtures/render_baselines/plan_only.png` and `dual.png`
+- [x] Task: Generate baselines from current code [93a5b02]
+    - [x] Run `CAVE_SKETCH_GENERATE_BASELINES=1 uv run pytest tests/test_render_regression.py -v`
+    - [x] Confirm `tests/fixtures/render_baselines/plan_only.png` and `dual.png`
       now exist (both scenarios SKIP).
-- [ ] Task: Verify the test passes against the fresh baselines (Green)
-    - [ ] Run `uv run pytest tests/test_render_regression.py -v`; confirm both
+- [x] Task: Verify the test passes against the fresh baselines (Green) [93a5b02]
+    - [x] Run `uv run pytest tests/test_render_regression.py -v`; confirm both
       `[plan_only]` and `[dual]` PASS.
-    - [ ] Commit test + committed baseline PNGs
+    - [x] Commit test + committed baseline PNGs
       (`test: add survey render image-regression baseline`).
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Image-Regression Safety Net' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Image-Regression Safety Net' (Protocol in workflow.md)
 
 ## Phase 2: De-duplicate DXF File Reads in parse_dxf
 

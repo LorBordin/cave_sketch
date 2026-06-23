@@ -30,5 +30,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Reduce Survey PDF Render Latency**
+- [~] **Track: Reduce Survey PDF Render Latency**
 *Link: [./tracks/survey_render_latency_20260623/](./tracks/survey_render_latency_20260623/)*
