@@ -168,8 +168,14 @@ Each phase is built just-in-time with its own `spec.md` + `plan.md` under
 - **Phase 2 — Satellite Map screen.** Screen 2: GPS editor, JSON import,
   connectivity handling, save/share HTML/JSON/KMZ. *Exit:* parity with the web
   Satellite Map page, including offline KMZ.
-- **Phase 3 — Polish & release.** App icon, error states, session cleanup,
-  build a distributable `.apk`. *Exit:* a sideloadable `.apk`.
+- **Phase 3 — Polish & release.** App icon, branded splash, light brand theme,
+  About screen, error/init hardening, session cleanup, release signing, and a
+  distributable `.apk` published to GitHub Releases. *Exit:* a release-signed,
+  sideloadable `.apk` installable from a GitHub Release.
+- **Phase 4 — Visual redesign.** Structural UI overhaul beyond Phase 3's light
+  theming: screen re-layout, custom components, animations, empty-state
+  illustrations, micro-interactions. Built only after Phase 3 ships; its own
+  brainstorm/spec. *Exit:* a redesigned, more polished UI with parity preserved.
 
 ## 11. Two-level spec process
 
