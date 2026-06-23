@@ -1,6 +1,7 @@
 package com.cavesketch.app.ui.components
 
 import android.util.Log
+import android.view.ViewGroup
 import android.webkit.ConsoleMessage
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
@@ -23,7 +24,12 @@ fun MapWebView(htmlPath: String, modifier: Modifier = Modifier) {
         modifier = modifier,
         factory = { ctx ->
             WebView(ctx).apply {
-                // Enable remote debugging for chrome://inspect
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+
+                // TODO: guard behind debug build
                 WebView.setWebContentsDebuggingEnabled(true)
 
                 @Suppress("SetJavaScriptEnabled")
@@ -65,44 +71,21 @@ fun MapWebView(htmlPath: String, modifier: Modifier = Modifier) {
 
                     override fun onPageFinished(view: WebView?, url: String?) {
                         Log.d(TAG, "onPageFinished: $url")
-                        // Injects CSS and dispatches window resize event
+                        // Injects CSS and dispatches window resize event robustly
                         view?.evaluateJavascript(
                             """
                             (function() {
                                 var style = document.createElement('style');
-                                style.innerHTML = 'html,body{height:100%;margin:0;padding:0;} .folium-map{position:absolute;top:0;bottom:0;left:0;right:0;height:100%!important;width:100%!important;}';
-                                document.head.appendChild(style);
+                                style.innerHTML = 'html, body { height: 100% !important; margin: 0; padding: 0; } .folium-map { position: absolute !important; top: 0; bottom: 0; left: 0; right: 0; height: 100% !important; width: 100% !important; }';
+                                var target = document.head || document.body || document.documentElement;
+                                if (target) {
+                                    target.appendChild(style);
+                                }
                                 window.dispatchEvent(new Event('resize'));
                             })()
                             """.trimIndent(),
                             null
                         )
-
-                        // Re-probe to log post-fix sizes
-                        view?.evaluateJavascript(
-                            """
-                            (function() {
-                                var bodyW = document.body ? document.body.clientWidth : -1;
-                                var bodyH = document.body ? document.body.clientHeight : -1;
-                                var mapEl = document.querySelector('.folium-map');
-                                var mapW = mapEl ? mapEl.clientWidth : -1;
-                                var mapH = mapEl ? mapEl.clientHeight : -1;
-                                var mapCompH = -1;
-                                if (mapEl) {
-                                    mapCompH = parseInt(window.getComputedStyle(mapEl).height, 10);
-                                }
-                                return JSON.stringify({
-                                    bodyW: bodyW,
-                                    bodyH: bodyH,
-                                    mapW: mapW,
-                                    mapH: mapH,
-                                    mapCompH: mapCompH
-                                });
-                            })()
-                            """.trimIndent()
-                        ) { result ->
-                            Log.d(TAG, "post-fix probeResult: $result")
-                        }
                     }
                 }
 
