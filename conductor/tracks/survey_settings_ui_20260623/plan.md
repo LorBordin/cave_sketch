@@ -23,17 +23,17 @@
 
 ## Phase 2: Replace Sliders with Steppers
 
-- [ ] Task: Write Tests — SettingsForm integration
-    - [ ] Test: Rule Length slider has range 5–100 (not 1000)
-    - [ ] Test: Map Rotation renders as stepper (not slider) with step 5
-    - [ ] Test: Marker zoom renders as stepper with step 0.1
-    - [ ] Test: Text zoom renders as stepper with step 0.1
-    - [ ] Test: Line width zoom renders as stepper with step 0.1
+- [x] Task: Write Tests — SettingsForm integration [ef1788a]
+    - [x] Test: Rule Length slider has range 5–100 (not 1000)
+    - [x] Test: Map Rotation renders as stepper (not slider) with step 5
+    - [x] Test: Marker zoom renders as stepper with step 0.1
+    - [x] Test: Text zoom renders as stepper with step 0.1
+    - [x] Test: Line width zoom renders as stepper with step 0.1
 
-- [ ] Task: Implement — Update SettingsForm
-    - [ ] Change Rule Length slider `valueRange` from `5f..1000f` to `5f..100f`
-    - [ ] Replace Map Rotation `Slider` with `StepperControl` (step=5, range=-180..180, formatter with °)
-    - [ ] Replace the three `ZoomSlider` calls with `StepperControl` (step=0.1, range=-1.0..1.0, formatter with 1 decimal)
-    - [ ] Remove the now-unused `ZoomSlider` private composable
+- [x] Task: Implement — Update SettingsForm [ef1788a]
+    - [x] Change Rule Length slider `valueRange` from `5f..1000f` to `5f..100f`
+    - [x] Replace Map Rotation `Slider` with `StepperControl` (step=5, range=-180..180, formatter with °)
+    - [x] Replace the three `ZoomSlider` calls with `StepperControl` (step=0.1, range=-1.0..1.0, formatter with 1 decimal)
+    - [x] Remove the now-unused `ZoomSlider` private composable
 
 - [ ] Task: Conductor - User Manual Verification 'Replace Sliders with Steppers' (Protocol in workflow.md)
