@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import ezdxf
 import pandas as pd
@@ -19,11 +19,13 @@ def parse_dxf(input_path: Path, output_path: Optional[Path] = None) -> CaveSurve
         A CaveSurvey object containing points and lines.
     """
     input_str = str(input_path)
+    doc = ezdxf.readfile(input_str)
+    msp = doc.modelspace()
 
-    stations = _get_stations(input_str)
-    all_polylines = _parse_polylines(input_str, filter_layers=["SCRAP_0"])
-    offset_x, offset_y = _get_offset(input_str, offset_idx=0)
-    blocks = _get_features(input_str)
+    stations = _get_stations(msp)
+    all_polylines = _parse_polylines(msp, filter_layers=["SCRAP_0"])
+    offset_x, offset_y = _get_offset(msp, offset_idx=0)
+    blocks = _get_features(msp)
 
     survey = CaveSurvey(name=input_path.stem)
 
@@ -86,9 +88,7 @@ def parse_dxf(input_path: Path, output_path: Optional[Path] = None) -> CaveSurve
     return survey
 
 
-def _get_stations(input_dxf_file: str) -> Dict:
-    doc = ezdxf.readfile(input_dxf_file)
-    msp = doc.modelspace()
+def _get_stations(msp: Any) -> Dict:
     idxs, coords, legs = [], [], []
     for entity in msp:
         if entity.dxf.layer == "STATION":
@@ -130,9 +130,7 @@ def _get_stations(input_dxf_file: str) -> Dict:
     return stations
 
 
-def _parse_polylines(input_dxf_file: str, filter_layers: Optional[List[str]] = None) -> List[Dict]:
-    doc = ezdxf.readfile(input_dxf_file)
-    msp = doc.modelspace()
+def _parse_polylines(msp: Any, filter_layers: Optional[List[str]] = None) -> List[Dict]:
     result = []
     for entity in msp.query("POLYLINE"):
         # Polyline entities in ezdxf have a different way to access points depending on type
@@ -153,9 +151,7 @@ def _parse_polylines(input_dxf_file: str, filter_layers: Optional[List[str]] = N
     return result
 
 
-def _get_offset(input_dxf_file: str, offset_idx: int) -> Tuple[float, float]:
-    doc = ezdxf.readfile(input_dxf_file)
-    msp = doc.modelspace()
+def _get_offset(msp: Any, offset_idx: int) -> Tuple[float, float]:
     offset_flag = False
     for entity in msp:
         if entity.dxf.layer == "STATION":
@@ -166,9 +162,7 @@ def _get_offset(input_dxf_file: str, offset_idx: int) -> Tuple[float, float]:
     return 0.0, 0.0
 
 
-def _get_features(input_dxf_file: str) -> List[Dict]:
-    doc = ezdxf.readfile(input_dxf_file)
-    msp = doc.modelspace()
+def _get_features(msp: Any) -> List[Dict]:
     valid_block_names = {"B_ice", "BLOCK", "B_snow"}
     blocks: List[Dict] = []
     for entity in msp.query("INSERT"):

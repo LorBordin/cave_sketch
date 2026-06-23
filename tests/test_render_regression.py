@@ -1,12 +1,16 @@
 import os
 from datetime import date
 from pathlib import Path
+
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pytest
+
 from cave_sketch.dxf.parser import parse_dxf
 from cave_sketch.survey import draw_survey
+
 
 class MockDate:
     @classmethod
