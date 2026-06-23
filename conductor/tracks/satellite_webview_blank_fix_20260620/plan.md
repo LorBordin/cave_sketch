@@ -25,30 +25,30 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Instrument MapWebView for Observability' (Protocol in workflow.md)
 
-## Phase 2: Observe the Real Cause on Device
+## Phase 2: Observe the Real Cause on Device [checkpoint: 24850d1]
 
 > **Note:** This phase produces no code change and no commit. It produces a **diagnosis classification** that drives Phase 3 branch selection.
 
-- [ ] Task: Reproduce blank box on device and capture diagnostics
-    - [ ] Install on device: `./gradlew :app:installDebug`
-    - [ ] On device: ensure online (Wi-Fi/4G), Survey tab → generate a plot, Satellite tab → valid GPS point matching a survey station → **Generate Satellite Map** → reproduce blank box
-    - [ ] Capture Logcat: `adb logcat -s MapWebView:* chromium:* | tee /tmp/mapwebview.log`
-    - [ ] Re-trigger generation; read captured lines. Classify:
+- [x] Task: Reproduce blank box on device and capture diagnostics [d4cadd8]
+    - [x] Install on device: `./gradlew :app:installDebug`
+    - [x] On device: ensure online (Wi-Fi/4G), Survey tab → generate a plot, Satellite tab → valid GPS point matching a survey station → **Generate Satellite Map** → reproduce blank box
+    - [x] Capture Logcat: `adb logcat -s MapWebView:* chromium:* | tee /tmp/mapwebview.log`
+    - [x] Re-trigger generation; read captured lines. Classify:
         - `page finished, probe={..., "mapH":0, ...}` → **`ZERO_HEIGHT`**
         - `load error` / `http error` lines for CDN/tile URLs → **`RESOURCE_FAILURE`**
         - console lines mentioning `SecurityError`, `origin`, `cross-origin`, `blocked` → **`ORIGIN_ERROR`**
         - None of the above but healthy sizes → **`OTHER`** (proceed to Chrome DevTools)
-    - [ ] Open Chrome → `chrome://inspect` → find the app's WebView → **inspect**
+    - [x] Open Chrome → `chrome://inspect` → find the app's WebView → **inspect**
         - Elements tab: confirm `.folium-map` computed height (0px → `ZERO_HEIGHT`)
         - Console tab: read errors directly
         - Network tab: re-trigger, look for failed (red) requests (→ `RESOURCE_FAILURE`)
-    - [ ] Record the classification and key evidence in `docs/mobile-app/phases/phase-2-satellite-map/to_fix.md`:
+    - [x] Record the classification and key evidence in `docs/mobile-app/phases/phase-2-satellite-map/to_fix.md`:
         ```
         DIAGNOSIS 2026-06-20: <CLASS> — <key evidence line>.
         ```
-    - [ ] Commit: `docs(mobile-app): record satellite WebView blank-render diagnosis`
+    - [x] Commit: `docs(mobile-app): record satellite WebView blank-render diagnosis`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Observe the Real Cause on Device' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Observe the Real Cause on Device' (Protocol in workflow.md)
 
 ## Phase 3: Apply the Targeted Fix (Conditional on Phase 2 Diagnosis)
 
