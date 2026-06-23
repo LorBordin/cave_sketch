@@ -43,7 +43,8 @@ def _inputs(map_path, points, **kw):
 
 def test_success_writes_three_outputs(map_csv, tmp_path):
     points = [{"station": "st1", "lat": "45.0", "lon": "7.0"}]
-    out = json.loads(satellite_bridge.generate_satellite_map(_inputs(map_csv, points), str(tmp_path)))
+    inputs = _inputs(map_csv, points)
+    out = json.loads(satellite_bridge.generate_satellite_map(inputs, str(tmp_path)))
     assert "error" not in out
     assert Path(out["html_path"]).exists()
     assert Path(out["json_path"]).exists()
@@ -62,11 +63,13 @@ def test_empty_points_errors(map_csv, tmp_path):
 
 def test_invalid_coordinate_errors(map_csv, tmp_path):
     points = [{"station": "st1", "lat": "abc", "lon": "7.0"}]
-    out = json.loads(satellite_bridge.generate_satellite_map(_inputs(map_csv, points), str(tmp_path)))
+    inputs = _inputs(map_csv, points)
+    out = json.loads(satellite_bridge.generate_satellite_map(inputs, str(tmp_path)))
     assert out["error"] == "invalid_points"
 
 
 def test_no_anchor_match_errors(map_csv, tmp_path):
     points = [{"station": "nope", "lat": "45.0", "lon": "7.0"}]
-    out = json.loads(satellite_bridge.generate_satellite_map(_inputs(map_csv, points), str(tmp_path)))
+    inputs = _inputs(map_csv, points)
+    out = json.loads(satellite_bridge.generate_satellite_map(inputs, str(tmp_path)))
     assert out["error"] == "no_anchor_match"
