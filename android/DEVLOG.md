@@ -108,3 +108,14 @@ None.
 **Next session notes:**
 Phase 2 complete. The Satellite Map screen is fully implemented with GPS point georeferencing, optional rotation, additional JSON map imports, offline-ready KMZ + JSON generation, and online HTML WebView preview. All Python checks, Kotlin unit tests, and compilation steps are passing cleanly.
 
+## [2026-06-23 09:52] Phase 3 & 4 — Satellite WebView Blank-Render Bugfix
+**Files:**
+- android/app/src/main/java/com/cavesketch/app/ui/components/MapWebView.kt
+- docs/mobile-app/phases/phase-2-satellite-map/to_fix.md
+
+**Deviations from spec:** None
+
+**Assumptions:** None
+
+**Next session notes:** None
+
