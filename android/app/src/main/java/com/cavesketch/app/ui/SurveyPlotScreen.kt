@@ -30,6 +30,9 @@ import com.cavesketch.app.util.extensionOf
 @Composable
 fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
     val context = LocalContext.current
+    val showError: (String) -> Unit = { msg ->
+        android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show()
+    }
     var inputs by remember { mutableStateOf(SurveyInputs()) }
     val state by viewModel.state.collectAsState()
     val canGenerate = inputs.mapPath != null || inputs.sectionPath != null
@@ -38,12 +41,14 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
         Text("Survey Plot")
 
         FilePickerRow("Pick Cave Map", inputs.mapPath?.let { "map" + extOf(it) }) { uri ->
-            val path = copyUriToDir(context, uri, context.filesDir, "map" + extensionOf(context, uri))
-            inputs = inputs.copy(mapPath = path)
+            com.cavesketch.app.util.safeCopyUriToDir(
+                context, uri, context.filesDir, "map" + extensionOf(context, uri), showError,
+            )?.let { inputs = inputs.copy(mapPath = it) }
         }
         FilePickerRow("Pick Cave Section", inputs.sectionPath?.let { "section" + extOf(it) }) { uri ->
-            val path = copyUriToDir(context, uri, context.filesDir, "section" + extensionOf(context, uri))
-            inputs = inputs.copy(sectionPath = path)
+            com.cavesketch.app.util.safeCopyUriToDir(
+                context, uri, context.filesDir, "section" + extensionOf(context, uri), showError,
+            )?.let { inputs = inputs.copy(sectionPath = it) }
         }
 
         com.cavesketch.app.ui.components.MergeControls(inputs, context) { inputs = it }

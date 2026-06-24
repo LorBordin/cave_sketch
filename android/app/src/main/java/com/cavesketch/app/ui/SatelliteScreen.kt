@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import com.cavesketch.app.ui.components.GpsPointsEditor
 import com.cavesketch.app.ui.components.MapWebView
 import com.cavesketch.app.ui.components.parsesAsCoordinate
-import com.cavesketch.app.util.copyUriToDir
 import com.cavesketch.app.util.shareFile
 
 @Composable
@@ -46,8 +45,10 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
         ActivityResultContracts.OpenMultipleDocuments()
     ) { uris ->
         uris.forEachIndexed { idx, uri ->
-            val path = copyUriToDir(context, uri, context.filesDir, "additional_${jsonMaps.size + idx}.json")
-            viewModel.addJsonMap(path)
+            com.cavesketch.app.util.safeCopyUriToDir(
+                context, uri, context.filesDir, "additional_${jsonMaps.size + idx}.json",
+                { msg -> android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show() },
+            )?.let { viewModel.addJsonMap(it) }
         }
     }
 
