@@ -101,7 +101,7 @@
 
 ## Phase 3: Root READMEs + Final Audit
 
-- [ ] Task: Restructure root READMEs as landing pages (EN + IT)
+- [x] Task: Restructure root READMEs as landing pages (EN + IT) fed260e
     - [ ] Read current `README.md` / `README.it.md`; note sections to preserve
       (badges, language switch, intro, TopoDroid DXF export how-to with `imgs/`,
       dev setup, ToDo list)
