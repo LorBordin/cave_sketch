@@ -211,3 +211,11 @@ Phase 2 complete. The Satellite Map screen is fully implemented with GPS point g
 **Next session notes:**
 None.
 
+## [2026-06-24 21:51] Release — APK Build
+**Files:**
+- CaveSketch-1.0.0.apk
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** None
+
