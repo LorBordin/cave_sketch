@@ -230,7 +230,7 @@ git commit -m "feat(android): Phase 4 dark theme tokens and always-dark scheme"
 
 ---
 
-### Task 2: SectionCard reusable composable
+### Task 2: SectionCard reusable composable (b9e6a79)
 
 **Files:**
 - Create: `android/app/src/main/java/com/cavesketch/app/ui/components/SectionCard.kt`
@@ -239,7 +239,7 @@ git commit -m "feat(android): Phase 4 dark theme tokens and always-dark scheme"
 **Interfaces:**
 - Produces: `SectionCard(title: String, icon: ImageVector, modifier: Modifier = Modifier, content: @Composable () -> Unit)` — a `surface`-colored 16dp-rounded card with an icon+title header above `content`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `android/app/src/test/java/com/cavesketch/app/ui/components/SectionCardTest.kt`:
 
@@ -277,12 +277,12 @@ class SectionCardTest {
 }
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.components.SectionCardTest"`
 Expected: FAIL — unresolved reference `SectionCard`.
 
-- [ ] **Step 3: Implement SectionCard**
+- [x] **Step 3: Implement SectionCard**
 
 Create `android/app/src/main/java/com/cavesketch/app/ui/components/SectionCard.kt`:
 
@@ -338,12 +338,12 @@ fun SectionCard(
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.components.SectionCardTest"`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/components/SectionCard.kt android/app/src/test/java/com/cavesketch/app/ui/components/SectionCardTest.kt
