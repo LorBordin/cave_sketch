@@ -330,3 +330,30 @@
 
 **Next session notes:** The latency optimizations are complete and verified. The warm rendering time on Samsung Galaxy S22 dropped from ~60.6s down to ~2.5–3.5s, and DXF parsing dropped from ~4.5s down to ~1.2s. All tests and static checks pass cleanly.
 
+## [2026-06-24 21:37] Track docs_overhaul_20260624 — Implementation
+**Files:**
+- README.md
+- README.it.md
+- docs/web/README.md
+- docs/web/README.it.md
+- docs/web/survey-merging.md
+- docs/web/survey-merging.it.md
+- docs/web/satellite-maps.md
+- docs/web/satellite-maps.it.md
+- docs/web/imgs/.gitkeep
+- docs/web/imgs/kmz-in-locus.png
+- docs/web/imgs/merge-displacement.png
+- docs/web/imgs/merge-mirror.png
+- docs/web/imgs/merge-ui.png
+- docs/web/imgs/satellite-multi-survey.png
+- docs/android/README.md
+- docs/android/README.it.md
+- docs/android/architecture.md
+- docs/android/architecture.it.md
+- conductor/tracks.md
+- conductor/tracks/docs_overhaul_20260624/plan.md
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** The documentation overhaul is fully completed, audited, and verified. Main READMEs and sub-guides in both English and Italian are complete and 100% of their local relative links resolved. All automated quality checks are passing.
