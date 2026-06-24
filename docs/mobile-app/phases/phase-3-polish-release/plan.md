@@ -629,7 +629,7 @@ Refactors Python startup so the app exposes an observable init status (Initializ
 - Produces: `class com.cavesketch.app.AppInitState` with `val status: StateFlow<InitStatus>`, `fun markReady()`, `fun markFailed(message: String)`.
 - Produces: `CaveSketchApplication.initState: AppInitState` (public property).
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `android/app/src/test/java/com/cavesketch/app/AppInitStateTest.kt`:
 
@@ -662,12 +662,12 @@ class AppInitStateTest {
 }
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.AppInitStateTest"`
 Expected: FAIL — `AppInitState` / `InitStatus` unresolved.
 
-- [ ] **Step 3: Implement the init-state holder**
+- [x] **Step 3: Implement the init-state holder**
 
 Create `android/app/src/main/java/com/cavesketch/app/AppInitState.kt`:
 
@@ -695,12 +695,12 @@ class AppInitState {
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.AppInitStateTest"`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Drive readiness from the Application + add uncaught handler**
+- [x] **Step 5: Drive readiness from the Application + add uncaught handler**
 
 Replace `android/app/src/main/java/com/cavesketch/app/CaveSketchApplication.kt` with:
 
@@ -751,7 +751,7 @@ class CaveSketchApplication : Application() {
 
 Note: `Python.start` moved into the background thread so a failure becomes a `Failed` status instead of crashing `onCreate`.
 
-- [ ] **Step 6: Show init status in MainActivity**
+- [x] **Step 6: Show init status in MainActivity**
 
 In `android/app/src/main/java/com/cavesketch/app/MainActivity.kt`, replace the `MainActivity` class and add an init-error composable. Update `onCreate` and add the status gate inside `setContent`:
 
@@ -805,12 +805,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 ```
 
-- [ ] **Step 7: Compile and test**
+- [x] **Step 7: Compile and test**
 
 Run: `cd android && ./gradlew :app:assembleDebug :app:testDebugUnitTest`
 Expected: BUILD SUCCESSFUL; tests PASS.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit** [386b133]
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/AppInitState.kt \
