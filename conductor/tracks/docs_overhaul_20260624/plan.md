@@ -23,7 +23,7 @@
 
 ---
 
-## Phase 1: Web Documentation
+## Phase 1: Web Documentation [checkpoint: 3388355]
 
 - [x] Task: Web docs index + image folder dd292b0
     - [ ] Create `docs/web/imgs/.gitkeep` (empty, to track the folder)
@@ -65,9 +65,9 @@
       JSON re-import workflow + KMZ rationale present
     - [ ] Commit: `docs(web): document satellite maps, multi-survey, and KMZ export (EN+IT)`
 
-- [ ] Task: Conductor - User Manual Verification 'Web Documentation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Web Documentation' (Protocol in workflow.md) 3388355
 
-## Phase 2: Android Documentation
+## Phase 2: Android Documentation [checkpoint: 3388355]
 
 - [x] Task: Android user guide (EN + IT) c622157
     - [ ] Create `docs/android/README.md` (EN) per spec FR-4 — cover: what the app
@@ -97,9 +97,9 @@
     - [ ] Create `docs/android/architecture.it.md` (IT mirror), same paths/links
     - [ ] Commit: `docs(android): add architecture & tech-stack contributor doc (EN+IT)`
 
-- [ ] Task: Conductor - User Manual Verification 'Android Documentation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Android Documentation' (Protocol in workflow.md) 3388355
 
-## Phase 3: Root READMEs + Final Audit
+## Phase 3: Root READMEs + Final Audit [checkpoint: 3388355]
 
 - [x] Task: Restructure root READMEs as landing pages (EN + IT) fed260e
     - [ ] Read current `README.md` / `README.it.md`; note sections to preserve
@@ -126,4 +126,4 @@
       docs/android` — reconcile against `screenshots-needed.md`
     - [ ] Commit any audit fixes: `docs: fix cross-doc links and verify bilingual coverage`
 
-- [ ] Task: Conductor - User Manual Verification 'Root READMEs + Final Audit' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Root READMEs + Final Audit' (Protocol in workflow.md) 3388355
