@@ -709,7 +709,7 @@ git commit -m "feat(android): single-row stepper and rounded file-picker buttons
 
 ---
 
-### Task 6: Top app bar + styled bottom navigation in AppNavHost
+### Task 6: Top app bar + styled bottom navigation in AppNavHost (f6b97cd)
 
 **Files:**
 - Modify: `android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt`
@@ -718,7 +718,7 @@ git commit -m "feat(android): single-row stepper and rounded file-picker buttons
 - Consumes: route strings `"survey_plot"`, `"satellite"`, `"about"` (unchanged); drawable `R.drawable.splash_icon` (existing cyan triangle mark).
 - Produces: a `Scaffold` with a per-route `TopAppBar` (logo + title) and the existing bottom `NavigationBar` restyled with cyan active items. `AppNavHost(surveyViewModel, satelliteViewModel, versionName)` signature unchanged.
 
-- [ ] **Step 1: Add the top app bar and nav styling**
+- [x] **Step 1: Add the top app bar and nav styling**
 
 Replace the entire contents of `android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt`:
 
@@ -825,16 +825,16 @@ fun AppNavHost(
 }
 ```
 
-- [ ] **Step 2: Build to verify it compiles**
+- [x] **Step 2: Build to verify it compiles**
 
 Run: `cd android && ./gradlew assembleDebug`
 Expected: BUILD SUCCESSFUL.
 
-- [ ] **Step 3: Manual verification**
+- [x] **Step 3: Manual verification**
 
 Install the APK (`./gradlew installDebug` or sideload `app/build/outputs/apk/debug/app-debug.apk`) and confirm: each tab shows a dark top app bar with the cyan triangle mark and the correct title ("Survey Plot" / "Satellite Map" / "About"); the bottom nav has a cyan active item with a pill indicator on the dark surface; the status bar is dark with light icons.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt
