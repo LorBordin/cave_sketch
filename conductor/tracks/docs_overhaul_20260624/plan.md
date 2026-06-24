@@ -117,7 +117,7 @@
     - [ ] Verify: all local links in both READMEs resolve (skip http/# anchors)
     - [ ] Commit: `docs: restructure root READMEs as bilingual landing pages`
 
-- [ ] Task: Final cross-doc link & placeholder audit
+- [x] Task: Final cross-doc link & placeholder audit fed260e
     - [ ] Audit every relative link across `README*.md`, `docs/web/**`,
       `docs/android/**` — expect no missing local targets
     - [ ] Confirm every nested doc has a language-switch header and a matching
