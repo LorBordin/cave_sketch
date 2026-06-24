@@ -843,7 +843,7 @@ git commit -m "feat(android): per-route top app bar and styled bottom nav"
 
 ---
 
-### Task 7: Survey Plot screen — group into cards + amber CTA
+### Task 7: Survey Plot screen — group into cards + amber CTA (7d5f399)
 
 **Files:**
 - Modify: `android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt`
@@ -853,7 +853,7 @@ git commit -m "feat(android): per-route top app bar and styled bottom nav"
 - Consumes: `SectionCard` (Task 2), `PrimaryCta` (Task 3), `StateBanner` (Task 4), `SettingsForm`/`FilePickerRow` (Task 5), `MergeControls` (this task), existing `SurveyPlotViewModel`, `SurveyInputs`, `PlotState`, `PdfPreview`.
 - `SurveyPlotScreen(viewModel: SurveyPlotViewModel)` signature unchanged.
 
-- [ ] **Step 1: Drop the internal header in MergeControls**
+- [x] **Step 1: Drop the internal header in MergeControls**
 
 In `android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt`, delete the first line of the composable body:
 
@@ -863,7 +863,7 @@ In `android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt`
 
 Leave the rest (child file pickers, station fields, protocol radios) unchanged. (The `Text` import stays — it is still used by the protocol section.)
 
-- [ ] **Step 2: Rewrite SurveyPlotScreen with cards + CTA + banners**
+- [x] **Step 2: Rewrite SurveyPlotScreen with cards + CTA + banners**
 
 Replace the entire contents of `android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt`:
 
@@ -996,16 +996,16 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
 private fun extOf(path: String) = if (path.lowercase().endsWith(".dxf")) ".dxf" else ".csv"
 ```
 
-- [ ] **Step 3: Build to verify it compiles**
+- [x] **Step 3: Build to verify it compiles**
 
 Run: `cd android && ./gradlew assembleDebug`
 Expected: BUILD SUCCESSFUL.
 
-- [ ] **Step 4: Manual verification**
+- [x] **Step 4: Manual verification**
 
 On device: the Survey Plot screen shows four cards (Input files / Merge survey / Survey details / Settings), an amber "Generate Survey Plot" button with a play icon, an idle banner before generating, and — after generating with a sample DXF — the PDF preview and a cyan "Save / Share PDF" button. Confirm full parity: file pickers, merge fields/protocol, all settings (slider + four single-row steppers + two toggles) work exactly as before.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt
