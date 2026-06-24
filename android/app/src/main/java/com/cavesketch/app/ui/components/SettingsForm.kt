@@ -23,7 +23,6 @@ import com.cavesketch.app.ui.SurveyInputs
 @Composable
 fun SettingsForm(inputs: SurveyInputs, onChange: (SurveyInputs) -> Unit) {
     Column {
-        Text("Survey settings")
 
     // Rule length: 5..100, step 5. Keep as Slider.
     Text("Rule length (m): ${inputs.ruleLength}")
@@ -124,31 +123,28 @@ fun StepperControl(
         onChange(castedValue)
     }
 
-    Column(Modifier.testTag(label)) {
-        Text(label)
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
+    Row(
+        modifier = Modifier.fillMaxWidth().testTag(label),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(label, modifier = Modifier.weight(1f))
+        Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton(
                 onClick = { updateValue(false) },
                 enabled = canDecrease,
                 modifier = Modifier
-                    .semantics { contentDescription = "−" }
-                    .testTag("${label}_−")
+                     .semantics { contentDescription = "−" }
+                     .testTag("${label}_−")
             ) {
                 Icon(Icons.Filled.Remove, contentDescription = "Decrease")
             }
-            Text(
-                text = formatter(value),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
+            Text(text = formatter(value))
             IconButton(
                 onClick = { updateValue(true) },
                 enabled = canIncrease,
                 modifier = Modifier
-                    .semantics { contentDescription = "+" }
-                    .testTag("${label}_+")
+                     .semantics { contentDescription = "+" }
+                     .testTag("${label}_+")
             ) {
                 Icon(Icons.Filled.Add, contentDescription = "Increase")
             }
