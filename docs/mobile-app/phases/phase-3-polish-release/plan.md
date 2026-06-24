@@ -35,7 +35,7 @@ Maps low-level throwables (out-of-space, Python/runtime failures) to non-technic
 **Interfaces:**
 - Produces: `fun com.cavesketch.app.util.friendlyError(t: Throwable): String`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `android/app/src/test/java/com/cavesketch/app/util/ErrorMessagesTest.kt`:
 
@@ -73,12 +73,12 @@ class ErrorMessagesTest {
 }
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.util.ErrorMessagesTest"`
 Expected: FAIL — `friendlyError` unresolved reference (compilation error).
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 Create `android/app/src/main/java/com/cavesketch/app/util/ErrorMessages.kt`:
 
@@ -104,12 +104,12 @@ fun friendlyError(t: Throwable): String {
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.util.ErrorMessagesTest"`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Wire into both ViewModels**
+- [x] **Step 5: Wire into both ViewModels**
 
 In `android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt`, change the catch block (lines ~90-92):
 
@@ -127,12 +127,12 @@ In `android/app/src/main/java/com/cavesketch/app/ui/SatelliteViewModel.kt`, chan
             }
 ```
 
-- [ ] **Step 6: Run the full unit-test suite to verify nothing broke**
+- [x] **Step 6: Run the full unit-test suite to verify nothing broke**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest`
 Expected: PASS (existing ViewModel/SettingsForm tests still green — note the existing `error_path_emits_error_with_detail` test asserts the message *contains* "boom", which `friendlyError` preserves via the fallback branch).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit** [4ec8fe9]
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/util/ErrorMessages.kt \
