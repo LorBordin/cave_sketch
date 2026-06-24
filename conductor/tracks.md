@@ -33,3 +33,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: Reduce Survey PDF Render Latency**
 *Link: [./archive/survey_render_latency_20260623/](./archive/survey_render_latency_20260623/)*
 
+---
+
+- [x] **Track: Phase 3 Polish & Release**
+*Link: [../docs/mobile-app/phases/phase-3-polish-release/](../docs/mobile-app/phases/phase-3-polish-release/)*
+
