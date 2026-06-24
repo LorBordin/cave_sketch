@@ -2,6 +2,7 @@ package com.cavesketch.app.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Terrain
 import androidx.compose.material3.Icon
@@ -17,7 +18,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun AppNavHost(surveyViewModel: SurveyPlotViewModel, satelliteViewModel: SatelliteViewModel) {
+fun AppNavHost(
+    surveyViewModel: SurveyPlotViewModel,
+    satelliteViewModel: SatelliteViewModel,
+    versionName: String,
+) {
     val nav = rememberNavController()
     val current = nav.currentBackStackEntryAsState().value?.destination?.route
     Scaffold(
@@ -35,12 +40,19 @@ fun AppNavHost(surveyViewModel: SurveyPlotViewModel, satelliteViewModel: Satelli
                     icon = { Icon(Icons.Filled.Map, null) },
                     label = { Text("Satellite") },
                 )
+                NavigationBarItem(
+                    selected = current == "about",
+                    onClick = { nav.navigate("about") { launchSingleTop = true } },
+                    icon = { Icon(Icons.Filled.Info, null) },
+                    label = { Text("About") },
+                )
             }
         }
     ) { padding ->
         NavHost(nav, startDestination = "survey_plot", modifier = Modifier.padding(padding)) {
             composable("survey_plot") { SurveyPlotScreen(surveyViewModel) }
             composable("satellite") { SatelliteScreen(satelliteViewModel) }
+            composable("about") { AboutScreen(versionName) }
         }
     }
 }

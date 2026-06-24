@@ -42,5 +42,9 @@ fun App() {
                 ) { com.cavesketch.app.util.isOnline(context) } as T
         }
     )
-    com.cavesketch.app.ui.AppNavHost(surveyViewModel, satelliteViewModel)
+    com.cavesketch.app.ui.AppNavHost(
+        surveyViewModel,
+        satelliteViewModel,
+        com.cavesketch.app.BuildConfig.VERSION_NAME,
+    )
 }
