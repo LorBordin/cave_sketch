@@ -88,7 +88,7 @@ class SatelliteViewModel(
                     SatelliteState.Error(obj.optString("detail", obj.optString("error", "Unknown error")))
                 }
             } catch (e: Throwable) {
-                _state.value = SatelliteState.Error(e.message ?: "Generation failed")
+                _state.value = SatelliteState.Error(com.cavesketch.app.util.friendlyError(e))
             }
         }
     }

@@ -88,7 +88,7 @@ class SurveyPlotViewModel(
                     PlotState.Error(obj.optString("detail", obj.optString("error", "Unknown error")))
                 }
             } catch (e: Throwable) {
-                _state.value = PlotState.Error(e.message ?: "Generation failed")
+                _state.value = PlotState.Error(com.cavesketch.app.util.friendlyError(e))
             }
         }
     }
