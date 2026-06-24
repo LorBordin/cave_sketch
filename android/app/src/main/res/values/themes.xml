@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.CaveSketch" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@color/brand_background</item>
+    <style name="Theme.CaveSketch" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/cave_background</item>
+        <item name="android:statusBarColor">@color/cave_surface</item>
+        <item name="android:navigationBarColor">@color/cave_surface</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Theme.CaveSketch.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/brand_background</item>
+        <item name="windowSplashScreenBackground">@color/cave_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.CaveSketch</item>
     </style>
