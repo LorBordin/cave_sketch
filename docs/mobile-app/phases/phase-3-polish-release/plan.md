@@ -278,7 +278,7 @@ Replaces the bare `MaterialTheme {}` with a branded Compose theme (cyan/blue pal
 **Interfaces:**
 - Produces: `@Composable fun com.cavesketch.app.ui.theme.CaveSketchTheme(content: @Composable () -> Unit)`
 
-- [ ] **Step 1: Create the color palette**
+- [x] **Step 1: Create the color palette**
 
 Create `android/app/src/main/java/com/cavesketch/app/ui/theme/Color.kt`:
 
@@ -295,7 +295,7 @@ val BrandSlateLight = Color(0xFFCFD8DC)
 val BrandBackground = Color(0xFFF7FBFC)
 ```
 
-- [ ] **Step 2: Create the theme**
+- [x] **Step 2: Create the theme**
 
 Create `android/app/src/main/java/com/cavesketch/app/ui/theme/Theme.kt`:
 
@@ -339,7 +339,7 @@ Add to `Color.kt` the white constant referenced above:
 val Color_White = Color(0xFFFFFFFF)
 ```
 
-- [ ] **Step 3: Create XML colors + window theme**
+- [x] **Step 3: Create XML colors + window theme**
 
 Create `android/app/src/main/res/values/colors.xml`:
 
@@ -363,7 +363,7 @@ Create `android/app/src/main/res/values/themes.xml`:
 </resources>
 ```
 
-- [ ] **Step 4: Apply the Compose theme**
+- [x] **Step 4: Apply the Compose theme**
 
 In `android/app/src/main/java/com/cavesketch/app/MainActivity.kt`, replace line 14:
 
@@ -371,7 +371,7 @@ In `android/app/src/main/java/com/cavesketch/app/MainActivity.kt`, replace line 
         setContent { com.cavesketch.app.ui.theme.CaveSketchTheme { App() } }
 ```
 
-- [ ] **Step 5: Point the manifest at the app theme**
+- [x] **Step 5: Point the manifest at the app theme**
 
 In `android/app/src/main/AndroidManifest.xml`, change the `<application>` `android:theme`:
 
@@ -379,12 +379,12 @@ In `android/app/src/main/AndroidManifest.xml`, change the `<application>` `andro
         android:theme="@style/Theme.CaveSketch">
 ```
 
-- [ ] **Step 6: Compile and run unit tests**
+- [x] **Step 6: Compile and run unit tests**
 
 Run: `cd android && ./gradlew :app:assembleDebug :app:testDebugUnitTest`
 Expected: BUILD SUCCESSFUL; tests PASS.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit** [a5019e8]
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/theme/ \
