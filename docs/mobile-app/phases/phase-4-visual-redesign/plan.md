@@ -1218,7 +1218,7 @@ git commit -m "feat(android): card-grouped Satellite Map screen with amber CTA"
 
 ---
 
-### Task 9: About screen — logo, version chip, cyan button
+### Task 9: About screen — logo, version chip, cyan button (5dc414a)
 
 **Files:**
 - Modify: `android/app/src/main/java/com/cavesketch/app/ui/AboutScreen.kt`
@@ -1228,7 +1228,7 @@ git commit -m "feat(android): card-grouped Satellite Map screen with amber CTA"
 - Consumes: drawable `R.drawable.splash_icon`; existing `aboutVersionLine(versionName)` helper (kept unchanged so `AboutScreenTest` passes).
 - `AboutScreen(versionName: String)` signature unchanged.
 
-- [ ] **Step 1: Rewrite AboutScreen with logo, chip, and cyan button**
+- [x] **Step 1: Rewrite AboutScreen with logo, chip, and cyan button**
 
 Replace the entire contents of `android/app/src/main/java/com/cavesketch/app/ui/AboutScreen.kt`:
 
@@ -1307,21 +1307,21 @@ fun AboutScreen(versionName: String) {
 }
 ```
 
-- [ ] **Step 2: Run the About test to verify it stays green**
+- [x] **Step 2: Run the About test to verify it stays green**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.AboutScreenTest"`
 Expected: PASS (`aboutVersionLine` is unchanged).
 
-- [ ] **Step 3: Build to verify it compiles**
+- [x] **Step 3: Build to verify it compiles**
 
 Run: `cd android && ./gradlew assembleDebug`
 Expected: BUILD SUCCESSFUL.
 
-- [ ] **Step 4: Manual verification**
+- [x] **Step 4: Manual verification**
 
 On device: the About screen is centered on the dark background with the cyan triangle logo, "CaveSketch" title, muted tagline, a rounded "Version 1.0.0" chip, and a cyan "Project on GitHub" button that opens the repo.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/AboutScreen.kt
