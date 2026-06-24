@@ -478,7 +478,7 @@ git commit -m "feat(android): add amber PrimaryCta composable"
 
 ---
 
-### Task 4: StateBanner reusable composable
+### Task 4: StateBanner reusable composable (71d4963)
 
 **Files:**
 - Create: `android/app/src/main/java/com/cavesketch/app/ui/components/StateBanner.kt`
@@ -487,14 +487,13 @@ git commit -m "feat(android): add amber PrimaryCta composable"
 **Interfaces:**
 - Produces: `StateBanner(message: String, isError: Boolean, modifier: Modifier = Modifier)` — a rounded full-width banner; soft-red tint when `isError`, muted `surfaceVariant` otherwise.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `android/app/src/test/java/com/cavesketch/app/ui/components/StateBannerTest.kt`:
 
 ```kotlin
 package com.cavesketch.app.ui.components
 
-import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import org.junit.Rule
@@ -527,12 +526,12 @@ class StateBannerTest {
 }
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.components.StateBannerTest"`
 Expected: FAIL — unresolved reference `StateBanner`.
 
-- [ ] **Step 3: Implement StateBanner**
+- [x] **Step 3: Implement StateBanner**
 
 Create `android/app/src/main/java/com/cavesketch/app/ui/components/StateBanner.kt`:
 
@@ -575,12 +574,12 @@ fun StateBanner(
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.components.StateBannerTest"`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/components/StateBanner.kt android/app/src/test/java/com/cavesketch/app/ui/components/StateBannerTest.kt
