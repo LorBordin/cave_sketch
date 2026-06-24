@@ -3,15 +3,47 @@ package com.cavesketch.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { com.cavesketch.app.ui.theme.CaveSketchTheme { App() } }
+        val initState = (application as CaveSketchApplication).initState
+        setContent {
+            com.cavesketch.app.ui.theme.CaveSketchTheme {
+                val status by initState.status.collectAsState()
+                when (val s = status) {
+                    is InitStatus.Failed -> InitErrorScreen(s.message)
+                    else -> App()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun InitErrorScreen(message: String) {
+    Surface(modifier = androidx.compose.ui.Modifier.fillMaxSize()) {
+        Column(
+            modifier = androidx.compose.ui.Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+            verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
+        ) {
+            Text("CaveSketch couldn’t start", style = androidx.compose.material3.MaterialTheme.typography.headlineSmall)
+            androidx.compose.foundation.layout.Spacer(androidx.compose.ui.Modifier.height(12.dp))
+            Text(message)
+        }
     }
 }
 
