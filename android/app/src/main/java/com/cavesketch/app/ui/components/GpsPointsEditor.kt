@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -25,7 +26,6 @@ fun GpsPointsEditor(
     onRemove: () -> Unit,
 ) {
     Column(Modifier.fillMaxWidth()) {
-        Text("📍 Known GPS Points")
         points.forEachIndexed { i, p ->
             Row(Modifier.fillMaxWidth().padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -52,8 +52,8 @@ fun GpsPointsEditor(
             }
         }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(onClick = onAdd) { Text("➕ Add point") }
-            Button(onClick = onRemove) { Text("➖ Remove last") }
+            Button(onClick = onAdd, shape = RoundedCornerShape(12.dp)) { Text("➕ Add point") }
+            Button(onClick = onRemove, shape = RoundedCornerShape(12.dp)) { Text("➖ Remove last") }
         }
     }
 }

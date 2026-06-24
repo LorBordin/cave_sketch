@@ -2,6 +2,7 @@ package com.cavesketch.app.ui
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,9 +12,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Folder
+import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +33,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.cavesketch.app.ui.components.GpsPointsEditor
 import com.cavesketch.app.ui.components.MapWebView
+import com.cavesketch.app.ui.components.PrimaryCta
+import com.cavesketch.app.ui.components.SectionCard
+import com.cavesketch.app.ui.components.StateBanner
 import com.cavesketch.app.ui.components.parsesAsCoordinate
 import com.cavesketch.app.util.shareFile
 
@@ -54,7 +62,10 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
 
     if (state is SatelliteState.NoMap) {
         Box(Modifier.fillMaxSize().padding(24.dp), contentAlignment = Alignment.Center) {
-            Text("Generate a survey plot first — the Satellite Map needs a cave map.")
+            StateBanner(
+                "Generate a survey plot first — the Satellite Map needs a cave map.",
+                isError = false,
+            )
         }
         return
     }
@@ -63,46 +74,50 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
         it.station.isNotBlank() && parsesAsCoordinate(it.lat) && parsesAsCoordinate(it.lon)
     }
 
-    Column(Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState())) {
-        Text("🌍 Satellite Map")
-
-        GpsPointsEditor(
-            points = points,
-            onUpdate = viewModel::updatePoint,
-            onAdd = viewModel::addPoint,
-            onRemove = viewModel::removeLastPoint,
-        )
-
-        OutlinedTextField(
-            value = surveyName,
-            onValueChange = { surveyName = it },
-            label = { Text("Survey name") },
-            modifier = Modifier.fillMaxWidth(),
-        )
-        OutlinedTextField(
-            value = rotationText,
-            onValueChange = {
-                rotationText = it
-                it.trim().replace(",", ".").toDoubleOrNull()?.let(viewModel::setRotation)
-            },
-            label = { Text("Map rotation angle (°)") },
-            isError = rotationText.isNotBlank() && rotationText.trim().replace(",", ".").toDoubleOrNull() == null,
-            modifier = Modifier.fillMaxWidth(),
-        )
-
-        Spacer(Modifier.height(8.dp))
-        Button(onClick = { jsonPicker.launch(arrayOf("application/json", "*/*")) }) {
-            Text("📁 Import JSON maps (${jsonMaps.size})")
+    Column(
+        modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        SectionCard("GPS points", Icons.Filled.Place) {
+            GpsPointsEditor(
+                points = points,
+                onUpdate = viewModel::updatePoint,
+                onAdd = viewModel::addPoint,
+                onRemove = viewModel::removeLastPoint,
+            )
         }
 
-        Spacer(Modifier.height(16.dp))
-        Button(
+        SectionCard("Map details", Icons.Filled.Edit) {
+            OutlinedTextField(
+                value = surveyName,
+                onValueChange = { surveyName = it },
+                label = { Text("Survey name") },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            OutlinedTextField(
+                value = rotationText,
+                onValueChange = {
+                    rotationText = it
+                    it.trim().replace(",", ".").toDoubleOrNull()?.let(viewModel::setRotation)
+                },
+                label = { Text("Map rotation angle (°)") },
+                isError = rotationText.isNotBlank() && rotationText.trim().replace(",", ".").toDoubleOrNull() == null,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+
+        SectionCard("Additional maps", Icons.Filled.Folder) {
+            Button(onClick = { jsonPicker.launch(arrayOf("application/json", "*/*")) }) {
+                Text("📁 Import JSON maps (${jsonMaps.size})")
+            }
+        }
+
+        PrimaryCta(
+            text = "Generate Satellite Map",
+            icon = Icons.Filled.PlayArrow,
             enabled = pointsValid && state !is SatelliteState.Generating,
             onClick = { viewModel.generate(surveyName) },
-            modifier = Modifier.fillMaxWidth(),
-        ) { Text("Generate Satellite Map") }
-
-        Spacer(Modifier.height(16.dp))
+        )
 
         when (val s = state) {
             is SatelliteState.Generating -> {
@@ -112,17 +127,15 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
                     Text(s.phase)
                 }
             }
-            is SatelliteState.Error -> {
-                Text("⚠️ ${s.message}", color = MaterialTheme.colorScheme.error)
-            }
+            is SatelliteState.Error -> StateBanner("⚠️ ${s.message}", isError = true)
             is SatelliteState.Success -> {
                 if (s.online) {
                     MapWebView(s.htmlPath, Modifier.fillMaxWidth().height(360.dp))
                 } else {
-                    Text(
+                    StateBanner(
                         "No connection — satellite preview unavailable. " +
                             "KMZ & JSON are ready to save/share.",
-                        color = MaterialTheme.colorScheme.error,
+                        isError = true,
                     )
                 }
                 Spacer(Modifier.height(8.dp))
