@@ -1420,7 +1420,7 @@ Documents the build/publish flow for GitHub Releases and runs every verification
 
 **Interfaces:** none.
 
-- [ ] **Step 1: Write the release guide**
+- [x] **Step 1: Write the release guide**
 
 Create `android/RELEASE.md`:
 
@@ -1473,7 +1473,7 @@ Bump `versionCode` (must increase) and `versionName` in
 `android/app/build.gradle`, rebuild, and attach the new APK to a new Release.
 ````
 
-- [ ] **Step 2: Append the DEVLOG entry**
+- [x] **Step 2: Append the DEVLOG entry**
 
 Append to `android/DEVLOG.md` (match the existing entry format; use today's date `2026-06-23`):
 
@@ -1492,7 +1492,7 @@ Append to `android/DEVLOG.md` (match the existing entry format; use today's date
 **Next session notes:** Phase 4 (visual redesign) is the next roadmap item.
 ```
 
-- [ ] **Step 3: Run all verification gates**
+- [x] **Step 3: Run all verification gates**
 
 ```bash
 uv run ruff check .
@@ -1502,7 +1502,7 @@ cd android && ./gradlew :app:testDebugUnitTest && ./gradlew assembleRelease
 ```
 Expected: ruff clean; mypy clean; pytest passes; Kotlin unit tests pass; release APK builds.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit** [34e5879]
 
 ```bash
 git add android/RELEASE.md android/DEVLOG.md
