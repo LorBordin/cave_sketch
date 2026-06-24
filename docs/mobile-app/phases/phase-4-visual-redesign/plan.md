@@ -55,7 +55,7 @@
 
 ---
 
-### Task 1: Dark theme tokens & always-dark scheme
+### Task 1: Dark theme tokens & always-dark scheme (534b3ed)
 
 **Files:**
 - Modify: `android/app/src/main/java/com/cavesketch/app/ui/theme/Color.kt`
@@ -68,12 +68,12 @@
 - Produces: `CaveSketchTheme(content: @Composable () -> Unit)` (the `darkTheme` parameter is removed). Color tokens: `CaveBackground`, `CaveSurface`, `CaveSurfaceVariant`, `CaveCyan`, `CaveOnCyan`, `CaveAmber`, `CaveOnAmber`, `CaveOnSurface`, `CaveOnSurfaceVariant`, `CaveOutline`, `CaveError`, `CaveOnError`.
 - Consumes: `MainActivity` already calls `CaveSketchTheme { ... }` with no argument — unaffected by removing the parameter.
 
-- [ ] **Step 1: Confirm no other references to the old color tokens**
+- [x] **Step 1: Confirm no other references to the old color tokens**
 
 Run: `cd android && grep -rn "BrandCyan\|BrandCyanDark\|BrandSlate\|BrandSlateLight\|BrandBackground\|Color_White" app/src/main/java`
 Expected: matches **only** in `ui/theme/Color.kt` and `ui/theme/Theme.kt`. If any other file references them, that file must be updated to a new token in this task too.
 
-- [ ] **Step 2: Write the failing theme test**
+- [x] **Step 2: Write the failing theme test**
 
 Create `android/app/src/test/java/com/cavesketch/app/ui/theme/ThemeTest.kt`:
 
@@ -118,12 +118,12 @@ class ThemeTest {
 }
 ```
 
-- [ ] **Step 3: Run the test to verify it fails**
+- [x] **Step 3: Run the test to verify it fails**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.theme.ThemeTest"`
 Expected: FAIL to compile / unresolved references `CaveBackground`, `CaveCyan`, `CaveAmber`, `CaveSurface`.
 
-- [ ] **Step 4: Replace the color tokens**
+- [x] **Step 4: Replace the color tokens**
 
 Replace the entire contents of `android/app/src/main/java/com/cavesketch/app/ui/theme/Color.kt`:
 
@@ -147,7 +147,7 @@ val CaveError = Color(0xFFFF6B6B)
 val CaveOnError = Color(0xFF3A0000)
 ```
 
-- [ ] **Step 5: Replace the theme with an always-dark scheme**
+- [x] **Step 5: Replace the theme with an always-dark scheme**
 
 Replace the entire contents of `android/app/src/main/java/com/cavesketch/app/ui/theme/Theme.kt`:
 
@@ -180,7 +180,7 @@ fun CaveSketchTheme(content: @Composable () -> Unit) {
 }
 ```
 
-- [ ] **Step 6: Update XML colors**
+- [x] **Step 6: Update XML colors**
 
 Replace the entire contents of `android/app/src/main/res/values/colors.xml`:
 
@@ -194,7 +194,7 @@ Replace the entire contents of `android/app/src/main/res/values/colors.xml`:
 </resources>
 ```
 
-- [ ] **Step 7: Update the Android window/status/splash theme to dark**
+- [x] **Step 7: Update the Android window/status/splash theme to dark**
 
 Replace the entire contents of `android/app/src/main/res/values/themes.xml`:
 
@@ -216,12 +216,12 @@ Replace the entire contents of `android/app/src/main/res/values/themes.xml`:
 </resources>
 ```
 
-- [ ] **Step 8: Run the test to verify it passes**
+- [x] **Step 8: Run the test to verify it passes**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.theme.ThemeTest"`
 Expected: PASS.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/theme/ android/app/src/main/res/values/colors.xml android/app/src/main/res/values/themes.xml android/app/src/test/java/com/cavesketch/app/ui/theme/ThemeTest.kt
