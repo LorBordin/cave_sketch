@@ -135,7 +135,7 @@ Phase 2 complete. The Satellite Map screen is fully implemented with GPS point g
 **Next session notes:** Latency optimizations successfully reduced the warm draw_survey time on Samsung S22 from ~60.6s to ~3.0s, and parse_dxf time from ~4.5s to ~1.2s. The PDF render on-screen continues to display pixel-identically and correctly.
 
 
-## [2026-06-23 15:10] Survey Settings UI Refinement — Implementation Complete
+## [2026-06-23] Survey Settings UI Refinement — Implementation Complete
 **Files:**
 - android/app/build.gradle
 - android/app/src/main/AndroidManifest.xml
@@ -145,4 +145,33 @@ Phase 2 complete. The Satellite Map screen is fully implemented with GPS point g
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-06-24] Phase 3 — Polish & Release
+**Files:**
+- android/app/build.gradle
+- android/app/src/main/AndroidManifest.xml
+- android/app/src/main/java/com/cavesketch/app/AppInitState.kt
+- android/app/src/main/java/com/cavesketch/app/CaveSketchApplication.kt
+- android/app/src/main/java/com/cavesketch/app/MainActivity.kt
+- android/app/src/main/java/com/cavesketch/app/ui/AboutScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt
+- android/app/src/main/java/com/cavesketch/app/ui/theme/Color.kt
+- android/app/src/main/java/com/cavesketch/app/ui/theme/Theme.kt
+- android/app/src/main/res/drawable/splash_icon.xml
+- android/app/src/main/res/values/colors.xml
+- android/app/src/main/res/values/themes.xml
+- android/app/src/test/java/com/cavesketch/app/AppInitStateTest.kt
+- android/app/src/test/java/com/cavesketch/app/ui/AboutScreenTest.kt
+- android/app/src/test/java/com/cavesketch/app/util/ErrorMessagesTest.kt
+- android/app/src/test/java/com/cavesketch/app/util/SafeCopyTest.kt
+- android/app/src/test/java/com/cavesketch/app/util/SessionCleanupTest.kt
+- android/tools/gen_launcher_icons.py
+- android/RELEASE.md
 
+**Deviations from spec:** None
+
+**Assumptions:** Splash uses core-splashscreen with the launcher foreground as the splash icon; About link points at the public repo.
+
+**Next session notes:** Phase 4 (visual redesign) is the next roadmap item.
