@@ -175,3 +175,39 @@ Phase 2 complete. The Satellite Map screen is fully implemented with GPS point g
 **Assumptions:** Splash uses core-splashscreen with the launcher foreground as the splash icon; About link points at the public repo.
 
 **Next session notes:** Phase 4 (visual redesign) is the next roadmap item.
+
+## [2026-06-24 10:10] Phase 4 — Visual Redesign Complete
+
+**Files:**
+- android/app/src/main/java/com/cavesketch/app/ui/theme/Color.kt
+- android/app/src/main/java/com/cavesketch/app/ui/theme/Theme.kt
+- android/app/src/main/res/values/colors.xml
+- android/app/src/main/res/values/themes.xml
+- android/app/src/test/java/com/cavesketch/app/ui/theme/ThemeTest.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/SectionCard.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/SectionCardTest.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/PrimaryCta.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/PrimaryCtaTest.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/StateBanner.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/StateBannerTest.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/SettingsForm.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/FilePickerRow.kt
+- android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/GpsPointsEditor.kt
+- android/app/src/main/java/com/cavesketch/app/ui/AboutScreen.kt
+- docs/mobile-app/phases/phase-4-visual-redesign/plan.md
+
+**Deviations from spec:**
+- The parameter order of `PrimaryCta` was adjusted to put `onClick` as the last parameter, enabling Kotlin's trailing lambda syntax.
+- `StepperRow` was implemented by restyling `StepperControl` in place rather than introducing a new file, maintaining complete test tag and contract compatibility.
+
+**Assumptions:**
+- Dark-only theme does not need to handle light theme fallback.
+- The status bar and navigation bar should use the same dark surface color.
+
+**Next session notes:**
+None.
+
