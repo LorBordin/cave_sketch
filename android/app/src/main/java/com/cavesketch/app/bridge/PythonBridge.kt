@@ -1,0 +1,23 @@
+package com.cavesketch.app.bridge
+
+import com.chaquo.python.Python
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
+
+class PythonBridge(private val io: CoroutineDispatcher) : SurveyBridge, SatelliteBridge {
+    override suspend fun generate(inputsJson: String, workDir: String): String =
+        withContext(io) {
+            Python.getInstance()
+                .getModule("survey_bridge")
+                .callAttr("generate_survey_plot", inputsJson, workDir)
+                .toString()
+        }
+
+    override suspend fun generateSatellite(inputsJson: String, workDir: String): String =
+        withContext(io) {
+            Python.getInstance()
+                .getModule("satellite_bridge")
+                .callAttr("generate_satellite_map", inputsJson, workDir)
+                .toString()
+        }
+}

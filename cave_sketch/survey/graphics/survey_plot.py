@@ -68,13 +68,14 @@ def create_survey(
     # --- Stations ---
     if config.get("show_details", True):
         offset = ref_scale * 0.005 if ref_scale > 0 else 0.1
-        for _, row in df.iterrows():
-            if row["Type"] == "station" and row["Node_Id"] not in excluded_nodes:
-                ax.scatter(row["X"], row["Y"], s=marker_size, color="red", zorder=5)
+        stations = df[(df["Type"] == "station") & (~df["Node_Id"].isin(excluded_nodes))]
+        if not stations.empty:
+            ax.scatter(stations["X"], stations["Y"], s=marker_size, color="red", zorder=5)
+            for row in stations.itertuples(index=False):
                 ax.text(
-                    row["X"] - offset,
-                    row["Y"] + offset,
-                    row["Node_Id"],
+                    row.X - offset,
+                    row.Y + offset,
+                    row.Node_Id,
                     fontsize=text_size,
                     ha="right",
                     va="bottom",

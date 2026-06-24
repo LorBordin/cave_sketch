@@ -1,0 +1,8 @@
+{
+  "track_id": "satellite_webview_blank_fix_20260620",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-06-20T00:00:00Z",
+  "updated_at": "2026-06-20T00:00:00Z",
+  "description": "Instrument MapWebView with diagnostics, observe the real blank-render cause on a physical Android device, and apply the smallest evidence-driven fix"
+}

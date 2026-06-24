@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_cyan">#FF2BD4E6</color>
+    <color name="cave_background">#FF0F171A</color>
+    <color name="cave_surface">#FF1A262C</color>
+    <color name="ic_launcher_background">#FF0F171A</color>
+</resources>

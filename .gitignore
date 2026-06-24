@@ -1,4 +1,4 @@
-data/
+/data/
 __pycache__/
 .DS_Store
 .vscode/
@@ -6,3 +6,15 @@ __pycache__/
 # Outreach and advertising materials
 conductor/outreach/
 conductor/outreach_plan.md
+
+.venv-mobile/
+
+# Android build and local files
+android/local.properties
+android/.gradle/
+android/build/
+android/app/build/
+android/keystore.properties
+android/app/*.jks
+android/app/*.keystore
+docs/.DS_Store

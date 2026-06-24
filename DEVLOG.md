@@ -302,3 +302,31 @@
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** The rule_grid_alignment track is fully completed, tested, and archived. All tests and linters pass successfully.
+
+## [2026-06-23 09:54] Track satellite_webview_blank_fix_20260620 — Implementation
+**Files:**
+- tests/test_satellite_bridge.py
+- conductor/tracks.md
+
+**Deviations from spec:** None
+
+**Assumptions:** None
+
+**Next session notes:** The satellite_webview_blank_fix track is fully completed, tested, and archived. All tests and linters pass successfully.
+
+## [2026-06-23 12:20] Track survey_render_latency_20260623 — Implementation
+**Files:**
+- cave_sketch/dxf/parser.py
+- cave_sketch/features/render_features.py
+- cave_sketch/backend_renders/matplotlib.py
+- cave_sketch/survey/graphics/survey_plot.py
+- tests/test_render_regression.py
+- tests/test_render_features.py
+- conductor/tracks.md
+
+**Deviations from spec:** None
+
+**Assumptions:** None
+
+**Next session notes:** The latency optimizations are complete and verified. The warm rendering time on Samsung Galaxy S22 dropped from ~60.6s down to ~2.5–3.5s, and DXF parsing dropped from ~4.5s down to ~1.2s. All tests and static checks pass cleanly.
+

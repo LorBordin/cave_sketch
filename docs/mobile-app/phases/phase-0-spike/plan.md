@@ -1,4 +1,4 @@
-# Phase 0 — Spike (De-risk) — Implementation Plan
+# Phase 0 — Spike (De-risk) — Implementation Plan [checkpoint: 990d133]
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -41,13 +41,13 @@
 
 # GATE A — Desktop relaxed-pin proof
 
-### Task A1: Pin the Chaquopy-compatible mobile dependency set
+### Task A1: Pin the Chaquopy-compatible mobile dependency set [8a43188]
 
 **Files:**
 - Create: `requirements-mobile.txt`
 - Create: `scripts/check_mobile_env.sh`
 
-- [ ] **Step 1: Write the relaxed-pins requirements file**
+- [x] **Step 1: Write the relaxed-pins requirements file**
 
 Create `requirements-mobile.txt`:
 
@@ -66,7 +66,7 @@ folium==0.19.5
 pytest>=8
 ```
 
-- [ ] **Step 2: Write the env-check script**
+- [x] **Step 2: Write the env-check script**
 
 Create `scripts/check_mobile_env.sh`:
 
@@ -99,47 +99,47 @@ print('matplotlib', matplotlib.__version__); print('ezdxf', ezdxf.__version__); 
 print('folium', folium.__version__)"
 ```
 
-- [ ] **Step 3: Make the script executable**
+- [x] **Step 3: Make the script executable**
 
 Run: `chmod +x scripts/check_mobile_env.sh`
 Expected: no output, exit 0.
 
-- [ ] **Step 4: Add `.venv-mobile` to .gitignore**
+- [x] **Step 4: Add `.venv-mobile` to .gitignore**
 
 Append `.venv-mobile/` to the repo `.gitignore` (the venv is a build artifact, not source).
 Run: `grep -q '.venv-mobile' .gitignore && echo OK`
 Expected: `OK`
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add requirements-mobile.txt scripts/check_mobile_env.sh .gitignore
 git commit -m "feat(mobile): add Gate A relaxed-pin env + check script"
 ```
 
-### Task A2: Run the existing suite under the relaxed pins (the Gate A test)
+### Task A2: Run the existing suite under the relaxed pins (the Gate A test) [a962935]
 
 **Files:**
 - Test: the existing `tests/` suite (no new tests — this gate verifies the unchanged core under downgraded deps).
 
-- [ ] **Step 1: Run the Gate A check**
+- [x] **Step 1: Run the Gate A check**
 
 Run: `./scripts/check_mobile_env.sh`
 Expected: pytest summary ends in `passed` with **0 failed**, then a version block printing `numpy 1.26.2`, `pandas 2.1.3`, `matplotlib 3.8.4`, Python `3.13.x`.
 
-- [ ] **Step 2: If any test fails, diagnose before proceeding**
+- [x] **Step 2: If any test fails, diagnose before proceeding**
 
 If the run is NOT green, do NOT start Gate B. For each failure, decide whether it is:
   - a deps-version behaviour change (record it; if a fix is needed in `cave_sketch`, the fix MUST stay Streamlit/Android-free AND keep the web-app env green — re-run `uv run pytest` on the main env to confirm), or
   - environment noise (e.g. a missing matplotlib font/backend) — set `MPLBACKEND=Agg` and re-run.
 Record the failure and resolution verbatim for the DEVLOG (Task B8). Expected (per the spec's API grep): **green with no code changes.**
 
-- [ ] **Step 3: Confirm the web-app env is untouched**
+- [x] **Step 3: Confirm the web-app env is untouched**
 
 Run: `git status --porcelain pyproject.toml uv.lock`
 Expected: **no output** (the web app's pins are unchanged).
 
-- [ ] **Step 4: Capture the version block for the DEVLOG**
+- [x] **Step 4: Capture the version block for the DEVLOG**
 
 Copy the printed version block from Step 1 into a scratch note; it becomes part of the Gate A findings in Task B8.
 
@@ -149,29 +149,29 @@ Copy the printed version block from Step 1 into a scratch note; it becomes part 
 
 # GATE B — On-device proof (real arm64 phone)
 
-### Task B1: Install and verify the Android toolchain
+### Task B1: Install and verify the Android toolchain [3bf0478]
 
 **Files:** none (local toolchain).
 
-- [ ] **Step 1: Install Android Studio + SDK + JDK 17**
+- [x] **Step 1: Install Android Studio + SDK + JDK 17**
 
 Install Android Studio (bundles the SDK and a compatible JDK). On macOS: `brew install --cask android-studio`, then launch once and complete the SDK setup wizard (install "Android SDK Platform 34" and "Android SDK Build-Tools").
 
-- [ ] **Step 2: Verify the SDK command-line tools are on PATH**
+- [x] **Step 2: Verify the SDK command-line tools are on PATH**
 
 Run: `sdkmanager --version` (or `~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --version`)
 Expected: a version number prints (e.g. `12.0` or similar), exit 0.
 
-- [ ] **Step 3: Enable USB debugging on the phone and connect it**
+- [x] **Step 3: Enable USB debugging on the phone and connect it**
 
 On the phone: Settings → About → tap Build Number 7× → Developer options → enable "USB debugging". Connect via USB and accept the RSA prompt.
 
-- [ ] **Step 4: Verify the real device is visible to adb**
+- [x] **Step 4: Verify the real device is visible to adb**
 
 Run: `adb devices`
 Expected: the phone's serial listed with status `device` (not `unauthorized`/`offline`). This is the device Gate B must run on — emulator does not count.
 
-### Task B2: Scaffold the `android/` Gradle project with Chaquopy
+### Task B2: Scaffold the `android/` Gradle project with Chaquopy [9cd5f60]
 
 **Files:**
 - Create: `android/settings.gradle`
@@ -185,7 +185,7 @@ Expected: the phone's serial listed with status `device` (not `unauthorized`/`of
 > the official example for the installed Chaquopy version wins — record any
 > deviation in the DEVLOG.
 
-- [ ] **Step 1: Write `android/settings.gradle`**
+- [x] **Step 1: Write `android/settings.gradle`**
 
 ```groovy
 pluginManagement {
@@ -205,7 +205,7 @@ rootProject.name = "CaveSketchSpike"
 include ":app"
 ```
 
-- [ ] **Step 2: Write `android/build.gradle` (top-level)**
+- [x] **Step 2: Write `android/build.gradle` (top-level)**
 
 ```groovy
 plugins {
@@ -215,7 +215,7 @@ plugins {
 }
 ```
 
-- [ ] **Step 3: Write `android/gradle.properties`**
+- [x] **Step 3: Write `android/gradle.properties`**
 
 ```properties
 org.gradle.jvmargs=-Xmx2048m
@@ -223,7 +223,7 @@ android.useAndroidX=true
 kotlin.code.style=official
 ```
 
-- [ ] **Step 4: Write `android/app/build.gradle`**
+- [x] **Step 4: Write `android/app/build.gradle`**
 
 ```groovy
 plugins {
@@ -292,20 +292,20 @@ dependencies {
 }
 ```
 
-- [ ] **Step 5: Commit the scaffold**
+- [x] **Step 5: Commit the scaffold**
 
 ```bash
 git add android/settings.gradle android/build.gradle android/gradle.properties android/app/build.gradle
 git commit -m "feat(android): scaffold Chaquopy spike Gradle project"
 ```
 
-### Task B3: Add the Python glue and the sample input
+### Task B3: Add the Python glue and the sample input [2ce9c14]
 
 **Files:**
 - Create: `android/app/src/main/python/spike.py`
 - Create: `android/app/src/main/assets/sample.dxf`
 
-- [ ] **Step 1: Write `spike.py` (thin glue, no business logic)**
+- [x] **Step 1: Write `spike.py` (thin glue, no business logic)**
 
 ```python
 """Phase 0 spike glue. Calls the UNTOUCHED cave_sketch core, mirroring the web
@@ -335,7 +335,7 @@ def render_sample_pdf(dxf_path: str, work_dir: str) -> str:
     return str(pdf_path)
 ```
 
-- [ ] **Step 2: Copy the fixture DXF into the app assets**
+- [x] **Step 2: Copy the fixture DXF into the app assets**
 
 Run: `mkdir -p android/app/src/main/assets && cp tests/fixtures/sample.dxf android/app/src/main/assets/sample.dxf`
 Expected: `android/app/src/main/assets/sample.dxf` exists.
@@ -343,20 +343,20 @@ Expected: `android/app/src/main/assets/sample.dxf` exists.
 Verify: `test -s android/app/src/main/assets/sample.dxf && echo OK`
 Expected: `OK`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add android/app/src/main/python/spike.py android/app/src/main/assets/sample.dxf
 git commit -m "feat(android): add spike.py glue + sample.dxf asset"
 ```
 
-### Task B4: Manifest + Python runtime startup
+### Task B4: Manifest + Python runtime startup [4bbd172]
 
 **Files:**
 - Create: `android/app/src/main/AndroidManifest.xml`
 - Create: `android/app/src/main/java/com/cavesketch/spike/SpikeApplication.kt`
 
-- [ ] **Step 1: Write the manifest**
+- [x] **Step 1: Write the manifest**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -377,7 +377,7 @@ git commit -m "feat(android): add spike.py glue + sample.dxf asset"
 </manifest>
 ```
 
-- [ ] **Step 2: Write the Application that starts Python**
+- [x] **Step 2: Write the Application that starts Python**
 
 ```kotlin
 package com.cavesketch.spike
@@ -396,19 +396,19 @@ class SpikeApplication : Application() {
 }
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add android/app/src/main/AndroidManifest.xml android/app/src/main/java/com/cavesketch/spike/SpikeApplication.kt
 git commit -m "feat(android): manifest + Python runtime startup"
 ```
 
-### Task B5: The Compose screen — button → bridge → PDF → on-screen image
+### Task B5: The Compose screen — button → bridge → PDF → on-screen image [f238b48]
 
 **Files:**
 - Create: `android/app/src/main/java/com/cavesketch/spike/MainActivity.kt`
 
-- [ ] **Step 1: Write `MainActivity.kt`**
+- [x] **Step 1: Write `MainActivity.kt`**
 
 ```kotlin
 package com.cavesketch.spike
@@ -506,46 +506,46 @@ class MainActivity : ComponentActivity() {
 }
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/spike/MainActivity.kt
 git commit -m "feat(android): Compose UI + bridge + PdfRenderer on-screen preview"
 ```
 
-### Task B6: Build the debug APK (build-success checkpoint)
+### Task B6: Build the debug APK (build-success checkpoint) [14ef731]
 
 **Files:** none (build).
 
-- [ ] **Step 1: Assemble the debug APK**
+- [x] **Step 1: Assemble the debug APK**
 
 Run (from `android/`): `./gradlew :app:assembleDebug`
 Expected: `BUILD SUCCESSFUL`. The first run downloads Chaquopy's native wheels for `numpy`/`pandas`/`matplotlib` (arm64-v8a + x86_64) — slow the first time.
 
-- [ ] **Step 2: If the build fails on a dependency, record and adjust**
+- [x] **Step 2: If the build fails on a dependency, record and adjust**
 
 If Chaquopy reports a package/ABI it cannot satisfy at the pinned version, note the exact message in the DEVLOG, then pick the nearest available version from `https://chaquo.com/pypi-13.1/<pkg>/` and re-run. Re-run Gate A (`./scripts/check_mobile_env.sh` with the adjusted pin) before accepting any changed pin, so the laptop proof stays honest.
 
-- [ ] **Step 3: Note the APK size (a findings metric)**
+- [x] **Step 3: Note the APK size (a findings metric)**
 
 Run: `ls -lh android/app/build/outputs/apk/debug/app-debug.apk`
 Expected: a file in the tens-of-MB range. Record the size for Task B8.
 
-### Task B7: Run on the real phone and verify the PDF (manual device verification)
+### Task B7: Run on the real phone and verify the PDF (manual device verification) [e19eed0]
 
 **Files:** none (on-device).
 
-- [ ] **Step 1: Install and launch on the connected phone**
+- [x] **Step 1: Install and launch on the connected phone**
 
 Run (from `android/`): `./gradlew :app:installDebug`
 Then launch "CaveSketch Spike" from the phone's app drawer (or `adb shell monkey -p com.cavesketch.spike 1`).
 Expected: app opens showing the "Run spike" button.
 
-- [ ] **Step 2: Run the spike on-device**
+- [x] **Step 2: Run the spike on-device**
 
 Tap **Run spike**. Expected: status changes to `OK — rendered in <N> ms` and a survey plot image appears below the button.
 
-- [ ] **Step 3: Verify correctness against the desktop output**
+- [x] **Step 3: Verify correctness against the desktop output**
 
 Generate the desktop reference from the Gate A env for the same fixture:
 
@@ -555,22 +555,22 @@ Generate the desktop reference from the Gate A env for the same fixture:
 
 Open `/tmp/spike_desktop.pdf` and eyeball-compare it to the on-phone image: same survey geometry, stations, and layout. Expected: **visually equivalent** (minor font/anti-aliasing differences are acceptable; the plot must be the same survey).
 
-- [ ] **Step 4: Record the on-device render time**
+- [x] **Step 4: Record the on-device render time**
 
 From the status line in Step 2, record the elapsed milliseconds. If it varies, run 3× and record the range. This is the §6 render-time metric.
 
-- [ ] **Step 5: If it fails on-device, capture logs**
+- [x] **Step 5: If it fails on-device, capture logs**
 
 Run: `adb logcat -d | grep -iE "python|chaquopy|AndroidRuntime" | tail -50`
 Record any Python traceback in the DEVLOG before attempting a fix.
 
-### Task B8: Record findings, difficulty verdict, and flip status
+### Task B8: Record findings, difficulty verdict, and flip status [4df2f5d]
 
 **Files:**
 - Create: `android/DEVLOG.md`
 - Modify: `docs/mobile-app/README.md`
 
-- [ ] **Step 1: Write the first `android/DEVLOG.md` entry**
+- [x] **Step 1: Write the first `android/DEVLOG.md` entry**
 
 Create `android/DEVLOG.md` with the findings (fill the bracketed values from the run):
 
@@ -579,7 +579,7 @@ Create `android/DEVLOG.md` with the findings (fill the bracketed values from the
 
 (Mobile-app history. Root `DEVLOG.md` covers the Python project / web app.)
 
-## 2026-06-16 — Phase 0 spike complete
+## 2026-06-18 — Phase 0 spike complete
 
 **Gate A (desktop relaxed pins):** existing pytest suite [PASSED/FAILED] under
 Python [3.13.x], numpy 1.26.2, pandas 2.1.3, matplotlib 3.8.4, ezdxf 1.4.1,
@@ -598,14 +598,14 @@ justification grounded in the above: e.g. "GREEN: stack runs unchanged, render
 time acceptable at N ms, no pin surprises; remaining work is UI wiring."].
 ```
 
-- [ ] **Step 2: Flip the Phase 0 status in the initiative README**
+- [x] **Step 2: Flip the Phase 0 status in the initiative README**
 
 In `docs/mobile-app/README.md`, change the Phase 0 row from `⬜ Not started` to `✅ Done` (and the Gate-A/Gate-B outcome if you wish to note it).
 
 Verify: `grep -A1 "Phase 0" docs/mobile-app/README.md`
 Expected: shows the updated status.
 
-- [ ] **Step 3: Commit the findings**
+- [x] **Step 3: Commit the findings**
 
 ```bash
 git add android/DEVLOG.md docs/mobile-app/README.md

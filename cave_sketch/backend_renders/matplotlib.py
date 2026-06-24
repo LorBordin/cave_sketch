@@ -1,6 +1,7 @@
-from typing import Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import numpy as np
+from matplotlib.collections import LineCollection
 from matplotlib.patches import Polygon as MplPolygon
 
 
@@ -34,59 +35,87 @@ def render_to_matplotlib(
         ax.add_patch(poly)
 
     # ---- LINES ----
+    segments = []
+    colors = []
+    linewidths = []
+    linestyles = []
+
     for line in features.get("lines", []):
         coords = np.array(line["coords"], dtype=float)
-        xs = coords[:, 1]
-        ys = coords[:, 0]
+        # coords is [[y1, x1], [y2, x2]], we need [[x1, y1], [x2, y2]]
+        segment = [(coords[0, 1], coords[0, 0]), (coords[1, 1], coords[1, 0])]
+        segments.append(segment)
+
+        colors.append(line.get("color", "black"))
 
         base_weight = line.get("weight", 1)
         lw = base_weight * zoom_factor / ref_scale
         lw = np.clip(lw, 0.2, 4)
+        linewidths.append(lw)
 
         dash = line.get("dash")
         linestyle = (0, tuple(dash)) if dash else "solid"
+        linestyles.append(linestyle)
 
-        ax.plot(
-            xs,
-            ys,
-            color=line.get("color", "black"),
-            linewidth=lw,
-            linestyle=linestyle,
+    if segments:
+        lc = LineCollection(
+            segments,
+            colors=colors,
+            linewidths=linewidths,
+            linestyles=linestyles,
             alpha=0.9,
-            zorder=line.get("zorder", 2),
+            zorder=2,
         )
+        ax.add_collection(lc)
+        ax.autoscale_view()
 
     # ---- POINTS (B_ice, BLOCK, etc.) ----
+    points_by_marker: Dict[str, List[Dict[str, Any]]] = {}
     for p in features.get("points", []):
-        y, x = p["coords"]
-
-        # interpret 'size' as diameter in points, not area
-        size_pts = p.get("size", 6)
-        s_area = size_pts**2 * 0.5  # dampen to avoid huge circles
-
         marker = p.get("marker", "o")
-        color = p.get("color", "black")
-        if color == "saddlebrown":
-            print("BLOCK!!")
-        elif color == "deepskyblue":
-            print("ICE")
+        points_by_marker.setdefault(marker, []).append(p)
+
+    for marker, plist in points_by_marker.items():
+        xs = []
+        ys = []
+        sizes = []
+        colors = []
+        zorder = 3
+        for p in plist:
+            y, x = p["coords"]
+            xs.append(x)
+            ys.append(y)
+            size_pts = p.get("size", 6)
+            s_area = size_pts**2 * 0.5
+            sizes.append(s_area)
+            colors.append(p.get("color", "black"))
+            zorder = p.get("zorder", 3)
 
         ax.scatter(
-            x,
-            y,
-            s=s_area,
-            c=color,
+            xs,
+            ys,
+            s=sizes,
+            c=colors,
             marker=marker,
             edgecolors="none",
             alpha=0.9,
-            zorder=p.get("zorder", 3),
+            zorder=zorder,
         )
 
         # Optional text label
         if config.get("show_labels", False):
-            ax.text(
-                x, y, p.get("popup", ""), fontsize=5, ha="left", va="bottom", color=color, zorder=4
-            )
+            for p in plist:
+                y, x = p["coords"]
+                ax.text(
+                    x,
+                    y,
+                    p.get("popup", ""),
+                    fontsize=5,
+                    ha="left",
+                    va="bottom",
+                    color=p.get("color", "black"),
+                    zorder=4,
+                )
 
     if layer_name:
         ax.set_title(layer_name, fontsize=10)

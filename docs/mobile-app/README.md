@@ -39,7 +39,7 @@ docs/mobile-app/
 | Phase | Description | Status |
 |-------|-------------|--------|
 | Umbrella spec | Roadmap & architecture | ✅ Approved |
-| Phase 0 | Spike: prove Python stack runs on device | ⬜ Not started |
+| Phase 0 | Spike: prove Python stack runs on device | ✅ Done |
 | Phase 1 | Survey Plot screen | ⬜ Not started |
 | Phase 2 | Satellite Map screen | ⬜ Not started |
 | Phase 3 | Polish & release `.apk` | ⬜ Not started |
