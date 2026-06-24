@@ -352,7 +352,7 @@ git commit -m "feat(android): add SectionCard composable"
 
 ---
 
-### Task 3: PrimaryCta reusable composable (amber)
+### Task 3: PrimaryCta reusable composable (amber) (012942e)
 
 **Files:**
 - Create: `android/app/src/main/java/com/cavesketch/app/ui/components/PrimaryCta.kt`
@@ -361,7 +361,7 @@ git commit -m "feat(android): add SectionCard composable"
 **Interfaces:**
 - Produces: `PrimaryCta(text: String, icon: ImageVector, enabled: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier)` — full-width 56dp amber (`secondary`) button with a leading icon; respects `enabled`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `android/app/src/test/java/com/cavesketch/app/ui/components/PrimaryCtaTest.kt`:
 
@@ -370,7 +370,6 @@ package com.cavesketch.app.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -413,12 +412,12 @@ class PrimaryCtaTest {
 }
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.components.PrimaryCtaTest"`
 Expected: FAIL — unresolved reference `PrimaryCta`.
 
-- [ ] **Step 3: Implement PrimaryCta**
+- [x] **Step 3: Implement PrimaryCta**
 
 Create `android/app/src/main/java/com/cavesketch/app/ui/components/PrimaryCta.kt`:
 
@@ -445,8 +444,8 @@ fun PrimaryCta(
     text: String,
     icon: ImageVector,
     enabled: Boolean,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     Button(
         onClick = onClick,
@@ -465,12 +464,12 @@ fun PrimaryCta(
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.components.PrimaryCtaTest"`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/components/PrimaryCta.kt android/app/src/test/java/com/cavesketch/app/ui/components/PrimaryCtaTest.kt
