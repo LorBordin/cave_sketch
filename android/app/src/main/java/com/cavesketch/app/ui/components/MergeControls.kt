@@ -14,8 +14,6 @@ import com.cavesketch.app.util.extensionOf
 
 @Composable
 fun MergeControls(inputs: SurveyInputs, context: Context, onChange: (SurveyInputs) -> Unit) {
-    Text("Merge another survey (optional)")
-
     FilePickerRow("Pick Child Map", inputs.childMapPath?.let { "child_map" }) { uri ->
         val p = com.cavesketch.app.util.safeCopyUriToDir(
             context, uri, context.filesDir, "child_map" + extensionOf(context, uri),
