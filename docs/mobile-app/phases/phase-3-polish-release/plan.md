@@ -941,7 +941,7 @@ Generates launcher icon assets from `imgs/logo.png` with a Pillow script, adds t
 **Interfaces:**
 - Consumes: `@color/ic_launcher_background` (defined in Task 3 `colors.xml`).
 
-- [ ] **Step 1: Write the icon generator**
+- [x] **Step 1: Write the icon generator**
 
 Create `android/tools/gen_launcher_icons.py`:
 
@@ -1027,12 +1027,12 @@ if __name__ == "__main__":
     main()
 ```
 
-- [ ] **Step 2: Run the generator**
+- [x] **Step 2: Run the generator**
 
 Run: `uv run python android/tools/gen_launcher_icons.py`
 Expected: prints "Launcher icons generated…"; PNGs appear under `mipmap-*` and `drawable-*`.
 
-- [ ] **Step 3: Add the adaptive-icon XML**
+- [x] **Step 3: Add the adaptive-icon XML**
 
 Create `android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`:
 
@@ -1046,7 +1046,7 @@ Create `android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`:
 
 Create `android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml` with identical content.
 
-- [ ] **Step 4: Wire the manifest icon**
+- [x] **Step 4: Wire the manifest icon**
 
 In `android/app/src/main/AndroidManifest.xml`, add to `<application>`:
 
@@ -1055,7 +1055,7 @@ In `android/app/src/main/AndroidManifest.xml`, add to `<application>`:
         android:roundIcon="@mipmap/ic_launcher_round"
 ```
 
-- [ ] **Step 5: (Optional) point the splash at the real foreground**
+- [x] **Step 5: (Optional) point the splash at the real foreground**
 
 In `android/app/src/main/res/values/themes.xml`, you may change the splash icon to the launcher foreground:
 
@@ -1063,16 +1063,16 @@ In `android/app/src/main/res/values/themes.xml`, you may change the splash icon 
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
 ```
 
-- [ ] **Step 6: Build and verify**
+- [x] **Step 6: Build and verify**
 
 Run: `cd android && ./gradlew :app:assembleDebug`
 Expected: BUILD SUCCESSFUL.
 
-- [ ] **Step 7: Manual device check**
+- [x] **Step 7: Manual device check**
 
 `./gradlew installDebug` and confirm the launcher icon shows the CaveSketch emblem (square and round/adaptive launchers).
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit** [4c3b05f]
 
 ```bash
 git add android/tools/gen_launcher_icons.py \
