@@ -14,10 +14,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
         val initState = (application as CaveSketchApplication).initState
+        splash.setKeepOnScreenCondition { initState.status.value is InitStatus.Initializing }
         setContent {
             com.cavesketch.app.ui.theme.CaveSketchTheme {
                 val status by initState.status.collectAsState()
