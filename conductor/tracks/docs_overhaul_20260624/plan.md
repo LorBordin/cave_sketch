@@ -37,7 +37,7 @@
       exist or are created in this phase
     - [ ] Commit: `docs(web): add web docs index and image folder`
 
-- [ ] Task: Survey merging doc (EN + IT)
+- [x] Task: Survey merging doc (EN + IT) 37627ee
     - [ ] Create `docs/web/survey-merging.md` (EN) per spec FR-2 — cover: what
       merging does; numeric-only station IDs (letter IDs rejected); one ID pair
       for both views; one child per session; map = Simple Merging; section
@@ -52,7 +52,7 @@
       confirm all protocols + the numeric-ID rule are represented
     - [ ] Commit: `docs(web): document survey merging feature (EN+IT)`
 
-- [ ] Task: Satellite maps & export doc (EN + IT)
+- [x] Task: Satellite maps & export doc (EN + IT) d36a9df
     - [ ] Create `docs/web/satellite-maps.md` (EN) per spec FR-3 — cover:
       single-survey overlay via GPS points; merged-survey rendering; multiple
       surveys via JSON export → re-import; outputs HTML + KML + KMZ; KMZ for
