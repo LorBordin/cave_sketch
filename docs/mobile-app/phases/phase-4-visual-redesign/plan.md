@@ -1330,30 +1330,30 @@ git commit -m "feat(android): branded dark About screen with logo and version ch
 
 ---
 
-### Task 10: Full verification gates + DEVLOG
+### Task 10: Full verification gates + DEVLOG (db97b07)
 
 **Files:**
 - Modify: `android/DEVLOG.md`
 
-- [ ] **Step 1: Run the full unit-test suite**
+- [x] **Step 1: Run the full unit-test suite**
 
 Run: `cd android && ./gradlew testDebugUnitTest`
 Expected: BUILD SUCCESSFUL — all tests pass (`ThemeTest`, `SectionCardTest`, `PrimaryCtaTest`, `StateBannerTest`, `SettingsFormTest`, `AboutScreenTest`).
 
-- [ ] **Step 2: Build the release-style debug APK**
+- [x] **Step 2: Build the release-style debug APK**
 
 Run: `cd android && ./gradlew assembleDebug`
 Expected: BUILD SUCCESSFUL; APK at `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-- [ ] **Step 3: Full-device parity smoke test**
+- [x] **Step 3: Full-device parity smoke test**
 
 Sideload the APK and walk all three screens end-to-end: generate a survey PDF from a sample DXF (incl. a merge), generate a satellite map (online and with connectivity off), and open the About link. Confirm dark theme throughout, cyan + amber identity, top app bar, and card grouping — with **no behavior changed** from Phase 3.
 
-- [ ] **Step 4: Add the DEVLOG entry**
+- [x] **Step 4: Add the DEVLOG entry**
 
 Append a Phase 4 entry to `android/DEVLOG.md` using the existing entry format (match the heading style, date `2026-06-24`, and sections used by prior entries). Summarize: dark-only theme with cyan + amber palette, top app bar, section-card layout, restyled stepper/buttons, new `SectionCard`/`PrimaryCta`/`StateBanner` composables; full feature parity preserved; tests + build green.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/DEVLOG.md
