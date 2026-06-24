@@ -1286,7 +1286,7 @@ Adds a release `signingConfig` reading credentials from an uncommitted `keystore
 
 **Interfaces:** none (build configuration).
 
-- [ ] **Step 1: Ignore keystore artifacts**
+- [x] **Step 1: Ignore keystore artifacts**
 
 In `.gitignore`, under the "Android build and local files" section, add:
 
@@ -1296,7 +1296,7 @@ android/app/*.jks
 android/app/*.keystore
 ```
 
-- [ ] **Step 2: Add a keystore.properties template**
+- [x] **Step 2: Add a keystore.properties template**
 
 Create `android/keystore.properties.template`:
 
@@ -1309,7 +1309,7 @@ keyAlias=cavesketch
 keyPassword=CHANGE_ME
 ```
 
-- [ ] **Step 3: Add ProGuard keep rules**
+- [x] **Step 3: Add ProGuard keep rules**
 
 Create `android/app/proguard-rules.pro`:
 
@@ -1322,7 +1322,7 @@ Create `android/app/proguard-rules.pro`:
 # default rules; nothing else app-specific needs keeping.
 ```
 
-- [ ] **Step 4: Wire signing + release build type**
+- [x] **Step 4: Wire signing + release build type**
 
 In `android/app/build.gradle`, add near the top (after the `plugins { }` block, before `android { }`):
 
@@ -1362,7 +1362,7 @@ Inside `android { }`, add a `signingConfigs` block (before `buildTypes`) and a `
 
 Note: resource shrinking only touches `res/`; Chaquopy's Python lives in `assets/` and is unaffected.
 
-- [ ] **Step 5: Generate a keystore locally (one time)**
+- [x] **Step 5: Generate a keystore locally (one time)**
 
 Run from the repo root (interactive — answer the prompts; remember the passwords):
 
@@ -1378,7 +1378,7 @@ cp android/keystore.properties.template android/keystore.properties
 # edit android/keystore.properties with the real passwords
 ```
 
-- [ ] **Step 6: Build the signed release APK**
+- [x] **Step 6: Build the signed release APK**
 
 Run: `cd android && ./gradlew assembleRelease`
 Expected: BUILD SUCCESSFUL; APK at `android/app/build/outputs/apk/release/app-release.apk`.
@@ -1390,7 +1390,7 @@ $ANDROID_HOME/build-tools/*/apksigner verify --print-certs android/app/build/out
 ```
 Expected: prints a signing certificate (no "DOES NOT VERIFY").
 
-- [ ] **Step 7: Manual device check (release build with minify)**
+- [x] **Step 7: Manual device check (release build with minify)**
 
 Install the release APK on a real device and run a full generation on each screen:
 
@@ -1399,7 +1399,7 @@ adb install -r android/app/build/outputs/apk/release/app-release.apk
 ```
 Expected: app launches; Survey Plot produces a PDF; Satellite produces KMZ/JSON (and online preview). This confirms R8/minify did not strip anything Chaquopy/Python needs.
 
-- [ ] **Step 8: Commit (config only — never the keystore or properties)**
+- [x] **Step 8: Commit (config only — never the keystore or properties)** [7e99382]
 
 ```bash
 git add .gitignore android/app/build.gradle android/app/proguard-rules.pro \
