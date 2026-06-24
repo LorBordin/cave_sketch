@@ -69,7 +69,7 @@
 
 ## Phase 2: Android Documentation
 
-- [ ] Task: Android user guide (EN + IT)
+- [x] Task: Android user guide (EN + IT) c622157
     - [ ] Create `docs/android/README.md` (EN) per spec FR-4 — cover: what the app
       is (offline native, same engine); install from Releases (allow unknown
       sources; upgrade-over-top, settings preserved, same signing key); the three
@@ -83,7 +83,7 @@
     - [ ] Create `docs/android/README.it.md` (IT mirror), same image paths
     - [ ] Commit: `docs(android): add Android user guide (EN+IT)`
 
-- [ ] Task: Android architecture / contributor doc (EN + IT)
+- [x] Task: Android architecture / contributor doc (EN + IT) c2aec70
     - [ ] Create `docs/android/architecture.md` (EN) per spec FR-5 — cover: stack
       (Kotlin, Compose dark Material3, Chaquopy 17 + Python 3.13, native
       PdfRenderer, WebView); layering (screens → ViewModels → bridges → python
