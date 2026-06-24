@@ -835,7 +835,7 @@ Adds `core-splashscreen`, a splash theme, and holds the splash on cold start unt
 **Interfaces:**
 - Consumes: `CaveSketchApplication.initState` + `InitStatus` (Task 5); `@drawable/ic_launcher_foreground` (created in Task 7 — see Step 3 fallback).
 
-- [ ] **Step 1: Add the dependency**
+- [x] **Step 1: Add the dependency**
 
 In `android/app/build.gradle`, add to `dependencies`:
 
@@ -843,7 +843,7 @@ In `android/app/build.gradle`, add to `dependencies`:
     implementation "androidx.core:core-splashscreen:1.0.1"
 ```
 
-- [ ] **Step 2: Add the splash theme**
+- [x] **Step 2: Add the splash theme**
 
 In `android/app/src/main/res/values/themes.xml`, add a splash style (sibling of `Theme.CaveSketch`):
 
@@ -855,7 +855,7 @@ In `android/app/src/main/res/values/themes.xml`, add a splash style (sibling of 
     </style>
 ```
 
-- [ ] **Step 3: Add a splash icon drawable**
+- [x] **Step 3: Add a splash icon drawable**
 
 Until the launcher foreground exists (Task 7), create a simple vector so the build resolves. Create `android/app/src/main/res/drawable/splash_icon.xml`:
 
@@ -874,7 +874,7 @@ Until the launcher foreground exists (Task 7), create a simple vector so the bui
 
 (Task 7 may repoint `windowSplashScreenAnimatedIcon` to the real launcher foreground if desired; this vector keeps Task 6 self-contained and buildable.)
 
-- [ ] **Step 4: Point the manifest at the splash theme**
+- [x] **Step 4: Point the manifest at the splash theme**
 
 In `android/app/src/main/AndroidManifest.xml`, change the `<application android:theme=...>` to the splash theme:
 
@@ -882,7 +882,7 @@ In `android/app/src/main/AndroidManifest.xml`, change the `<application android:
         android:theme="@style/Theme.CaveSketch.Splash">
 ```
 
-- [ ] **Step 5: Install + hold the splash**
+- [x] **Step 5: Install + hold the splash**
 
 In `android/app/src/main/java/com/cavesketch/app/MainActivity.kt`, update `onCreate` to install the splash before `super.onCreate` and hold it while initializing:
 
@@ -904,16 +904,16 @@ In `android/app/src/main/java/com/cavesketch/app/MainActivity.kt`, update `onCre
     }
 ```
 
-- [ ] **Step 6: Compile and test**
+- [x] **Step 6: Compile and test**
 
 Run: `cd android && ./gradlew :app:assembleDebug :app:testDebugUnitTest`
 Expected: BUILD SUCCESSFUL; tests PASS.
 
-- [ ] **Step 7: Manual device check**
+- [x] **Step 7: Manual device check**
 
 Install on a real device (`./gradlew installDebug`), cold-start the app. Expected: branded splash shows on the `brand_background` color and remains until the screens are interactive (no blank/dead UI while Python warms up).
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit** [d2cf3ca]
 
 ```bash
 git add android/app/build.gradle \
