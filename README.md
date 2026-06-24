@@ -5,64 +5,51 @@
 🌍 Available languages: [🇬🇧 English](README.md) | [🇮🇹 Italiano](README.it.md)
 
 **Draw your cave surveys in seconds — directly from TopoDroid!**
-No more heavy tools, no more painful setups. Just DXF files, a browser, and your next expedition.
-
-🔗 **Try it now**: [CaveSketch Live App](https://cavesketch.streamlit.app/)
+No more heavy tools, no more painful setups. Just DXF files, your phone or browser, and your next expedition.
 
 ---
 
-## 🚀 What is CaveSketch?
+## 🚀 Two Ways to Use CaveSketch
 
-CaveSketch is a simple, fast, and mobile-friendly app built with Streamlit that helps cavers generate survey plots **directly from TopoDroid's `.dxf` files**.
+### 🌐 Web App (Online)
+No installation required. Run directly in your web browser.
+- 🔗 **Try the live app:** [cavesketch.streamlit.app](https://cavesketch.streamlit.app/)
+- 📖 **Web Documentation:** See the [Web App Guides](docs/web/README.md) for details on advanced online features.
 
-Whether you're in the field or just back at base camp, you can:
-- 🖨️ **Export clean PDF maps and sections** from your TopoDroid sketches.
-- 🌍 **Place cave maps on satellite imagery**, using known GPS coordinates.
-- 📱 Use it **directly from your phone** — all you need is an internet connection.
-
-No Csurvey, no QGIS, no headaches.
-
----
-
-## 🧭 Features
-
-### ✅ Generate PDF Survey
-- Upload `.dxf` files from TopoDroid (map and/or section).
-- Customize scale, rotation, text size, line width, etc.
-- Export a polished **PDF with your cave map and/or section**.
-
-### ✅ Draw on Satellite Map
-- Overlay your cave map on a satellite image using entrance GPS points.
-- Export an interactive **.html map** ready to share or view offline.
-- Export a **.kml file** for 3D visualization in Google Earth.
+### 📱 Android App (Fully Offline)
+Perfect for field research and offline base camps. Run all survey rendering on-device.
+- 📥 **Download APK:** Get the latest release from [GitHub Releases](https://github.com/LorBordin/cave_sketch/releases).
+- 📖 **Android Documentation:** See the [Android User Guide](docs/android/README.md) for installation and usage.
+- 💻 **Android Contributors:** Read the [Android Architecture & Stack](docs/android/architecture.md) guide.
 
 ---
 
-## 📸 How To Use
+## 🧭 Features at a Glance
 
-### 1. Export your sketches from TopoDroid as **.dxf** files
-   - From the project main window in TopoDroid, tap on the Sketch Editing button <img src="imgs/topodroid_icon.png" style="width: 20px;"> and select the cave map
-   -  Tap on 3 buttons on Top Left and tap `Export`
-   - Select the DXF option and tap on `Save`
-   - In the same way export the cave section
+- 🖨️ **PDF Cave Survey Plots** — Generate high-quality print-ready plan and section maps with customizable scale, rotation, grid, and drawn scale bars.
+- 🔗 **Survey Merging** — Join a parent and child survey directly in the survey plot, supporting multiple section layout protocols (Simple, Mirror, Displacement).
+- 🌍 **Satellite Imagery Overlay** — Position your cave map on GPS-georeferenced satellite images (more referenced points = higher accuracy).
+- 🗺️ **Multi-Survey Maps** — Combine multiple independent surveys into a single geographic view using JSON export and re-import.
+- 📦 **Offline KMZ & KML Export** — Export self-contained, optimized KMZ archives for offline use in mobile mapping tools like Locus Map or OsmAnd.
+
+For detailed guides on how to use these features, explore the [Web App Documentation](docs/web/README.md) or the [Android User Guide](docs/android/README.md).
+
+---
+
+## 📸 Prerequisite: Exporting from TopoDroid
+
+To use CaveSketch, you need to export your sketches from TopoDroid as **.dxf** files:
+
+1. From the project main window in TopoDroid, tap on the Sketch Editing button <img src="imgs/topodroid_icon.png" style="width: 20px;"> and select the cave map.
+2. Tap on the 3 dots/buttons on the Top Left and select `Export`.
+3. Select the `DXF` option and tap `Save`.
+4. Export the cave section in the same way.
 
 <div style="display: flex; gap: 10px; justify-content: space-between;">
   <img src="imgs/map_export.jpg" style="width: 200px;">
   <img src="imgs/export_format.jpg" style="width: 200px;">
   <img src="imgs/section_export.jpg" style="width: 200px;">
 </div>
-
-
-### 2. 🗺️ Create the survey on the map
-   - Upload the exported DXF files on the app. Notice: there is no need to upload both files, in case you are interested only on the map or the section.
-   - Customize the settings (scale, text size, rotation, etc.)
-   - Click **✨ Generate Survey Plot**
-   - If you are satisfied, download your **PDF**!
-
-### 3. 🌍 Position the cave map on satellite imagery.
-   - add known GPS points for survey stations to georeference your map.
-   - add as many knwon points as you want (the more the better)
-   - click on **🌍 Generate Geo Map** to generate a satelite view map.
 
 ---
 
@@ -83,7 +70,7 @@ No Csurvey, no QGIS, no headaches.
    ```bash
    uv run pre-commit install
    ```
-4. **Run the app**:
+4. **Run the local development app**:
    ```bash
    uv run streamlit run app/app.py
    ```
@@ -91,19 +78,17 @@ No Csurvey, no QGIS, no headaches.
 ### 🧑‍💻 Contribute
 Found a bug? Got an idea? PRs welcome!
 To contribute:
-
-1. Fork the repo
-2. Create a new branch
-3. Commit your changes
+1. Fork the repo.
+2. Create a new branch.
+3. Commit your changes.
 4. Open a pull request 🚀
 
-### 📋 ToDo List (Open for Contributors)
+---
+
+## 📋 ToDo List (Open for Contributors)
+
 Help us make CaveSketch even better!
 
-- 📖 **Document multi-survey satellite map workflow**: Explain how to export a sketch as JSON and re-import it with new surveys to draw multiple sketches on the map.
-- 📄 **Implement multi-survey merging for PDF surveys**: Enable the same merging capabilities found in the satellite view for the PDF survey plot generation.
-- 🎨 Add option to color areas, not just draw lines
-- 🛰️ Improve satellite HTML map rendering
-- ✅ Add support for .kml export (Google Earth)
-- ➕ Allow adding surveys to an existing .kml file (merge drawings)
-- 🧊 Draw and export 3D cave models
+- 🎨 Add option to color areas, not just draw lines.
+- 🛰️ Improve satellite HTML map rendering.
+- 🧊 Draw and export 3D cave models.
