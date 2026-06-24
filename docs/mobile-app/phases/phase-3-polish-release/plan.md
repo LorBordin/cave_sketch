@@ -157,7 +157,7 @@ Extracts the launch-time cleanup file list (currently inline in `CaveSketchAppli
 - Produces: `val com.cavesketch.app.util.SESSION_FILES: List<String>`
 - Produces: `fun com.cavesketch.app.util.filesToDelete(names: List<String>): List<String>`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `android/app/src/test/java/com/cavesketch/app/util/SessionCleanupTest.kt`:
 
@@ -200,12 +200,12 @@ class SessionCleanupTest {
 }
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.util.SessionCleanupTest"`
 Expected: FAIL — `filesToDelete` / `SESSION_FILES` unresolved.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 Create `android/app/src/main/java/com/cavesketch/app/util/SessionCleanup.kt`:
 
@@ -230,12 +230,12 @@ fun filesToDelete(names: List<String>): List<String> =
     names.filter { it in SESSION_FILES || it.startsWith(ADDITIONAL_PREFIX) }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.util.SessionCleanupTest"`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Wire into the Application**
+- [x] **Step 5: Wire into the Application**
 
 In `android/app/src/main/java/com/cavesketch/app/CaveSketchApplication.kt`, replace the inline cleanup block (lines ~11-17) with:
 
@@ -247,12 +247,12 @@ In `android/app/src/main/java/com/cavesketch/app/CaveSketchApplication.kt`, repl
         }
 ```
 
-- [ ] **Step 6: Run unit tests + compile**
+- [x] **Step 6: Run unit tests + compile**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest`
 Expected: PASS.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit** [456ad74]
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/util/SessionCleanup.kt \
