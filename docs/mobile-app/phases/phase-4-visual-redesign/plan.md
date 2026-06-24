@@ -1014,7 +1014,7 @@ git commit -m "feat(android): card-grouped Survey Plot screen with amber CTA"
 
 ---
 
-### Task 8: Satellite Map screen — group into cards + amber CTA
+### Task 8: Satellite Map screen — group into cards + amber CTA (7904a5a)
 
 **Files:**
 - Modify: `android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt`
@@ -1024,7 +1024,7 @@ git commit -m "feat(android): card-grouped Survey Plot screen with amber CTA"
 - Consumes: `SectionCard`, `PrimaryCta`, `StateBanner`, `GpsPointsEditor` (this task), existing `SatelliteViewModel`, `SatelliteState`, `MapWebView`, `parsesAsCoordinate`, `shareFile`.
 - `SatelliteScreen(viewModel: SatelliteViewModel)` signature unchanged.
 
-- [ ] **Step 1: Drop the internal header in GpsPointsEditor**
+- [x] **Step 1: Drop the internal header in GpsPointsEditor**
 
 In `android/app/src/main/java/com/cavesketch/app/ui/components/GpsPointsEditor.kt`, delete the line:
 
@@ -1034,7 +1034,7 @@ In `android/app/src/main/java/com/cavesketch/app/ui/components/GpsPointsEditor.k
 
 Leave the point rows and the Add/Remove buttons unchanged.
 
-- [ ] **Step 2: Rewrite SatelliteScreen with cards + CTA + banners**
+- [x] **Step 2: Rewrite SatelliteScreen with cards + CTA + banners**
 
 Replace the entire contents of `android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt`:
 
@@ -1200,16 +1200,16 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
 }
 ```
 
-- [ ] **Step 3: Build to verify it compiles**
+- [x] **Step 3: Build to verify it compiles**
 
 Run: `cd android && ./gradlew assembleDebug`
 Expected: BUILD SUCCESSFUL.
 
-- [ ] **Step 4: Manual verification**
+- [x] **Step 4: Manual verification**
 
 On device: the Satellite Map screen shows three cards (GPS points / Map details / Additional maps), the amber "Generate Satellite Map" CTA, and (after generating) the WebView map online or the soft offline banner. Confirm parity: add/remove GPS points, lat/lon validation, JSON import counter, rotation field, and the three Save/Share buttons all behave as before.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt android/app/src/main/java/com/cavesketch/app/ui/components/GpsPointsEditor.kt
