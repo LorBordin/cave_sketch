@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MaterialTheme { App() } }
+        setContent { com.cavesketch.app.ui.theme.CaveSketchTheme { App() } }
     }
 }
 
