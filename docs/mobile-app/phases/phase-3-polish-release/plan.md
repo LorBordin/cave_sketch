@@ -414,7 +414,7 @@ Adds an About destination to the bottom nav showing the app version (from `Build
 - Produces: `@Composable fun com.cavesketch.app.ui.AboutScreen(versionName: String)`
 - Produces: `AppNavHost(surveyViewModel, satelliteViewModel, versionName: String)` (signature gains a `versionName` param).
 
-- [ ] **Step 1: Enable BuildConfig + set release version**
+- [x] **Step 1: Enable BuildConfig + set release version**
 
 In `android/app/build.gradle`, set the version in `defaultConfig`:
 
@@ -432,7 +432,7 @@ And add `buildConfig` next to `compose` in `buildFeatures`:
     }
 ```
 
-- [ ] **Step 2: Write the failing test for the version line**
+- [x] **Step 2: Write the failing test for the version line**
 
 Create `android/app/src/test/java/com/cavesketch/app/ui/AboutScreenTest.kt`:
 
@@ -455,12 +455,12 @@ class AboutScreenTest {
 }
 ```
 
-- [ ] **Step 3: Run test to verify it fails**
+- [x] **Step 3: Run test to verify it fails**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.ui.AboutScreenTest"`
 Expected: FAIL — `aboutVersionLine` unresolved.
 
-- [ ] **Step 4: Implement the About screen**
+- [x] **Step 4: Implement the About screen**
 
 Create `android/app/src/main/java/com/cavesketch/app/ui/AboutScreen.kt`:
 
@@ -513,12 +513,12 @@ fun AboutScreen(versionName: String) {
 }
 ```
 
-- [ ] **Step 5: Run test to verify it passes**
+- [x] **Step 5: Run test to verify it passes**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.ui.AboutScreenTest"`
 Expected: PASS (2 tests).
 
-- [ ] **Step 6: Add the About destination to the nav host**
+- [x] **Step 6: Add the About destination to the nav host**
 
 Replace the body of `android/app/src/main/java/com/cavesketch/app/ui/AppNavHost.kt` with:
 
@@ -583,7 +583,7 @@ fun AppNavHost(
 }
 ```
 
-- [ ] **Step 7: Pass the version into the nav host**
+- [x] **Step 7: Pass the version into the nav host**
 
 In `android/app/src/main/java/com/cavesketch/app/MainActivity.kt`, replace line 45:
 
@@ -595,12 +595,12 @@ In `android/app/src/main/java/com/cavesketch/app/MainActivity.kt`, replace line 
     )
 ```
 
-- [ ] **Step 8: Compile and test**
+- [x] **Step 8: Compile and test**
 
 Run: `cd android && ./gradlew :app:assembleDebug :app:testDebugUnitTest`
 Expected: BUILD SUCCESSFUL; tests PASS.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit** [1f72236]
 
 ```bash
 git add android/app/build.gradle \
