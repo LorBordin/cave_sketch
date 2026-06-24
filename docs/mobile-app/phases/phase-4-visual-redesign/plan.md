@@ -588,7 +588,7 @@ git commit -m "feat(android): add StateBanner composable"
 
 ---
 
-### Task 5: Restyle StepperControl to a single row & FilePickerRow buttons
+### Task 5: Restyle StepperControl to a single row & FilePickerRow buttons (0415990)
 
 **Files:**
 - Modify: `android/app/src/main/java/com/cavesketch/app/ui/components/SettingsForm.kt`
@@ -600,7 +600,7 @@ git commit -m "feat(android): add StateBanner composable"
 - `SettingsForm(inputs, onChange)` signature unchanged; its internal `Text("Survey settings")` header is removed (the wrapping `SectionCard` from Task 7 supplies the header).
 - `FilePickerRow(label, fileName, onPick)` signature unchanged.
 
-- [ ] **Step 1: Restyle StepperControl into a single row**
+- [x] **Step 1: Restyle StepperControl into a single row**
 
 In `android/app/src/main/java/com/cavesketch/app/ui/components/SettingsForm.kt`, replace the `Column(Modifier.testTag(label)) { ... }` block at the end of `StepperControl` (the layout, **not** the value/clamp logic above it) with:
 
@@ -636,7 +636,7 @@ In `android/app/src/main/java/com/cavesketch/app/ui/components/SettingsForm.kt`,
 
 (The imports `Row`, `fillMaxWidth`, `Alignment`, `testTag`, `semantics`, `contentDescription`, `Icons.Filled.Add`, `Icons.Filled.Remove` are already present in this file.)
 
-- [ ] **Step 2: Remove the SettingsForm internal header**
+- [x] **Step 2: Remove the SettingsForm internal header**
 
 In the same file, in `SettingsForm`, delete the line:
 
@@ -646,7 +646,7 @@ In the same file, in `SettingsForm`, delete the line:
 
 Leave the rest of `SettingsForm` (rule-length slider, the four `StepperControl` calls, the two checkbox rows) unchanged.
 
-- [ ] **Step 3: Restyle FilePickerRow buttons**
+- [x] **Step 3: Restyle FilePickerRow buttons**
 
 Replace the entire contents of `android/app/src/main/java/com/cavesketch/app/ui/components/FilePickerRow.kt`:
 
@@ -695,12 +695,12 @@ Add the missing import at the top of the file:
 import androidx.compose.ui.unit.dp
 ```
 
-- [ ] **Step 4: Run the existing settings tests to verify they stay green**
+- [x] **Step 4: Run the existing settings tests to verify they stay green**
 
 Run: `cd android && ./gradlew testDebugUnitTest --tests "com.cavesketch.app.ui.components.SettingsFormTest"`
 Expected: PASS (all stepper testTags, content descriptions, label/value text, and the rule-length slider range still resolve).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/ui/components/SettingsForm.kt android/app/src/main/java/com/cavesketch/app/ui/components/FilePickerRow.kt
