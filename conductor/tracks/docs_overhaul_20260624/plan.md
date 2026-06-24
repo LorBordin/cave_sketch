@@ -25,7 +25,7 @@
 
 ## Phase 1: Web Documentation
 
-- [ ] Task: Web docs index + image folder
+- [x] Task: Web docs index + image folder dd292b0
     - [ ] Create `docs/web/imgs/.gitkeep` (empty, to track the folder)
     - [ ] Create `docs/web/README.md` (EN): language-switch header; title
       `# CaveSketch — Web App Documentation`; one-paragraph overview + live link
