@@ -1105,7 +1105,7 @@ Wraps the picked-file copy call sites so an `IOException` (e.g. disk full) shows
 - Consumes: `friendlyError` (Task 1); `copyUriToDir` (existing, `FileCopy.kt`).
 - Produces: `fun com.cavesketch.app.util.safeCopyUriToDir(context, uri, dir, fileName, onError: (String) -> Unit): String?` — returns the path on success, or `null` after invoking `onError` with a friendly message.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `android/app/src/test/java/com/cavesketch/app/util/SafeCopyTest.kt`:
 
@@ -1142,12 +1142,12 @@ class SafeCopyTest {
 }
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.util.SafeCopyTest"`
 Expected: FAIL — `runCopy` unresolved.
 
-- [ ] **Step 3: Implement the safe-copy helper**
+- [x] **Step 3: Implement the safe-copy helper**
 
 Create `android/app/src/main/java/com/cavesketch/app/util/SafeCopy.kt`:
 
@@ -1184,12 +1184,12 @@ fun safeCopyUriToDir(
 ): String? = runCopy({ copyUriToDir(context, uri, dir, fileName) }, onError)
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd android && ./gradlew :app:testDebugUnitTest --tests "com.cavesketch.app.util.SafeCopyTest"`
 Expected: PASS (2 tests).
 
-- [ ] **Step 5: Use safe copy in SurveyPlotScreen**
+- [x] **Step 5: Use safe copy in SurveyPlotScreen**
 
 In `android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt`, add a toast helper and update the two picker callbacks (lines ~40-47). Add near the top of the composable (after `val context = LocalContext.current`):
 
@@ -1214,7 +1214,7 @@ Replace the two `FilePickerRow` callbacks:
         }
 ```
 
-- [ ] **Step 6: Use safe copy in MergeControls**
+- [x] **Step 6: Use safe copy in MergeControls**
 
 In `android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt`, replace the two `copyUriToDir` calls (lines ~21-25) with `safeCopyUriToDir`, surfacing errors via a Toast. For each picker callback, replace:
 
@@ -1243,7 +1243,7 @@ If the existing lambda has no label to `return@`, instead guard with a local:
 
 Apply the same to the `child_section` callback. (Read the current file before editing; preserve the existing assignment logic — only the copy call and the null-guard change.)
 
-- [ ] **Step 7: Use safe copy in SatelliteScreen**
+- [x] **Step 7: Use safe copy in SatelliteScreen**
 
 In `android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt`, replace the copy inside the `jsonPicker` callback (lines ~48-51):
 
@@ -1256,12 +1256,12 @@ In `android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt`, replace
         }
 ```
 
-- [ ] **Step 8: Compile and test**
+- [x] **Step 8: Compile and test**
 
 Run: `cd android && ./gradlew :app:assembleDebug :app:testDebugUnitTest`
 Expected: BUILD SUCCESSFUL; tests PASS.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit** [254538d]
 
 ```bash
 git add android/app/src/main/java/com/cavesketch/app/util/SafeCopy.kt \
