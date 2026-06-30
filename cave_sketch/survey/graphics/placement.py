@@ -124,7 +124,9 @@ def get_dual_placement(
     corner, x_min, x_max, y_min, y_max, 
     rule_width, arrow_height, 
     inset_fraction=0.02, vertical_gap=2.0,
-    ref_scale=None
+    ref_scale=None,
+    rule_orientation="horizontal",
+    north_flag=True
 ):
     """
     Compute coordinates for both North arrow and scale rule.
@@ -135,6 +137,60 @@ def get_dual_placement(
     inset_x = width * inset_fraction
     inset_y = height * inset_fraction
     
+    if rule_orientation == "vertical":
+        # For a vertical rule, there is no North arrow.
+        # Its width is rule_width (which is scale_width = ref_scale * 0.005).
+        # Its height is arrow_height (which is rule_length).
+        # The label is on the left side of the rule, placed at x_start - 6.
+        # So we want the left side of the footprint (x_start - 8) to be clear.
+        left_padding = 8.0
+        
+        if corner == "bottom-left":
+            x_start = x_min + inset_x + left_padding
+            y_start = y_min + inset_y
+        elif corner == "bottom-right":
+            x_start = x_max - inset_x - rule_width
+            y_start = y_min + inset_y
+        elif corner == "top-left":
+            x_start = x_min + inset_x + left_padding
+            y_start = y_max - inset_y - arrow_height
+        elif corner == "top-right":
+            x_start = x_max - inset_x - rule_width
+            y_start = y_max - inset_y - arrow_height
+        else:
+            x_start = x_min + inset_x + left_padding
+            y_start = y_min + inset_y
+            
+        rule_pos = (x_start, y_start)
+        arrow_pos = (0.0, 0.0)
+        return arrow_pos, rule_pos
+        
+    elif rule_orientation == "horizontal" and not north_flag:
+        # We only draw the horizontal rule.
+        # The label is at y_start - 2, so bottom offset is 4.0
+        bottom_offset = 4.0
+        rule_height = ref_scale * 0.01 if ref_scale is not None else 2.0
+        
+        if corner == "bottom-left":
+            x_start = x_min + inset_x
+            y_start = y_min + inset_y + bottom_offset
+        elif corner == "bottom-right":
+            x_start = x_max - inset_x - rule_width
+            y_start = y_min + inset_y + bottom_offset
+        elif corner == "top-left":
+            x_start = x_min + inset_x
+            y_start = y_max - inset_y - rule_height
+        elif corner == "top-right":
+            x_start = x_max - inset_x - rule_width
+            y_start = y_max - inset_y - rule_height
+        else:
+            x_start = x_min + inset_x
+            y_start = y_min + inset_y + bottom_offset
+            
+        rule_pos = (x_start, y_start)
+        arrow_pos = (0.0, 0.0)
+        return arrow_pos, rule_pos
+        
     # Scale dependent values
     if ref_scale is not None:
         rule_height = ref_scale * 0.01
@@ -166,7 +222,10 @@ def get_dual_placement(
     
     return arrow_pos, rule_pos
 
-def compute_dual_layout(x, y, rule_length, arrow_len, ref_scale):
+def compute_dual_layout(
+    x, y, rule_length, arrow_len, ref_scale,
+    rule_orientation="horizontal", north_flag=True
+):
     """
     High-level placement function that handles scaling, footprint calculation,
     corner selection, and fallback expansion.
@@ -180,10 +239,24 @@ def compute_dual_layout(x, y, rule_length, arrow_len, ref_scale):
     rule_height = ref_scale * 0.01
     
     # 2. Compute element footprint
-    # Total width is max of rule and arrow
-    elem_w = max(rule_length, arrow_len)
-    # Total height is arrow + gap + rule
-    elem_h = arrow_len + vertical_gap + rule_height
+    if rule_orientation == "vertical" and not north_flag:
+        scale_width = ref_scale * 0.005
+        elem_w = scale_width + 8.0 # Including label space (label is at x_start - 6)
+        elem_h = rule_length
+        rule_w_param = scale_width
+        arrow_h_param = rule_length
+    elif rule_orientation == "horizontal" and not north_flag:
+        elem_w = rule_length
+        elem_h = rule_height + 4.0 # Including label space (label is at y_start - 2)
+        rule_w_param = rule_length
+        arrow_h_param = 0.0
+    else:
+        # Total width is max of rule and arrow
+        elem_w = max(rule_length, arrow_len)
+        # Total height is arrow + gap + rule
+        elem_h = arrow_len + vertical_gap + rule_height
+        rule_w_param = rule_length
+        arrow_h_param = arrow_len
     
     # 3. Add 3% margin of axes range as padding
     margin_x = x_span * 0.03 if x_span > 0 else ref_scale * 0.03
@@ -205,8 +278,9 @@ def compute_dual_layout(x, y, rule_length, arrow_len, ref_scale):
             # Place at bottom-left of expanded strip
             arrow_pos, rule_pos = get_dual_placement(
                 "bottom-left", x_min, x_max, new_y_min, y_max,
-                rule_width=rule_length, arrow_height=arrow_len,
-                ref_scale=ref_scale
+                rule_width=rule_w_param, arrow_height=arrow_h_param,
+                ref_scale=ref_scale, rule_orientation=rule_orientation,
+                north_flag=north_flag
             )
             return arrow_pos, rule_pos, {"y_min": new_y_min}
         else:
@@ -216,8 +290,9 @@ def compute_dual_layout(x, y, rule_length, arrow_len, ref_scale):
             # Place at bottom-left of expanded strip
             arrow_pos, rule_pos = get_dual_placement(
                 "bottom-left", new_x_min, x_max, y_min, y_max,
-                rule_width=rule_length, arrow_height=arrow_len,
-                ref_scale=ref_scale
+                rule_width=rule_w_param, arrow_height=arrow_h_param,
+                ref_scale=ref_scale, rule_orientation=rule_orientation,
+                north_flag=north_flag
             )
             return arrow_pos, rule_pos, {"x_min": new_x_min}
     
@@ -232,8 +307,9 @@ def compute_dual_layout(x, y, rule_length, arrow_len, ref_scale):
             
     arrow_pos, rule_pos = get_dual_placement(
         best_corner, x_min, x_max, y_min, y_max,
-        rule_width=rule_length, arrow_height=arrow_len,
-        ref_scale=ref_scale
+        rule_width=rule_w_param, arrow_height=arrow_h_param,
+        ref_scale=ref_scale, rule_orientation=rule_orientation,
+        north_flag=north_flag
     )
     
     return arrow_pos, rule_pos, None

@@ -87,7 +87,8 @@ def create_survey(
     if rule_flag or north_flag:
         arrow_len = ref_scale * 0.07
         arrow_coord, rule_pos, axes_expansion = compute_dual_layout(
-            x_coords, y_coords, rule_length, arrow_len, ref_scale
+            x_coords, y_coords, rule_length, arrow_len, ref_scale,
+            rule_orientation=rule_orientation, north_flag=north_flag
         )
 
         if config.get("show_grid", True):

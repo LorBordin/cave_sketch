@@ -1,6 +1,6 @@
-import pandas as pd
-import pytest
 import matplotlib.pyplot as plt
+import pandas as pd
+
 from cave_sketch.survey.graphics.survey_plot import create_survey
 
 
