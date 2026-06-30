@@ -30,7 +30,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp UI' (Protocol in workflow.md) (f4cbdec)
 
-## Phase 3: Android App UI & Bridge
+## Phase 3: Android App UI & Bridge [checkpoint: e6c4437]
 
 - [x] Task: Implement — Add `showCenterline` to Android data model and Python bridge (46ee4ff)
     - [x] Add `showCenterline: Boolean = true` to `SurveyInputs` data class in `SurveyPlotViewModel.kt`
@@ -42,4 +42,4 @@
     - [x] When unchecked, visually disable the "Show station markers" checkbox
     - [x] Wire state through `SurveyPlotScreen.kt`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Android App UI & Bridge' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Android App UI & Bridge' (Protocol in workflow.md) (e6c4437)
