@@ -57,7 +57,9 @@ def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
 
 
 def extract_features_from_df(
-    df: pd.DataFrame, excluded_nodes: Optional[List[str]] = None
+    df: pd.DataFrame,
+    excluded_nodes: Optional[List[str]] = None,
+    show_centerline: bool = True,
 ) -> Dict[str, list]:
     """Convert survey DataFrame into backend-agnostic drawable features."""
     if excluded_nodes is None:
@@ -76,6 +78,9 @@ def extract_features_from_df(
         nid, x, y, links, typ = row.Node_Id, row.X, row.Y, row.Links, row.Type
 
         if nid in excluded_nodes or typ.startswith("A_"):
+            continue
+
+        if not show_centerline and typ == "station":
             continue
 
         # --- New block: handle standalone point features ---

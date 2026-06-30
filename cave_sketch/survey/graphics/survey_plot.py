@@ -55,7 +55,9 @@ def create_survey(
     text_size = 300 / ref_scale * 10**tz
 
     # --- Extract features (using your backend-agnostic system) ---
-    features = extract_features_from_df(df, excluded_nodes)
+    features = extract_features_from_df(
+        df, excluded_nodes, show_centerline=config.get("show_centerline", True)
+    )
 
     # --- Render using Matplotlib backend ---
     render_to_matplotlib(
@@ -66,7 +68,7 @@ def create_survey(
     )
 
     # --- Stations ---
-    if config.get("show_details", True):
+    if config.get("show_centerline", True) and config.get("show_details", True):
         offset = ref_scale * 0.005 if ref_scale > 0 else 0.1
         stations = df[(df["Type"] == "station") & (~df["Node_Id"].isin(excluded_nodes))]
         if not stations.empty:

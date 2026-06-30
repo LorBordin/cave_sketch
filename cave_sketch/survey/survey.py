@@ -82,6 +82,7 @@ def draw_survey(
         show_north=show_north,
         show_grid=config.get("show_grid", True),
         surveyor_name=surveyor_name,
+        show_centerline=config.get("show_centerline", True),
     )
 
     fig = render_survey(

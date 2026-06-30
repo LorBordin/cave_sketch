@@ -14,3 +14,4 @@ class SurveyConfig:
     show_north: bool = True
     show_grid: bool = True
     surveyor_name: str = ""
+    show_centerline: bool = True

@@ -54,6 +54,7 @@ def render_survey(
         "line_width_zoom": config.line_width_zoom,
         "rotation_deg": config.rotation_deg,
         "show_grid": config.show_grid,
+        "show_centerline": config.show_centerline,
     }
 
     # 1. Section Subplot
