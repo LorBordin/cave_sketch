@@ -20,7 +20,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Backend — Config & Rendering Logic' (Protocol in workflow.md) (b8b32f1)
 
-## Phase 2: Streamlit Webapp UI
+## Phase 2: Streamlit Webapp UI [checkpoint: f4cbdec]
 
 - [x] Task: Implement — Add `show_centerline` to Streamlit session state and settings panel (131d74e)
     - [x] Add `show_centerline` default to session state in `app/session.py` (if used)
@@ -28,7 +28,7 @@
     - [x] When "Show Polygonal Line" is unchecked, disable the "Show Station Markers" checkbox visually
     - [x] Map `show_centerline` through to `draw_survey()` config dict in `app/pages/1_survey_plot.py`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp UI' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp UI' (Protocol in workflow.md) (f4cbdec)
 
 ## Phase 3: Android App UI & Bridge
 
