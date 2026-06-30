@@ -1,0 +1,8 @@
+{
+  "track_id": "dxf_version_compat_20260630",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-06-30T12:26:00Z",
+  "updated_at": "2026-06-30T12:26:00Z",
+  "description": "DXF v14 (R2000) files are not correctly rendered — LWPOLYLINE entities are not parsed, causing all polyline-based features to be missing."
+}
