@@ -1,6 +1,6 @@
 # Plan: Show Polygonal Line Toggle
 
-## Phase 1: Backend — Config & Rendering Logic
+## Phase 1: Backend — Config & Rendering Logic [checkpoint: b8b32f1]
 
 - [x] Task: Write Tests — `show_centerline` config field and conditional rendering (a7f7663)
     - [x] Test that `SurveyConfig` has a `show_centerline` field defaulting to `True`
@@ -18,7 +18,7 @@
     - [x] In `cave_sketch/features/render_features.py`, skip station-type line extraction when `show_centerline=False`
     - [x] In `cave_sketch/survey/graphics/survey_plot.py`, suppress station markers when `show_centerline=False` (cascading)
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Backend — Config & Rendering Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Backend — Config & Rendering Logic' (Protocol in workflow.md) (b8b32f1)
 
 ## Phase 2: Streamlit Webapp UI
 
