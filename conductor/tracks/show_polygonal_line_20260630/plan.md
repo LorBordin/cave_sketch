@@ -2,21 +2,21 @@
 
 ## Phase 1: Backend — Config & Rendering Logic
 
-- [ ] Task: Write Tests — `show_centerline` config field and conditional rendering
-    - [ ] Test that `SurveyConfig` has a `show_centerline` field defaulting to `True`
-    - [ ] Test that when `show_centerline=True`, station-type lines are included in extracted features
-    - [ ] Test that when `show_centerline=False`, station-type lines are excluded from extracted features
-    - [ ] Test that when `show_centerline=False`, station markers (`show_details`) are also suppressed
-    - [ ] Test that when `show_centerline=True` and `show_details=True`, station markers are rendered
-    - [ ] Test that when `show_centerline=True` and `show_details=False`, station markers are hidden but centerline is drawn
+- [x] Task: Write Tests — `show_centerline` config field and conditional rendering (a7f7663)
+    - [x] Test that `SurveyConfig` has a `show_centerline` field defaulting to `True`
+    - [x] Test that when `show_centerline=True`, station-type lines are included in extracted features
+    - [x] Test that when `show_centerline=False`, station-type lines are excluded from extracted features
+    - [x] Test that when `show_centerline=False`, station markers (`show_details`) are also suppressed
+    - [x] Test that when `show_centerline=True` and `show_details=True`, station markers are rendered
+    - [x] Test that when `show_centerline=True` and `show_details=False`, station markers are hidden but centerline is drawn
 
-- [ ] Task: Implement — Add `show_centerline` field to `SurveyConfig` dataclass
-    - [ ] Add `show_centerline: bool = True` to `SurveyConfig` in `cave_sketch/survey/config.py`
+- [x] Task: Implement — Add `show_centerline` field to `SurveyConfig` dataclass (a7f7663)
+    - [x] Add `show_centerline: bool = True` to `SurveyConfig` in `cave_sketch/survey/config.py`
 
-- [ ] Task: Implement — Gate polygonal line and station markers in the rendering pipeline
-    - [ ] Pass `show_centerline` through `renderer.py` config dict
-    - [ ] In `cave_sketch/features/render_features.py`, skip station-type line extraction when `show_centerline=False`
-    - [ ] In `cave_sketch/survey/graphics/survey_plot.py`, suppress station markers when `show_centerline=False` (cascading)
+- [x] Task: Implement — Gate polygonal line and station markers in the rendering pipeline (a7f7663)
+    - [x] Pass `show_centerline` through `renderer.py` config dict
+    - [x] In `cave_sketch/features/render_features.py`, skip station-type line extraction when `show_centerline=False`
+    - [x] In `cave_sketch/survey/graphics/survey_plot.py`, suppress station markers when `show_centerline=False` (cascading)
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Backend — Config & Rendering Logic' (Protocol in workflow.md)
 
