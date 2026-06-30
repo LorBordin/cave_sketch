@@ -1,6 +1,6 @@
 # Implementation Plan: Prevent Scale Bar (Rule) Intersection in Section Plot
 
-## Phase 1: Setup and Test Cases (Red Phase)
+## Phase 1: Setup and Test Cases (Red Phase) [checkpoint: 1a557db]
 - [x] Task: Set up test fixtures (a86163d)
     - [x] Locate the problematic sample DXF files in `tests/fixtures/scale_bar_test`.
     - [x] Configure the PDF generation settings (rule length to 100m, both files in same PDF).
