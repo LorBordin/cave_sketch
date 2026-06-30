@@ -50,7 +50,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: Show Polygonal Line Toggle**
+- [x] **Track: Show Polygonal Line Toggle**
 *Link: [./tracks/show_polygonal_line_20260630/](./tracks/show_polygonal_line_20260630/)*
 
 ---
