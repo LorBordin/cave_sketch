@@ -50,11 +50,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [x] **Track: Fix bug where section scale bar intersects the survey draw.**
-*Link: [./tracks/section_rule_fix_20260630/](./tracks/section_rule_fix_20260630/)*
-
----
-
 - [ ] **Track: Show Polygonal Line Toggle**
 *Link: [./tracks/show_polygonal_line_20260630/](./tracks/show_polygonal_line_20260630/)*
 
