@@ -32,14 +32,14 @@
 
 ## Phase 3: Android App UI & Bridge
 
-- [ ] Task: Implement — Add `showCenterline` to Android data model and Python bridge
-    - [ ] Add `showCenterline: Boolean = true` to `SurveyInputs` data class in `SurveyPlotViewModel.kt`
-    - [ ] Add JSON serialization for `show_centerline` in `SurveyInputs.toJson()`
-    - [ ] Map `show_centerline` in `survey_bridge.py` config dict
+- [x] Task: Implement — Add `showCenterline` to Android data model and Python bridge (46ee4ff)
+    - [x] Add `showCenterline: Boolean = true` to `SurveyInputs` data class in `SurveyPlotViewModel.kt`
+    - [x] Add JSON serialization for `show_centerline` in `SurveyInputs.toJson()`
+    - [x] Map `show_centerline` in `survey_bridge.py` config dict
 
-- [ ] Task: Implement — Add "Show Polygonal Line" toggle to Android settings UI
-    - [ ] Add checkbox/toggle in `SettingsForm.kt`, placed above "Show station markers"
-    - [ ] When unchecked, visually disable the "Show station markers" checkbox
-    - [ ] Wire state through `SurveyPlotScreen.kt`
+- [x] Task: Implement — Add "Show Polygonal Line" toggle to Android settings UI (46ee4ff)
+    - [x] Add checkbox/toggle in `SettingsForm.kt`, placed above "Show station markers"
+    - [x] When unchecked, visually disable the "Show station markers" checkbox
+    - [x] Wire state through `SurveyPlotScreen.kt`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Android App UI & Bridge' (Protocol in workflow.md)
