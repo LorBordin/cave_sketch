@@ -1,0 +1,8 @@
+{
+  "track_id": "show_polygonal_line_20260630",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-06-30T12:00:00Z",
+  "updated_at": "2026-06-30T12:00:00Z",
+  "description": "Add a 'Show Polygonal Line' checkbox to toggle visibility of the station-connecting centerline in survey plots. Applies to both plan and section views. Hiding the polygonal line also cascades to hide station markers."
+}
