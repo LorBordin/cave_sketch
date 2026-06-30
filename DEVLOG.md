@@ -357,3 +357,16 @@
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** The documentation overhaul is fully completed, audited, and verified. Main READMEs and sub-guides in both English and Italian are complete and 100% of their local relative links resolved. All automated quality checks are passing.
+
+## [2026-06-30 15:01] Track section_rule_fix_20260630 — Implementation
+**Files:**
+- cave_sketch/survey/graphics/placement.py
+- cave_sketch/survey/graphics/survey_plot.py
+- tests/test_survey_section_scale_bar.py
+- tests/fixtures/render_baselines/dual.png
+- tests/fixtures/render_baselines/plan_only.png
+- conductor/tracks.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** The section_rule_fix track is fully completed, verified, and archived. The vertical scale bar (rule) drawn on section plots is now properly placed to avoid intersecting with survey drawings, and regression image baselines are updated. All 118 unit tests, mypy, and ruff check pass cleanly.
