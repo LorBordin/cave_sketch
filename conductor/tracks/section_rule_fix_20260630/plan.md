@@ -1,13 +1,13 @@
 # Implementation Plan: Prevent Scale Bar (Rule) Intersection in Section Plot
 
 ## Phase 1: Setup and Test Cases (Red Phase)
-- [ ] Task: Set up test fixtures
-    - [ ] Locate the problematic sample DXF files in `tests/fixtures/scale_bar_test`.
-    - [ ] Configure the PDF generation settings (rule length to 100m, both files in same PDF).
-- [ ] Task: Write failing unit test
-    - [ ] Create or update test file for section rendering (e.g., `tests/test_survey_render.py` or similar).
-    - [ ] Write a test that asserts the bounding box of the scale bar does not intersect with the bounding box of the survey draw in the section plot using the provided DXF files.
-    - [ ] Verify the test fails on the current implementation.
+- [x] Task: Set up test fixtures (a86163d)
+    - [x] Locate the problematic sample DXF files in `tests/fixtures/scale_bar_test`.
+    - [x] Configure the PDF generation settings (rule length to 100m, both files in same PDF).
+- [x] Task: Write failing unit test (a86163d)
+    - [x] Create or update test file for section rendering (e.g., `tests/test_survey_render.py` or similar).
+    - [x] Write a test that asserts the bounding box of the scale bar does not intersect with the bounding box of the survey draw in the section plot using the provided DXF files.
+    - [x] Verify the test fails on the current implementation.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Setup and Test Cases (Red Phase)' (Protocol in workflow.md)
 
 ## Phase 2: Implementation (Green Phase)
