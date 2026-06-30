@@ -22,11 +22,11 @@
 
 ## Phase 2: Streamlit Webapp UI
 
-- [ ] Task: Implement — Add `show_centerline` to Streamlit session state and settings panel
-    - [ ] Add `show_centerline` default to session state in `app/session.py` (if used)
-    - [ ] Add "Show Polygonal Line" checkbox in `app/components/settings_panel.py`, placed above "Show Station Markers"
-    - [ ] When "Show Polygonal Line" is unchecked, disable the "Show Station Markers" checkbox visually
-    - [ ] Map `show_centerline` through to `draw_survey()` config dict in `app/pages/1_survey_plot.py`
+- [x] Task: Implement — Add `show_centerline` to Streamlit session state and settings panel (131d74e)
+    - [x] Add `show_centerline` default to session state in `app/session.py` (if used)
+    - [x] Add "Show Polygonal Line" checkbox in `app/components/settings_panel.py`, placed above "Show Station Markers"
+    - [x] When "Show Polygonal Line" is unchecked, disable the "Show Station Markers" checkbox visually
+    - [x] Map `show_centerline` through to `draw_survey()` config dict in `app/pages/1_survey_plot.py`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp UI' (Protocol in workflow.md)
 
