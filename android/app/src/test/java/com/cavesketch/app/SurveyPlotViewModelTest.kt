@@ -64,4 +64,11 @@ class SurveyPlotViewModelTest {
             store.result.value,
         )
     }
+
+    @Test
+    fun survey_inputs_to_json_includes_show_centerline() {
+        val inputs = SurveyInputs(showCenterline = false)
+        val json = inputs.toJson()
+        assertTrue(json.contains("\"show_centerline\":false"))
+    }
 }

@@ -121,6 +121,7 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
                 "marker_zoom": settings.get("marker_zoom", 0.0),
                 "text_zoom": settings.get("text_zoom", 0.0),
                 "line_width_zoom": settings.get("line_width_zoom", 0.0),
+                "show_centerline": settings.get("show_centerline", True),
             },
         )
         import matplotlib.pyplot as plt

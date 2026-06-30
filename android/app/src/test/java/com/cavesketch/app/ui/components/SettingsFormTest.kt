@@ -230,4 +230,16 @@ class SettingsFormTest {
         onStepperButton("Line width zoom [-1, 1]", "+").performClick()
         assertEquals(0.1, updatedInputs?.lineWidthZoom ?: 0.0, 0.001)
     }
+
+    @Test
+    fun show_station_markers_disabled_when_show_polygonal_line_is_false() {
+        composeTestRule.setContent {
+            SettingsForm(
+                inputs = SurveyInputs(showCenterline = false),
+                onChange = {}
+            )
+        }
+
+        composeTestRule.onNodeWithTag("show_details_checkbox").assertIsNotEnabled()
+    }
 }

@@ -55,3 +55,22 @@ def test_merge_writes_and_returns_merged_csv(two_csvs):
     assert out == str(work_dir / "merged_map.csv")
     assert Path(out).exists()
     assert len(pd.read_csv(out)) > len(pd.read_csv(map_csv))
+
+
+def test_generate_survey_plot_respects_show_centerline(two_csvs):
+    from unittest.mock import patch
+    map_csv, _, work_dir = two_csvs
+    inputs_json = {
+        "map_path": map_csv,
+        "survey_name": "TestCenterlineBridge",
+        "settings": {
+            "rule_length": "100",
+            "show_centerline": False
+        }
+    }
+    with patch.object(survey_bridge, "draw_survey") as mock_draw:
+        import json
+        survey_bridge.generate_survey_plot(json.dumps(inputs_json), str(work_dir))
+        mock_draw.assert_called_once()
+        _, kwargs = mock_draw.call_args
+        assert kwargs["config"]["show_centerline"] is False

@@ -34,6 +34,7 @@ data class SurveyInputs(
     val markerZoom: Double = 0.0,
     val textZoom: Double = 0.0,
     val lineWidthZoom: Double = 0.0,
+    val showCenterline: Boolean = true,
 ) {
     fun toJson(): String {
         val settings = JSONObject()
@@ -44,6 +45,7 @@ data class SurveyInputs(
             .put("marker_zoom", markerZoom)
             .put("text_zoom", textZoom)
             .put("line_width_zoom", lineWidthZoom)
+            .put("show_centerline", showCenterline)
         return JSONObject()
             .put("map_path", mapPath ?: JSONObject.NULL)
             .put("section_path", sectionPath ?: JSONObject.NULL)

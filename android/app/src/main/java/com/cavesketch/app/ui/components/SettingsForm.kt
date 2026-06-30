@@ -73,7 +73,20 @@ fun SettingsForm(inputs: SurveyInputs, onChange: (SurveyInputs) -> Unit) {
     )
 
     Row(Modifier.fillMaxWidth()) {
-        Checkbox(inputs.showDetails, { onChange(inputs.copy(showDetails = it)) })
+        Checkbox(
+            checked = inputs.showCenterline,
+            onCheckedChange = { onChange(inputs.copy(showCenterline = it)) },
+            modifier = Modifier.testTag("show_centerline_checkbox")
+        )
+        Text("Show polygonal line")
+    }
+    Row(Modifier.fillMaxWidth()) {
+        Checkbox(
+            checked = inputs.showDetails,
+            onCheckedChange = { onChange(inputs.copy(showDetails = it)) },
+            enabled = inputs.showCenterline,
+            modifier = Modifier.testTag("show_details_checkbox")
+        )
         Text("Show station markers")
     }
     Row(Modifier.fillMaxWidth()) {
