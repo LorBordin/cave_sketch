@@ -11,13 +11,13 @@
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Setup and Test Cases (Red Phase)' (Protocol in workflow.md)
 
 ## Phase 2: Implementation (Green Phase)
-- [ ] Task: Implement intersection prevention logic for section scale bar
-    - [ ] Identify where the map scale bar intersection prevention logic is located.
-    - [ ] Adapt or extract the algorithm for reuse in the section rendering logic.
-    - [ ] Apply the logic to the section's scale bar placement.
-    - [ ] Run unit tests and confirm they pass.
-- [ ] Task: Refactor and Verify
-    - [ ] Refactor the collision logic for clarity if needed.
-    - [ ] Ensure code passes `uv run ruff check .` and `uv run mypy cave_sketch/`.
-    - [ ] Run full test suite (`uv run pytest`) to ensure no regressions.
+- [~] Task: Implement intersection prevention logic for section scale bar
+    - [~] Identify where the map scale bar intersection prevention logic is located.
+    - [~] Adapt or extract the algorithm for reuse in the section rendering logic.
+    - [~] Apply the logic to the section's scale bar placement.
+    - [~] Run unit tests and confirm they pass.
+- [~] Task: Refactor and Verify
+    - [~] Refactor the collision logic for clarity if needed.
+    - [~] Ensure code passes `uv run ruff check .` and `uv run mypy cave_sketch/`.
+    - [~] Run full test suite (`uv run pytest`) to ensure no regressions.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Implementation (Green Phase)' (Protocol in workflow.md)
