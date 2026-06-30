@@ -8,7 +8,7 @@
     - [x] Create or update test file for section rendering (e.g., `tests/test_survey_render.py` or similar).
     - [x] Write a test that asserts the bounding box of the scale bar does not intersect with the bounding box of the survey draw in the section plot using the provided DXF files.
     - [x] Verify the test fails on the current implementation.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Setup and Test Cases (Red Phase)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Setup and Test Cases (Red Phase)' (Protocol in workflow.md) (1a557db)
 
 ## Phase 2: Implementation (Green Phase) [checkpoint: 1721a43]
 - [x] Task: Implement intersection prevention logic for section scale bar (dad23df)
@@ -20,4 +20,4 @@
     - [x] Refactor the collision logic for clarity if needed.
     - [x] Ensure code passes `uv run ruff check .` and `uv run mypy cave_sketch/`.
     - [x] Run full test suite (`uv run pytest`) to ensure no regressions.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Implementation (Green Phase)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Implementation (Green Phase)' (Protocol in workflow.md) (1721a43)
