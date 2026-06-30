@@ -23,6 +23,7 @@ class AppState(TypedDict):
     uploaded_json_paths: List[str]
     survey_name: str
     show_grid: bool
+    show_centerline: bool
 
 
 def init_session() -> None:
@@ -56,6 +57,7 @@ def init_session() -> None:
         "survey_name": "MySurvey",
         "surveyor_name": "",
         "show_grid": True,
+        "show_centerline": True,
     }
 
     for key, val in defaults.items():

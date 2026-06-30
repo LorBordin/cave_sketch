@@ -13,7 +13,18 @@ def settings_panel_component():
         rotation_deg = st.number_input(
             "🧭 Map rotation (°)", min_value=-180, max_value=180, step=1, value=0
         )
-        show_details = st.checkbox("Show Stations Markers", value=True)
+        show_centerline = st.checkbox(
+            "Show Polygonal Line", value=st.session_state.get("show_centerline", True)
+        )
+        st.session_state.show_centerline = show_centerline
+
+        show_details = st.checkbox(
+            "Show Stations Markers",
+            value=st.session_state.get("show_details", True),
+            disabled=not show_centerline,
+        )
+        st.session_state.show_details = show_details
+
         show_grid = st.checkbox("Show grid", value=st.session_state.get("show_grid", True))
         st.session_state.show_grid = show_grid
 
@@ -33,6 +44,7 @@ def settings_panel_component():
         "rotation_deg": rotation_deg,
         "show_details": show_details,
         "show_grid": show_grid,
+        "show_centerline": show_centerline,
         "marker_zoom": marker_zoom,
         "text_zoom": text_zoom,
         "line_width_zoom": line_width_zoom,
