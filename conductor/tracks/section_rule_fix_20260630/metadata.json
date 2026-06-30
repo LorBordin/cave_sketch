@@ -1,0 +1,8 @@
+{
+  "track_id": "section_rule_fix_20260630",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-06-30T10:30:00Z",
+  "updated_at": "2026-06-30T10:30:00Z",
+  "description": "Fix bug where section scale bar intersects the survey draw."
+}

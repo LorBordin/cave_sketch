@@ -48,4 +48,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: Phase 4 Visual Redesign**
 *Link: [../docs/mobile-app/phases/phase-4-visual-redesign/](../docs/mobile-app/phases/phase-4-visual-redesign/)*
 
+---
 
+- [ ] **Track: Fix bug where section scale bar intersects the survey draw.**
+*Link: [./tracks/section_rule_fix_20260630/](./tracks/section_rule_fix_20260630/)*
