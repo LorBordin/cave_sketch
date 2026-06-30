@@ -10,7 +10,7 @@
     - [x] Verify the test fails on the current implementation.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Setup and Test Cases (Red Phase)' (Protocol in workflow.md)
 
-## Phase 2: Implementation (Green Phase)
+## Phase 2: Implementation (Green Phase) [checkpoint: 1721a43]
 - [x] Task: Implement intersection prevention logic for section scale bar (dad23df)
     - [x] Identify where the map scale bar intersection prevention logic is located.
     - [x] Adapt or extract the algorithm for reuse in the section rendering logic.
