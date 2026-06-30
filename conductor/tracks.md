@@ -48,10 +48,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: Phase 4 Visual Redesign**
 *Link: [../docs/mobile-app/phases/phase-4-visual-redesign/](../docs/mobile-app/phases/phase-4-visual-redesign/)*
 
----
 
-- [x] **Track: Show Polygonal Line Toggle**
-*Link: [./tracks/show_polygonal_line_20260630/](./tracks/show_polygonal_line_20260630/)*
 
 ---
 
