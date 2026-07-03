@@ -39,6 +39,12 @@ import com.cavesketch.app.ui.components.StateBanner
 import com.cavesketch.app.ui.components.parsesAsCoordinate
 import com.cavesketch.app.util.shareFile
 
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
+
 @Composable
 fun SatelliteScreen(viewModel: SatelliteViewModel) {
     val context = LocalContext.current
@@ -48,6 +54,9 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
 
     var surveyName by remember { mutableStateOf(viewModel.suggestedSurveyName()) }
     var rotationText by remember { mutableStateOf("0") }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
 
     val jsonPicker = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenMultipleDocuments()
@@ -74,10 +83,17 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
         it.station.isNotBlank() && parsesAsCoordinate(it.lat) && parsesAsCoordinate(it.lon)
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { contentPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
         SectionCard("GPS points", Icons.Filled.Place) {
             GpsPointsEditor(
                 points = points,
@@ -156,4 +172,5 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
             else -> {}
         }
     }
+}
 }

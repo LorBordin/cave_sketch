@@ -37,88 +37,104 @@ import com.cavesketch.app.ui.components.SettingsForm
 import com.cavesketch.app.ui.components.StateBanner
 import com.cavesketch.app.util.extensionOf
 
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
+
 @Composable
 fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
     val context = LocalContext.current
     val showError: (String) -> Unit = { msg ->
         android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show()
     }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
     var inputs by remember { mutableStateOf(SurveyInputs()) }
     val state by viewModel.state.collectAsState()
     val canGenerate = inputs.mapPath != null || inputs.sectionPath != null
 
-    Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
-        SectionCard("Input files", Icons.Filled.Description) {
-            FilePickerRow("Pick Cave Map", inputs.mapPath?.let { "map" + extOf(it) }) { uri ->
-                com.cavesketch.app.util.safeCopyUriToDir(
-                    context, uri, context.filesDir, "map" + extensionOf(context, uri), showError,
-                )?.let { inputs = inputs.copy(mapPath = it) }
-            }
-            FilePickerRow("Pick Cave Section", inputs.sectionPath?.let { "section" + extOf(it) }) { uri ->
-                com.cavesketch.app.util.safeCopyUriToDir(
-                    context, uri, context.filesDir, "section" + extensionOf(context, uri), showError,
-                )?.let { inputs = inputs.copy(sectionPath = it) }
-            }
-        }
-
-        SectionCard("Merge survey (optional)", Icons.Filled.Link) {
-            MergeControls(inputs, context) { inputs = it }
-        }
-
-        SectionCard("Survey details", Icons.Filled.Edit) {
-            OutlinedTextField(
-                value = inputs.surveyName,
-                onValueChange = { inputs = inputs.copy(surveyName = it) },
-                label = { Text("Survey name") },
-                modifier = Modifier.fillMaxWidth(),
-            )
-            OutlinedTextField(
-                value = inputs.surveyorName,
-                onValueChange = { inputs = inputs.copy(surveyorName = it) },
-                label = { Text("Surveyor name") },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        SectionCard("Settings", Icons.Filled.Tune) {
-            SettingsForm(inputs) { inputs = it }
-        }
-
-        PrimaryCta(
-            text = "Generate Survey Plot",
-            icon = Icons.Filled.PlayArrow,
-            enabled = canGenerate && state !is PlotState.Generating,
-            onClick = { viewModel.generate(inputs) },
-        )
-
-        when (val s = state) {
-            is PlotState.Generating -> {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    CircularProgressIndicator()
-                    Spacer(Modifier.height(8.dp))
-                    Text(s.phase)
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { contentPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            SectionCard("Input files", Icons.Filled.Description) {
+                FilePickerRow("Pick Cave Map", inputs.mapPath?.let { "map" + extOf(it) }) { uri ->
+                    com.cavesketch.app.util.safeCopyUriToDir(
+                        context, uri, context.filesDir, "map" + extensionOf(context, uri), showError,
+                    )?.let { inputs = inputs.copy(mapPath = it) }
+                }
+                FilePickerRow("Pick Cave Section", inputs.sectionPath?.let { "section" + extOf(it) }) { uri ->
+                    com.cavesketch.app.util.safeCopyUriToDir(
+                        context, uri, context.filesDir, "section" + extensionOf(context, uri), showError,
+                    )?.let { inputs = inputs.copy(sectionPath = it) }
                 }
             }
-            is PlotState.Error -> StateBanner("⚠️ ${s.message}", isError = true)
-            is PlotState.Success -> {
-                PdfPreview(s.pdfPath)
-                Button(
-                    onClick = {
-                        val name = inputs.surveyName.ifBlank { "survey" } + ".pdf"
-                        com.cavesketch.app.util.sharePdf(context, s.pdfPath, name)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text("Save / Share PDF")
-                }
+
+            SectionCard("Merge survey (optional)", Icons.Filled.Link) {
+                MergeControls(inputs, context) { inputs = it }
             }
-            PlotState.Idle -> StateBanner("Pick your files and tap Generate.", isError = false)
+
+            SectionCard("Survey details", Icons.Filled.Edit) {
+                OutlinedTextField(
+                    value = inputs.surveyName,
+                    onValueChange = { inputs = inputs.copy(surveyName = it) },
+                    label = { Text("Survey name") },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedTextField(
+                    value = inputs.surveyorName,
+                    onValueChange = { inputs = inputs.copy(surveyorName = it) },
+                    label = { Text("Surveyor name") },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+
+            SectionCard("Settings", Icons.Filled.Tune) {
+                SettingsForm(inputs) { inputs = it }
+            }
+
+            PrimaryCta(
+                text = "Generate Survey Plot",
+                icon = Icons.Filled.PlayArrow,
+                enabled = canGenerate && state !is PlotState.Generating,
+                onClick = { viewModel.generate(inputs) },
+            )
+
+            when (val s = state) {
+                is PlotState.Generating -> {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        CircularProgressIndicator()
+                        Spacer(Modifier.height(8.dp))
+                        Text(s.phase)
+                    }
+                }
+                is PlotState.Error -> StateBanner("⚠️ ${s.message}", isError = true)
+                is PlotState.Success -> {
+                    PdfPreview(s.pdfPath)
+                    Button(
+                        onClick = {
+                            val name = inputs.surveyName.ifBlank { "survey" } + ".pdf"
+                            com.cavesketch.app.util.sharePdf(context, s.pdfPath, name)
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text("Save / Share PDF")
+                    }
+                }
+                PlotState.Idle -> StateBanner("Pick your files and tap Generate.", isError = false)
+            }
         }
     }
 }
