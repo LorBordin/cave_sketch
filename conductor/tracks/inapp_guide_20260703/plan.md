@@ -35,11 +35,11 @@
 
 ## Phase 4: Polish & Final Verification
 
-- [ ] Task: End-to-end polish and edge cases
-    - [ ] Verify all 8 screenshots render inline in airplane mode
-    - [ ] Test language toggle does not reset scroll position unexpectedly
-    - [ ] Ensure external links (GitHub) open in system browser, not inside the WebView
-    - [ ] Review CSS styling for readability (font sizes, spacing, image sizing) on various screen sizes
-    - [ ] Run full test suite and verify >80% coverage for new code
+- [x] Task: End-to-end polish and edge cases [f8cbb2f]
+    - [x] Verify all 8 screenshots render inline in airplane mode
+    - [x] Test language toggle does not reset scroll position unexpectedly
+    - [x] Ensure external links (GitHub) open in system browser, not inside the WebView
+    - [x] Review CSS styling for readability (font sizes, spacing, image sizing) on various screen sizes
+    - [x] Run full test suite and verify >80% coverage for new code
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Polish & Final Verification' (Protocol in workflow.md)
