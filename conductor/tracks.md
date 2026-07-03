@@ -51,5 +51,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Input File Format Validation (Android)**
+- [~] **Track: Input File Format Validation (Android)**
 *Link: [./tracks/input_validation_20260703/](./tracks/input_validation_20260703/)*
