@@ -49,10 +49,3 @@ This file tracks all major tracks for the project. Each track has its own detail
 *Link: [../docs/mobile-app/phases/phase-4-visual-redesign/](../docs/mobile-app/phases/phase-4-visual-redesign/)*
 
 
-
----
-
-- [x] **Track: DXF Version Compatibility (R9, R12, R14/R2000)**
-*Link: [./tracks/dxf_version_compat_20260630/](./tracks/dxf_version_compat_20260630/)*
-
-
