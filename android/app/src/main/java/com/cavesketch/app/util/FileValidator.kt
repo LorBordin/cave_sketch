@@ -28,15 +28,25 @@ object FileValidator {
 
     /**
      * Validates if a file has the standard DXF signature:
-     * Line 1 is "0" and Line 2 is "SECTION" (after trimming whitespace).
+     * Scans the first 50 lines to find a line that trims to "0" followed immediately
+     * by a line that trims to "SECTION". This allows for leading comment blocks (999).
      */
     fun isDxfHeaderValid(file: File): Boolean {
         if (!file.exists() || !file.isFile) return false
         return try {
             file.bufferedReader().use { reader ->
-                val line1 = reader.readLine()?.trim() ?: return false
-                val line2 = reader.readLine()?.trim() ?: return false
-                line1 == "0" && line2 == "SECTION"
+                var lineCount = 0
+                while (lineCount < 50) {
+                    val line = reader.readLine() ?: break
+                    lineCount++
+                    if (line.trim() == "0") {
+                        val nextLine = reader.readLine()?.trim() ?: break
+                        if (nextLine == "SECTION") {
+                            return true
+                        }
+                    }
+                }
+                false
             }
         } catch (e: Exception) {
             false

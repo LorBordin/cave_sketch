@@ -57,6 +57,13 @@ class FileValidatorTest {
     }
 
     @Test
+    fun testIsDxfHeaderValid_validHeaderWithComments() {
+        val file = tempFolder.newFile("valid_comment.dxf")
+        file.writeText("  999\nDXF created by TopoDroid v. 6.2.44\n  0\nSECTION\n2\nHEADER\n")
+        assertTrue(FileValidator.isDxfHeaderValid(file))
+    }
+
+    @Test
     fun testIsDxfHeaderValid_emptyFile() {
         val file = tempFolder.newFile("empty.dxf")
         assertFalse(FileValidator.isDxfHeaderValid(file))
