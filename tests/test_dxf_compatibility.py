@@ -1,7 +1,7 @@
 from pathlib import Path
-import pytest
-from cave_sketch.dxf.parser import parse_dxf
+
 from cave_sketch.dxf.models import CaveSurvey
+from cave_sketch.dxf.parser import parse_dxf
 
 
 def test_parse_v14_produces_same_survey_as_v9():
@@ -21,8 +21,8 @@ def test_parse_v14_produces_same_survey_as_v9():
     assert sorted(v9_point_types) == sorted(v14_point_types)
 
     # Check distributions of line types
-    v9_line_types = [l.line_type for l in survey_v9.lines]
-    v14_line_types = [l.line_type for l in survey_v14.lines]
+    v9_line_types = [line.line_type for line in survey_v9.lines]
+    v14_line_types = [line.line_type for line in survey_v14.lines]
     assert sorted(v9_line_types) == sorted(v14_line_types)
 
 
@@ -30,7 +30,7 @@ def test_parse_v14_polyline_linetypes():
     dxf_v14_path = Path("tests/fixtures/sample_v14.dxf")
     survey = parse_dxf(dxf_v14_path)
 
-    line_types = {l.line_type for l in survey.lines}
+    line_types = {line.line_type for line in survey.lines}
     expected_types = {"L_wall", "L_wall-presumed", "L_pit", "A_water", "station_leg"}
     assert expected_types.issubset(line_types)
 
@@ -45,4 +45,6 @@ def test_parse_v9_backward_compat():
 
     # Ensure station points exist
     station_ids = [p.id for p in survey.points if p.point_type == "station"]
-    assert len(station_ids) > 0
+    assert "0" in station_ids
+    assert "1" in station_ids
+

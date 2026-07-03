@@ -132,13 +132,14 @@ def _get_stations(msp: Any) -> Dict:
 
 def _parse_polylines(msp: Any, filter_layers: Optional[List[str]] = None) -> List[Dict]:
     result = []
-    for entity in msp.query("POLYLINE"):
-        # Polyline entities in ezdxf have a different way to access points depending on type
-        # For simplicity in this legacy-port, we cast to any or use the known method
+    for entity in msp.query("POLYLINE LWPOLYLINE"):
         layer = entity.dxf.layer
         if filter_layers and layer not in filter_layers:
             continue
-        pts = [(pt[0], pt[1]) for pt in entity.points()]  # type: ignore
+        if entity.dxftype() == "LWPOLYLINE":
+            pts = [(float(pt[0]), float(pt[1])) for pt in entity.vertices()]
+        else:
+            pts = [(float(pt[0]), float(pt[1])) for pt in entity.points()]  # type: ignore
         result.append(
             {
                 "points": pts,
