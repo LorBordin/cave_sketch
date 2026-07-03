@@ -1,6 +1,6 @@
 # Plan: DXF Version Compatibility (R9, R12, R14/R2000)
 
-## Phase 1: Test Infrastructure & LWPOLYLINE Support
+## Phase 1: Test Infrastructure & LWPOLYLINE Support [checkpoint: cec2718]
 
 - [x] Task: Write failing tests for DXF v14 parsing parity (53bce19)
     - [ ] Add test `test_parse_v14_produces_same_survey_as_v9` that loads both `sample_v9.dxf` and `sample_v14.dxf`, parses them, and asserts the resulting `CaveSurvey` objects have identical point counts, line counts, and line-type distributions.
@@ -23,4 +23,4 @@
     - [ ] Run the existing `test_parse_valid_dxf` test to confirm no regression.
     - [ ] Confirm the parse output (stations, polylines, blocks) matches the pre-change baseline.
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Test Infrastructure & LWPOLYLINE Support' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Test Infrastructure & LWPOLYLINE Support' (Protocol in workflow.md) (cec2718)
