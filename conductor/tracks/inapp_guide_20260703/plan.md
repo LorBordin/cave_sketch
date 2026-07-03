@@ -1,6 +1,6 @@
 # Plan: In-App Offline User Guide (Android)
 
-## Phase 1: Bundle Guide Assets
+## Phase 1: Bundle Guide Assets [checkpoint: 2ab8a7a]
 
 - [x] Task: Prepare guide Markdown files for in-app use [1a30d3b]
     - [x] Create `assets/guide/` directory structure (`assets/guide/screenshots/`, `assets/guide/`)
@@ -13,7 +13,7 @@
     - [x] Write tests for a `GuideRenderer` utility that loads a Markdown asset file and produces a complete HTML string with embedded CSS link and correct base URL for images
     - [x] Implement `GuideRenderer` in `util/GuideRenderer.kt` that reads the Markdown asset, converts to HTML (using a lightweight library or simple regex-based conversion), and wraps with the CSS stylesheet reference
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Bundle Guide Assets' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Bundle Guide Assets' (Protocol in workflow.md)
 
 ## Phase 2: WebView Guide Component
 
