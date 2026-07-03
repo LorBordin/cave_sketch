@@ -2,12 +2,12 @@
 
 ## Phase 1: Bundle Guide Assets
 
-- [ ] Task: Prepare guide Markdown files for in-app use
-    - [ ] Create `assets/guide/` directory structure (`assets/guide/screenshots/`, `assets/guide/`)
-    - [ ] Copy screenshot JPEGs from `docs/mobile-app/screenshots_v1/` into `assets/guide/screenshots/`
-    - [ ] Adapt `docs/android/README.md` → `assets/guide/guide_en.md`: strip Installation, For Contributors, external-only links; rewrite image paths to `screenshots/...`
-    - [ ] Adapt `docs/android/README.it.md` → `assets/guide/guide_it.md`: same adaptations for Italian
-    - [ ] Create `assets/guide/guide.css` with Material 3 dark-theme-compatible styling for the rendered HTML
+- [x] Task: Prepare guide Markdown files for in-app use [1a30d3b]
+    - [x] Create `assets/guide/` directory structure (`assets/guide/screenshots/`, `assets/guide/`)
+    - [x] Copy screenshot JPEGs from `docs/mobile-app/screenshots_v1/` into `assets/guide/screenshots/`
+    - [x] Adapt `docs/android/README.md` → `assets/guide/guide_en.md`: strip Installation, For Contributors, external-only links; rewrite image paths to `screenshots/...`
+    - [x] Adapt `docs/android/README.it.md` → `assets/guide/guide_it.md`: same adaptations for Italian
+    - [x] Create `assets/guide/guide.css` with Material 3 dark-theme-compatible styling for the rendered HTML
 
 - [ ] Task: Create Markdown-to-HTML conversion utility
     - [ ] Write tests for a `GuideRenderer` utility that loads a Markdown asset file and produces a complete HTML string with embedded CSS link and correct base URL for images
