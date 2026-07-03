@@ -49,3 +49,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 *Link: [../docs/mobile-app/phases/phase-4-visual-redesign/](../docs/mobile-app/phases/phase-4-visual-redesign/)*
 
 
+---
+
+- [ ] **Track: Input File Format Validation (Android)**
+*Link: [./tracks/input_validation_20260703/](./tracks/input_validation_20260703/)*
