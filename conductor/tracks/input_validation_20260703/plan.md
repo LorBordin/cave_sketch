@@ -2,21 +2,21 @@
 
 ## Phase 1: Core Validation Logic
 
-- [ ] Task: Write Tests — File Extension Validator
-    - [ ] Create `FileValidatorTest.kt` in `android/app/src/test/java/com/cavesketch/app/util/`
-    - [ ] Test `isAcceptedExtension(name, allowed)` with valid extensions (`.dxf`, `.csv`, `.DXF`, `.Csv`) returns true
-    - [ ] Test `isAcceptedExtension` with invalid extensions (`.txt`, `.pdf`, `.png`, `.dxf.bak`, no extension) returns false
-    - [ ] Test `isAcceptedJsonExtension(name)` with `.json` and `.JSON` returns true, others return false
-    - [ ] Run tests and confirm they fail (Red)
+- [x] Task: Write Tests — File Extension Validator (eb0f77c)
+    - [x] Create `FileValidatorTest.kt` in `android/app/src/test/java/com/cavesketch/app/util/`
+    - [x] Test `isAcceptedExtension(name, allowed)` with valid extensions (`.dxf`, `.csv`, `.DXF`, `.Csv`) returns true
+    - [x] Test `isAcceptedExtension` with invalid extensions (`.txt`, `.pdf`, `.png`, `.dxf.bak`, no extension) returns false
+    - [x] Test `isAcceptedJsonExtension(name)` with `.json` and `.JSON` returns true, others return false
+    - [x] Run tests and confirm they fail (Red)
 
-- [ ] Task: Write Tests — DXF Header Validator
-    - [ ] Test `isDxfHeaderValid(file)` with a file containing a valid DXF header (`0\nSECTION`) returns true
-    - [ ] Test `isDxfHeaderValid` with an empty file returns false
-    - [ ] Test `isDxfHeaderValid` with a plain text file returns false
-    - [ ] Test `isDxfHeaderValid` with a binary file (random bytes) returns false
-    - [ ] Run tests and confirm they fail (Red)
+- [x] Task: Write Tests — DXF Header Validator (eb0f77c)
+    - [x] Test `isDxfHeaderValid(file)` with a file containing a valid DXF header (`0\nSECTION`) returns true
+    - [x] Test `isDxfHeaderValid` with an empty file returns false
+    - [x] Test `isDxfHeaderValid` with a plain text file returns false
+    - [x] Test `isDxfHeaderValid` with a binary file (random bytes) returns false
+    - [x] Run tests and confirm they fail (Red)
 
-- [ ] Task: Implement — FileValidator utility
+- [~] Task: Implement — FileValidator utility
     - [ ] Create `FileValidator.kt` in `android/app/src/main/java/com/cavesketch/app/util/`
     - [ ] Implement `isAcceptedExtension(displayName: String, allowed: Set<String>): Boolean` — case-insensitive extension check
     - [ ] Implement `isDxfHeaderValid(file: File): Boolean` — reads first few lines to check for DXF magic marker
