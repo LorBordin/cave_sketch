@@ -67,7 +67,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Wire Validation into File Pickers' (Protocol in workflow.md) (8a97c95)
 
-## Phase 4: Polish & Cleanup
+## Phase 4: Polish & Cleanup [checkpoint: 1b8ef0b]
 
 - [x] Task: Refactor — Review and clean up validation integration (2d85f1c)
     - [x] Ensure no duplicate validation code across screens
@@ -75,4 +75,4 @@
     - [x] Ensure the existing StateBanner and Toast error paths are not affected
     - [x] Run full test suite and confirm all tests pass
 
-- [~] Task: Conductor - User Manual Verification 'Phase 4: Polish & Cleanup' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Polish & Cleanup' (Protocol in workflow.md) (1b8ef0b)
