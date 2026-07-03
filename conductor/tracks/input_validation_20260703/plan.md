@@ -41,14 +41,14 @@
 
 ## Phase 3: Wire Validation into File Pickers
 
-- [~] Task: Write Tests — ViewModel validation behavior
-    - [ ] Add tests to `SurveyPlotViewModelTest.kt` verifying that:
-        - Setting a file with invalid extension does not update the file path state
-        - Setting a file with valid extension updates the state normally
-    - [ ] Add tests to `SatelliteViewModelTest.kt` verifying JSON extension validation
-    - [ ] Run tests and confirm they fail (Red)
+- [x] Task: Write Tests — ViewModel validation behavior (4557365)
+    - [x] Add tests to `SurveyPlotViewModelTest.kt` verifying that:
+        - [x] Setting a file with invalid extension does not update the file path state
+        - [x] Setting a file with valid extension updates the state normally
+    - [x] Add tests to `SatelliteViewModelTest.kt` verifying JSON extension validation
+    - [x] Run tests and confirm they fail (Red)
 
-- [ ] Task: Implement — Extension validation in SurveyPlotScreen file pickers
+- [~] Task: Implement — Extension validation in SurveyPlotScreen file pickers
     - [ ] Before calling `safeCopyUriToDir`, check `isAcceptedExtension(displayName, SURVEY_EXTENSIONS)`
     - [ ] On rejection: show Snackbar with "Unsupported file format. Please select a .dxf or .csv file.", do NOT update state
     - [ ] Apply to all 4 file picker callbacks (map, section, child map, child section)
