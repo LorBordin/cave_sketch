@@ -1,10 +1,10 @@
 # Implementation Plan: Section Scale Bar Grid-Snap Collision Fix
 
 ## Phase 1: Reproduce and Write Tests (Red Phase)
-- [ ] Task: Write failing test for grid-snap collision
-    - [ ] Add a `show_grid=True` variant of the existing `test_section_scale_bar_no_intersection` test.
-    - [ ] Create a new test `test_grid_snap_skipped_on_collision` that verifies: when grid-snapping would push the scale bar into survey data, the snap is skipped and the original collision-free position is preserved.
-    - [ ] Run the tests and confirm they fail on the current implementation (Red phase).
+- [x] Task: Write failing test for grid-snap collision (e252e11)
+    - [x] Add a `show_grid=True` variant of the existing `test_section_scale_bar_no_intersection` test.
+    - [x] Create a new test `test_grid_snap_skipped_on_collision` that verifies: when grid-snapping would push the scale bar into survey data, the snap is skipped and the original collision-free position is preserved.
+    - [x] Run the tests and confirm they fail on the current implementation (Red phase).
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Reproduce and Write Tests (Red Phase)' (Protocol in workflow.md)
 
 ## Phase 2: Fix Grid-Snap Collision Logic (Green Phase)
