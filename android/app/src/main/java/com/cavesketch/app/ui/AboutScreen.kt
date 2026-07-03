@@ -178,6 +178,12 @@ fun AboutScreen(versionName: String) {
                             .padding(horizontal = 16.dp)
                             .padding(bottom = 16.dp)
                     ) {
+                        Text(
+                            text = if (language == "it") "💡 Usa due dita per scorrere la guida" else "💡 Use two fingers to scroll the guide content",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
                         GuideWebView(
                             htmlContent = htmlContent,
                             modifier = Modifier

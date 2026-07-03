@@ -39,11 +39,17 @@ class AboutScreenTest {
         composeTestRule.onNodeWithText("User Guide").performClick()
         composeTestRule.waitForIdle()
 
+        // Verify English helper text exists
+        composeTestRule.onNodeWithText("💡 Use two fingers to scroll the guide content").assertExists()
+
         // Toggle language to Italian
         composeTestRule.onNodeWithText("🇮🇹").performClick()
         composeTestRule.waitForIdle()
         
         // After clicking Italian flag, the header text should localize to "Guida Utente"
         composeTestRule.onNodeWithText("Guida Utente").assertExists()
+
+        // Verify Italian helper text exists
+        composeTestRule.onNodeWithText("💡 Usa due dita per scorrere la guida").assertExists()
     }
 }
