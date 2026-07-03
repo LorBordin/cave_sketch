@@ -33,7 +33,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: About Screen Integration' (Protocol in workflow.md)
 
-## Phase 4: Polish & Final Verification
+## Phase 4: Polish & Final Verification [checkpoint: 60b1a6d]
 
 - [x] Task: End-to-end polish and edge cases [f8cbb2f]
     - [x] Verify all 8 screenshots render inline in airplane mode
@@ -42,4 +42,4 @@
     - [x] Review CSS styling for readability (font sizes, spacing, image sizing) on various screen sizes
     - [x] Run full test suite and verify >80% coverage for new code
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Polish & Final Verification' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Polish & Final Verification' (Protocol in workflow.md)
