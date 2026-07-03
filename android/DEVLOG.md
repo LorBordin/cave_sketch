@@ -263,3 +263,26 @@ None.
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** Ready for Phase 1 implementation of the offline guide.
+
+## [2026-07-03 17:03] implementation — In-App Offline User Guide Complete
+**Files:**
+- android/app/src/main/assets/guide/guide_en.md
+- android/app/src/main/assets/guide/guide_it.md
+- android/app/src/main/assets/guide/guide.css
+- android/app/src/main/assets/guide/screenshots/*
+- android/app/src/main/java/com/cavesketch/app/util/GuideRenderer.kt
+- android/app/src/test/java/com/cavesketch/app/util/GuideRendererTest.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/GuideWebView.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/GuideWebViewTest.kt
+- android/app/src/main/java/com/cavesketch/app/ui/AboutScreen.kt
+- android/app/src/test/java/com/cavesketch/app/ui/AboutScreenTest.kt
+- conductor/tracks.md
+
+**Deviations from spec:**
+- Added a localized scroll helper instruction text inside the accordion body above the WebView component to guide users that two fingers are required to scroll content inside a nested scroll layout.
+
+**Assumptions:**
+- Emojis (🇬🇧/🇮🇹) were used for language flags, which is a lightweight way to support visual styling.
+
+**Next session notes:**
+None
