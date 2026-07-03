@@ -1,0 +1,8 @@
+{
+  "track_id": "inapp_guide_20260703",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-07-03T11:43:19+02:00",
+  "updated_at": "2026-07-03T11:43:19+02:00",
+  "description": "Embed offline user guide in the Android app's About screen with accordion UI, WebView Markdown rendering, and EN/IT language toggle"
+}

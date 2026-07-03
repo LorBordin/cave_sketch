@@ -1,0 +1,45 @@
+# Plan: In-App Offline User Guide (Android)
+
+## Phase 1: Bundle Guide Assets
+
+- [ ] Task: Prepare guide Markdown files for in-app use
+    - [ ] Create `assets/guide/` directory structure (`assets/guide/screenshots/`, `assets/guide/`)
+    - [ ] Copy screenshot JPEGs from `docs/mobile-app/screenshots_v1/` into `assets/guide/screenshots/`
+    - [ ] Adapt `docs/android/README.md` → `assets/guide/guide_en.md`: strip Installation, For Contributors, external-only links; rewrite image paths to `screenshots/...`
+    - [ ] Adapt `docs/android/README.it.md` → `assets/guide/guide_it.md`: same adaptations for Italian
+    - [ ] Create `assets/guide/guide.css` with Material 3 dark-theme-compatible styling for the rendered HTML
+
+- [ ] Task: Create Markdown-to-HTML conversion utility
+    - [ ] Write tests for a `GuideRenderer` utility that loads a Markdown asset file and produces a complete HTML string with embedded CSS link and correct base URL for images
+    - [ ] Implement `GuideRenderer` in `util/GuideRenderer.kt` that reads the Markdown asset, converts to HTML (using a lightweight library or simple regex-based conversion), and wraps with the CSS stylesheet reference
+
+- [ ] Task: Conductor - User Manual Verification 'Phase 1: Bundle Guide Assets' (Protocol in workflow.md)
+
+## Phase 2: WebView Guide Component
+
+- [ ] Task: Create GuideWebView composable component
+    - [ ] Write tests for the composable: verifies WebView is created with correct settings (JavaScript disabled, no external loads), and that `loadDataWithBaseURL` is called with the rendered HTML
+    - [ ] Implement `GuideWebView` composable in `ui/components/GuideWebView.kt` that accepts an HTML string, renders it in an Android `WebView`, intercepts external URL clicks to open in system browser, and configures offline-only operation
+
+- [ ] Task: Conductor - User Manual Verification 'Phase 2: WebView Guide Component' (Protocol in workflow.md)
+
+## Phase 3: About Screen Integration
+
+- [ ] Task: Add language toggle and accordion UI to AboutScreen
+    - [ ] Write tests for the updated AboutScreen: verify the User Guide accordion header is displayed, expand/collapse toggles content visibility, and language toggle switches between EN/IT
+    - [ ] Update `AboutScreen.kt` to add a "User Guide" expandable accordion section below existing content, with a 🇬🇧/🇮🇹 language toggle in the header and animated expand/collapse
+    - [ ] Integrate `GuideRenderer` and `GuideWebView` inside the accordion body: load the selected language's Markdown, render to HTML, and display in the WebView
+    - [ ] Handle nested scrolling: configure the WebView with a fixed or adaptive height to avoid scroll conflicts with the parent Column
+
+- [ ] Task: Conductor - User Manual Verification 'Phase 3: About Screen Integration' (Protocol in workflow.md)
+
+## Phase 4: Polish & Final Verification
+
+- [ ] Task: End-to-end polish and edge cases
+    - [ ] Verify all 8 screenshots render inline in airplane mode
+    - [ ] Test language toggle does not reset scroll position unexpectedly
+    - [ ] Ensure external links (GitHub) open in system browser, not inside the WebView
+    - [ ] Review CSS styling for readability (font sizes, spacing, image sizing) on various screen sizes
+    - [ ] Run full test suite and verify >80% coverage for new code
+
+- [ ] Task: Conductor - User Manual Verification 'Phase 4: Polish & Final Verification' (Protocol in workflow.md)

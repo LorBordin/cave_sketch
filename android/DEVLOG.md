@@ -252,6 +252,14 @@ None.
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-07-03 14:53] planning — In-app offline user guide track creation
+**Files:**
+- conductor/tracks/inapp_guide_20260703/index.md
+- conductor/tracks/inapp_guide_20260703/metadata.json
+- conductor/tracks/inapp_guide_20260703/plan.md
+- conductor/tracks/inapp_guide_20260703/spec.md
+- conductor/tracks.md
 
-
-
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Ready for Phase 1 implementation of the offline guide.

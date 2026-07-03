@@ -47,3 +47,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [x] **Track: Phase 4 Visual Redesign**
 *Link: [../docs/mobile-app/phases/phase-4-visual-redesign/](../docs/mobile-app/phases/phase-4-visual-redesign/)*
+
+---
+
+- [ ] **Track: In-App Offline User Guide (Android)**
+*Link: [./tracks/inapp_guide_20260703/](./tracks/inapp_guide_20260703/)*
+
