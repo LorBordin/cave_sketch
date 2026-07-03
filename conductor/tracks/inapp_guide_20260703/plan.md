@@ -15,13 +15,13 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Bundle Guide Assets' (Protocol in workflow.md)
 
-## Phase 2: WebView Guide Component
+## Phase 2: WebView Guide Component [checkpoint: 0e36290]
 
 - [x] Task: Create GuideWebView composable component [8c8de28]
     - [x] Write tests for the composable: verifies WebView is created with correct settings (JavaScript disabled, no external loads), and that `loadDataWithBaseURL` is called with the rendered HTML
     - [x] Implement `GuideWebView` composable in `ui/components/GuideWebView.kt` that accepts an HTML string, renders it in an Android `WebView`, intercepts external URL clicks to open in system browser, and configures offline-only operation
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: WebView Guide Component' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: WebView Guide Component' (Protocol in workflow.md)
 
 ## Phase 3: About Screen Integration
 
