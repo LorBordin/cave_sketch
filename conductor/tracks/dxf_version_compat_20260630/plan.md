@@ -2,7 +2,7 @@
 
 ## Phase 1: Test Infrastructure & LWPOLYLINE Support
 
-- [ ] Task: Write failing tests for DXF v14 parsing parity
+- [x] Task: Write failing tests for DXF v14 parsing parity (53bce19)
     - [ ] Add test `test_parse_v14_produces_same_survey_as_v9` that loads both `sample_v9.dxf` and `sample_v14.dxf`, parses them, and asserts the resulting `CaveSurvey` objects have identical point counts, line counts, and line-type distributions.
     - [ ] Add test `test_parse_v14_polyline_linetypes` that verifies all expected line types (`L_wall`, `L_wall-presumed`, `L_pit`, `A_water`) are present in the v14 parse result.
     - [ ] Add test `test_parse_v9_backward_compat` that ensures parsing `sample_v9.dxf` produces the same result as the existing `sample.dxf` baseline (if they represent the same survey) or at minimum has stations and polylines.
