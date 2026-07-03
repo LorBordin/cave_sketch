@@ -71,4 +71,12 @@ class SurveyPlotViewModelTest {
         val json = inputs.toJson()
         assertTrue(json.contains("\"show_centerline\":false"))
     }
+
+    @Test
+    fun testFileValidator_surveyExtensions() {
+        val allowed = com.cavesketch.app.util.FileValidator.SURVEY_EXTENSIONS
+        assertTrue(com.cavesketch.app.util.FileValidator.isAcceptedExtension("survey.dxf", allowed))
+        assertTrue(com.cavesketch.app.util.FileValidator.isAcceptedExtension("data.csv", allowed))
+        org.junit.Assert.assertFalse(com.cavesketch.app.util.FileValidator.isAcceptedExtension("survey.txt", allowed))
+    }
 }

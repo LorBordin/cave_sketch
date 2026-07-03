@@ -89,4 +89,10 @@ class SatelliteViewModelTest {
         model.removeLastPoint() // never drops below one row
         assertEquals(1, model.points.value.size)
     }
+
+    @Test
+    fun testFileValidator_jsonExtension() {
+        assertTrue(com.cavesketch.app.util.FileValidator.isAcceptedJsonExtension("map.json"))
+        org.junit.Assert.assertFalse(com.cavesketch.app.util.FileValidator.isAcceptedJsonExtension("map.txt"))
+    }
 }
