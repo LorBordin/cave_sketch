@@ -23,6 +23,9 @@ def parse_dxf(input_path: Path, output_path: Optional[Path] = None) -> CaveSurve
     msp = doc.modelspace()
 
     stations = _get_stations(msp)
+    # Note: HATCH entities (found in DXF R2000+) represent filled areas (e.g. A_water)
+    # but they are redundant as their boundary coordinates are already captured by
+    # the corresponding LWPOLYLINE entities. Hence, we can safely ignore HATCH entities.
     all_polylines = _parse_polylines(msp, filter_layers=["SCRAP_0"])
     offset_x, offset_y = _get_offset(msp, offset_idx=0)
     blocks = _get_features(msp)
