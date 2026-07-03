@@ -34,16 +34,30 @@ fun GuideWebView(
                 settings.allowUniversalAccessFromFileURLs = false
 
                 webViewClient = object : WebViewClient() {
+                    private fun openBrowser(uri: Uri) {
+                        val intent = Intent(Intent.ACTION_VIEW, uri).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }
+                        context.startActivity(intent)
+                    }
+
                     override fun shouldOverrideUrlLoading(
                         view: WebView?,
                         request: WebResourceRequest?
                     ): Boolean {
                         val url = request?.url ?: return false
-                        // Open external URLs in the system browser
-                        val intent = Intent(Intent.ACTION_VIEW, url).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        openBrowser(url)
+                        return true
+                    }
+
+                    @Deprecated("Deprecated in Java")
+                    override fun shouldOverrideUrlLoading(
+                        view: WebView?,
+                        url: String?
+                    ): Boolean {
+                        if (url != null) {
+                            openBrowser(Uri.parse(url))
                         }
-                        context.startActivity(intent)
                         return true
                     }
                 }
