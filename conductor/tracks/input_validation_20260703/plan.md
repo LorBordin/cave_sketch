@@ -27,17 +27,17 @@
 
 ## Phase 2: Snackbar Infrastructure
 
-- [~] Task: Implement — SnackbarHost integration in SurveyPlotScreen
-    - [ ] Add a `SnackbarHostState` to `SurveyPlotScreen` (or lift to a shared scaffold if needed)
-    - [ ] Wire `SnackbarHost` into the Compose layout
-    - [ ] Expose a `showSnackbar(message)` suspend function callable from file-picker callbacks via a coroutine scope
-    - [ ] Verify visually that a test Snackbar renders correctly (then remove test trigger)
+- [x] Task: Implement — SnackbarHost integration in SurveyPlotScreen (d0860bd)
+    - [x] Add a `SnackbarHostState` to `SurveyPlotScreen` (or lift to a shared scaffold if needed)
+    - [x] Wire `SnackbarHost` into the Compose layout
+    - [x] Expose a `showSnackbar(message)` suspend function callable from file-picker callbacks via a coroutine scope
+    - [x] Verify visually that a test Snackbar renders correctly (then remove test trigger)
 
-- [ ] Task: Implement — SnackbarHost integration in SatelliteScreen
-    - [ ] Add a `SnackbarHostState` and `SnackbarHost` to `SatelliteScreen`
-    - [ ] Wire Snackbar display for the satellite screen file picker callbacks
+- [x] Task: Implement — SnackbarHost integration in SatelliteScreen (d0860bd)
+    - [x] Add a `SnackbarHostState` and `SnackbarHost` to `SatelliteScreen`
+    - [x] Wire Snackbar display for the satellite screen file picker callbacks
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Snackbar Infrastructure' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Snackbar Infrastructure' (Protocol in workflow.md)
 
 ## Phase 3: Wire Validation into File Pickers
 
