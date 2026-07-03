@@ -383,3 +383,20 @@
 **Assumptions:** None
 **Next session notes:** The track is fully implemented and verified. The bug fix prevents grid-snapping from reintroducing scale-bar collisions with survey data when grid is enabled. All tests, linting, type-checking, and mobile app build checks pass. Ready to archive or close.
 
+## [2026-07-03 11:58] Track dxf_version_compat_20260630 — Implementation
+**Files:**
+- cave_sketch/dxf/parser.py
+- tests/test_dxf_compatibility.py
+- conductor/tracks.md
+- conductor/archive/dxf_version_compat_20260630/index.md
+- conductor/archive/dxf_version_compat_20260630/metadata.json
+- conductor/archive/dxf_version_compat_20260630/plan.md
+- conductor/archive/dxf_version_compat_20260630/spec.md
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:**
+- HATCH entities in DXF v14 files are redundant with LWPOLYLINE boundary definitions and do not need to be parsed to maintain point/line parity.
+**Next session notes:** The DXF R14/R2000 compatibility track is fully implemented, verified, and archived. All 130 unit tests pass cleanly, and code style / static checking (ruff, mypy) are fully compliant.
+
+
