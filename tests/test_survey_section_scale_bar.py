@@ -164,7 +164,7 @@ def test_grid_snap_skipped_on_collision():
     # Construct a simple dataset where snapping vertical rule would cause collision
     data = {
         "X": [0.0, 100.0, 10.0],
-        "Y": [0.0, 100.0, 1.0],  # 1.0 is inside snapped Y [0.0, 100.0] but not unsnapped Y [2.0, 102.0]
+        "Y": [0.0, 100.0, 1.0],  # 1.0 inside snapped Y [0.0, 100.0], not unsnapped [2.0, 102.0]
         "Node_Id": ["A", "B", "C"],
         "Links": ["", "", ""],
         "Type": ["station", "station", "station"],
