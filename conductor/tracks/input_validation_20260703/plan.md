@@ -69,10 +69,10 @@
 
 ## Phase 4: Polish & Cleanup
 
-- [~] Task: Refactor — Review and clean up validation integration
-    - [ ] Ensure no duplicate validation code across screens
-    - [ ] Verify error messages are consistent across all pickers
-    - [ ] Ensure the existing StateBanner and Toast error paths are not affected
-    - [ ] Run full test suite and confirm all tests pass
+- [x] Task: Refactor — Review and clean up validation integration (2d85f1c)
+    - [x] Ensure no duplicate validation code across screens
+    - [x] Verify error messages are consistent across all pickers
+    - [x] Ensure the existing StateBanner and Toast error paths are not affected
+    - [x] Run full test suite and confirm all tests pass
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Polish & Cleanup' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 4: Polish & Cleanup' (Protocol in workflow.md)
