@@ -46,14 +46,17 @@ import kotlinx.coroutines.launch
 @Composable
 fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
     val context = LocalContext.current
-    val showError: (String) -> Unit = { msg ->
-        android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show()
-    }
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     var inputs by remember { mutableStateOf(SurveyInputs()) }
     val state by viewModel.state.collectAsState()
     val canGenerate = inputs.mapPath != null || inputs.sectionPath != null
+
+    val showSnackbar: (String) -> Unit = { msg ->
+        coroutineScope.launch {
+            snackbarHostState.showSnackbar(msg)
+        }
+    }
 
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
@@ -68,19 +71,19 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
         ) {
             SectionCard("Input files", Icons.Filled.Description) {
                 FilePickerRow("Pick Cave Map", inputs.mapPath?.let { "map" + extOf(it) }) { uri ->
-                    com.cavesketch.app.util.safeCopyUriToDir(
-                        context, uri, context.filesDir, "map" + extensionOf(context, uri), showError,
-                    )?.let { inputs = inputs.copy(mapPath = it) }
+                    com.cavesketch.app.util.FileValidator.validateAndCopySurveyFile(
+                        context, uri, "map", showSnackbar
+                    ) { inputs = inputs.copy(mapPath = it) }
                 }
                 FilePickerRow("Pick Cave Section", inputs.sectionPath?.let { "section" + extOf(it) }) { uri ->
-                    com.cavesketch.app.util.safeCopyUriToDir(
-                        context, uri, context.filesDir, "section" + extensionOf(context, uri), showError,
-                    )?.let { inputs = inputs.copy(sectionPath = it) }
+                    com.cavesketch.app.util.FileValidator.validateAndCopySurveyFile(
+                        context, uri, "section", showSnackbar
+                    ) { inputs = inputs.copy(sectionPath = it) }
                 }
             }
 
             SectionCard("Merge survey (optional)", Icons.Filled.Link) {
-                MergeControls(inputs, context) { inputs = it }
+                MergeControls(inputs, context, showSnackbar) { inputs = it }
             }
 
             SectionCard("Survey details", Icons.Filled.Edit) {

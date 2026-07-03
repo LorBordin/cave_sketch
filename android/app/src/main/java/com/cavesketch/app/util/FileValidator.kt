@@ -1,5 +1,8 @@
 package com.cavesketch.app.util
 
+import android.content.Context
+import android.net.Uri
+import android.widget.Toast
 import java.io.File
 
 object FileValidator {
@@ -38,5 +41,41 @@ object FileValidator {
         } catch (e: Exception) {
             false
         }
+    }
+
+    /**
+     * Validates file extension, copies the file, validates the DXF structure if applicable,
+     * and triggers onSuccess on success. Shows Snackbars on validation errors.
+     */
+    fun validateAndCopySurveyFile(
+        context: Context,
+        uri: Uri,
+        fileNamePrefix: String,
+        showSnackbar: (String) -> Unit,
+        onSuccess: (String) -> Unit
+    ) {
+        val displayName = getDisplayName(context, uri)
+        if (!isAcceptedExtension(displayName, SURVEY_EXTENSIONS)) {
+            showSnackbar("Unsupported file format. Please select a .dxf or .csv file.")
+            return
+        }
+        val isDxf = displayName.lowercase().endsWith(".dxf")
+        val targetExt = if (isDxf) ".dxf" else ".csv"
+        val targetFileName = fileNamePrefix + targetExt
+        val showError: (String) -> Unit = { msg ->
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        }
+        val copiedPath = safeCopyUriToDir(context, uri, context.filesDir, targetFileName, showError) ?: return
+        if (isDxf) {
+            val file = File(copiedPath)
+            if (!isDxfHeaderValid(file)) {
+                if (file.exists()) {
+                    file.delete()
+                }
+                showSnackbar("The selected file is not a valid DXF file.")
+                return
+            }
+        }
+        onSuccess(copiedPath)
     }
 }

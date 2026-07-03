@@ -13,23 +13,24 @@ import com.cavesketch.app.ui.SurveyInputs
 import com.cavesketch.app.util.extensionOf
 
 @Composable
-fun MergeControls(inputs: SurveyInputs, context: Context, onChange: (SurveyInputs) -> Unit) {
+fun MergeControls(
+    inputs: SurveyInputs,
+    context: Context,
+    showSnackbar: (String) -> Unit,
+    onChange: (SurveyInputs) -> Unit
+) {
     FilePickerRow("Pick Child Map", inputs.childMapPath?.let { "child_map" }) { uri ->
-        val p = com.cavesketch.app.util.safeCopyUriToDir(
-            context, uri, context.filesDir, "child_map" + extensionOf(context, uri),
-            { msg -> android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show() },
-        )
-        if (p != null) {
-            onChange(inputs.copy(childMapPath = p))
+        com.cavesketch.app.util.FileValidator.validateAndCopySurveyFile(
+            context, uri, "child_map", showSnackbar
+        ) { path ->
+            onChange(inputs.copy(childMapPath = path))
         }
     }
     FilePickerRow("Pick Child Section", inputs.childSectionPath?.let { "child_section" }) { uri ->
-        val p = com.cavesketch.app.util.safeCopyUriToDir(
-            context, uri, context.filesDir, "child_section" + extensionOf(context, uri),
-            { msg -> android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show() },
-        )
-        if (p != null) {
-            onChange(inputs.copy(childSectionPath = p))
+        com.cavesketch.app.util.FileValidator.validateAndCopySurveyFile(
+            context, uri, "child_section", showSnackbar
+        ) { path ->
+            onChange(inputs.copy(childSectionPath = path))
         }
     }
 

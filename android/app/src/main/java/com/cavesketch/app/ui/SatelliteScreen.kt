@@ -57,15 +57,25 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
 
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
+    val showSnackbar: (String) -> Unit = { msg ->
+        coroutineScope.launch {
+            snackbarHostState.showSnackbar(msg)
+        }
+    }
 
     val jsonPicker = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenMultipleDocuments()
     ) { uris ->
         uris.forEachIndexed { idx, uri ->
-            com.cavesketch.app.util.safeCopyUriToDir(
-                context, uri, context.filesDir, "additional_${jsonMaps.size + idx}.json",
-                { msg -> android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show() },
-            )?.let { viewModel.addJsonMap(it) }
+            val displayName = com.cavesketch.app.util.getDisplayName(context, uri)
+            if (!com.cavesketch.app.util.FileValidator.isAcceptedJsonExtension(displayName)) {
+                showSnackbar("Unsupported file format. Please select a .json file.")
+            } else {
+                com.cavesketch.app.util.safeCopyUriToDir(
+                    context, uri, context.filesDir, "additional_${jsonMaps.size + idx}.json",
+                    { msg -> android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_LONG).show() },
+                )?.let { viewModel.addJsonMap(it) }
+            }
         }
     }
 
