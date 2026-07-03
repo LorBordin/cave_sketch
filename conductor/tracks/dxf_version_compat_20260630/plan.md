@@ -14,7 +14,7 @@
     - [ ] Ensure linetype, color, lineweight, and layer attributes are read correctly from `LWPOLYLINE` entities.
     - [ ] Run tests and confirm all pass (Green phase).
 
-- [ ] Task: Investigate HATCH entities for area parity
+- [x] Task: Investigate HATCH entities for area parity (99e7bc2)
     - [ ] Write a small investigation to compare `A_water` area data parsed from v9 polylines vs. v14 (which has both LWPOLYLINE with `A_water` linetype AND `HATCH` entities).
     - [ ] If the `A_water` LWPOLYLINE data already produces equivalent area polygons, document that HATCH entities are redundant and can be ignored.
     - [ ] If HATCH entities are needed, add parsing support. Otherwise, add a code comment explaining the decision.
