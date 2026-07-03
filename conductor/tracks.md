@@ -56,3 +56,13 @@ This file tracks all major tracks for the project. Each track has its own detail
 *Link: [./tracks/dxf_version_compat_20260630/](./tracks/dxf_version_compat_20260630/)*
 
 
+<<<<<<< HEAD
+=======
+- [ ] **Track: Section Scale Bar Grid-Snap Collision Fix**
+*Link: [./tracks/section_rule_snap_fix_20260630/](./tracks/section_rule_snap_fix_20260630/)*
+
+---
+
+- [ ] **Track: Input File Format Validation (Android)**
+*Link: [./tracks/input_validation_20260703/](./tracks/input_validation_20260703/)*
+>>>>>>> db7bc0f (chore(conductor): Add new track 'Input File Format Validation (Android)')
