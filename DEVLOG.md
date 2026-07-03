@@ -399,4 +399,11 @@
 - HATCH entities in DXF v14 files are redundant with LWPOLYLINE boundary definitions and do not need to be parsed to maintain point/line parity.
 **Next session notes:** The DXF R14/R2000 compatibility track is fully implemented, verified, and archived. All 130 unit tests pass cleanly, and code style / static checking (ruff, mypy) are fully compliant.
 
+## [2026-07-03 12:01] Conflict Resolution — Resolved merge conflict in conductor/tracks.md
+**Files:**
+- conductor/tracks.md
+- DEVLOG.md
 
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** None
