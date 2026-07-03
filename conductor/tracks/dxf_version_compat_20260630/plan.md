@@ -8,7 +8,7 @@
     - [ ] Add test `test_parse_v9_backward_compat` that ensures parsing `sample_v9.dxf` produces the same result as the existing `sample.dxf` baseline (if they represent the same survey) or at minimum has stations and polylines.
     - [ ] Run tests and confirm they fail (Red phase).
 
-- [ ] Task: Implement LWPOLYLINE support in `_parse_polylines()`
+- [x] Task: Implement LWPOLYLINE support in `_parse_polylines()` (662ff00)
     - [ ] Modify `_parse_polylines()` in `cave_sketch/dxf/parser.py` to query both `POLYLINE` and `LWPOLYLINE` entity types.
     - [ ] Normalize `LWPOLYLINE` vertex access (uses `.get_points(format='xy')` or similar) to the same `(x, y)` tuple format as `POLYLINE`.
     - [ ] Ensure linetype, color, lineweight, and layer attributes are read correctly from `LWPOLYLINE` entities.
