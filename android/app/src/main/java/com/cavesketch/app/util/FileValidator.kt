@@ -27,35 +27,8 @@ object FileValidator {
     }
 
     /**
-     * Validates if a file has the standard DXF signature:
-     * Scans the first 50 lines to find a line that trims to "0" followed immediately
-     * by a line that trims to "SECTION". This allows for leading comment blocks (999).
-     */
-    fun isDxfHeaderValid(file: File): Boolean {
-        if (!file.exists() || !file.isFile) return false
-        return try {
-            file.bufferedReader().use { reader ->
-                var lineCount = 0
-                while (lineCount < 50) {
-                    val line = reader.readLine() ?: break
-                    lineCount++
-                    if (line.trim() == "0") {
-                        val nextLine = reader.readLine()?.trim() ?: break
-                        if (nextLine == "SECTION") {
-                            return true
-                        }
-                    }
-                }
-                false
-            }
-        } catch (e: Exception) {
-            false
-        }
-    }
-
-    /**
-     * Validates file extension, copies the file, validates the DXF structure if applicable,
-     * and triggers onSuccess on success. Shows Snackbars on validation errors.
+     * Validates file extension, copies the file, and triggers onSuccess on success.
+     * Shows Snackbars on validation errors.
      */
     fun validateAndCopySurveyFile(
         context: Context,
@@ -76,16 +49,6 @@ object FileValidator {
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         }
         val copiedPath = safeCopyUriToDir(context, uri, context.filesDir, targetFileName, showError) ?: return
-        if (isDxf) {
-            val file = File(copiedPath)
-            if (!isDxfHeaderValid(file)) {
-                if (file.exists()) {
-                    file.delete()
-                }
-                showSnackbar("The selected file is not a valid DXF file.")
-                return
-            }
-        }
         onSuccess(copiedPath)
     }
 }
