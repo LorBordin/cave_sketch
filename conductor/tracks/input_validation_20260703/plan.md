@@ -39,7 +39,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Snackbar Infrastructure' (Protocol in workflow.md) (aaf8ba8)
 
-## Phase 3: Wire Validation into File Pickers
+## Phase 3: Wire Validation into File Pickers [checkpoint: 8a97c95]
 
 - [x] Task: Write Tests — ViewModel validation behavior (4557365)
     - [x] Add tests to `SurveyPlotViewModelTest.kt` verifying that:
@@ -65,11 +65,11 @@
     - [x] On rejection: show Snackbar with "Unsupported file format. Please select a .json file.", skip that file
     - [x] Run tests and confirm they pass (Green)
 
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Wire Validation into File Pickers' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Wire Validation into File Pickers' (Protocol in workflow.md) (8a97c95)
 
 ## Phase 4: Polish & Cleanup
 
-- [ ] Task: Refactor — Review and clean up validation integration
+- [~] Task: Refactor — Review and clean up validation integration
     - [ ] Ensure no duplicate validation code across screens
     - [ ] Verify error messages are consistent across all pickers
     - [ ] Ensure the existing StateBanner and Toast error paths are not affected
