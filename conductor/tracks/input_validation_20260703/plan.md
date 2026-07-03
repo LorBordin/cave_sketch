@@ -25,7 +25,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Core Validation Logic' (Protocol in workflow.md) (227cb1e)
 
-## Phase 2: Snackbar Infrastructure
+## Phase 2: Snackbar Infrastructure [checkpoint: aaf8ba8]
 
 - [x] Task: Implement — SnackbarHost integration in SurveyPlotScreen (d0860bd)
     - [x] Add a `SnackbarHostState` to `SurveyPlotScreen` (or lift to a shared scaffold if needed)
@@ -37,11 +37,11 @@
     - [x] Add a `SnackbarHostState` and `SnackbarHost` to `SatelliteScreen`
     - [x] Wire Snackbar display for the satellite screen file picker callbacks
 
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Snackbar Infrastructure' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Snackbar Infrastructure' (Protocol in workflow.md) (aaf8ba8)
 
 ## Phase 3: Wire Validation into File Pickers
 
-- [ ] Task: Write Tests — ViewModel validation behavior
+- [~] Task: Write Tests — ViewModel validation behavior
     - [ ] Add tests to `SurveyPlotViewModelTest.kt` verifying that:
         - Setting a file with invalid extension does not update the file path state
         - Setting a file with valid extension updates the state normally
