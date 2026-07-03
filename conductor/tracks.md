@@ -52,7 +52,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: DXF Version Compatibility (R9, R12, R14/R2000)**
+- [x] **Track: DXF Version Compatibility (R9, R12, R14/R2000)**
 *Link: [./tracks/dxf_version_compat_20260630/](./tracks/dxf_version_compat_20260630/)*
 
 
