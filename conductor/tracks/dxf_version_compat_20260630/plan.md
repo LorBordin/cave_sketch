@@ -19,7 +19,7 @@
     - [ ] If the `A_water` LWPOLYLINE data already produces equivalent area polygons, document that HATCH entities are redundant and can be ignored.
     - [ ] If HATCH entities are needed, add parsing support. Otherwise, add a code comment explaining the decision.
 
-- [ ] Task: Verify backward compatibility with existing `sample.dxf`
+- [x] Task: Verify backward compatibility with existing `sample.dxf` (96a2807)
     - [ ] Run the existing `test_parse_valid_dxf` test to confirm no regression.
     - [ ] Confirm the parse output (stations, polylines, blocks) matches the pre-change baseline.
 
