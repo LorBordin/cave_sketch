@@ -219,3 +219,19 @@ None.
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-07-03 12:21] Phase 1-4 — Input validation implementation
+**Files:**
+- android/app/src/main/java/com/cavesketch/app/util/FileValidator.kt
+- android/app/src/main/java/com/cavesketch/app/util/FileCopy.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt
+- android/app/src/test/java/com/cavesketch/app/util/FileValidatorTest.kt
+- android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt
+- android/app/src/test/java/com/cavesketch/app/SatelliteViewModelTest.kt
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** None
+
+
