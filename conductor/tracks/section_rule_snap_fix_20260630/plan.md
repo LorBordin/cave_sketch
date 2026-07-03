@@ -8,12 +8,12 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Reproduce and Write Tests (Red Phase)' (Protocol in workflow.md) (0f4c6cd)
 
 ## Phase 2: Fix Grid-Snap Collision Logic (Green Phase)
-- [ ] Task: Implement post-snap collision re-check in `survey_plot.py`
-    - [ ] After `snap_rule_to_grid()` is called, re-check whether the snapped position causes overlap with survey data points (reuse the collision-checking logic from `placement.py`).
-    - [ ] If the snapped position causes a collision, revert to the original pre-snap `rule_pos` (and `arrow_coord`).
-    - [ ] Ensure this logic works for both horizontal and vertical rule orientations.
-    - [ ] Run the failing tests and confirm they now pass (Green phase).
-- [ ] Task: Refactor and verify
-    - [ ] Review the code for clarity and extract a helper function if needed (e.g., `check_collision_at_position()`).
-    - [ ] Run `uv run ruff check .`, `uv run mypy cave_sketch/`, and `uv run pytest` to confirm everything passes.
+- [x] Task: Implement post-snap collision re-check in `survey_plot.py` (934ea79)
+    - [x] After `snap_rule_to_grid()` is called, re-check whether the snapped position causes overlap with survey data points (reuse the collision-checking logic from `placement.py`).
+    - [x] If the snapped position causes a collision, revert to the original pre-snap `rule_pos` (and `arrow_coord`).
+    - [x] Ensure this logic works for both horizontal and vertical rule orientations.
+    - [x] Run the failing tests and confirm they now pass (Green phase).
+- [x] Task: Refactor and verify (dce3009)
+    - [x] Review the code for clarity and extract a helper function if needed (e.g., `check_collision_at_position()`).
+    - [x] Run `uv run ruff check .`, `uv run mypy cave_sketch/`, and `uv run pytest` to confirm everything passes.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Fix Grid-Snap Collision Logic (Green Phase)' (Protocol in workflow.md)
