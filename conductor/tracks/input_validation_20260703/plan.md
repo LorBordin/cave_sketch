@@ -16,14 +16,14 @@
     - [x] Test `isDxfHeaderValid` with a binary file (random bytes) returns false
     - [x] Run tests and confirm they fail (Red)
 
-- [~] Task: Implement — FileValidator utility
-    - [ ] Create `FileValidator.kt` in `android/app/src/main/java/com/cavesketch/app/util/`
-    - [ ] Implement `isAcceptedExtension(displayName: String, allowed: Set<String>): Boolean` — case-insensitive extension check
-    - [ ] Implement `isDxfHeaderValid(file: File): Boolean` — reads first few lines to check for DXF magic marker
-    - [ ] Define `SURVEY_EXTENSIONS = setOf("dxf", "csv")` and `JSON_EXTENSIONS = setOf("json")`
-    - [ ] Run tests and confirm they pass (Green)
+- [x] Task: Implement — FileValidator utility (270801a)
+    - [x] Create `FileValidator.kt` in `android/app/src/main/java/com/cavesketch/app/util/`
+    - [x] Implement `isAcceptedExtension(displayName: String, allowed: Set<String>): Boolean` — case-insensitive extension check
+    - [x] Implement `isDxfHeaderValid(file: File): Boolean` — reads first few lines to check for DXF magic marker
+    - [x] Define `SURVEY_EXTENSIONS = setOf("dxf", "csv")` and `JSON_EXTENSIONS = setOf("json")`
+    - [x] Run tests and confirm they pass (Green)
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Core Validation Logic' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Core Validation Logic' (Protocol in workflow.md)
 
 ## Phase 2: Snackbar Infrastructure
 
