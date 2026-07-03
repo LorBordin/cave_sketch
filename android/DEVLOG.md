@@ -243,5 +243,15 @@ None.
 **Assumptions:** Relaxed signature validation to allow comments (999) before 0 SECTION.
 **Next session notes:** None
 
+## [2026-07-03 12:29] Refactor — Remove DXF structure validation
+**Files:**
+- android/app/src/main/java/com/cavesketch/app/util/FileValidator.kt
+- android/app/src/test/java/com/cavesketch/app/util/FileValidatorTest.kt
+
+**Deviations from spec:** Removed DXF magic marker signature validation completely per user request.
+**Assumptions:** None
+**Next session notes:** None
+
+
 
 
