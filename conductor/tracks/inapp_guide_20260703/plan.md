@@ -9,9 +9,9 @@
     - [x] Adapt `docs/android/README.it.md` → `assets/guide/guide_it.md`: same adaptations for Italian
     - [x] Create `assets/guide/guide.css` with Material 3 dark-theme-compatible styling for the rendered HTML
 
-- [ ] Task: Create Markdown-to-HTML conversion utility
-    - [ ] Write tests for a `GuideRenderer` utility that loads a Markdown asset file and produces a complete HTML string with embedded CSS link and correct base URL for images
-    - [ ] Implement `GuideRenderer` in `util/GuideRenderer.kt` that reads the Markdown asset, converts to HTML (using a lightweight library or simple regex-based conversion), and wraps with the CSS stylesheet reference
+- [x] Task: Create Markdown-to-HTML conversion utility [2ad5ed7]
+    - [x] Write tests for a `GuideRenderer` utility that loads a Markdown asset file and produces a complete HTML string with embedded CSS link and correct base URL for images
+    - [x] Implement `GuideRenderer` in `util/GuideRenderer.kt` that reads the Markdown asset, converts to HTML (using a lightweight library or simple regex-based conversion), and wraps with the CSS stylesheet reference
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Bundle Guide Assets' (Protocol in workflow.md)
 
