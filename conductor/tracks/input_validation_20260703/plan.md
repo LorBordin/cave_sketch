@@ -1,6 +1,6 @@
 # Plan: Input File Format Validation (Android)
 
-## Phase 1: Core Validation Logic
+## Phase 1: Core Validation Logic [checkpoint: 227cb1e]
 
 - [x] Task: Write Tests — File Extension Validator (eb0f77c)
     - [x] Create `FileValidatorTest.kt` in `android/app/src/test/java/com/cavesketch/app/util/`
@@ -23,11 +23,11 @@
     - [x] Define `SURVEY_EXTENSIONS = setOf("dxf", "csv")` and `JSON_EXTENSIONS = setOf("json")`
     - [x] Run tests and confirm they pass (Green)
 
-- [~] Task: Conductor - User Manual Verification 'Phase 1: Core Validation Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Core Validation Logic' (Protocol in workflow.md) (227cb1e)
 
 ## Phase 2: Snackbar Infrastructure
 
-- [ ] Task: Implement — SnackbarHost integration in SurveyPlotScreen
+- [~] Task: Implement — SnackbarHost integration in SurveyPlotScreen
     - [ ] Add a `SnackbarHostState` to `SurveyPlotScreen` (or lift to a shared scaffold if needed)
     - [ ] Wire `SnackbarHost` into the Compose layout
     - [ ] Expose a `showSnackbar(message)` suspend function callable from file-picker callbacks via a coroutine scope
