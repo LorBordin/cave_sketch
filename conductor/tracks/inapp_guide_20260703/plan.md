@@ -23,7 +23,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: WebView Guide Component' (Protocol in workflow.md)
 
-## Phase 3: About Screen Integration
+## Phase 3: About Screen Integration [checkpoint: 0d6597d]
 
 - [x] Task: Add language toggle and accordion UI to AboutScreen [9b78b73]
     - [x] Write tests for the updated AboutScreen: verify the User Guide accordion header is displayed, expand/collapse toggles content visibility, and language toggle switches between EN/IT
@@ -31,7 +31,7 @@
     - [x] Integrate `GuideRenderer` and `GuideWebView` inside the accordion body: load the selected language's Markdown, render to HTML, and display in the WebView
     - [x] Handle nested scrolling: configure the WebView with a fixed or adaptive height to avoid scroll conflicts with the parent Column
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: About Screen Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: About Screen Integration' (Protocol in workflow.md)
 
 ## Phase 4: Polish & Final Verification
 
