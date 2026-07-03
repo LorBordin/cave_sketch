@@ -50,6 +50,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: In-App Offline User Guide (Android)**
+- [x] **Track: In-App Offline User Guide (Android)**
 *Link: [./tracks/inapp_guide_20260703/](./tracks/inapp_guide_20260703/)*
 
