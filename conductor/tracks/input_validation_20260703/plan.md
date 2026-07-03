@@ -48,24 +48,24 @@
     - [x] Add tests to `SatelliteViewModelTest.kt` verifying JSON extension validation
     - [x] Run tests and confirm they fail (Red)
 
-- [~] Task: Implement — Extension validation in SurveyPlotScreen file pickers
-    - [ ] Before calling `safeCopyUriToDir`, check `isAcceptedExtension(displayName, SURVEY_EXTENSIONS)`
-    - [ ] On rejection: show Snackbar with "Unsupported file format. Please select a .dxf or .csv file.", do NOT update state
-    - [ ] Apply to all 4 file picker callbacks (map, section, child map, child section)
-    - [ ] Run tests and confirm they pass (Green)
+- [x] Task: Implement — Extension validation in SurveyPlotScreen file pickers (2d85f1c)
+    - [x] Before calling `safeCopyUriToDir`, check `isAcceptedExtension(displayName, SURVEY_EXTENSIONS)`
+    - [x] On rejection: show Snackbar with "Unsupported file format. Please select a .dxf or .csv file.", do NOT update state
+    - [x] Apply to all 4 file picker callbacks (map, section, child map, child section)
+    - [x] Run tests and confirm they pass (Green)
 
-- [ ] Task: Implement — DXF header validation after copy
-    - [ ] After `safeCopyUriToDir` succeeds for a `.dxf` file, call `isDxfHeaderValid(copiedFile)`
-    - [ ] On failure: delete the copied file, show Snackbar with "The selected file is not a valid DXF file.", do NOT update state
-    - [ ] Apply to all DXF file picker callbacks
-    - [ ] Run tests and confirm they pass (Green)
+- [x] Task: Implement — DXF header validation after copy (2d85f1c)
+    - [x] After `safeCopyUriToDir` succeeds for a `.dxf` file, call `isDxfHeaderValid(copiedFile)`
+    - [x] On failure: delete the copied file, show Snackbar with "The selected file is not a valid DXF file.", do NOT update state
+    - [x] Apply to all DXF file picker callbacks
+    - [x] Run tests and confirm they pass (Green)
 
-- [ ] Task: Implement — JSON extension validation in SatelliteScreen
-    - [ ] Before copying each file in the multi-file JSON picker, check `isAcceptedExtension(displayName, JSON_EXTENSIONS)`
-    - [ ] On rejection: show Snackbar with "Unsupported file format. Please select a .json file.", skip that file
-    - [ ] Run tests and confirm they pass (Green)
+- [x] Task: Implement — JSON extension validation in SatelliteScreen (2d85f1c)
+    - [x] Before copying each file in the multi-file JSON picker, check `isAcceptedExtension(displayName, JSON_EXTENSIONS)`
+    - [x] On rejection: show Snackbar with "Unsupported file format. Please select a .json file.", skip that file
+    - [x] Run tests and confirm they pass (Green)
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Wire Validation into File Pickers' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Wire Validation into File Pickers' (Protocol in workflow.md)
 
 ## Phase 4: Polish & Cleanup
 
