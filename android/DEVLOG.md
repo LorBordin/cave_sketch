@@ -234,4 +234,14 @@ None.
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-07-03 12:25] Bugfix — DXF header check comments handling
+**Files:**
+- android/app/src/main/java/com/cavesketch/app/util/FileValidator.kt
+- android/app/src/test/java/com/cavesketch/app/util/FileValidatorTest.kt
+
+**Deviations from spec:** None
+**Assumptions:** Relaxed signature validation to allow comments (999) before 0 SECTION.
+**Next session notes:** None
+
+
 
