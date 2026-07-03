@@ -370,3 +370,16 @@
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** The section_rule_fix track is fully completed, verified, and archived. The vertical scale bar (rule) drawn on section plots is now properly placed to avoid intersecting with survey drawings, and regression image baselines are updated. All 118 unit tests, mypy, and ruff check pass cleanly.
+
+## [2026-07-03 11:45] Track section_rule_snap_fix_20260630 — Implementation
+**Files:**
+- cave_sketch/survey/graphics/survey_plot.py
+- tests/test_survey_section_scale_bar.py
+- conductor/tracks/section_rule_snap_fix_20260630/plan.md
+- conductor/tracks.md
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** The track is fully implemented and verified. The bug fix prevents grid-snapping from reintroducing scale-bar collisions with survey data when grid is enabled. All tests, linting, type-checking, and mobile app build checks pass. Ready to archive or close.
+
