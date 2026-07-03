@@ -1,6 +1,7 @@
 from typing import List, Optional, Tuple
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 from cave_sketch.backend_renders import render_to_matplotlib
@@ -13,6 +14,40 @@ from cave_sketch.survey.graphics.placement import (
     compute_dual_layout,
 )
 from cave_sketch.survey.graphics.rule import _add_rule
+
+
+def get_rule_footprint(
+    rule_pos: Tuple[float, float],
+    rule_orientation: str,
+    north_flag: bool,
+    rule_length: float,
+    arrow_len: float,
+    ref_scale: float,
+) -> Tuple[float, float, float, float]:
+    x_r, y_r = rule_pos
+    vertical_gap = ref_scale * 0.02
+    rule_height = ref_scale * 0.01
+
+    if rule_orientation == "vertical" and not north_flag:
+        scale_width = ref_scale * 0.005
+        x_min = x_r - 8.0
+        x_max = x_r + scale_width
+        y_min = y_r
+        y_max = y_r + rule_length
+    elif rule_orientation == "horizontal" and not north_flag:
+        x_min = x_r
+        x_max = x_r + rule_length
+        y_min = y_r - 4.0
+        y_max = y_r + rule_height
+    else:
+        # Both drawn or fallback
+        elem_w = max(rule_length, arrow_len)
+        x_min = x_r + rule_length / 2 - elem_w / 2
+        x_max = x_r + rule_length / 2 + elem_w / 2
+        y_min = y_r
+        y_max = y_r + rule_height + vertical_gap + arrow_len
+
+    return x_min, x_max, y_min, y_max
 
 
 def create_survey(
@@ -98,8 +133,26 @@ def create_survey(
             rule_pos_snapped = snap_rule_to_grid(rule_pos, grid_spacing, rule_orientation)
             dx = rule_pos_snapped[0] - rule_pos[0]
             dy = rule_pos_snapped[1] - rule_pos[1]
-            rule_pos = rule_pos_snapped
-            arrow_coord = (arrow_coord[0] + dx, arrow_coord[1] + dy)
+            
+            # Check for collision at snapped position
+            snapped_footprint = get_rule_footprint(
+                rule_pos_snapped,
+                rule_orientation,
+                north_flag,
+                rule_length,
+                arrow_len,
+                ref_scale,
+            )
+            x_min_f, x_max_f, y_min_f, y_max_f = snapped_footprint
+            points_inside = (
+                (x_coords >= x_min_f)
+                & (x_coords <= x_max_f)
+                & (y_coords >= y_min_f)
+                & (y_coords <= y_max_f)
+            )
+            if not np.any(points_inside):
+                rule_pos = rule_pos_snapped
+                arrow_coord = (arrow_coord[0] + dx, arrow_coord[1] + dy)
         
         # Apply axis expansion if triggered by fallback
         if axes_expansion:
