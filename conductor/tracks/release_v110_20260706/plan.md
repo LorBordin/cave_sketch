@@ -34,9 +34,9 @@
     - [x] Tone: friendly, action-oriented, aimed at field cavers
     - [x] Save as a deliverable artifact for the user to copy into GitHub Releases
 
-- [ ] Task: Update `android/RELEASE.md`
-    - [ ] Update version references from v1.0.0 to include v1.1.0
-    - [ ] Commit: `docs(android): Update RELEASE.md for v1.1.0`
+- [x] Task: Update `android/RELEASE.md` (032d9c8)
+    - [x] Update version references from v1.0.0 to include v1.1.0
+    - [x] Commit: `docs(android): Update RELEASE.md for v1.1.0`
 
 - [ ] Task: Append release entry to `android/DEVLOG.md`
     - [ ] Add a `## [YYYY-MM-DD HH:MM] Release — v1.1.0 APK Build` entry
