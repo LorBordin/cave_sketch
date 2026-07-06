@@ -13,7 +13,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Version Bump & Build Preparation' (Protocol in workflow.md) (0728cfd)
 
-## Phase 2: Build & Package
+## Phase 2: Build & Package [checkpoint: 52b86dc]
 
 - [x] Task: Build the release APK (e67596e)
     - [x] Run `./gradlew assembleRelease` from the `android/` directory
@@ -22,7 +22,7 @@
 - [x] Task: Rename the APK for distribution (7d4cc6f)
     - [x] Copy/rename `app-release.apk` to `CaveSketch-v1.1.0.apk`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Build & Package' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Build & Package' (Protocol in workflow.md) (52b86dc)
 
 ## Phase 3: Tag, Release Notes & Documentation
 
