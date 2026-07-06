@@ -15,9 +15,9 @@
 
 ## Phase 2: Build & Package
 
-- [ ] Task: Build the release APK
-    - [ ] Run `./gradlew assembleRelease` from the `android/` directory
-    - [ ] Verify the APK is produced at `android/app/build/outputs/apk/release/app-release.apk`
+- [x] Task: Build the release APK (e67596e)
+    - [x] Run `./gradlew assembleRelease` from the `android/` directory
+    - [x] Verify the APK is produced at `android/app/build/outputs/apk/release/app-release.apk`
 
 - [ ] Task: Rename the APK for distribution
     - [ ] Copy/rename `app-release.apk` to `CaveSketch-v1.1.0.apk`
