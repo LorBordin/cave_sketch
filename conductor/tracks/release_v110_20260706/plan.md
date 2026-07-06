@@ -26,8 +26,8 @@
 
 ## Phase 3: Tag, Release Notes & Documentation
 
-- [ ] Task: Create annotated git tag
-    - [ ] Create tag `v1.1.0` with a descriptive message on the release commit
+- [x] Task: Create annotated git tag (6b79d7d)
+    - [x] Create tag `v1.1.0` with a descriptive message on the release commit
 
 - [ ] Task: Draft GitHub Release notes
     - [ ] Write markdown release notes with: version title, feature list, bug fix list, installation instructions
