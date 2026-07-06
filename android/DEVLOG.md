@@ -286,3 +286,13 @@ None.
 
 **Next session notes:**
 None
+
+## [2026-07-06 10:07] Release — v1.1.0 APK Build
+**Files:**
+- android/app/build.gradle
+- android/RELEASE.md
+- CaveSketch-v1.1.0.apk
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** None
