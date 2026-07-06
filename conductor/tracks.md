@@ -51,6 +51,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: CaveSketch v1.1.0 Android Release**
+- [x] **Track: CaveSketch v1.1.0 Android Release**
 *Link: [./tracks/release_v110_20260706/](./tracks/release_v110_20260706/)*
 
