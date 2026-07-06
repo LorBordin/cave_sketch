@@ -2,10 +2,10 @@
 
 ## Phase 1: Version Bump & Build Preparation
 
-- [ ] Task: Bump version in `build.gradle`
-    - [ ] Update `versionCode` from `1` to `2`
-    - [ ] Update `versionName` from `"1.0.0"` to `"1.1.0"`
-    - [ ] Commit: `chore(android): Bump version to v1.1.0 (versionCode 2)`
+- [x] Task: Bump version in `build.gradle` (863734f)
+    - [x] Update `versionCode` from `1` to `2`
+    - [x] Update `versionName` from `"1.0.0"` to `"1.1.0"`
+    - [x] Commit: `chore(android): Bump version to v1.1.0 (versionCode 2)`
 
 - [ ] Task: Verify all track code is present on the build branch
     - [ ] Confirm the 6 included tracks' changes exist in the working tree
