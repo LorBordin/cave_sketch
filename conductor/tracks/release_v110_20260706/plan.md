@@ -24,7 +24,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Build & Package' (Protocol in workflow.md) (52b86dc)
 
-## Phase 3: Tag, Release Notes & Documentation
+## Phase 3: Tag, Release Notes & Documentation [checkpoint: 1e39799]
 
 - [x] Task: Create annotated git tag (6b79d7d)
     - [x] Create tag `v1.1.0` with a descriptive message on the release commit
@@ -42,4 +42,4 @@
     - [x] Add a `## [YYYY-MM-DD HH:MM] Release — v1.1.0 APK Build` entry
     - [x] Commit: `docs(android): Add v1.1.0 release DEVLOG entry`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Tag, Release Notes & Documentation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Tag, Release Notes & Documentation' (Protocol in workflow.md) (1e39799)
