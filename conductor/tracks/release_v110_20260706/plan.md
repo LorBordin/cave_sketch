@@ -1,6 +1,6 @@
 # Plan: CaveSketch v1.1.0 Android Release
 
-## Phase 1: Version Bump & Build Preparation
+## Phase 1: Version Bump & Build Preparation [checkpoint: 0728cfd]
 
 - [x] Task: Bump version in `build.gradle` (863734f)
     - [x] Update `versionCode` from `1` to `2`
@@ -11,7 +11,7 @@
     - [x] Confirm the 6 included tracks' changes exist in the working tree
     - [x] Run `./gradlew test` to verify Android unit tests pass
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Version Bump & Build Preparation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Version Bump & Build Preparation' (Protocol in workflow.md) (0728cfd)
 
 ## Phase 2: Build & Package
 
