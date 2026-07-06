@@ -48,9 +48,3 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: Phase 4 Visual Redesign**
 *Link: [../docs/mobile-app/phases/phase-4-visual-redesign/](../docs/mobile-app/phases/phase-4-visual-redesign/)*
 
-
----
-
-- [x] **Track: CaveSketch v1.1.0 Android Release**
-*Link: [./tracks/release_v110_20260706/](./tracks/release_v110_20260706/)*
-
