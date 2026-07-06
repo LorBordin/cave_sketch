@@ -7,9 +7,9 @@
     - [x] Update `versionName` from `"1.0.0"` to `"1.1.0"`
     - [x] Commit: `chore(android): Bump version to v1.1.0 (versionCode 2)`
 
-- [ ] Task: Verify all track code is present on the build branch
-    - [ ] Confirm the 6 included tracks' changes exist in the working tree
-    - [ ] Run `./gradlew test` to verify Android unit tests pass
+- [x] Task: Verify all track code is present on the build branch (e615590)
+    - [x] Confirm the 6 included tracks' changes exist in the working tree
+    - [x] Run `./gradlew test` to verify Android unit tests pass
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Version Bump & Build Preparation' (Protocol in workflow.md)
 
