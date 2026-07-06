@@ -29,10 +29,10 @@
 - [x] Task: Create annotated git tag (6b79d7d)
     - [x] Create tag `v1.1.0` with a descriptive message on the release commit
 
-- [ ] Task: Draft GitHub Release notes
-    - [ ] Write markdown release notes with: version title, feature list, bug fix list, installation instructions
-    - [ ] Tone: friendly, action-oriented, aimed at field cavers
-    - [ ] Save as a deliverable artifact for the user to copy into GitHub Releases
+- [x] Task: Draft GitHub Release notes (988e2c4)
+    - [x] Write markdown release notes with: version title, feature list, bug fix list, installation instructions
+    - [x] Tone: friendly, action-oriented, aimed at field cavers
+    - [x] Save as a deliverable artifact for the user to copy into GitHub Releases
 
 - [ ] Task: Update `android/RELEASE.md`
     - [ ] Update version references from v1.0.0 to include v1.1.0
