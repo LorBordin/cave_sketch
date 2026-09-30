@@ -5,6 +5,11 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
+- [x] **Track: Magnetic Variation (Declination) Correction**
+*Link: [./tracks/magnetic_variation_20260930/](./tracks/magnetic_variation_20260930/)*
+
+---
+
 - [x] **Track: Documentation Overhaul (README + Nested Docs)**
 *Link: [./tracks/docs_overhaul_20260624/](./tracks/docs_overhaul_20260624/)*
 
