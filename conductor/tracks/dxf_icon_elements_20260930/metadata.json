@@ -1,0 +1,8 @@
+{
+  "track_id": "dxf_icon_elements_20260930",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-09-30T19:29:58+02:00",
+  "updated_at": "2026-09-30T19:29:58+02:00",
+  "description": "Render L_water-flow, B_water-flow, B_continuation, B_entrance (currently invisible) and fix B_blocks (currently dropped) as real TopoDroid-style vector icons, shared identically across the matplotlib survey plot, the Folium satellite HTML view, and the KML/KMZ Google Earth export. Backend-only (cave_sketch/ package) — ships to both the webapp and the Android app automatically via the existing Chaquopy symlink."
+}
