@@ -71,6 +71,50 @@ def test_compact_kml_export():
     assert "wall" in style_url
     
 
+def test_water_style_renders_fill():
+    """LineStyle must precede PolyStyle in the area Style, and fill/color/tessellate
+    must be present, or Google Earth silently drops the polygon fill."""
+    map_data = {
+        "name": "Test Map",
+        "lines": [],
+        "nodes": [],
+        "water_polygons": [
+            {
+                "polygon_id": "1",
+                "coordinates": [
+                    [1.0, 1.0],
+                    [2.0, 1.0],
+                    [2.0, 2.0],
+                    [1.0, 1.0],
+                ],
+            }
+        ],
+    }
+
+    kml_str = render_to_kml([map_data])
+    root = ET.fromstring(kml_str.encode("utf-8"))
+    ns = {"kml": "http://www.opengis.net/kml/2.2"}
+
+    water_style = next(s for s in root.findall(".//kml:Style", ns) if s.get("id") == "area_A_water")
+    children = list(water_style)
+    tags = [c.tag.split("}")[-1] for c in children]
+    assert tags.index("LineStyle") < tags.index("PolyStyle"), (
+        "LineStyle must come before PolyStyle in the Style element"
+    )
+
+    poly_style = water_style.find("kml:PolyStyle", ns)
+    assert poly_style.find("kml:fill", ns).text == "1"
+    color = poly_style.find("kml:color", ns).text
+    assert color is not None and len(color) == 8
+    alpha = int(color[:2], 16)
+    assert 0 < alpha < 255, "Fill should be partially transparent, not fully opaque/invisible"
+
+    placemark = root.find(".//kml:Polygon/..", ns)
+    polygon = placemark.find("kml:Polygon", ns)
+    assert polygon.find("kml:tessellate", ns).text == "1"
+    assert polygon.find("kml:altitudeMode", ns).text == "clampToGround"
+
+
 def test_kmz_export(tmp_path):
     map_data = {
         "name": "Test Map",

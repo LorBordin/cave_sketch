@@ -45,18 +45,20 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
         style = ET.SubElement(doc, "Style", id=style_id)
         
         if sdict.get("type") == "area":
+            # KML requires LineStyle before PolyStyle within a Style element;
+            # Google Earth silently drops the fill when the order is reversed.
+            line_style = ET.SubElement(style, "LineStyle")
+            ET.SubElement(line_style, "color").text = rgba_to_kml_color(
+                str(sdict.get("color", "blue")), 1.0
+            )
+            ET.SubElement(line_style, "width").text = "1"
+
             poly_style = ET.SubElement(style, "PolyStyle")
             ET.SubElement(poly_style, "color").text = rgba_to_kml_color(
                 str(sdict.get("color", "blue")), float(str(sdict.get("alpha", 0.3)))
             )
             ET.SubElement(poly_style, "fill").text = "1"
             ET.SubElement(poly_style, "outline").text = "1"
-
-            line_style = ET.SubElement(style, "LineStyle")
-            ET.SubElement(line_style, "color").text = rgba_to_kml_color(
-                str(sdict.get("color", "blue")), 1.0
-            )
-            ET.SubElement(line_style, "width").text = "1"
         elif sdict.get("type") == "point":
             icon_style = ET.SubElement(style, "IconStyle")
             color_kml = rgba_to_kml_color(str(sdict.get("color", "black")))
@@ -87,6 +89,8 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
 
             # ---- GEOMETRY ----
             polygon = ET.SubElement(placemark, "Polygon")
+            ET.SubElement(polygon, "tessellate").text = "1"
+            ET.SubElement(polygon, "altitudeMode").text = "clampToGround"
             outer = ET.SubElement(polygon, "outerBoundaryIs")
             ring = ET.SubElement(outer, "LinearRing")
 
