@@ -418,4 +418,15 @@
 **Assumptions:** None
 **Next session notes:** Phase 1 complete and checkpointed. Moving to Phase 2: Wire the Correction into draw_survey().
 
+## [2026-10-01 09:52] Phase 2: Wire the Correction into draw_survey() — Implementation
+**Files:**
+- cave_sketch/survey/survey.py
+- tests/test_survey_declination.py
+- conductor/tracks/magnetic_variation_20260930/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 2 complete and checkpointed. Moving to Phase 3: Wire the Correction into draw_map().
+
+
 
