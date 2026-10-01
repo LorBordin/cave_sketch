@@ -17,6 +17,13 @@ survey_name_component()
 rotation_angle = st.number_input("🧭 Map rotation angle (°)", value=st.session_state.rotation_angle)
 st.session_state.rotation_angle = rotation_angle
 
+magnetic_variation_deg = st.session_state.magnetic_variation_deg
+if magnetic_variation_deg:
+    st.caption(
+        f"🧭 Magnetic variation correction: {magnetic_variation_deg:+g}° "
+        "applied automatically from Survey Plot"
+    )
+
 st.markdown("#### 📁 Upload Additional JSON Maps")
 uploaded_json = st.file_uploader("JSON maps", type=["json"], accept_multiple_files=True)
 
@@ -42,6 +49,7 @@ if col1.button("🌍 Generate HTML Map"):
             map_name="Current Cave",
             additional_json_maps=st.session_state.uploaded_json_paths,
             rotation_angle=rotation_angle,
+            magnetic_variation_deg=magnetic_variation_deg,
         )
         st.session_state.current_json_path = json_path
         st.session_state.html_path = html_path
