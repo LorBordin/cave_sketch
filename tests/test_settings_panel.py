@@ -29,7 +29,7 @@ def test_settings_panel_centerline_enabled(mock_st):
     mock_st.checkbox.side_effect = [True, True, True]
 
     # Setup number_input mock values
-    mock_st.number_input.side_effect = [100, 0, 0.0, 0.0, 0.0]
+    mock_st.number_input.side_effect = [100, 0, 0.0, 0.0, 0.0, 0.0]
 
     # Run the component
     res = settings_panel_component()
@@ -41,6 +41,7 @@ def test_settings_panel_centerline_enabled(mock_st):
 
     assert res["show_centerline"] is True
     assert res["show_details"] is True
+    assert res["magnetic_variation_deg"] == 0.0
 
 
 @patch("app.components.settings_panel.st")
@@ -61,7 +62,7 @@ def test_settings_panel_centerline_disabled(mock_st):
     mock_st.checkbox.side_effect = [False, True, True]
 
     # Setup number_input mock values
-    mock_st.number_input.side_effect = [100, 0, 0.0, 0.0, 0.0]
+    mock_st.number_input.side_effect = [100, 0, 0.0, 0.0, 0.0, 0.0]
 
     # Run the component
     res = settings_panel_component()
@@ -73,3 +74,4 @@ def test_settings_panel_centerline_disabled(mock_st):
 
     assert res["show_centerline"] is False
     assert res["show_details"] is True
+    assert res["magnetic_variation_deg"] == 0.0

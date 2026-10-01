@@ -49,6 +49,7 @@ if st.button("✨ Generate Survey Plot"):
             fig = draw_survey(
                 title=title,
                 rule_length=settings.pop("rule_length"),
+                magnetic_variation_deg=settings.pop("magnetic_variation_deg", 0.0),
                 csv_map_path=st.session_state.map_csv,
                 csv_section_path=st.session_state.section_csv,
                 child_csv_map_path=st.session_state.child_map_csv,

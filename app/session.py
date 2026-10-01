@@ -17,6 +17,7 @@ class AppState(TypedDict):
     section_csv: Optional[Path]
     known_points: List[Dict[str, Any]]
     rotation_angle: float
+    magnetic_variation_deg: float
     html_content: Optional[str]
     html_path: Optional[Path]
     current_json_path: Optional[Path]
@@ -49,6 +50,7 @@ def init_session() -> None:
         "child_expander_open": False,
         "known_points": [{"station": "", "lat": 0.0, "lon": 0.0}],
         "rotation_angle": 0.0,
+        "magnetic_variation_deg": 0.0,
         "html_content": None,
         "html_path": None,
         "kml_path": None,

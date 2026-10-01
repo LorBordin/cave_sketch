@@ -13,6 +13,14 @@ def settings_panel_component():
         rotation_deg = st.number_input(
             "🧭 Map rotation (°)", min_value=-180, max_value=180, step=1, value=0
         )
+        magnetic_variation_deg = st.number_input(
+            "🧭 Magnetic variation (°, +E/-W)",
+            min_value=-180.0,
+            max_value=180.0,
+            step=0.1,
+            value=st.session_state.get("magnetic_variation_deg", 0.0),
+        )
+        st.session_state.magnetic_variation_deg = magnetic_variation_deg
         show_centerline = st.checkbox(
             "Show Polygonal Line", value=st.session_state.get("show_centerline", True)
         )
@@ -42,6 +50,7 @@ def settings_panel_component():
     return {
         "rule_length": rule_length,
         "rotation_deg": rotation_deg,
+        "magnetic_variation_deg": magnetic_variation_deg,
         "show_details": show_details,
         "show_grid": show_grid,
         "show_centerline": show_centerline,
