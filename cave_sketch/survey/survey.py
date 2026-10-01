@@ -5,6 +5,7 @@ import pandas as pd
 from matplotlib.figure import Figure
 
 from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
+from cave_sketch.geo.declination import apply_magnetic_variation
 from cave_sketch.survey.config import SurveyConfig
 from cave_sketch.survey.merger import SectionProtocol, merge_surveys
 from cave_sketch.survey.metrics import compute_total_depth, compute_total_length
@@ -25,6 +26,7 @@ def draw_survey(
     output_path: Optional[str] = None,
     excluded_nodes: Optional[List] = None,
     surveyor_name: str = "",
+    magnetic_variation_deg: float = 0.0,
     config: Dict = {},
 ) -> Figure:
     """
@@ -47,6 +49,9 @@ def draw_survey(
         )
     else:
         merged_map, merged_section = parent_map, parent_section
+
+    if merged_map is not None:
+        merged_map = apply_magnetic_variation(merged_map, magnetic_variation_deg)
 
     # Compute metrics after merge
     total_length = compute_total_length(merged_map)
