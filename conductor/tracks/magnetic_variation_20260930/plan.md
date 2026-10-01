@@ -59,31 +59,31 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 1.
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 2.
 
-- [ ] Task: Write the failing tests (Red)
-    - [ ] Create `tests/test_survey_declination.py` covering: default vs.
+- [x] Task: Write the failing tests (Red) [2dc72c4]
+    - [x] Create `tests/test_survey_declination.py` covering: default vs.
       explicit `magnetic_variation_deg=0.0` producing identical, unrotated
       station offsets; and `magnetic_variation_deg=10.0` rotating the map
       subplot's station offsets while leaving the section subplot untouched.
-    - [ ] Run `uv run pytest tests/test_survey_declination.py -v`; confirm it
+    - [x] Run `uv run pytest tests/test_survey_declination.py -v`; confirm it
       fails with `TypeError: draw_survey() got an unexpected keyword
       argument 'magnetic_variation_deg'`.
-- [ ] Task: Implement the wiring (Green)
-    - [ ] In `cave_sketch/survey/survey.py`, add the
+- [x] Task: Implement the wiring (Green) [2dc72c4]
+    - [x] In `cave_sketch/survey/survey.py`, add the
       `from cave_sketch.geo.declination import apply_magnetic_variation`
       import in alphabetical order (between the `cave_sketch.dxf.models`
       and `cave_sketch.survey.config` imports).
-    - [ ] Add `magnetic_variation_deg: float = 0.0` to `draw_survey()`'s
+    - [x] Add `magnetic_variation_deg: float = 0.0` to `draw_survey()`'s
       signature, after `surveyor_name` and before `config`.
-    - [ ] Right after the merge/no-merge branch resolves `merged_map` (and
+    - [x] Right after the merge/no-merge branch resolves `merged_map` (and
       before "Compute metrics after merge"), apply
       `merged_map = apply_magnetic_variation(merged_map, magnetic_variation_deg)`
       when `merged_map is not None`. `merged_section` is never touched.
-    - [ ] Run `uv run pytest tests/test_survey_declination.py -v`; confirm
+    - [x] Run `uv run pytest tests/test_survey_declination.py -v`; confirm
       both pass.
-- [ ] Task: Regression-test, verify, and commit
-    - [ ] Run `uv run pytest tests/test_survey_rendering.py tests/test_survey_plot.py tests/test_survey_plot_placement.py tests/test_survey_bridge.py tests/test_survey_metrics.py tests/test_survey_section_scale_bar.py -v`; confirm all pass unchanged.
-    - [ ] Run `uv run ruff check cave_sketch/survey/survey.py tests/test_survey_declination.py && uv run mypy cave_sketch/survey/survey.py`.
-    - [ ] Commit (`feat(survey): apply magnetic variation correction in draw_survey`).
+- [x] Task: Regression-test, verify, and commit [2dc72c4]
+    - [x] Run `uv run pytest tests/test_survey_rendering.py tests/test_survey_plot.py tests/test_survey_plot_placement.py tests/test_survey_bridge.py tests/test_survey_metrics.py tests/test_survey_section_scale_bar.py -v`; confirm all pass unchanged.
+    - [x] Run `uv run ruff check cave_sketch/survey/survey.py tests/test_survey_declination.py && uv run mypy cave_sketch/survey/survey.py`.
+    - [x] Commit (`feat(survey): apply magnetic variation correction in draw_survey`).
 
 ## Phase 3: Wire the Correction into `draw_map()` (Satellite Map Backend)
 
