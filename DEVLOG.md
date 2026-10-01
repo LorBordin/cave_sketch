@@ -407,3 +407,15 @@
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** None
+
+## [2026-10-01 09:47] Phase 1: Shared Magnetic-Variation Correction Utility — Implementation
+**Files:**
+- cave_sketch/geo/declination.py
+- tests/test_declination.py
+- conductor/tracks/magnetic_variation_20260930/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 1 complete and checkpointed. Moving to Phase 2: Wire the Correction into draw_survey().
+
+
