@@ -34,7 +34,7 @@
 
 ---
 
-## Phase 1: Shared Magnetic-Variation Correction Utility
+## Phase 1: Shared Magnetic-Variation Correction Utility [checkpoint: 26fa142]
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 1.
 
