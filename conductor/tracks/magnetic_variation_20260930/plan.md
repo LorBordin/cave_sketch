@@ -55,7 +55,7 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 1.
     - [x] Run `uv run ruff check cave_sketch/geo/declination.py tests/test_declination.py && uv run mypy cave_sketch/geo/declination.py`.
     - [x] Commit (`feat(geo): add apply_magnetic_variation coordinate correction`).
 
-## Phase 2: Wire the Correction into `draw_survey()` (Survey Plot Backend)
+## Phase 2: Wire the Correction into `draw_survey()` (Survey Plot Backend) [checkpoint: 3d2023b]
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 2.
 
