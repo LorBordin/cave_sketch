@@ -121,31 +121,31 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 3.
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 4.
 
-- [ ] Task: Update the failing tests (Red)
-    - [ ] In `tests/test_settings_panel.py`, extend both `number_input`
+- [x] Task: Update the failing tests (Red) [8db0523]
+    - [x] In `tests/test_settings_panel.py`, extend both `number_input`
       `side_effect` lists from 5 to 6 values (inserting the new field's
       value right after "Map rotation"), and assert
       `res["magnetic_variation_deg"] == 0.0` in both tests.
-    - [ ] Run `uv run pytest tests/test_settings_panel.py -v`; confirm it
+    - [x] Run `uv run pytest tests/test_settings_panel.py -v`; confirm it
       fails with `KeyError: 'magnetic_variation_deg'`.
-- [ ] Task: Implement the wiring (Green)
-    - [ ] In `app/components/settings_panel.py`, add a `number_input` for
+- [x] Task: Implement the wiring (Green) [8db0523]
+    - [x] In `app/components/settings_panel.py`, add a `number_input` for
       "🧭 Magnetic variation (°, +E/-W)" right after the existing "Map
       rotation" input, persist it to
       `st.session_state.magnetic_variation_deg` (mirroring the existing
       `show_centerline`/`show_details`/`show_grid` pattern), and add it to
       the returned settings dict.
-    - [ ] In `app/session.py`, add `magnetic_variation_deg: float` to the
+    - [x] In `app/session.py`, add `magnetic_variation_deg: float` to the
       `AppState` TypedDict and `"magnetic_variation_deg": 0.0` to
       `init_session()`'s defaults, next to `rotation_angle`.
-    - [ ] In `app/pages/1_survey_plot.py`, add
+    - [x] In `app/pages/1_survey_plot.py`, add
       `magnetic_variation_deg=settings.pop("magnetic_variation_deg", 0.0),`
       to the `draw_survey(...)` call, alongside the existing
       `rule_length=settings.pop("rule_length")`.
-    - [ ] Run `uv run pytest tests/test_settings_panel.py -v`; confirm both pass.
-- [ ] Task: Verify and commit
-    - [ ] Run `uv run ruff check app/ tests/test_settings_panel.py && uv run mypy cave_sketch/`.
-    - [ ] Commit (`feat(webapp): add magnetic variation input to Survey Plot settings`).
+    - [x] Run `uv run pytest tests/test_settings_panel.py -v`; confirm both pass.
+- [x] Task: Verify and commit [8db0523]
+    - [x] Run `uv run ruff check app/ tests/test_settings_panel.py && uv run mypy cave_sketch/`.
+    - [x] Commit (`feat(webapp): add magnetic variation input to Survey Plot settings`).
 
 ## Phase 5: Satellite Map Page — Auto-Apply the Survey's Magnetic Variation
 
