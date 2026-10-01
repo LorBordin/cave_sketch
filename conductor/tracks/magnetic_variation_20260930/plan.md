@@ -38,22 +38,22 @@
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 1.
 
-- [ ] Task: Write the failing tests (Red)
-    - [ ] Create `tests/test_declination.py` covering: zero-variation no-op
+- [x] Task: Write the failing tests (Red) [702249d]
+    - [x] Create `tests/test_declination.py` covering: zero-variation no-op
       copy, `+10°` East worked example, `-10°` West mirror, and a
       `+7.5°`/`-7.5°` round-trip restoring the original coordinates.
-    - [ ] Run `uv run pytest tests/test_declination.py -v`; confirm it fails
+    - [x] Run `uv run pytest tests/test_declination.py -v`; confirm it fails
       with `ModuleNotFoundError: No module named 'cave_sketch.geo.declination'`.
-- [ ] Task: Implement `apply_magnetic_variation` (Green)
-    - [ ] Create `cave_sketch/geo/declination.py` with
+- [x] Task: Implement `apply_magnetic_variation` (Green) [702249d]
+    - [x] Create `cave_sketch/geo/declination.py` with
       `apply_magnetic_variation(df: pd.DataFrame, variation_deg: float) -> pd.DataFrame`,
       rotating `X`/`Y` about the DataFrame's own centroid via the existing
       `rotate_points()` helper (`cave_sketch/features/geometry.py`),
       negating `variation_deg` per the sign convention above.
-    - [ ] Run `uv run pytest tests/test_declination.py -v`; confirm all 4 pass.
-- [ ] Task: Verify and commit
-    - [ ] Run `uv run ruff check cave_sketch/geo/declination.py tests/test_declination.py && uv run mypy cave_sketch/geo/declination.py`.
-    - [ ] Commit (`feat(geo): add apply_magnetic_variation coordinate correction`).
+    - [x] Run `uv run pytest tests/test_declination.py -v`; confirm all 4 pass.
+- [x] Task: Verify and commit [702249d]
+    - [x] Run `uv run ruff check cave_sketch/geo/declination.py tests/test_declination.py && uv run mypy cave_sketch/geo/declination.py`.
+    - [x] Commit (`feat(geo): add apply_magnetic_variation coordinate correction`).
 
 ## Phase 2: Wire the Correction into `draw_survey()` (Survey Plot Backend)
 
