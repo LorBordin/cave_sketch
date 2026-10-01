@@ -147,7 +147,7 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 4.
     - [x] Run `uv run ruff check app/ tests/test_settings_panel.py && uv run mypy cave_sketch/`.
     - [x] Commit (`feat(webapp): add magnetic variation input to Survey Plot settings`).
 
-## Phase 5: Satellite Map Page — Auto-Apply the Survey's Magnetic Variation
+## Phase 5: Satellite Map Page — Auto-Apply the Survey's Magnetic Variation [checkpoint: 8a214a7]
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 5.
 
@@ -161,20 +161,20 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 5.
     - [x] Run `uv run pytest`; confirm the full suite passes.
     - [x] Run `uv run ruff check app/pages/2_satellite_map.py && uv run mypy cave_sketch/`.
     - [x] Commit (`feat(webapp): auto-apply survey magnetic variation on Satellite Map page`).
-- [ ] Task: Manual verification
-    - [ ] Run `uv run streamlit run app/app.py`.
-    - [ ] On the Cave Survey Plot page, upload `tests/fixtures/test_survey.csv`
+- [x] Task: Manual verification
+    - [x] Run `uv run streamlit run app/app.py`.
+    - [x] On the Cave Survey Plot page, upload `tests/fixtures/test_survey.csv`
       as the map file, set "Magnetic variation" to `10`, generate the plot.
       Confirm the plotted stations visibly rotate compared to `0`, while the
       north arrow stays fixed pointing straight up.
-    - [ ] Navigate to the Satellite Map page without changing anything.
+    - [x] Navigate to the Satellite Map page without changing anything.
       Confirm the caption `🧭 Magnetic variation correction: +10° applied
       automatically from Survey Plot` is shown.
-    - [ ] Fill in a station/lat/lon GPS point matching a station from the
+    - [x] Fill in a station/lat/lon GPS point matching a station from the
       uploaded CSV, generate the HTML map. Confirm it renders without error.
-    - [ ] Reset "Magnetic variation" to `0` on Survey Plot, regenerate,
+    - [x] Reset "Magnetic variation" to `0` on Survey Plot, regenerate,
       return to Satellite Map: confirm the caption disappears and the map
       regenerates without error.
-    - [ ] Restart with a fresh session and open the Satellite Map page
+    - [x] Restart with a fresh session and open the Satellite Map page
       first, before ever visiting Survey Plot. Confirm no `AttributeError`
       is raised (the page loads normally, field defaults to `0`).
