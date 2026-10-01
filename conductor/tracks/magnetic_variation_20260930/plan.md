@@ -89,8 +89,8 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 2.
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 3.
 
-- [ ] Task: Write the failing tests (Red)
-    - [ ] Create `tests/test_map_declination.py` covering: default vs.
+- [x] Task: Write the failing tests (Red) [08d6146]
+    - [x] Create `tests/test_map_declination.py` covering: default vs.
       explicit `magnetic_variation_deg=0.0` producing identical
       georeferenced output; `magnetic_variation_deg=10.0` rotating the
       georeferenced lat/lon of a station relative to its GPS anchor by the
@@ -99,23 +99,23 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 3.
       correction runs on the raw CSV data before the existing manual
       `rotation_angle` block, so the two compose instead of one silently
       overriding the other.
-    - [ ] Run `uv run pytest tests/test_map_declination.py -v`; confirm it
+    - [x] Run `uv run pytest tests/test_map_declination.py -v`; confirm it
       fails (missing kwarg / missing patch target).
-- [ ] Task: Implement the wiring (Green)
-    - [ ] In `cave_sketch/satellite_view/map.py`, add the
+- [x] Task: Implement the wiring (Green) [08d6146]
+    - [x] In `cave_sketch/satellite_view/map.py`, add the
       `from cave_sketch.geo.declination import apply_magnetic_variation`
       import in alphabetical order (after the
       `cave_sketch.features.render_features` import).
-    - [ ] Add `magnetic_variation_deg: float = 0.0` to `draw_map()`'s
+    - [x] Add `magnetic_variation_deg: float = 0.0` to `draw_map()`'s
       signature, after `rotation_angle`.
-    - [ ] Apply `map_df = apply_magnetic_variation(map_df, magnetic_variation_deg)`
+    - [x] Apply `map_df = apply_magnetic_variation(map_df, magnetic_variation_deg)`
       immediately after `pd.read_csv(map_path)`, before the existing
       `if rotation_angle != 0:` block (left otherwise unchanged).
-    - [ ] Run `uv run pytest tests/test_map_declination.py -v`; confirm all pass.
-- [ ] Task: Regression-test, verify, and commit
-    - [ ] Run `uv run pytest tests/test_satellite_map.py tests/test_satellite_bridge.py -v`; confirm all pass unchanged.
-    - [ ] Run `uv run ruff check cave_sketch/satellite_view/map.py tests/test_map_declination.py && uv run mypy cave_sketch/satellite_view/map.py`.
-    - [ ] Commit (`feat(satellite): apply magnetic variation correction in draw_map`).
+    - [x] Run `uv run pytest tests/test_map_declination.py -v`; confirm all pass.
+- [x] Task: Regression-test, verify, and commit [08d6146]
+    - [x] Run `uv run pytest tests/test_satellite_map.py tests/test_satellite_bridge.py -v`; confirm all pass unchanged.
+    - [x] Run `uv run ruff check cave_sketch/satellite_view/map.py tests/test_map_declination.py && uv run mypy cave_sketch/satellite_view/map.py`.
+    - [x] Commit (`feat(satellite): apply magnetic variation correction in draw_map`).
 
 ## Phase 4: Survey Plot Page — Magnetic Variation Input
 
