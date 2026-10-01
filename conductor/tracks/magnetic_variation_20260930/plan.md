@@ -85,7 +85,7 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 2.
     - [x] Run `uv run ruff check cave_sketch/survey/survey.py tests/test_survey_declination.py && uv run mypy cave_sketch/survey/survey.py`.
     - [x] Commit (`feat(survey): apply magnetic variation correction in draw_survey`).
 
-## Phase 3: Wire the Correction into `draw_map()` (Satellite Map Backend)
+## Phase 3: Wire the Correction into `draw_map()` (Satellite Map Backend) [checkpoint: 1e410e0]
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 3.
 
