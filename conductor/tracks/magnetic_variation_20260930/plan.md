@@ -151,16 +151,16 @@ Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 4.
 
 Full code: `docs/superpowers/plans/2026-09-30-magnetic-variation.md` → Task 5.
 
-- [ ] Task: Implement the wiring
-    - [ ] In `app/pages/2_satellite_map.py`, read
+- [x] Task: Implement the wiring [7c74381]
+    - [x] In `app/pages/2_satellite_map.py`, read
       `st.session_state.magnetic_variation_deg`, show a caption
       (`🧭 Magnetic variation correction: {value:+g}° applied automatically
       from Survey Plot`) when it is non-zero, and pass it to the
       `draw_map(...)` call alongside `rotation_angle`.
-- [ ] Task: Regression-test, verify, and commit
-    - [ ] Run `uv run pytest`; confirm the full suite passes.
-    - [ ] Run `uv run ruff check app/pages/2_satellite_map.py && uv run mypy cave_sketch/`.
-    - [ ] Commit (`feat(webapp): auto-apply survey magnetic variation on Satellite Map page`).
+- [x] Task: Regression-test, verify, and commit [7c74381]
+    - [x] Run `uv run pytest`; confirm the full suite passes.
+    - [x] Run `uv run ruff check app/pages/2_satellite_map.py && uv run mypy cave_sketch/`.
+    - [x] Commit (`feat(webapp): auto-apply survey magnetic variation on Satellite Map page`).
 - [ ] Task: Manual verification
     - [ ] Run `uv run streamlit run app/app.py`.
     - [ ] On the Cave Survey Plot page, upload `tests/fixtures/test_survey.csv`
