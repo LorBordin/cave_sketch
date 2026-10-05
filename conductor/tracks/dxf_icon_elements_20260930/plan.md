@@ -1111,7 +1111,7 @@ def test_folium_icon_is_polyline_with_wall_weight():
     - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
     - [x] Commit: `feat(folium-backend): draw icons as ground-anchored polylines`.
 
-## Phase 8: Render icons in KML/KMZ (Google Earth)
+## Phase 8: Render icons in KML/KMZ (Google Earth) [checkpoint: 49ea846]
 
 - [x] Task: Write the failing tests (Red)
     - [x] Create `tests/test_icons_kml.py`:
