@@ -917,7 +917,7 @@ def test_json_water_flow_both_directions_give_one_northward_chevron():
 
 ## Phase 6: Render icons in matplotlib (survey plot)
 
-- [ ] Task: Write the failing tests (Red)
+- [x] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_icons_matplotlib.py`:
 
 ```python
@@ -964,10 +964,10 @@ def test_matplotlib_icon_strokes_are_in_data_coordinates():
     plt.close(fig)
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_icons_matplotlib.py`. Expected: `ValueError: not
+    - [x] Run `uv run pytest -q tests/test_icons_matplotlib.py`. Expected: `ValueError: not
       enough values to unpack` (only the wall `LineCollection` exists).
-- [ ] Task: Implement (Green) in `cave_sketch/backend_renders/matplotlib.py`
-    - [ ] **Replace**
+- [x] Task: Implement (Green) in `cave_sketch/backend_renders/matplotlib.py` [7d03358]
+    - [x] **Replace**
 
 ```python
 from matplotlib.patches import Polygon as MplPolygon
@@ -1045,12 +1045,12 @@ def _scaled_linewidth(weight: float, zoom_factor: float, ref_scale: float) -> fl
     # ---- POINTS (B_ice, B_snow) ----
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_icons_matplotlib.py tests/test_render_regression.py`.
+    - [x] Run `uv run pytest -q tests/test_icons_matplotlib.py tests/test_render_regression.py`.
       Expected: all pass (the regression fixture `sample.dxf` has no blocks, so the baselines are
       unchanged).
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(matplotlib-backend): draw icons as meter-sized strokes with wall line width`.
+- [x] Task: Verify and commit [7d03358]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(matplotlib-backend): draw icons as meter-sized strokes with wall line width`.
 
 ## Phase 7: Render icons in Folium (satellite HTML)
 
