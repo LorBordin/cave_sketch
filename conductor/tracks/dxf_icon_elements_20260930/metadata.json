@@ -3,6 +3,6 @@
   "type": "feature",
   "status": "new",
   "created_at": "2026-09-30T19:29:58+02:00",
-  "updated_at": "2026-09-30T19:29:58+02:00",
-  "description": "Render L_water-flow, B_water-flow, B_continuation, B_entrance (currently invisible) and fix B_blocks (currently dropped) as real TopoDroid-style vector icons, shared identically across the matplotlib survey plot, the Folium satellite HTML view, and the KML/KMZ Google Earth export. Backend-only (cave_sketch/ package) — ships to both the webapp and the Android app automatically via the existing Chaquopy symlink."
+  "updated_at": "2026-10-05T12:00:00+02:00",
+  "description": "Render L_water-flow, B_water-flow, B_continuation, B_entrance (currently invisible) and fix B_blocks (currently dropped) as ground-anchored vector icons: line geometry sized in meters, stroked with the L_wall line width, identical across the matplotlib survey plot, the Folium satellite map and the KMZ export (icons scale with zoom like the survey, no pushpins/PNGs). Continuation is a '?', water-flow is an S-wiggle with an arrowhead oriented by the DXF INSERT rotation. Backend-only (cave_sketch/), ships to webapp and Android via the Chaquopy symlink."
 }
