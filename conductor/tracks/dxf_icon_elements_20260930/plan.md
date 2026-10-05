@@ -1401,7 +1401,7 @@ def test_create_survey_view_rotation_also_rotates_icons(monkeypatch):
     - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
     - [x] Commit: `feat(rotation): propagate DXF symbol rotation through view rotation and map JSON`.
 
-## Phase 10: Docs, full verification, manual and Android checks
+## Phase 10: Docs, full verification, manual and Android checks [checkpoint: 91f36f0]
 
 - [x] Task: Update `docs/DXF_ELEMENTS.md` [1d2ae47]
     - [x] In the per-element sections and the summary table, mark `L_water-flow`, `B_water-flow`,
