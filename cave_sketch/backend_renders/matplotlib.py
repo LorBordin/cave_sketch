@@ -5,6 +5,11 @@ from matplotlib.collections import LineCollection
 from matplotlib.patches import Polygon as MplPolygon
 
 
+def _scaled_linewidth(weight: float, zoom_factor: float, ref_scale: float) -> float:
+    """Line width in points, shared by lines and icons so icons match walls."""
+    return float(np.clip(weight * zoom_factor / ref_scale, 0.2, 4))
+
+
 def render_to_matplotlib(
     features: Dict[str, list], ax, layer_name: str = "", config: Optional[Dict] = None
 ):
@@ -47,11 +52,7 @@ def render_to_matplotlib(
         segments.append(segment)
 
         colors.append(line.get("color", "black"))
-
-        base_weight = line.get("weight", 1)
-        lw = base_weight * zoom_factor / ref_scale
-        lw = np.clip(lw, 0.2, 4)
-        linewidths.append(lw)
+        linewidths.append(_scaled_linewidth(line.get("weight", 1), zoom_factor, ref_scale))
 
         dash = line.get("dash")
         linestyle = (0, tuple(dash)) if dash else "solid"
@@ -69,7 +70,33 @@ def render_to_matplotlib(
         ax.add_collection(lc)
         ax.autoscale_view()
 
-    # ---- POINTS (B_ice, BLOCK, etc.) ----
+    # ---- ICONS (B_blocks, B_water-flow, ..., L_water-flow chevrons) ----
+    # Drawn in data units (meters), stroked exactly like walls.
+    icon_segments = []
+    icon_colors = []
+    icon_linewidths = []
+    for icon in features.get("icons", []):
+        lw = _scaled_linewidth(icon["weight"], zoom_factor, ref_scale)
+        for stroke in icon["strokes"]:
+            icon_segments.append([(px, py) for py, px in stroke])  # [y, x] -> (x, y)
+            icon_colors.append(icon["color"])
+            icon_linewidths.append(lw)
+
+    if icon_segments:
+        ax.add_collection(
+            LineCollection(
+                icon_segments,
+                colors=icon_colors,
+                linewidths=icon_linewidths,
+                capstyle="round",
+                joinstyle="round",
+                alpha=0.9,
+                zorder=3,
+            )
+        )
+        ax.autoscale_view()
+
+    # ---- POINTS (B_ice, B_snow) ----
     points_by_marker: Dict[str, List[Dict[str, Any]]] = {}
     for p in features.get("points", []):
         marker = p.get("marker", "o")
