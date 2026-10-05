@@ -1264,8 +1264,8 @@ Without this phase, `B_water-flow` arrows point the wrong way on rotated
 plots and are never oriented on the satellite map/KMZ (the JSON has no
 rotation).
 
-- [~] Task: Write the failing tests (Red)
-    - [ ] Create `tests/test_icon_rotation_plumbing.py`:
+- [x] Task: Write the failing tests (Red)
+    - [x] Create `tests/test_icon_rotation_plumbing.py`:
 
 ```python
 # ruff: noqa: E501
@@ -1326,10 +1326,10 @@ def test_create_survey_view_rotation_also_rotates_icons(monkeypatch):
     plt.close(fig)
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_icon_rotation_plumbing.py`. Expected: `KeyError:
+    - [x] Run `uv run pytest -q tests/test_icon_rotation_plumbing.py`. Expected: `KeyError:
       'rotation'` (2 tests) and `[0.0, 280.0] != [30.0, 310.0]`.
-- [ ] Task: Implement (Green)
-    - [ ] `cave_sketch/survey/graphics/survey_plot.py`, in `create_survey`: **replace**
+- [x] Task: Implement (Green)
+    - [x] `cave_sketch/survey/graphics/survey_plot.py`, in `create_survey`: **replace**
 
 ```python
         df[["X", "Y"]] = rotate_points(points, center, rotation_deg)
@@ -1344,7 +1344,7 @@ def test_create_survey_view_rotation_also_rotates_icons(monkeypatch):
 ```
 
       (`df` is already a copy at that point, so the caller's DataFrame is not mutated.)
-    - [ ] `cave_sketch/satellite_view/map.py`, in `draw_map`: **replace**
+    - [x] `cave_sketch/satellite_view/map.py`, in `draw_map`: **replace**
 
 ```python
         map_df[["X", "Y"]] = rotate_points(map_df[["X", "Y"]].values, center, rotation_angle)
@@ -1358,7 +1358,7 @@ def test_create_survey_view_rotation_also_rotates_icons(monkeypatch):
             map_df["Rotation"] = map_df["Rotation"].fillna(0.0) + rotation_angle
 ```
 
-    - [ ] `cave_sketch/satellite_view/map.py`, in `export_map_data`: **replace**
+    - [x] `cave_sketch/satellite_view/map.py`, in `export_map_data`: **replace**
 
 ```python
     # Store nodes
@@ -1386,7 +1386,7 @@ def test_create_survey_view_rotation_also_rotates_icons(monkeypatch):
         }
 ```
 
-    - [ ] Consolidate the duplicated WGS84 helper in `cave_sketch/satellite_view/map.py`, so
+    - [x] Consolidate the duplicated WGS84 helper in `cave_sketch/satellite_view/map.py`, so
       icons and survey use one meters→degrees conversion:
         - delete the `# WGS84 constants` block (`_A`, `_F`, `_E2`, `_DEG2RAD`, 5 lines);
         - delete the whole `def _meters_per_degree_wgs84(lat_deg: float):` function;
@@ -1395,15 +1395,15 @@ def test_create_survey_view_rotation_also_rotates_icons(monkeypatch):
         - add `from cave_sketch.geo.georef import meters_per_degree_wgs84` right after
           `from cave_sketch.features.render_features import extract_features_from_json`.
         - `numpy` is still used elsewhere in the file: keep `import numpy as np`.
-    - [ ] Run `uv run pytest -q tests/test_icon_rotation_plumbing.py tests/test_satellite_map.py
+    - [x] Run `uv run pytest -q tests/test_icon_rotation_plumbing.py tests/test_satellite_map.py
       tests/test_satellite_bridge.py tests/test_georef.py`. Expected: all pass.
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(rotation): propagate DXF symbol rotation through view rotation and map JSON`.
+- [x] Task: Verify and commit [cd7e661]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(rotation): propagate DXF symbol rotation through view rotation and map JSON`.
 
 ## Phase 10: Docs, full verification, manual and Android checks
 
-- [ ] Task: Update `docs/DXF_ELEMENTS.md`
+- [~] Task: Update `docs/DXF_ELEMENTS.md`
     - [ ] In the per-element sections and the summary table, mark `L_water-flow`, `B_water-flow`,
       `B_continuation`, `B_entrance` and `B_blocks` as **supported**. Remove the note
       `DXF uses "B_blocks" but style.py defines it as "BLOCK"`. State that these are drawn as
