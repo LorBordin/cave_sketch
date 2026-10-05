@@ -140,9 +140,9 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
 
         # --- ICONS (B_blocks, B_water-flow, ..., L_water-flow chevrons) ---
         # Real ground geometry, not pushpins: they scale with zoom like the survey.
+        # Do not set <name> so Google Earth does not display floating text labels or placemark pins.
         for icon in features.get("icons", []):
             placemark = ET.SubElement(folder, "Placemark")
-            ET.SubElement(placemark, "name").text = icon["type"]
             ET.SubElement(placemark, "styleUrl").text = f"#icon_{icon['type']}"
             multi_geo = ET.SubElement(placemark, "MultiGeometry")
             for stroke in icon["strokes"]:
@@ -159,6 +159,8 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
         
         for n in nodes_list:
             ntype = n.get("type", "")
+            if ntype in ("B_snow", "B_blocks"):
+                continue
             style_info = STYLE_MAP.get(ntype)
             if style_info and style_info.get("type") == "point":
                 placemark = ET.SubElement(folder, "Placemark")
