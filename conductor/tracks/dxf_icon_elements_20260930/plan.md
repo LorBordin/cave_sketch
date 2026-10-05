@@ -214,7 +214,7 @@ def icon_strokes(
     - [x] `uv run pytest -q` (all green) and `uv run ruff check cave_sketch tests`.
     - [x] Commit: `feat(style): add ground-scaled vector icon shapes for DXF symbols`.
 
-## Phase 2: Parse the missing DXF blocks and keep their rotation
+## Phase 2: Parse the missing DXF blocks and keep their rotation [checkpoint: b298b4d]
 
 - [x] Task: Write the failing tests (Red)
     - [ ] In `tests/test_dxf_parser.py`, **replace** the imports
