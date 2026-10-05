@@ -1258,7 +1258,7 @@ def render_to_kml(
     - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
     - [x] Commit: `feat(kml-backend): export icons as ground LineStrings with wall line width`.
 
-## Phase 9: Carry rotation through view rotation and the map JSON
+## Phase 9: Carry rotation through view rotation and the map JSON [checkpoint: b139d5a]
 
 Without this phase, `B_water-flow` arrows point the wrong way on rotated
 plots and are never oriented on the satellite map/KMZ (the JSON has no
