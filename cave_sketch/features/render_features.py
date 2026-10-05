@@ -62,10 +62,15 @@ def _icon_feature(strokes: list, typ: str, color: str, popup: str) -> Dict[str, 
 
 def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
     """
-    Extract abstract features (lines, polygons) with styles,
-    independent of rendering backend.
+    Extract abstract features (lines, polygons, points, icons) with styles,
+    independent of rendering backend. Coordinates are ``[lat, lon]``.
     """
-    features: Dict[str, List[Dict[str, Any]]] = {"lines": [], "polygons": []}
+    features: Dict[str, List[Dict[str, Any]]] = {
+        "lines": [],
+        "polygons": [],
+        "points": [],
+        "icons": [],
+    }
 
     # Polygons
     for water_polygon in map_data.get("water_polygons", []):
@@ -106,6 +111,48 @@ def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
                 "popup": f"{map_data['name']}: {line_type}",
             }
         )
+
+        decoration = style.get("line_decoration")
+        if decoration and _is_forward_segment(line["from"].get("id"), line["to"].get("id")):
+            mid_lat = (pt_from[0] + pt_to[0]) / 2
+            mid_lon = (pt_from[1] + pt_to[1]) / 2
+            m_per_deg_lat, m_per_deg_lon = meters_per_degree_wgs84(mid_lat)
+            heading = _heading_deg(
+                (pt_to[1] - pt_from[1]) * m_per_deg_lon, (pt_to[0] - pt_from[0]) * m_per_deg_lat
+            )
+            strokes = _icon_strokes_latlon(
+                str(decoration), mid_lat, mid_lon, float(str(style["decoration_size_m"])), heading
+            )
+            features["icons"].append(
+                _icon_feature(strokes, line_type, str(color), f"{map_data['name']}: {line_type}")
+            )
+
+    # Points and icons (B_* blocks)
+    nodes = map_data.get("nodes", {})
+    node_list = nodes if isinstance(nodes, list) else [{"id": k, **v} for k, v in nodes.items()]
+    for node in node_list:
+        node_type = node.get("type", "")
+        style = STYLE_MAP.get(node_type, {})
+        popup = f"{map_data.get('name', '')}: {node_type} ({node.get('id', '')})"
+        if style.get("type") == "point":
+            features["points"].append(
+                {
+                    "coords": [node["lat"], node["lon"]],
+                    "color": style["color"],
+                    "marker": style.get("marker", "o"),
+                    "size": style.get("markersize", 6),
+                    "popup": popup,
+                }
+            )
+        elif style.get("type") == "icon":
+            strokes = _icon_strokes_latlon(
+                str(style["icon"]),
+                node["lat"],
+                node["lon"],
+                float(str(style["size_m"])),
+                _rotation_value(node.get("rotation", 0.0)),
+            )
+            features["icons"].append(_icon_feature(strokes, node_type, str(style["color"]), popup))
 
     return features
 
