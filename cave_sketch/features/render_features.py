@@ -1,9 +1,63 @@
+import math
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 
-from cave_sketch.style import STYLE_MAP
+from cave_sketch.geo.georef import meters_per_degree_wgs84
+from cave_sketch.style import ICON_LINE_WEIGHT, STYLE_MAP
+from cave_sketch.style_icons import icon_strokes
+
+_POLYLINE_NODE_RE = re.compile(r"^(\d+)P(\d+)$")
+
+
+def _is_forward_segment(from_id: Any, to_id: Any) -> bool:
+    """True when ``from_id -> to_id`` is one step along a DXF polyline in drawing
+    order (``"{i}P{j}" -> "{i}P{j+1}"``).
+
+    Every polyline segment appears twice in the data (once from each end).
+    Keeping only the forward copy gives exactly one decoration per segment,
+    oriented the way the line was drawn (TopoDroid draws water-flow lines
+    downstream).
+    """
+    a = _POLYLINE_NODE_RE.match(str(from_id))
+    b = _POLYLINE_NODE_RE.match(str(to_id))
+    return bool(a and b and a.group(1) == b.group(1) and int(b.group(2)) == int(a.group(2)) + 1)
+
+
+def _rotation_value(value: Any) -> float:
+    """Rotation from a CSV/JSON cell; missing or NaN (old CSVs, merge connectors) means 0."""
+    try:
+        rotation = float(value)
+    except (TypeError, ValueError):
+        return 0.0
+    return 0.0 if math.isnan(rotation) else rotation
+
+
+def _heading_deg(dx: float, dy: float) -> float:
+    """Icon rotation (CCW degrees, 0 = icon up along +Y) pointing the icon along (dx, dy)."""
+    return math.degrees(math.atan2(dy, dx)) - 90.0
+
+
+def _icon_strokes_latlon(
+    name: str, lat: float, lon: float, size_m: float, rotation_deg: float
+) -> List[List[List[float]]]:
+    """Icon strokes as ``[lat, lon]`` polylines, sized in meters on the ground."""
+    m_per_deg_lat, m_per_deg_lon = meters_per_degree_wgs84(lat)
+    return [
+        [[lat + dy / m_per_deg_lat, lon + dx / m_per_deg_lon] for dx, dy in stroke]
+        for stroke in icon_strokes(name, 0.0, 0.0, size_m, rotation_deg)
+    ]
+
+
+def _icon_feature(strokes: list, typ: str, color: str, popup: str) -> Dict[str, Any]:
+    return {
+        "type": typ,
+        "strokes": strokes,
+        "color": color,
+        "weight": ICON_LINE_WEIGHT,
+        "popup": popup,
+    }
 
 
 def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
@@ -65,7 +119,7 @@ def extract_features_from_df(
     if excluded_nodes is None:
         excluded_nodes = []
 
-    features: Dict[str, list] = {"lines": [], "polygons": [], "points": []}  # <-- added points
+    features: Dict[str, list] = {"lines": [], "polygons": [], "points": [], "icons": []}
 
     # Build coordinate index with first-occurrence-wins semantics
     coord_index: Dict[Any, Tuple[float, float]] = {}
@@ -83,8 +137,24 @@ def extract_features_from_df(
         if not show_centerline and typ == "station":
             continue
 
-        # --- New block: handle standalone point features ---
         style_type = STYLE_MAP.get(typ, {}).get("type", "line")
+
+        # --- Icon features (B_blocks, B_water-flow, ...), sized in meters ---
+        if style_type == "icon":
+            style = STYLE_MAP[typ]
+            rotation = _rotation_value(getattr(row, "Rotation", 0.0))
+            strokes = icon_strokes(str(style["icon"]), x, y, float(str(style["size_m"])), rotation)
+            features["icons"].append(
+                _icon_feature(
+                    [[[py, px] for px, py in stroke] for stroke in strokes],
+                    typ,
+                    str(style["color"]),
+                    f"{typ} ({nid})",
+                )
+            )
+            continue
+
+        # --- Standalone point features (B_ice, B_snow) ---
         if style_type == "point":
             style = STYLE_MAP.get(typ, {"color": "black", "marker": "o", "markersize": 6})
             features["points"].append(
@@ -119,6 +189,24 @@ def extract_features_from_df(
                             "popup": f"{typ} ({nid}-{nbr})",
                         }
                     )
+
+                    decoration = style.get("line_decoration")
+                    if decoration and _is_forward_segment(nid, nbr):
+                        strokes = icon_strokes(
+                            str(decoration),
+                            (x + x2) / 2,
+                            (y + y2) / 2,
+                            float(str(style["decoration_size_m"])),
+                            _heading_deg(x2 - x, y2 - y),
+                        )
+                        features["icons"].append(
+                            _icon_feature(
+                                [[[py, px] for px, py in stroke] for stroke in strokes],
+                                typ,
+                                str(style["color"]),
+                                f"{typ} ({nid}-{nbr})",
+                            )
+                        )
 
     # --- 2️⃣ Handle area features (A_water, A_sediment, etc.) ---
     area_rows = df[df["Type"].str.startswith("A_")].copy()

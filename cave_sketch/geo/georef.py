@@ -12,7 +12,7 @@ _E2 = _F * (2 - _F)
 _DEG2RAD = np.pi / 180.0
 
 
-def _meters_per_degree_wgs84(lat_deg: float):
+def meters_per_degree_wgs84(lat_deg: float):
     """
     Return (meters_per_degree_latitude, meters_per_degree_longitude)
     at given latitude in degrees using WGS84 ellipsoid.
@@ -62,7 +62,7 @@ def georeference(survey: CaveSurvey, gps_refs: List[GpsRef]) -> List[GeoPoint]:
         if anchor is None:
             continue
 
-        m_per_deg_lat, m_per_deg_lon = _meters_per_degree_wgs84(ref.lat)
+        m_per_deg_lat, m_per_deg_lon = meters_per_degree_wgs84(ref.lat)
         transforms.append(
             {
                 "ref": ref,
