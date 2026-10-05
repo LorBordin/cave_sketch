@@ -159,7 +159,7 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
         
         for n in nodes_list:
             ntype = n.get("type", "")
-            if ntype in ("B_snow", "B_blocks"):
+            if ntype in ("B_snow", "B_ice", "B_blocks"):
                 continue
             style_info = STYLE_MAP.get(ntype)
             if style_info and style_info.get("type") == "point":

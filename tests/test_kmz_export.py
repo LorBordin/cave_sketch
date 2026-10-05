@@ -63,8 +63,8 @@ def test_compact_kml_export():
     # 1 polygon
     assert len(water_placemarks) == 1, "Expected exactly ONE Polygon placemark"
     
-    # 1 point
-    assert len(point_placemarks) == 1, "Expected exactly ONE Point placemark"
+    # B_ice / B_snow point placemarks are suppressed from KMZ
+    assert len(point_placemarks) == 0, "Expected B_ice point placemarks to be suppressed"
     
     # Check styleUrl
     style_url = wall_placemarks[0].find("kml:styleUrl", ns).text
