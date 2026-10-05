@@ -99,5 +99,5 @@ def _survey_to_df(survey: CaveSurvey) -> pd.DataFrame:
     data = []
     for p in survey.points:
         links_str = "-".join(p.links) if p.links else "-"
-        data.append([p.id, links_str, p.x, p.y, p.point_type])
-    return pd.DataFrame(data, columns=["Node_Id", "Links", "X", "Y", "Type"])
+        data.append([p.id, links_str, p.x, p.y, p.point_type, p.rotation])
+    return pd.DataFrame(data, columns=["Node_Id", "Links", "X", "Y", "Type", "Rotation"])

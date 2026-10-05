@@ -82,6 +82,7 @@ def parse_dxf(input_path: Path, output_path: Optional[Path] = None) -> CaveSurve
                 y=block["Y"] - offset_y,
                 point_type=block["Type"],
                 links=[],
+                rotation=block["Rotation"],
             )
         )
 
@@ -167,7 +168,9 @@ def _get_offset(msp: Any, offset_idx: int) -> Tuple[float, float]:
 
 
 def _get_features(msp: Any) -> List[Dict]:
-    valid_block_names = {"B_ice", "BLOCK", "B_snow"}
+    valid_block_names = {
+        "B_ice", "B_snow", "B_blocks", "B_water-flow", "B_continuation", "B_entrance"
+    }
     blocks: List[Dict] = []
     for entity in msp.query("INSERT"):
         if entity.dxf.name in valid_block_names:
@@ -178,6 +181,7 @@ def _get_features(msp: Any) -> List[Dict]:
                     "X": entity.dxf.insert.x,
                     "Y": entity.dxf.insert.y,
                     "Type": entity.dxf.name,
+                    "Rotation": float(entity.dxf.rotation) % 360.0,
                 }
             )
     return blocks
@@ -187,6 +191,6 @@ def _export_to_csv(survey: CaveSurvey, output_path: Path):
     data = []
     for p in survey.points:
         links_str = "-".join(p.links) if p.links else "-"
-        data.append([p.id, links_str, p.x, p.y, p.point_type])
-    df = pd.DataFrame(data, columns=["Node_Id", "Links", "X", "Y", "Type"])
+        data.append([p.id, links_str, p.x, p.y, p.point_type, p.rotation])
+    df = pd.DataFrame(data, columns=["Node_Id", "Links", "X", "Y", "Type", "Rotation"])
     df.to_csv(output_path, index=False)

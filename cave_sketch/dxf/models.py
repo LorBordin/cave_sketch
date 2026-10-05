@@ -12,6 +12,8 @@ class SurveyPoint:
     z: float = 0.0
     point_type: str = "station"
     links: List[str] = field(default_factory=list)
+    # DXF INSERT rotation in degrees, counter-clockwise (0 for non-block points).
+    rotation: float = 0.0
 
 
 @dataclass
