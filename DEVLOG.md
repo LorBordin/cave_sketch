@@ -407,3 +407,42 @@
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** None
+
+## [2026-10-05 12:02] Track dxf_icon_elements_20260930 — Implementation
+**Files:**
+- cave_sketch/style_icons.py
+- cave_sketch/style.py
+- cave_sketch/dxf/models.py
+- cave_sketch/dxf/parser.py
+- cave_sketch/survey/renderer.py
+- cave_sketch/geo/georef.py
+- cave_sketch/features/render_features.py
+- cave_sketch/backend_renders/matplotlib.py
+- cave_sketch/backend_renders/folium.py
+- cave_sketch/backend_renders/google_earth.py
+- cave_sketch/survey/graphics/survey_plot.py
+- cave_sketch/satellite_view/map.py
+- docs/DXF_ELEMENTS.md
+- tests/test_style_icons.py
+- tests/test_dxf_parser.py
+- tests/test_style.py
+- tests/test_render_icons_df.py
+- tests/test_render_icons_json.py
+- tests/test_icons_matplotlib.py
+- tests/test_icons_folium.py
+- tests/test_icons_kml.py
+- tests/test_icon_rotation_plumbing.py
+- tests/test_kmz_export.py
+- conductor/tracks/dxf_icon_elements_20260930/plan.md
+- conductor/tracks.md
+- DEVLOG.md
+
+**Deviations from spec:**
+- In Google Earth KMZ export, placemark names were omitted for ground vector icons and point placemarks for B_snow / B_ice were suppressed per maintainer review feedback to prevent label clutter and pin duplication.
+
+**Assumptions:**
+- None
+
+**Next session notes:**
+- The DXF icon elements track is fully implemented, verified, and completed. All 182 unit tests pass, ruff check and mypy pass with zero warnings/errors. All five element types (`B_blocks`, `B_water-flow`, `B_continuation`, `B_entrance`, `L_water-flow`) render consistently as ground-scaled vector line geometry across survey plots (matplotlib), satellite HTML maps (folium), and Google Earth (KMZ).
+

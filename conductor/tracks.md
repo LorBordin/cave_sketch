@@ -5,7 +5,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: DXF Icon Elements (Water-Flow, Continuation, Entrance, Blocks Fix)**
+- [x] **Track: DXF Icon Elements (Water-Flow, Continuation, Entrance, Blocks Fix)**
 *Link: [./tracks/dxf_icon_elements_20260930/](./tracks/dxf_icon_elements_20260930/)*
 
 ---
