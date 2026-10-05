@@ -355,7 +355,7 @@ def test_parse_sample_v14_includes_blocks_and_oriented_water_flow():
       whitelist contained the non-existent name `BLOCK`. The INSERT rotation is now stored in a
       new `Rotation` CSV column (missing in old CSVs, treated as 0 downstream).
 
-## Phase 3: `STYLE_MAP` entries and `ICON_LINE_WEIGHT`
+## Phase 3: `STYLE_MAP` entries and `ICON_LINE_WEIGHT` [checkpoint: c231428]
 
 - [x] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_style.py`:
