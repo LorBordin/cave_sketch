@@ -1403,19 +1403,19 @@ def test_create_survey_view_rotation_also_rotates_icons(monkeypatch):
 
 ## Phase 10: Docs, full verification, manual and Android checks
 
-- [~] Task: Update `docs/DXF_ELEMENTS.md`
-    - [ ] In the per-element sections and the summary table, mark `L_water-flow`, `B_water-flow`,
+- [x] Task: Update `docs/DXF_ELEMENTS.md` [1d2ae47]
+    - [x] In the per-element sections and the summary table, mark `L_water-flow`, `B_water-flow`,
       `B_continuation`, `B_entrance` and `B_blocks` as **supported**. Remove the note
       `DXF uses "B_blocks" but style.py defines it as "BLOCK"`. State that these are drawn as
       ground-scaled vector icons (size in meters, stroke width = `L_wall`) in the survey plot,
       satellite map and KMZ, and that `B_water-flow` is oriented by the DXF INSERT rotation.
-    - [ ] Commit: `docs(dxf): document icon rendering for water-flow, continuation, entrance, blocks`.
-- [ ] Task: Full automated suite
-    - [ ] `uv run pytest -q`. Expected: **182 passed**, 0 failed (131 before the track + 51 new).
-    - [ ] `uv run ruff check cave_sketch tests`. Expected: `All checks passed!`.
-- [ ] Task: Real-fixture smoke test (throwaway script, **not committed**; write outputs to a temp
+    - [x] Commit: `docs(dxf): document icon rendering for water-flow, continuation, entrance, blocks`.
+- [x] Task: Full automated suite
+    - [x] `uv run pytest -q`. Expected: **182 passed**, 0 failed (131 before the track + 51 new).
+    - [x] `uv run ruff check cave_sketch tests`. Expected: `All checks passed!`.
+- [x] Task: Real-fixture smoke test (throwaway script, **not committed**; write outputs to a temp
       dir)
-    - [ ] Run:
+    - [x] Run:
 
 ```python
 import matplotlib; matplotlib.use("Agg")
@@ -1438,9 +1438,9 @@ kml = zipfile.ZipFile(kmz).read("doc.kml").decode()
 print(out, "icon placemarks:", kml.count("#icon_B_"), "<Icon> tags:", kml.count("<Icon>"))
 ```
 
-    - [ ] Expected: `B_blocks` count 90 and `B_water-flow` count 21 with rotation min ≈ 5.63 and
+    - [x] Expected: `B_blocks` count 90 and `B_water-flow` count 21 with rotation min ≈ 5.63 and
       max ≈ 305.39; `icon placemarks: 111`, `<Icon> tags: 0`; no exceptions.
-- [ ] Task: Manual visual verification
+- [~] Task: Manual visual verification
     - [ ] PNG/PDF: zoom into the right-hand end of the cave. You should see tan block outlines
       with the same stroke width as the red walls, and purple S-arrows pointing along the
       passage. On the full page the icons are small (1.5 m in a ~300 m cave): this is expected.
