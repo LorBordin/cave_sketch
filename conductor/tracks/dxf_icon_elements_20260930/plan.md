@@ -70,7 +70,7 @@
 
 ---
 
-## Phase 1: Icon shapes module
+## Phase 1: Icon shapes module [checkpoint: d4b52e6]
 
 - [x] Task: Write the failing tests (Red)
     - [x] Create `tests/test_style_icons.py` with exactly this content:
