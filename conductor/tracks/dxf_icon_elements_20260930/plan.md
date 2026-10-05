@@ -743,7 +743,7 @@ def _icon_feature(strokes: list, typ: str, color: str, popup: str) -> Dict[str, 
 Also fixes a pre-existing bug: `extract_features_from_json` never returned
 `"points"`, so the Folium map showed **no** B_ice/B_snow markers at all.
 
-- [ ] Task: Write the failing tests (Red)
+- [x] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_render_icons_json.py`:
 
 ```python
@@ -820,9 +820,9 @@ def test_json_water_flow_both_directions_give_one_northward_chevron():
     assert math.isclose(max(_ground_extent_m(chevron)), STYLE_MAP["L_water-flow"]["decoration_size_m"], abs_tol=1e-2)
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_render_icons_json.py`. Expected: `KeyError: 'icons'`.
-- [ ] Task: Implement (Green) in `cave_sketch/features/render_features.py`
-    - [ ] In `extract_features_from_json`, **replace**
+    - [x] Run `uv run pytest -q tests/test_render_icons_json.py`. Expected: `KeyError: 'icons'`.
+- [x] Task: Implement (Green) in `cave_sketch/features/render_features.py` [a08f8c6]
+    - [x] In `extract_features_from_json`, **replace**
 
 ```python
     Extract abstract features (lines, polygons) with styles,
@@ -907,11 +907,11 @@ def test_json_water_flow_both_directions_give_one_northward_chevron():
     return features
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_render_icons_json.py tests/test_kmz_export.py`.
+    - [x] Run `uv run pytest -q tests/test_render_icons_json.py tests/test_kmz_export.py`.
       Expected: all pass.
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(render-features): build points, icons and chevrons from map JSON`.
+- [x] Task: Verify and commit [a08f8c6]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(render-features): build points, icons and chevrons from map JSON`.
       Commit body: also fixes the Folium satellite view showing zero point markers, because
       this function never built a `points` list.
 
