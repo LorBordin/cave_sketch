@@ -1052,7 +1052,7 @@ def _scaled_linewidth(weight: float, zoom_factor: float, ref_scale: float) -> fl
     - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
     - [x] Commit: `feat(matplotlib-backend): draw icons as meter-sized strokes with wall line width`.
 
-## Phase 7: Render icons in Folium (satellite HTML)
+## Phase 7: Render icons in Folium (satellite HTML) [checkpoint: 1e998f1]
 
 - [x] Task: Write the failing test (Red)
     - [ ] Create `tests/test_icons_folium.py`:
