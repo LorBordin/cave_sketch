@@ -72,8 +72,8 @@
 
 ## Phase 1: Icon shapes module
 
-- [ ] Task: Write the failing tests (Red)
-    - [ ] Create `tests/test_style_icons.py` with exactly this content:
+- [x] Task: Write the failing tests (Red)
+    - [x] Create `tests/test_style_icons.py` with exactly this content:
 
 ```python
 import pytest
@@ -130,10 +130,10 @@ def test_unknown_icon_raises_key_error():
         icon_strokes("no_such_icon", 0.0, 0.0, 1.0)
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_style_icons.py`. Expected: collection error
+    - [x] Run `uv run pytest -q tests/test_style_icons.py`. Expected: collection error
       `ModuleNotFoundError: No module named 'cave_sketch.style_icons'`.
-- [ ] Task: Implement `cave_sketch/style_icons.py` (Green)
-    - [ ] Create `cave_sketch/style_icons.py` with exactly this content. The vertex lists are
+- [x] Task: Implement `cave_sketch/style_icons.py` (Green) [cbc16a6]
+    - [x] Create `cave_sketch/style_icons.py` with exactly this content. The vertex lists are
       final: they are TopoDroid's own block geometry (`blocks`, `entrance`, `continuation`)
       normalized to the unit box, plus the maintainer-requested S-arrow and chevron.
 
@@ -209,10 +209,10 @@ def icon_strokes(
     ]
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_style_icons.py`. Expected: 16 passed.
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` (all green) and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(style): add ground-scaled vector icon shapes for DXF symbols`.
+    - [x] Run `uv run pytest -q tests/test_style_icons.py`. Expected: 16 passed.
+- [x] Task: Verify and commit [cbc16a6]
+    - [x] `uv run pytest -q` (all green) and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(style): add ground-scaled vector icon shapes for DXF symbols`.
 
 ## Phase 2: Parse the missing DXF blocks and keep their rotation
 
