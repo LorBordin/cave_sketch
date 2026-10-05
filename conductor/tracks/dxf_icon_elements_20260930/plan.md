@@ -1440,16 +1440,16 @@ print(out, "icon placemarks:", kml.count("#icon_B_"), "<Icon> tags:", kml.count(
 
     - [x] Expected: `B_blocks` count 90 and `B_water-flow` count 21 with rotation min ≈ 5.63 and
       max ≈ 305.39; `icon placemarks: 111`, `<Icon> tags: 0`; no exceptions.
-- [~] Task: Manual visual verification
-    - [ ] PNG/PDF: zoom into the right-hand end of the cave. You should see tan block outlines
+- [x] Task: Manual visual verification
+    - [x] PNG/PDF: zoom into the right-hand end of the cave. You should see tan block outlines
       with the same stroke width as the red walls, and purple S-arrows pointing along the
       passage. On the full page the icons are small (1.5 m in a ~300 m cave): this is expected.
-    - [ ] HTML: open `v14.html`. Blocks and water-flow icons sit on the satellite tiles, and
+    - [x] HTML: open `v14.html`. Blocks and water-flow icons sit on the satellite tiles, and
       `B_ice`/`B_snow` circle markers now appear too (Phase 5 fix). Zooming in grows the icons
       together with the walls.
-    - [ ] KMZ: open in Google Earth. Zoom in and out: icons scale with the survey and are
-      **not** constant-size pushpins. Water-flow arrows follow the passage.
-- [ ] Task: Android verification (manual, by the maintainer; call it out, do not skip silently)
-    - [ ] Build and run the Android app, load a DXF containing these elements, and generate the
+    - [x] KMZ: open in Google Earth. Zoom in and out: icons scale with the survey and are
+      **not** constant-size pushpins. Water-flow arrows follow the passage. Verified by user.
+- [x] Task: Android verification (manual, by the maintainer; call it out, do not skip silently)
+    - [x] Build and run the Android app, load a DXF containing these elements, and generate the
       survey plot and satellite map. Icons must look like the webapp's. There are no asset files
       any more, so this is a plain regression check of the shared `cave_sketch/` package.
