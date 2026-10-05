@@ -29,12 +29,18 @@ STYLE_MAP = {
         "markersize": 2,
         "type": "point",
     },
-    "BLOCK": {
-        "color": "saddlebrown",
-        "marker": "o",  # square marker
-        "markersize": 4,
-        "type": "point",
+    "L_water-flow": {
+        "color": "steelblue",
+        "linestyle": "solid",
+        "type": "line",
+        "weight": 1,
+        "line_decoration": "water_flow_chevron",  # one chevron per segment
+        "decoration_size_m": 1.0,
     },
+    "B_blocks": {"color": "tan", "icon": "blocks", "size_m": 1.5, "type": "icon"},
+    "B_continuation": {"color": "firebrick", "icon": "continuation", "size_m": 1.5, "type": "icon"},
+    "B_entrance": {"color": "firebrick", "icon": "entrance", "size_m": 1.5, "type": "icon"},
+    "B_water-flow": {"color": "mediumpurple", "icon": "water_flow", "size_m": 1.5, "type": "icon"},
     "connector": {
         "color": "gray",
         "linestyle": "dotted",
@@ -42,3 +48,6 @@ STYLE_MAP = {
         "weight": 0.5,
     },
 }
+
+# Icons are stroked exactly as thick as walls, in every backend.
+ICON_LINE_WEIGHT = STYLE_MAP["L_wall"]["weight"]

@@ -15,7 +15,7 @@ def test_compact_kml_export():
             {"from": {"id": "3", "lat": 3.0, "lon": 3.0}, "to": {"id": "4", "lat": 4.0, "lon": 4.0}, "type": "wall"},
         ],
         "nodes": [
-            {"id": "5", "lat": 5.0, "lon": 5.0, "type": "BLOCK"},
+            {"id": "5", "lat": 5.0, "lon": 5.0, "type": "B_ice"},
         ],
         "water_polygons": [
             {
