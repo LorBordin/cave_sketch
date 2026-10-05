@@ -408,6 +408,57 @@
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-10-01 09:47] Phase 1: Shared Magnetic-Variation Correction Utility — Implementation
+**Files:**
+- cave_sketch/geo/declination.py
+- tests/test_declination.py
+- conductor/tracks/magnetic_variation_20260930/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 1 complete and checkpointed. Moving to Phase 2: Wire the Correction into draw_survey().
+
+## [2026-10-01 09:52] Phase 2: Wire the Correction into draw_survey() — Implementation
+**Files:**
+- cave_sketch/survey/survey.py
+- tests/test_survey_declination.py
+- conductor/tracks/magnetic_variation_20260930/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 2 complete and checkpointed. Moving to Phase 3: Wire the Correction into draw_map().
+
+## [2026-10-01 09:58] Phase 3: Wire the Correction into draw_map() — Implementation
+**Files:**
+- cave_sketch/satellite_view/map.py
+- tests/test_map_declination.py
+- conductor/tracks/magnetic_variation_20260930/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 3 complete and checkpointed. Moving to Phase 4: Survey Plot Page — Magnetic Variation Input.
+
+## [2026-10-01 10:04] Phase 4: Survey Plot Page — Magnetic Variation Input — Implementation
+**Files:**
+- app/components/settings_panel.py
+- app/session.py
+- app/pages/1_survey_plot.py
+- tests/test_settings_panel.py
+- conductor/tracks/magnetic_variation_20260930/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 4 complete and checkpointed. Moving to Phase 5: Satellite Map Page — Auto-Apply the Survey's Magnetic Variation.
+
+## [2026-10-01 10:51] Phase 5: Satellite Map Page — Auto-Apply the Survey's Magnetic Variation — Implementation
+**Files:**
+- app/pages/2_satellite_map.py
+- conductor/tracks/magnetic_variation_20260930/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** All 5 phases of track magnetic_variation_20260930 are completed and verified.
+
 ## [2026-10-05 12:02] Track dxf_icon_elements_20260930 — Implementation
 **Files:**
 - cave_sketch/style_icons.py
@@ -445,4 +496,14 @@
 
 **Next session notes:**
 - The DXF icon elements track is fully implemented, verified, and completed. All 182 unit tests pass, ruff check and mypy pass with zero warnings/errors. All five element types (`B_blocks`, `B_water-flow`, `B_continuation`, `B_entrance`, `L_water-flow`) render consistently as ground-scaled vector line geometry across survey plots (matplotlib), satellite HTML maps (folium), and Google Earth (KMZ).
+
+## [2026-10-05 12:06] Conflict Resolution — Resolved merge conflicts from feature/magnetic_variation_20260930
+**Files:**
+- cave_sketch/satellite_view/map.py
+- DEVLOG.md
+- tests/test_map_declination.py
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** None
 

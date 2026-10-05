@@ -9,7 +9,11 @@ from folium import Map
 from cave_sketch.backend_renders import render_to_folium, render_to_kmz
 from cave_sketch.features.geometry import rotate_points
 from cave_sketch.features.render_features import extract_features_from_json
+from cave_sketch.geo.declination import apply_magnetic_variation
 from cave_sketch.geo.georef import meters_per_degree_wgs84
+
+# Backward-compatibility alias
+_meters_per_degree_wgs84 = meters_per_degree_wgs84
 
 
 def draw_map(
@@ -19,12 +23,14 @@ def draw_map(
     map_name: str = "Cave",
     additional_json_maps: Optional[List[str]] = None,
     rotation_angle: float = 0,
+    magnetic_variation_deg: float = 0.0,
 ):
     """
     Create cave map from CSV data and optionally combine with additional JSON maps
     """
     # Load and process the main map data
     map_df = pd.read_csv(map_path)
+    map_df = apply_magnetic_variation(map_df, magnetic_variation_deg)
     if rotation_angle != 0:
         mask = map_df["Node_Id"] == "13"
         center_x = map_df[mask]["X"].mean()

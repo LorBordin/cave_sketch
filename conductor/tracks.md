@@ -8,10 +8,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: DXF Icon Elements (Water-Flow, Continuation, Entrance, Blocks Fix)**
 *Link: [./tracks/dxf_icon_elements_20260930/](./tracks/dxf_icon_elements_20260930/)*
 
----
-
-- [x] **Track: Magnetic Variation (Declination) Correction**
-*Link: [./tracks/magnetic_variation_20260930/](./tracks/magnetic_variation_20260930/)*
 
 ---
 
