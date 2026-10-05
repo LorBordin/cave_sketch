@@ -9,12 +9,7 @@ from folium import Map
 from cave_sketch.backend_renders import render_to_folium, render_to_kmz
 from cave_sketch.features.geometry import rotate_points
 from cave_sketch.features.render_features import extract_features_from_json
-
-# WGS84 constants
-_A = 6378137.0
-_F = 1.0 / 298.257223563
-_E2 = _F * (2 - _F)
-_DEG2RAD = np.pi / 180.0
+from cave_sketch.geo.georef import meters_per_degree_wgs84
 
 
 def draw_map(
@@ -36,6 +31,8 @@ def draw_map(
         center_y = map_df[mask]["Y"].mean()
         center = (float(center_x), float(center_y))
         map_df[["X", "Y"]] = rotate_points(map_df[["X", "Y"]].values, center, rotation_angle)
+        if "Rotation" in map_df.columns:
+            map_df["Rotation"] = map_df["Rotation"].fillna(0.0) + rotation_angle
 
     map_df = cartesian_to_latlon(map_df, gps_points)
 
@@ -66,26 +63,6 @@ def draw_map(
 
 
 
-
-
-def _meters_per_degree_wgs84(lat_deg: float):
-    """
-    Return (meters_per_degree_latitude, meters_per_degree_longitude)
-    at given latitude in degrees using WGS84 ellipsoid.
-    """
-    lat_rad = np.asarray(lat_deg) * _DEG2RAD
-    sinlat = np.sin(lat_rad)
-    one_minus_e2_sin2 = 1.0 - _E2 * sinlat**2
-
-    # meridional radius of curvature
-    M = _A * (1 - _E2) / (one_minus_e2_sin2**1.5)
-    # prime vertical radius of curvature
-    N = _A / np.sqrt(one_minus_e2_sin2)
-
-    m_per_deg_lat = M * _DEG2RAD
-    m_per_deg_lon = N * np.cos(lat_rad) * _DEG2RAD
-
-    return float(m_per_deg_lat), float(m_per_deg_lon)
 
 
 def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
@@ -123,7 +100,7 @@ def cartesian_to_latlon(df: pd.DataFrame, points: List[Dict]) -> pd.DataFrame:
         offset_y = float(df.loc[anchor_idx, "Y"])
 
         # compute local meters-per-degree at lat_0
-        m_per_deg_lat, m_per_deg_lon = _meters_per_degree_wgs84(lat_0)
+        m_per_deg_lat, m_per_deg_lon = meters_per_degree_wgs84(lat_0)
 
         # set exact anchor lat/lon for the anchor row (optional, mirrors your old behavior)
         df.loc[anchor_idx, lat_col] = lat_0
@@ -169,11 +146,15 @@ def export_map_data(df: pd.DataFrame, map_name: str, output_path: str):
     }
 
     # Store nodes
+    has_rotation = "Rotation" in df.columns
     for _, row in df.iterrows():
         map_data["nodes"][row["Node_Id"]] = {
             "lat": row["Latitude"],
             "lon": row["Longitude"],
             "type": row["Type"],
+            "rotation": (
+                float(row["Rotation"]) if has_rotation and pd.notna(row["Rotation"]) else 0.0
+            ),
         }
 
     # Separate water areas from regular lines

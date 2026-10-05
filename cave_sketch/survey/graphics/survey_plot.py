@@ -76,6 +76,8 @@ def create_survey(
         points = df[["X", "Y"]].values
         center: Tuple[float, float] = (float(df["X"].mean()), float(df["Y"].mean()))
         df[["X", "Y"]] = rotate_points(points, center, rotation_deg)
+        if "Rotation" in df.columns:
+            df["Rotation"] = df["Rotation"].fillna(0.0) + rotation_deg
 
     # --- Compute scale parameters ---
     x_coords = df["X"].values
