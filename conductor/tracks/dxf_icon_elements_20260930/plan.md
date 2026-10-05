@@ -459,7 +459,7 @@ ICON_LINE_WEIGHT = STYLE_MAP["L_wall"]["weight"]
     - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
     - [x] Commit: `feat(style): add icon styles for blocks, continuation, entrance, water-flow`.
 
-## Phase 4: Icons and water-flow chevrons from the survey DataFrame (survey plot data)
+## Phase 4: Icons and water-flow chevrons from the survey DataFrame (survey plot data) [checkpoint: de14143]
 
 - [x] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_render_icons_df.py`:
