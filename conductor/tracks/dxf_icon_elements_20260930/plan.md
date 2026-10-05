@@ -357,7 +357,7 @@ def test_parse_sample_v14_includes_blocks_and_oriented_water_flow():
 
 ## Phase 3: `STYLE_MAP` entries and `ICON_LINE_WEIGHT`
 
-- [ ] Task: Write the failing tests (Red)
+- [x] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_style.py`:
 
 ```python
@@ -410,10 +410,10 @@ def test_every_style_color_is_renderable():
         assert is_color_like(style["color"]), style["color"]
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_style.py`. Expected: `ImportError: cannot import name
+    - [x] Run `uv run pytest -q tests/test_style.py`. Expected: `ImportError: cannot import name
       'ICON_LINE_WEIGHT'`.
-- [ ] Task: Implement (Green)
-    - [ ] `cave_sketch/style.py`: **replace** the whole `"BLOCK"` entry
+- [x] Task: Implement (Green) [e83f86e]
+    - [x] `cave_sketch/style.py`: **replace** the whole `"BLOCK"` entry
 
 ```python
     "BLOCK": {
@@ -454,10 +454,10 @@ ICON_LINE_WEIGHT = STYLE_MAP["L_wall"]["weight"]
       `{"id": "5", "lat": 5.0, "lon": 5.0, "type": "BLOCK"},` **with**
       `{"id": "5", "lat": 5.0, "lon": 5.0, "type": "B_ice"},`. Do **not** use `B_blocks`:
       it is now an icon (MultiGeometry), so the test's point/wall counts would be wrong.
-    - [ ] Run `uv run pytest -q tests/test_style.py tests/test_kmz_export.py`. Expected: all pass.
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(style): add icon styles for blocks, continuation, entrance, water-flow`.
+    - [x] Run `uv run pytest -q tests/test_style.py tests/test_kmz_export.py`. Expected: all pass.
+- [x] Task: Verify and commit [e83f86e]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(style): add icon styles for blocks, continuation, entrance, water-flow`.
 
 ## Phase 4: Icons and water-flow chevrons from the survey DataFrame (survey plot data)
 
