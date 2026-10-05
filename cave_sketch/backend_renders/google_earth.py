@@ -5,7 +5,7 @@ from xml.dom import minidom
 
 from cave_sketch.features.chaining import chain_segments_by_type
 from cave_sketch.features.render_features import extract_features_from_json
-from cave_sketch.style import STYLE_MAP
+from cave_sketch.style import ICON_LINE_WEIGHT, STYLE_MAP
 
 
 def rgba_to_kml_color(color: str, opacity: float = 1.0) -> str:
@@ -22,10 +22,22 @@ def rgba_to_kml_color(color: str, opacity: float = 1.0) -> str:
         "deepskyblue": "ffffbf00",
         "aliceblue": "fffff8f0",
         "saddlebrown": "ff13458b",
+        "tan": "ff8cb4d2",
+        "firebrick": "ff2222b2",
+        "mediumpurple": "ffdb7093",
+        "steelblue": "ffb48246",
     }
     base = color_map.get(color.lower(), "ffffffff")
     alpha = int(opacity * 255)
     return f"{alpha:02x}{base[2:]}"
+
+
+def _add_icon_style(doc: ET.Element, stype: str, color: str) -> None:
+    """Shared style ``icon_<stype>``: icons are LineStrings stroked like walls."""
+    style = ET.SubElement(doc, "Style", id=f"icon_{stype}")
+    line_style = ET.SubElement(style, "LineStyle")
+    ET.SubElement(line_style, "color").text = rgba_to_kml_color(color)
+    ET.SubElement(line_style, "width").text = str(ICON_LINE_WEIGHT)
 
 
 def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") -> str:
@@ -41,6 +53,12 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
     # We need to collect all unique types so we can define shared styles at the document level
     # Or we can just define them for all styles in STYLE_MAP
     for stype, sdict in STYLE_MAP.items():
+        if sdict.get("type") == "icon":
+            _add_icon_style(doc, stype, str(sdict["color"]))
+            continue
+        if "line_decoration" in sdict:
+            _add_icon_style(doc, stype, str(sdict["color"]))
+
         style_id = str(sdict.get("type", "line")) + "_" + stype
         style = ET.SubElement(doc, "Style", id=style_id)
         
@@ -118,6 +136,19 @@ def render_to_kml(map_list: List[Dict[str, Any]], layer_name: str = "All Maps") 
                 ls = ET.SubElement(multi_geo, "LineString")
                 ET.SubElement(ls, "tessellate").text = "1"
                 coord_str = " ".join([f"{lon},{lat},0" for lat, lon in polyline])
+                ET.SubElement(ls, "coordinates").text = coord_str
+
+        # --- ICONS (B_blocks, B_water-flow, ..., L_water-flow chevrons) ---
+        # Real ground geometry, not pushpins: they scale with zoom like the survey.
+        for icon in features.get("icons", []):
+            placemark = ET.SubElement(folder, "Placemark")
+            ET.SubElement(placemark, "name").text = icon["type"]
+            ET.SubElement(placemark, "styleUrl").text = f"#icon_{icon['type']}"
+            multi_geo = ET.SubElement(placemark, "MultiGeometry")
+            for stroke in icon["strokes"]:
+                ls = ET.SubElement(multi_geo, "LineString")
+                ET.SubElement(ls, "tessellate").text = "1"
+                coord_str = " ".join([f"{lon},{lat},0" for lat, lon in stroke])
                 ET.SubElement(ls, "coordinates").text = coord_str
 
         # --- POINTS ---
