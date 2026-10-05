@@ -915,7 +915,7 @@ def test_json_water_flow_both_directions_give_one_northward_chevron():
       Commit body: also fixes the Folium satellite view showing zero point markers, because
       this function never built a `points` list.
 
-## Phase 6: Render icons in matplotlib (survey plot)
+## Phase 6: Render icons in matplotlib (survey plot) [checkpoint: e4426d1]
 
 - [x] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_icons_matplotlib.py`:
