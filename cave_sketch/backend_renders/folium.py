@@ -31,7 +31,18 @@ def render_to_folium(features: Dict[str, list], folium_map, layer_name: str):
             kwargs["dashArray"] = ",".join(map(str, line["dash"]))
         folium.PolyLine(**kwargs).add_to(fg)
 
-    # ---- POINTS (B_ice, BLOCK, etc.) ----
+    # ---- ICONS (B_blocks, B_water-flow, ..., L_water-flow chevrons) ----
+    # Ground-anchored polylines: they scale with zoom exactly like the walls.
+    for icon in features.get("icons", []):
+        folium.PolyLine(
+            locations=icon["strokes"],
+            color=icon["color"],
+            weight=icon["weight"],
+            opacity=0.8,
+            popup=icon.get("popup", ""),
+        ).add_to(fg)
+
+    # ---- POINTS (B_ice, B_snow) ----
     for p in features.get("points", []):
         folium.CircleMarker(
             location=p["coords"],
