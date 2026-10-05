@@ -738,7 +738,7 @@ def _icon_feature(strokes: list, typ: str, color: str, popup: str) -> Dict[str, 
     - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
     - [x] Commit: `feat(render-features): emit meter-sized icons and water-flow chevrons from survey data`.
 
-## Phase 5: Points, icons and chevrons from the map JSON (satellite HTML + KMZ data)
+## Phase 5: Points, icons and chevrons from the map JSON (satellite HTML + KMZ data) [checkpoint: 58b872f]
 
 Also fixes a pre-existing bug: `extract_features_from_json` never returned
 `"points"`, so the Folium map showed **no** B_ice/B_snow markers at all.
