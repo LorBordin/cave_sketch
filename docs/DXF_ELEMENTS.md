@@ -59,10 +59,16 @@ DXF elements are organized into three categories based on their DXF representati
 - **Files using**: sample.dxf, val_mul_4-1p.dxf
 
 ### L_water-flow
-- **Type**: Line
+- **Type**: Line with decoration
 - **DXF Type**: LWPOLYLINE/POLYLINE with linetype "L_water-flow"
-- **Description**: Water flow direction indicator
-- **Defined in style.py**: ❌ **Missing** — Not defined in style.py
+- **Description**: Water flow direction indicator (polyline decorated with chevrons)
+- **Defined in style.py**: ✅ Yes
+- **Rendering**:
+  - Color: Steel Blue
+  - Line Style: Solid
+  - Weight: 2
+  - Decoration: Chevrons (`water_flow_chevron`, size 1.0 m, stroke width = `L_wall`)
+  - Supported: Drawn as ground-scaled vector line with chevron icons in survey plot, satellite map and KMZ
 - **Files using**: val_cont_06-0p.dxf (93 instances)
 
 ### L_border
@@ -131,37 +137,52 @@ DXF elements are organized into three categories based on their DXF representati
 - **Files using**: sample_v14.dxf, sample_v9.dxf, grotta_mittelbergferner-1p.dxf (146 instances)
 
 ### B_water-flow
-- **Type**: Block (INSERT entity)
+- **Type**: Block (INSERT entity) / Vector Icon
 - **DXF Type**: INSERT block named "B_water-flow"
 - **Description**: Water flow indicator or direction marker
-- **Defined in style.py**: ❌ **Missing** — Not defined in style.py
+- **Defined in style.py**: ✅ Yes
+- **Rendering**:
+  - Color: Medium Purple
+  - Icon: S-curve arrow (`water_flow`, size 1.5 m)
+  - Stroke width: = `L_wall` (`ICON_LINE_WEIGHT`)
+  - Rotation: Oriented by DXF INSERT rotation
+  - Supported: Drawn as ground-scaled vector icon in survey plot, satellite map and KMZ
 - **Files using**: sample_v14.dxf, sample_v9.dxf, val_mul_4-1p.dxf (6 instances), grotta_mittelbergferner-1p.dxf (20 instances)
 
 ### B_blocks
-- **Type**: Block (INSERT entity)
+- **Type**: Block (INSERT entity) / Vector Icon
 - **DXF Type**: INSERT block named "B_blocks"
 - **Description**: Rock blocks, breakdown, or debris (generic blocks)
-- **Defined in style.py**: ⚠️ Partially — defined as "BLOCK" (different name)
-- **Rendering** (via "BLOCK" entry):
-  - Color: Saddle Brown
-  - Marker: Circle (o)
-  - Marker Size: 4
-  - Type: Point marker
+- **Defined in style.py**: ✅ Yes
+- **Rendering**:
+  - Color: Tan
+  - Icon: Overlapping block outlines (`blocks`, size 1.5 m)
+  - Stroke width: = `L_wall` (`ICON_LINE_WEIGHT`)
+  - Supported: Drawn as ground-scaled vector icon in survey plot, satellite map and KMZ
 - **Files using**: sample_v14.dxf, sample_v9.dxf, val_mul_4-1p.dxf (5 instances), grotta_mittelbergferner-1p.dxf (90 instances)
-- **Note**: DXF uses "B_blocks" but style.py defines it as "BLOCK"
 
 ### B_continuation
-- **Type**: Block (INSERT entity)
+- **Type**: Block (INSERT entity) / Vector Icon
 - **DXF Type**: INSERT block named "B_continuation"
-- **Description**: Passage continues or survey continuation marker
-- **Defined in style.py**: ❌ **Missing** — Not defined in style.py
+- **Description**: Passage continues or survey continuation marker ("?")
+- **Defined in style.py**: ✅ Yes
+- **Rendering**:
+  - Color: Firebrick
+  - Icon: Question mark (`continuation`, size 1.5 m)
+  - Stroke width: = `L_wall` (`ICON_LINE_WEIGHT`)
+  - Supported: Drawn as ground-scaled vector icon in survey plot, satellite map and KMZ
 - **Files using**: val_cont_06-0p.dxf (1 instance)
 
 ### B_entrance
-- **Type**: Block (INSERT entity)
+- **Type**: Block (INSERT entity) / Vector Icon
 - **DXF Type**: INSERT block named "B_entrance"
-- **Description**: Cave entrance marker
-- **Defined in style.py**: ❌ **Missing** — Not defined in style.py
+- **Description**: Cave entrance marker (hollow triangle pointing into passage)
+- **Defined in style.py**: ✅ Yes
+- **Rendering**:
+  - Color: Firebrick
+  - Icon: Triangle (`entrance`, size 2.0 m)
+  - Stroke width: = `L_wall` (`ICON_LINE_WEIGHT`)
+  - Supported: Drawn as ground-scaled vector icon in survey plot, satellite map and KMZ
 - **Files using**: val_cont_06-0p.dxf
 
 ---
@@ -218,14 +239,14 @@ DXF elements are organized into three categories based on their DXF representati
 | L_chimney | Line | ✅ | Defined | 2/6 files (sample.dxf, val_mul_4-1p.dxf) |
 | L_border | Line | ✅ | Defined | 1/6 files |
 | L_slope | Line | ✅ | Defined | 0/6 files (code only) |
-| L_water-flow | Line | ❌ | **Missing** | 1/6 files (val_cont_06-0p.dxf) |
+| L_water-flow | Line | ✅ | Defined (line + chevrons) | 1/6 files (val_cont_06-0p.dxf) |
 | A_water | Area | ✅ | Defined | 6/6 files |
 | B_ice | Block | ✅ | Defined | 3/6 files (sample_v14.dxf, sample_v9.dxf, grotta_mittelbergferner-1p.dxf) |
 | B_snow | Block | ✅ | Defined | 3/6 files (sample_v14.dxf, sample_v9.dxf, grotta_mittelbergferner-1p.dxf) |
-| B_blocks | Block | ⚠️ | Partial (named "BLOCK") | 4/6 files (sample_v14.dxf, sample_v9.dxf, val_mul_4-1p.dxf, grotta_mittelbergferner-1p.dxf) |
-| B_water-flow | Block | ❌ | **Missing** | 4/6 files (sample_v14.dxf, sample_v9.dxf, val_mul_4-1p.dxf, grotta_mittelbergferner-1p.dxf) |
-| B_continuation | Block | ❌ | **Missing** | 1/6 files (val_cont_06-0p.dxf) |
-| B_entrance | Block | ❌ | **Missing** | 1/6 files |
+| B_blocks | Block | ✅ | Defined (vector icon) | 4/6 files (sample_v14.dxf, sample_v9.dxf, val_mul_4-1p.dxf, grotta_mittelbergferner-1p.dxf) |
+| B_water-flow | Block | ✅ | Defined (vector icon) | 4/6 files (sample_v14.dxf, sample_v9.dxf, val_mul_4-1p.dxf, grotta_mittelbergferner-1p.dxf) |
+| B_continuation | Block | ✅ | Defined (vector icon) | 1/6 files (val_cont_06-0p.dxf) |
+| B_entrance | Block | ✅ | Defined (vector icon) | 1/6 files |
 | station | Point | ✅ | Defined | 6/6 files |
 | LEG | Line | ⚠️ | Partial (as "connector") | 6/6 files |
 | SPLAY | Layer | ❌ | **Missing** | 3/6 files |
@@ -236,11 +257,7 @@ DXF elements are organized into three categories based on their DXF representati
 
 The following elements exist in DXF files but lack rendering definitions in `style.py`:
 
-1. **L_water-flow** — Water flow direction lines (val_cont_06-0p.dxf: 93 instances)
-2. **B_water-flow** — Water flow markers (4 files: sample_v14.dxf, sample_v9.dxf, val_mul_4-1p.dxf, grotta_mittelbergferner-1p.dxf)
-3. **B_continuation** — Passage continuation markers (val_cont_06-0p.dxf: 1 instance)
-4. **B_entrance** — Entrance markers (1 file)
-5. **SPLAY** — Splay shots layer (3 files)
+1. **SPLAY** — Splay shots layer (3 files)
 
 Consider adding style definitions for these elements to enable proper rendering in visualizations.
 
