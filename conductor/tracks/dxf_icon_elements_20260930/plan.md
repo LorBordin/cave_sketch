@@ -1113,8 +1113,8 @@ def test_folium_icon_is_polyline_with_wall_weight():
 
 ## Phase 8: Render icons in KML/KMZ (Google Earth)
 
-- [ ] Task: Write the failing tests (Red)
-    - [ ] Create `tests/test_icons_kml.py`:
+- [x] Task: Write the failing tests (Red)
+    - [x] Create `tests/test_icons_kml.py`:
 
 ```python
 # ruff: noqa: E501
@@ -1175,12 +1175,12 @@ def test_kml_color_map_covers_every_style_color():
         assert rgba_to_kml_color(style["color"]) != "ffffffff" or style["color"] == "white", style["color"]
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_icons_kml.py`. Expected: `KeyError: 'icon_B_blocks'`
+    - [x] Run `uv run pytest -q tests/test_icons_kml.py`. Expected: `KeyError: 'icon_B_blocks'`
       and the color-map test failing on `tan`.
-- [ ] Task: Implement (Green) in `cave_sketch/backend_renders/google_earth.py`
-    - [ ] **Replace** `from cave_sketch.style import STYLE_MAP` **with**
+- [x] Task: Implement (Green) in `cave_sketch/backend_renders/google_earth.py`
+    - [x] **Replace** `from cave_sketch.style import STYLE_MAP` **with**
       `from cave_sketch.style import ICON_LINE_WEIGHT, STYLE_MAP`.
-    - [ ] In `rgba_to_kml_color`, **replace**
+    - [x] In `rgba_to_kml_color`, **replace**
 
 ```python
         "saddlebrown": "ff13458b",
@@ -1198,7 +1198,7 @@ def test_kml_color_map_covers_every_style_color():
     }
 ```
 
-    - [ ] **Replace** `def render_to_kml(` **with**
+    - [x] **Replace** `def render_to_kml(` **with**
 
 ```python
 def _add_icon_style(doc: ET.Element, stype: str, color: str) -> None:
@@ -1212,7 +1212,7 @@ def _add_icon_style(doc: ET.Element, stype: str, color: str) -> None:
 def render_to_kml(
 ```
 
-    - [ ] **Replace**
+    - [x] **Replace**
 
 ```python
     for stype, sdict in STYLE_MAP.items():
@@ -1232,7 +1232,7 @@ def render_to_kml(
         style_id = str(sdict.get("type", "line")) + "_" + stype
 ```
 
-    - [ ] **Replace** `        # --- POINTS ---` **with**
+    - [x] **Replace** `        # --- POINTS ---` **with**
 
 ```python
         # --- ICONS (B_blocks, B_water-flow, ..., L_water-flow chevrons) ---
@@ -1253,10 +1253,10 @@ def render_to_kml(
 
       Leave the existing `# --- POINTS ---` loop as it is: it only handles `type == "point"`.
       `render_to_kmz` needs **no** change (there are no assets).
-    - [ ] Run `uv run pytest -q tests/test_icons_kml.py tests/test_kmz_export.py`. Expected: all pass.
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(kml-backend): export icons as ground LineStrings with wall line width`.
+    - [x] Run `uv run pytest -q tests/test_icons_kml.py tests/test_kmz_export.py`. Expected: all pass.
+- [x] Task: Verify and commit [a0445ac]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(kml-backend): export icons as ground LineStrings with wall line width`.
 
 ## Phase 9: Carry rotation through view rotation and the map JSON
 
@@ -1264,7 +1264,7 @@ Without this phase, `B_water-flow` arrows point the wrong way on rotated
 plots and are never oriented on the satellite map/KMZ (the JSON has no
 rotation).
 
-- [ ] Task: Write the failing tests (Red)
+- [~] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_icon_rotation_plumbing.py`:
 
 ```python
