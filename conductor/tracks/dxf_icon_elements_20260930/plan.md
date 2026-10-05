@@ -461,7 +461,7 @@ ICON_LINE_WEIGHT = STYLE_MAP["L_wall"]["weight"]
 
 ## Phase 4: Icons and water-flow chevrons from the survey DataFrame (survey plot data)
 
-- [ ] Task: Write the failing tests (Red)
+- [x] Task: Write the failing tests (Red)
     - [ ] Create `tests/test_render_icons_df.py`:
 
 ```python
@@ -578,14 +578,14 @@ def test_df_other_lines_get_no_decoration():
     assert extract_features_from_df(df)["icons"] == []
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_render_icons_df.py`. Expected: failures with
+    - [x] Run `uv run pytest -q tests/test_render_icons_df.py`. Expected: failures with
       `KeyError: 'icons'`.
-- [ ] Task: Make the WGS84 helper public (needed here and in Phase 5)
-    - [ ] `cave_sketch/geo/georef.py`: rename `def _meters_per_degree_wgs84(` to
+- [x] Task: Make the WGS84 helper public (needed here and in Phase 5) [d6c38a5]
+    - [x] `cave_sketch/geo/georef.py`: rename `def _meters_per_degree_wgs84(` to
       `def meters_per_degree_wgs84(` and update its one call site in the same file
       (`= _meters_per_degree_wgs84(` → `= meters_per_degree_wgs84(`). Do **not** touch the
       private copy in `satellite_view/map.py` yet (Phase 9 removes it).
-- [ ] Task: Implement (Green) in `cave_sketch/features/render_features.py`
+- [x] Task: Implement (Green) in `cave_sketch/features/render_features.py` [d6c38a5]
     - [ ] **Replace** the module header
 
 ```python
@@ -732,11 +732,11 @@ def _icon_feature(strokes: list, typ: str, color: str, popup: str) -> Dict[str, 
                         )
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_render_icons_df.py tests/test_render_features.py`.
+    - [x] Run `uv run pytest -q tests/test_render_icons_df.py tests/test_render_features.py`.
       Expected: all pass (the old tests still see 4 wall lines and no points).
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(render-features): emit meter-sized icons and water-flow chevrons from survey data`.
+- [x] Task: Verify and commit [d6c38a5]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(render-features): emit meter-sized icons and water-flow chevrons from survey data`.
 
 ## Phase 5: Points, icons and chevrons from the map JSON (satellite HTML + KMZ data)
 
