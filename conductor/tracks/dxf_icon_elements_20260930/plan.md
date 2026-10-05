@@ -216,7 +216,7 @@ def icon_strokes(
 
 ## Phase 2: Parse the missing DXF blocks and keep their rotation
 
-- [ ] Task: Write the failing tests (Red)
+- [x] Task: Write the failing tests (Red)
     - [ ] In `tests/test_dxf_parser.py`, **replace** the imports
 
 ```python
@@ -278,11 +278,11 @@ def test_parse_sample_v14_includes_blocks_and_oriented_water_flow():
     assert all(0.0 <= p.rotation < 360.0 for p in survey.points)
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_dxf_parser.py`. Expected failures: the CSV column
-      test, `test_get_features_recognizes_all_supported_blocks` (only B_ice/B_snow found),
+    - [x] Run `uv run pytest -q tests/test_dxf_parser.py`. Expected failures: the CSV column
+      `test_get_features_recognizes_all_supported_blocks` (only B_ice/B_snow found),
       `KeyError: 'Rotation'`, and the sample_v14 test (`B_blocks` missing).
-- [ ] Task: Implement (Green)
-    - [ ] `cave_sketch/dxf/models.py`: in `SurveyPoint`, **replace**
+- [x] Task: Implement (Green) [754172e]
+    - [x] `cave_sketch/dxf/models.py`: in `SurveyPoint`, **replace**
 
 ```python
     point_type: str = "station"
@@ -346,11 +346,11 @@ def test_parse_sample_v14_includes_blocks_and_oriented_water_flow():
       `        data.append([p.id, links_str, p.x, p.y, p.point_type, p.rotation])`, and
       **replace** `columns=["Node_Id", "Links", "X", "Y", "Type"])` **with**
       `columns=["Node_Id", "Links", "X", "Y", "Type", "Rotation"])`.
-    - [ ] Run `uv run pytest -q tests/test_dxf_parser.py tests/test_dxf_compatibility.py`.
+    - [x] Run `uv run pytest -q tests/test_dxf_parser.py tests/test_dxf_compatibility.py`.
       Expected: all pass.
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `fix(dxf): parse B_blocks/B_water-flow/B_continuation/B_entrance and keep rotation`.
+- [x] Task: Verify and commit [754172e]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `fix(dxf): parse B_blocks/B_water-flow/B_continuation/B_entrance and keep rotation`.
       Commit body: these four block types were silently dropped by the parser because the
       whitelist contained the non-existent name `BLOCK`. The INSERT rotation is now stored in a
       new `Rotation` CSV column (missing in old CSVs, treated as 0 downstream).
