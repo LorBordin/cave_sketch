@@ -1054,7 +1054,7 @@ def _scaled_linewidth(weight: float, zoom_factor: float, ref_scale: float) -> fl
 
 ## Phase 7: Render icons in Folium (satellite HTML)
 
-- [ ] Task: Write the failing test (Red)
+- [x] Task: Write the failing test (Red)
     - [ ] Create `tests/test_icons_folium.py`:
 
 ```python
@@ -1086,10 +1086,10 @@ def test_folium_icon_is_polyline_with_wall_weight():
     assert "L.circleMarker(" in html  # plain points unchanged
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_icons_folium.py`. Expected: assertion fails on
+    - [x] Run `uv run pytest -q tests/test_icons_folium.py`. Expected: assertion fails on
       `html.count("L.polyline(") == 1` (it is 0).
-- [ ] Task: Implement (Green) in `cave_sketch/backend_renders/folium.py`
-    - [ ] **Replace** `    # ---- POINTS (B_ice, BLOCK, etc.) ----` **with**
+- [x] Task: Implement (Green) in `cave_sketch/backend_renders/folium.py` [5c93d23]
+    - [x] **Replace** `    # ---- POINTS (B_ice, BLOCK, etc.) ----` **with**
 
 ```python
     # ---- ICONS (B_blocks, B_water-flow, ..., L_water-flow chevrons) ----
@@ -1106,10 +1106,10 @@ def test_folium_icon_is_polyline_with_wall_weight():
     # ---- POINTS (B_ice, B_snow) ----
 ```
 
-    - [ ] Run `uv run pytest -q tests/test_icons_folium.py`. Expected: pass.
-- [ ] Task: Verify and commit
-    - [ ] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
-    - [ ] Commit: `feat(folium-backend): draw icons as ground-anchored polylines`.
+    - [x] Run `uv run pytest -q tests/test_icons_folium.py`. Expected: pass.
+- [x] Task: Verify and commit [5c93d23]
+    - [x] `uv run pytest -q` and `uv run ruff check cave_sketch tests`.
+    - [x] Commit: `feat(folium-backend): draw icons as ground-anchored polylines`.
 
 ## Phase 8: Render icons in KML/KMZ (Google Earth)
 
