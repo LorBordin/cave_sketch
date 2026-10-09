@@ -301,10 +301,10 @@ Full code: superpowers plan → **Task 7**.
 
 Full code: superpowers plan → **Task 8**.
 
-- [ ] Task: Write failing UI tests (Red)
-    - [ ] Create `TitleBlockFieldsTest.kt` and append the magnetic variation test to
+- [x] Task: Write failing UI tests (Red) [f5400af]
+    - [x] Create `TitleBlockFieldsTest.kt` and append the magnetic variation test to
       `SettingsFormTest.kt` (Step 1); confirm compile failure.
-- [ ] Task: Implement (Green)
+- [~] Task: Implement (Green)
     - [ ] Create `ui/components/TitleBlockFields.kt` (Step 3).
     - [ ] Add the magnetic variation field to `SettingsForm.kt` (Step 4).
     - [ ] Use `TitleBlockFields` in `SurveyPlotScreen.kt` and gate `canGenerate` on
