@@ -18,7 +18,7 @@ def title_block_inputs_component() -> Optional[TitleBlockInfo]:
     lat_col, lon_col, elev_col = st.columns(3)
     with lat_col:
         latitude = st.number_input(
-            "Latitude (°)",
+            "Latitude (° N)",
             min_value=-90.0,
             max_value=90.0,
             step=0.00001,
@@ -28,7 +28,7 @@ def title_block_inputs_component() -> Optional[TitleBlockInfo]:
         )
     with lon_col:
         longitude = st.number_input(
-            "Longitude (°)",
+            "Longitude (° E)",
             min_value=-180.0,
             max_value=180.0,
             step=0.00001,
