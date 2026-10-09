@@ -9,10 +9,10 @@ from components.file_upload import (
 )
 from components.settings_panel import settings_panel_component
 from components.sidebar import render_sidebar
+from components.title_block_inputs import title_block_inputs_component
 from session import init_session
 
 from cave_sketch.survey import draw_survey
-from cave_sketch.survey.config import TitleBlockInfo
 
 st.set_page_config(page_title="Cave Survey Plot", layout="centered")
 init_session()
@@ -25,13 +25,7 @@ child_file_uploader_component()
 st.markdown("---")
 title = survey_name_component()
 
-st.markdown("#### 👤 Surveyor name")
-surveyor_name = st.text_input(
-    "Surveyor Name",
-    value=st.session_state.surveyor_name,
-    label_visibility="collapsed",
-)
-st.session_state.surveyor_name = surveyor_name
+title_block = title_block_inputs_component()
 
 merge_valid = True
 if st.session_state.child_map_csv or st.session_state.child_section_csv:
@@ -43,6 +37,8 @@ settings = settings_panel_component()
 if st.button("✨ Generate Survey Plot"):
     if not merge_valid:
         st.error("⚠️ Please resolve the merging errors before generating the plot.")
+    elif title_block is None:
+        st.error("⚠️ Please fix the title block fields before generating the plot.")
     elif st.session_state.map_csv or st.session_state.section_csv:
         from cave_sketch.survey.merger import SectionProtocol, merge_surveys
         pdf_path = st.session_state.files_dir / "survey.pdf"
@@ -59,7 +55,7 @@ if st.button("✨ Generate Survey Plot"):
                 child_station=st.session_state.child_station,
                 section_protocol=SectionProtocol(st.session_state.section_protocol),
                 output_path=pdf_path,
-                title_block=TitleBlockInfo(surveyor_name=surveyor_name),
+                title_block=title_block,
                 config=settings,
             )
             st.session_state.cave_survey = fig

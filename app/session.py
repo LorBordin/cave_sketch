@@ -23,6 +23,12 @@ class AppState(TypedDict):
     current_json_path: Optional[Path]
     uploaded_json_paths: List[str]
     survey_name: str
+    surveyor_name: str
+    drawer_name: str
+    municipality: str
+    cave_latitude: Optional[float]
+    cave_longitude: Optional[float]
+    cave_elevation_m: Optional[float]
     show_grid: bool
     show_centerline: bool
 
@@ -58,6 +64,11 @@ def init_session() -> None:
         "uploaded_json_paths": [],
         "survey_name": "MySurvey",
         "surveyor_name": "",
+        "drawer_name": "",
+        "municipality": "",
+        "cave_latitude": None,
+        "cave_longitude": None,
+        "cave_elevation_m": None,
         "show_grid": True,
         "show_centerline": True,
     }
