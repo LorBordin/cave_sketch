@@ -229,16 +229,16 @@ also migrates both apps' call sites (Step 5b) to keep them working.
 - [x] Task: Quality gates and commit [5326a22]
     - [x] Python gates **and** Android gates (the bridge changed). Commit
       `feat(survey): render extended title block with adaptive placement`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 5' (Protocol in workflow.md)
-    - [ ] Show the user `tests/fixtures/render_baselines/full_metadata.png`: 9 rows, no overlap
+- [x] Task: Conductor - Device Verification & Approval 'Phase 5' (Protocol in workflow.md)
+    - [x] Show the user `tests/fixtures/render_baselines/full_metadata.png`: 9 rows, no overlap
       with cave walls, stations, north arrow, scale bar or cave name.
-    - [ ] Webapp: map only and map + section with surveyor `Test`: box top-right in the header
+    - [x] Webapp: map only and map + section with surveyor `Test`: box top-right in the header
       as in `before_web.pdf` (row spacing may differ slightly), rows Rilevatore/Data/Sviluppo
       (+ Dislivello with section). Set magnetic variation `2.5` → an extra
       `Declinazione: 2.5° E` row appears.
-    - [ ] Android: `./gradlew :app:installDebug`, generate a PDF with surveyor `Test`: same
+    - [x] Android: `./gradlew :app:installDebug`, generate a PDF with surveyor `Test`: same
       result as the webapp; the app does not show an error.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 6: Webapp Inputs
