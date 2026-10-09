@@ -6,6 +6,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -241,5 +242,14 @@ class SettingsFormTest {
         }
 
         composeTestRule.onNodeWithTag("show_details_checkbox").assertIsNotEnabled()
+    }
+
+    @Test
+    fun typing_magnetic_variation_updates_inputs() {
+        var latest = SurveyInputs()
+        composeTestRule.setContent { SettingsForm(latest) { latest = it } }
+        composeTestRule.onNodeWithTag("magnetic_variation_field")
+            .performTextInput("2.5")
+        assertEquals("2.5", latest.magneticVariationDeg)
     }
 }
