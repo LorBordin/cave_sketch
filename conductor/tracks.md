@@ -5,7 +5,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Title Block Metadata & Adaptive Placement**
+- [~] **Track: Title Block Metadata & Adaptive Placement**
 *Link: [./tracks/title_block_metadata_20261009/](./tracks/title_block_metadata_20261009/)*
 
 ---

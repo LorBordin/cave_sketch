@@ -212,22 +212,22 @@ also migrates both apps' call sites (Step 5b) to keep them working.
     - [x] Run `uv run pytest tests/test_title_block.py tests/test_title_block_integration.py -v`;
       confirm `ImportError: cannot import name 'draw_cave_name'` / unexpected keyword
       `title_block`.
-- [~] Task: Implement rendering changes (Green)
-    - [ ] `title_block.py`: replace old `draw_title_block` with `draw_cave_name`,
+- [x] Task: Implement rendering changes (Green) [5326a22]
+    - [x] `title_block.py`: replace old `draw_title_block` with `draw_cave_name`,
       `draw_title_block`, `_draw_box` (Step 3).
-    - [ ] `renderer.py`: name first, plots, then rows + `draw_title_block` (Step 4).
-    - [ ] `survey.py` / `config.py`: `title_block` parameter, remove
+    - [x] `renderer.py`: name first, plots, then rows + `draw_title_block` (Step 4).
+    - [x] `survey.py` / `config.py`: `title_block` parameter, remove
       `SurveyConfig.surveyor_name`, forward variation only when a map exists (Step 5).
-    - [ ] Migrate `app/pages/1_survey_plot.py` and `android/app/src/main/python/survey_bridge.py`
+    - [x] Migrate `app/pages/1_survey_plot.py` and `android/app/src/main/python/survey_bridge.py`
       to `title_block=TitleBlockInfo(surveyor_name=...)` (Step 5b).
-    - [ ] Run the tests listed in Step 6; all pass.
-- [ ] Task: Regenerate render baselines
-    - [ ] `CAVE_SKETCH_GENERATE_BASELINES=1 uv run pytest tests/test_render_regression.py -v`
+    - [x] Run the tests listed in Step 6; all pass.
+- [x] Task: Regenerate render baselines [5326a22]
+    - [x] `CAVE_SKETCH_GENERATE_BASELINES=1 uv run pytest tests/test_render_regression.py -v`
       (3 skipped), then open the three PNGs in `tests/fixtures/render_baselines/` and check
       them as described in Step 7. Then `uv run pytest tests/test_render_regression.py -v`
       (3 pass).
-- [ ] Task: Quality gates and commit
-    - [ ] Python gates **and** Android gates (the bridge changed). Commit
+- [x] Task: Quality gates and commit [5326a22]
+    - [x] Python gates **and** Android gates (the bridge changed). Commit
       `feat(survey): render extended title block with adaptive placement`.
 - [ ] Task: Conductor - Device Verification & Approval 'Phase 5' (Protocol in workflow.md)
     - [ ] Show the user `tests/fixtures/render_baselines/full_metadata.png`: 9 rows, no overlap
