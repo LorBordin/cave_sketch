@@ -37,7 +37,7 @@ import com.cavesketch.app.ui.components.PrimaryCta
 import com.cavesketch.app.ui.components.SectionCard
 import com.cavesketch.app.ui.components.StateBanner
 import com.cavesketch.app.ui.components.parsesAsCoordinate
-import com.cavesketch.app.util.shareFile
+import com.cavesketch.app.ui.components.SaveShareButton
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -166,18 +166,33 @@ fun SatelliteScreen(viewModel: SatelliteViewModel) {
                 }
                 Spacer(Modifier.height(8.dp))
                 val name = surveyName.ifBlank { "survey" }
-                Button(
-                    onClick = { shareFile(context, s.htmlPath, "text/html", "$name.html") },
+                SaveShareButton(
+                    label = "Save / Share HTML",
+                    path = s.htmlPath,
+                    mimeType = "text/html",
+                    displayName = "$name.html",
                     modifier = Modifier.fillMaxWidth(),
-                ) { Text("Save / Share HTML") }
-                Button(
-                    onClick = { shareFile(context, s.jsonPath, "application/json", "$name.json") },
+                    onError = showSnackbar,
+                    onSaved = { showSnackbar("Saved $name.html") },
+                )
+                SaveShareButton(
+                    label = "Save / Share JSON",
+                    path = s.jsonPath,
+                    mimeType = "application/json",
+                    displayName = "$name.json",
                     modifier = Modifier.fillMaxWidth(),
-                ) { Text("Save / Share JSON") }
-                Button(
-                    onClick = { shareFile(context, s.kmzPath, "application/vnd.google-earth.kmz", "$name.kmz") },
+                    onError = showSnackbar,
+                    onSaved = { showSnackbar("Saved $name.json") },
+                )
+                SaveShareButton(
+                    label = "Save / Share KMZ",
+                    path = s.kmzPath,
+                    mimeType = "application/vnd.google-earth.kmz",
+                    displayName = "$name.kmz",
                     modifier = Modifier.fillMaxWidth(),
-                ) { Text("Save / Share KMZ") }
+                    onError = showSnackbar,
+                    onSaved = { showSnackbar("Saved $name.kmz") },
+                )
             }
             else -> {}
         }

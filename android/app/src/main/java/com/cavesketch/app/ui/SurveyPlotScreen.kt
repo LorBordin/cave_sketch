@@ -35,6 +35,7 @@ import com.cavesketch.app.ui.components.PrimaryCta
 import com.cavesketch.app.ui.components.SectionCard
 import com.cavesketch.app.ui.components.SettingsForm
 import com.cavesketch.app.ui.components.StateBanner
+import com.cavesketch.app.ui.components.SaveShareButton
 import com.cavesketch.app.util.extensionOf
 
 import androidx.compose.material3.Scaffold
@@ -126,15 +127,16 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
                 is PlotState.Error -> StateBanner("⚠️ ${s.message}", isError = true)
                 is PlotState.Success -> {
                     PdfPreview(s.pdfPath)
-                    Button(
-                        onClick = {
-                            val name = inputs.surveyName.ifBlank { "survey" } + ".pdf"
-                            com.cavesketch.app.util.sharePdf(context, s.pdfPath, name)
-                        },
+                    val name = inputs.surveyName.ifBlank { "survey" } + ".pdf"
+                    SaveShareButton(
+                        label = "Save / Share PDF",
+                        path = s.pdfPath,
+                        mimeType = "application/pdf",
+                        displayName = name,
                         modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text("Save / Share PDF")
-                    }
+                        onError = showSnackbar,
+                        onSaved = { showSnackbar("Saved $name") },
+                    )
                 }
                 PlotState.Idle -> StateBanner("Pick your files and tap Generate.", isError = false)
             }
