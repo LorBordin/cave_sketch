@@ -179,12 +179,12 @@ Full code: superpowers plan → **Task 3**.
 
 Full code: superpowers plan → **Task 4**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Add the imports to the **top** of `tests/test_title_block_layout.py` and append the
+- [x] Task: Write failing tests (Red) [5e15f12]
+    - [x] Add the imports to the **top** of `tests/test_title_block_layout.py` and append the
       five tests (Task 4 Step 1).
-    - [ ] Run `uv run pytest tests/test_title_block_layout.py -v`; the five new tests fail with
+    - [x] Run `uv run pytest tests/test_title_block_layout.py -v`; the five new tests fail with
       `strategy == "grow-header"`, Phase 3 tests still pass.
-- [ ] Task: Implement corner search (Green)
+- [~] Task: Implement corner search (Green)
     - [ ] Add `gid="grid"` to both lines in `cave_sketch/survey/graphics/grid.py`.
     - [ ] Replace the `_find_free_corner` stub and add `_corner_rects`, `_ignored`, `_hits`,
       `CORNER_INSET`, `MARKER_MARGIN_PX` (Task 4 Step 3).
