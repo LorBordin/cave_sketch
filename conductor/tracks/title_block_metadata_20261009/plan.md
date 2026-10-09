@@ -297,7 +297,7 @@ Full code: superpowers plan → **Task 7**.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 8: Android UI Fields
+## Phase 8: Android UI Fields [checkpoint: 95b7f77]
 
 Full code: superpowers plan → **Task 8**.
 
