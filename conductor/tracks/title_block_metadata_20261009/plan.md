@@ -63,11 +63,11 @@
 
 Full code: superpowers plan → **Task 1**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_info.py` with the tests from Task 1 Step 1.
-    - [ ] Run `uv run pytest tests/test_title_block_info.py -v`; confirm it fails with
+- [x] Task: Write failing tests (Red) [15d117f]
+    - [x] Create `tests/test_title_block_info.py` with the tests from Task 1 Step 1.
+    - [x] Run `uv run pytest tests/test_title_block_info.py -v`; confirm it fails with
       `ImportError: cannot import name 'TitleBlockInfo'`.
-- [ ] Task: Implement `TitleBlockInfo` (Green)
+- [~] Task: Implement `TitleBlockInfo` (Green)
     - [ ] Add the dataclass to `cave_sketch/survey/config.py` (Task 1 Step 3). Do **not**
       remove `SurveyConfig.surveyor_name` yet (that happens in Phase 5).
     - [ ] Run `uv run pytest tests/test_title_block_info.py -v`; all pass.
