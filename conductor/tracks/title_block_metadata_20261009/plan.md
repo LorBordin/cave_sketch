@@ -88,11 +88,11 @@ Full code: superpowers plan → **Task 1**.
 
 Full code: superpowers plan → **Task 2**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_rows.py` (Task 2 Step 1).
-    - [ ] Run `uv run pytest tests/test_title_block_rows.py -v`; confirm
+- [x] Task: Write failing tests (Red) [be5fd2a]
+    - [x] Create `tests/test_title_block_rows.py` (Task 2 Step 1).
+    - [x] Run `uv run pytest tests/test_title_block_rows.py -v`; confirm
       `ImportError: cannot import name 'build_title_rows'`.
-- [ ] Task: Implement `build_title_rows` (Green)
+- [~] Task: Implement `build_title_rows` (Green)
     - [ ] Add `MAX_VALUE_CHARS`, `_truncate`, `_format_coordinates`, `build_title_rows` to
       `cave_sketch/survey/graphics/title_block.py` (Task 2 Step 3). Leave the existing
       `draw_title_block` untouched.
