@@ -59,7 +59,7 @@
 
 ---
 
-## Phase 1: `TitleBlockInfo` Model
+## Phase 1: `TitleBlockInfo` Model [checkpoint: b994803]
 
 Full code: superpowers plan → **Task 1**.
 
@@ -71,17 +71,17 @@ Full code: superpowers plan → **Task 1**.
     - [x] Add the dataclass to `cave_sketch/survey/config.py` (Task 1 Step 3). Do **not**
       remove `SurveyConfig.surveyor_name` yet (that happens in Phase 5).
     - [x] Run `uv run pytest tests/test_title_block_info.py -v`; all pass.
-- [~] Task: Quality gates and commit
-    - [ ] Run the Python gates. Commit `feat(survey): add validated TitleBlockInfo model`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 1' (Protocol in workflow.md)
-    - [ ] Show the validation working:
+- [x] Task: Quality gates and commit [a598f76]
+    - [x] Run the Python gates. Commit `feat(survey): add validated TitleBlockInfo model`.
+- [x] Task: Conductor - Device Verification & Approval 'Phase 1' (Protocol in workflow.md) [b994803]
+    - [x] Show the validation working:
       `uv run python -c "from cave_sketch.survey.config import TitleBlockInfo as T; print(T(latitude=0.0, longitude=0.0)); T(latitude=45.0)"`
       → prints the object, then `ValueError: Latitude and longitude must be entered together.`
-    - [ ] Webapp: generate a PDF (map only, surveyor `Test`); title block identical to
+    - [x] Webapp: generate a PDF (map only, surveyor `Test`); title block identical to
       `before_web.pdf`.
-    - [ ] Android: `./gradlew :app:installDebug`, generate a PDF; identical to
+    - [x] Android: `./gradlew :app:installDebug`, generate a PDF; identical to
       `before_android.pdf`.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 2: Title Block Rows
