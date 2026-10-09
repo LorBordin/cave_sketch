@@ -175,7 +175,7 @@ Full code: superpowers plan → **Task 3**.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 4: Free In-Plot Corner Search
+## Phase 4: Free In-Plot Corner Search [checkpoint: a5248cb]
 
 Full code: superpowers plan → **Task 4**.
 
@@ -189,15 +189,15 @@ Full code: superpowers plan → **Task 4**.
     - [x] Replace the `_find_free_corner` stub and add `_corner_rects`, `_ignored`, `_hits`,
       `CORNER_INSET`, `MARKER_MARGIN_PX` (Task 4 Step 3).
     - [x] Run `uv run pytest tests/test_title_block_layout.py tests/test_grid.py -v`; all pass.
-- [~] Task: Quality gates and commit
-    - [ ] Python gates. Commit
+- [x] Task: Quality gates and commit [3d10f31]
+    - [x] Python gates. Commit
       `feat(survey): place title block in a free plot corner when header is too small`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 4' (Protocol in workflow.md)
-    - [ ] Rerun the Phase 3 demo command. Expected: `2_large_sparse -> corner` (box in the
+- [x] Task: Conductor - Device Verification & Approval 'Phase 4' (Protocol in workflow.md) [a5248cb]
+    - [x] Rerun the Phase 3 demo command. Expected: `2_large_sparse -> corner` (box in the
       top-left, not crossing the diagonal line); the other two unchanged.
-    - [ ] Webapp and Android: generate a PDF **with grid on**; identical to the Phase 1
+    - [x] Webapp and Android: generate a PDF **with grid on**; identical to the Phase 1
       references (grid lines look the same; the new `gid` is invisible).
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 5: Wire the Title Block into Rendering
