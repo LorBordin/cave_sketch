@@ -184,12 +184,12 @@ Full code: superpowers plan → **Task 4**.
       five tests (Task 4 Step 1).
     - [x] Run `uv run pytest tests/test_title_block_layout.py -v`; the five new tests fail with
       `strategy == "grow-header"`, Phase 3 tests still pass.
-- [~] Task: Implement corner search (Green)
-    - [ ] Add `gid="grid"` to both lines in `cave_sketch/survey/graphics/grid.py`.
-    - [ ] Replace the `_find_free_corner` stub and add `_corner_rects`, `_ignored`, `_hits`,
+- [x] Task: Implement corner search (Green) [3d10f31]
+    - [x] Add `gid="grid"` to both lines in `cave_sketch/survey/graphics/grid.py`.
+    - [x] Replace the `_find_free_corner` stub and add `_corner_rects`, `_ignored`, `_hits`,
       `CORNER_INSET`, `MARKER_MARGIN_PX` (Task 4 Step 3).
-    - [ ] Run `uv run pytest tests/test_title_block_layout.py tests/test_grid.py -v`; all pass.
-- [ ] Task: Quality gates and commit
+    - [x] Run `uv run pytest tests/test_title_block_layout.py tests/test_grid.py -v`; all pass.
+- [~] Task: Quality gates and commit
     - [ ] Python gates. Commit
       `feat(survey): place title block in a free plot corner when header is too small`.
 - [ ] Task: Conductor - Device Verification & Approval 'Phase 4' (Protocol in workflow.md)
