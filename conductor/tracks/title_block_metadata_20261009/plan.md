@@ -67,11 +67,11 @@ Full code: superpowers plan → **Task 1**.
     - [x] Create `tests/test_title_block_info.py` with the tests from Task 1 Step 1.
     - [x] Run `uv run pytest tests/test_title_block_info.py -v`; confirm it fails with
       `ImportError: cannot import name 'TitleBlockInfo'`.
-- [~] Task: Implement `TitleBlockInfo` (Green)
-    - [ ] Add the dataclass to `cave_sketch/survey/config.py` (Task 1 Step 3). Do **not**
+- [x] Task: Implement `TitleBlockInfo` (Green) [a598f76]
+    - [x] Add the dataclass to `cave_sketch/survey/config.py` (Task 1 Step 3). Do **not**
       remove `SurveyConfig.surveyor_name` yet (that happens in Phase 5).
-    - [ ] Run `uv run pytest tests/test_title_block_info.py -v`; all pass.
-- [ ] Task: Quality gates and commit
+    - [x] Run `uv run pytest tests/test_title_block_info.py -v`; all pass.
+- [~] Task: Quality gates and commit
     - [ ] Run the Python gates. Commit `feat(survey): add validated TitleBlockInfo model`.
 - [ ] Task: Conductor - Device Verification & Approval 'Phase 1' (Protocol in workflow.md)
     - [ ] Show the validation working:
