@@ -254,8 +254,8 @@ Full code: superpowers plan → **Task 6**.
     - [x] Run `uv run pytest tests/test_title_block_inputs.py tests/test_settings_panel.py -v`.
 - [x] Task: Quality gates and commit [ae36837]
     - [x] Python gates. Commit `feat(app): add title block metadata inputs to survey plot page`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 6' (Protocol in workflow.md)
-    - [ ] Webapp on desktop browser **and** on a phone browser (same Wi-Fi, use the
+- [x] Task: Conductor - Device Verification & Approval 'Phase 6' (Protocol in workflow.md)
+    - [x] Webapp on desktop browser **and** on a phone browser (same Wi-Fi, use the
       "Network URL" Streamlit prints):
         1. The "👤 Title block" section shows Surveyor, Drawer, Municipality, Latitude,
            Longitude, Elevation.
@@ -266,8 +266,8 @@ Full code: superpowers plan → **Task 6**.
         4. Enter only Latitude → red error "Latitude and longitude must be entered together.";
            clicking Generate shows "Please fix the title block fields…" and no PDF is made.
         5. Switch to another page in the sidebar and back → values are kept.
-    - [ ] Android: generate a PDF; unchanged from Phase 5.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] Android: generate a PDF; unchanged from Phase 5.
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 7: Android Bridge and `SurveyInputs` Model
