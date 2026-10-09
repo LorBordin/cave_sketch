@@ -289,12 +289,12 @@ Full code: superpowers plan → **Task 7**.
 - [x] Task: Quality gates and commit [782fbcc]
     - [x] Python + Android gates. Commit
       `feat(android): send title block metadata and magnetic variation to the bridge`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 7' (Protocol in workflow.md)
-    - [ ] Android: `./gradlew :app:installDebug`; generate a PDF with surveyor `Test` → same
+- [x] Task: Conductor - Device Verification & Approval 'Phase 7' (Protocol in workflow.md)
+    - [x] Android: `./gradlew :app:installDebug`; generate a PDF with surveyor `Test` → same
       as Phase 5 (no new fields on screen yet; this phase only changes data plumbing). The GPS
       points editor on the Satellite screen still accepts `45,5` without a red error.
-    - [ ] Webapp: unchanged from Phase 6.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] Webapp: unchanged from Phase 6.
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 8: Android UI Fields
