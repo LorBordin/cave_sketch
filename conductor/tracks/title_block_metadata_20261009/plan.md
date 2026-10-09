@@ -200,7 +200,7 @@ Full code: superpowers plan → **Task 4**.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 5: Wire the Title Block into Rendering
+## Phase 5: Wire the Title Block into Rendering [checkpoint: d95f5ea]
 
 Full code: superpowers plan → **Task 5**. This phase changes `draw_survey`'s signature, so it
 also migrates both apps' call sites (Step 5b) to keep them working.
