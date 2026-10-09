@@ -3,9 +3,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pytest
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Circle, Rectangle
 from matplotlib.transforms import Bbox
 
+from cave_sketch.survey.graphics.grid import _add_grid
 from cave_sketch.survey.graphics.title_block import wrap_text
 from cave_sketch.survey.graphics.title_block_layout import (
     GAP,
@@ -100,3 +101,72 @@ def test_grow_header_box_never_overlaps_long_cave_name():
     assert not box.overlaps(_fig_bbox(fig, name_text))
     assert ax.get_position().y1 <= placement.rect[1]
     plt.close(fig)
+
+
+def _assert_inside_axes(fig, rect, ax):
+    ax_box = ax.get_window_extent(fig.canvas.get_renderer()).transformed(
+        fig.transFigure.inverted()
+    )
+    x0, y0, w, h = rect
+    assert ax_box.x0 <= x0 and x0 + w <= ax_box.x1
+    assert ax_box.y0 <= y0 and y0 + h <= ax_box.y1
+
+
+def test_large_box_goes_to_first_free_corner():
+    fig, name_text, ax = _page()
+    ax.plot([0, 10], [0, 10], color="black")  # blocks top-right and bottom-left
+    placement = place_title_block(fig, measure_title_block(fig, NINE_ROWS), name_text, [ax])
+    assert placement.strategy == "corner"
+    x0, y0, w, h = placement.rect
+    assert x0 < 0.5 and y0 > 0.5  # top-left
+    _assert_inside_axes(fig, placement.rect, ax)
+    plt.close(fig)
+
+
+def test_patches_block_corners():
+    fig, name_text, ax = _page()
+    ax.plot([0, 10], [0, 10], color="black")
+    ax.add_patch(Circle((1.5, 8.5), 1.0, fill=False))  # north-arrow-like ring, top-left
+    placement = place_title_block(fig, measure_title_block(fig, NINE_ROWS), name_text, [ax])
+    assert placement.strategy == "corner"
+    x0, y0, _, _ = placement.rect
+    assert x0 > 0.5 and y0 < 0.5  # bottom-right
+    plt.close(fig)
+
+
+def test_scatter_markers_block_corners():
+    fig, name_text, ax = _page()
+    ax.scatter([9.5], [9.5], s=20)  # single station in the top-right
+    placement = place_title_block(fig, measure_title_block(fig, NINE_ROWS), name_text, [ax])
+    assert placement.strategy == "corner"
+    x0, y0, _, _ = placement.rect
+    assert x0 < 0.5 and y0 > 0.5  # top-left
+    plt.close(fig)
+
+
+def test_grid_lines_do_not_block_corners():
+    fig, name_text, ax = _page()
+    _add_grid(ax, 0, 10, 0, 10, 1.0)
+    placement = place_title_block(fig, measure_title_block(fig, NINE_ROWS), name_text, [ax])
+    assert placement.strategy == "corner"
+    x0, y0, _, _ = placement.rect
+    assert x0 > 0.5 and y0 > 0.5  # top-right, first preference
+    plt.close(fig)
+
+
+def test_map_axes_preferred_over_section_axes():
+    fig = plt.figure(figsize=(8.27, 11.69))
+    fig.subplots_adjust(top=0.86)
+    name_text = fig.text(0.05, 0.92, "Grotta", fontsize=15)
+    section_ax = fig.add_subplot(2, 1, 1)
+    map_ax = fig.add_subplot(2, 1, 2)
+    for ax in (section_ax, map_ax):
+        ax.set_xlim(0, 10)
+        ax.set_ylim(0, 10)
+    rows = NINE_ROWS[:7]
+    size = measure_title_block(fig, rows)
+    placement = place_title_block(fig, size, name_text, [map_ax, section_ax])
+    assert placement.strategy == "corner"
+    _assert_inside_axes(fig, placement.rect, map_ax)
+    plt.close(fig)
+
