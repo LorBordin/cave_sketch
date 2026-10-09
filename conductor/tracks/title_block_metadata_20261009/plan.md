@@ -313,8 +313,8 @@ Full code: superpowers plan → **Task 8**.
 - [x] Task: Quality gates and commit [c672a19]
     - [x] Android gates + `uv run pytest -q`. Commit
       `feat(android): add title block fields and magnetic variation input`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 8' (Protocol in workflow.md)
-    - [ ] On the **physical phone** (and emulator if available), `./gradlew :app:installDebug`:
+- [x] Task: Conductor - Device Verification & Approval 'Phase 8' (Protocol in workflow.md)
+    - [x] On the **physical phone** (and emulator if available), `./gradlew :app:installDebug`:
         1. "Survey details" shows Survey name, Surveyor, Drawer, Municipality, Latitude,
            Longitude, Elevation; Settings shows "Magnetic variation (°, +E/-W)".
         2. Latitude/Longitude/Elevation/Variation open a numeric keyboard.
@@ -325,7 +325,7 @@ Full code: superpowers plan → **Task 8**.
         5. Enter only Latitude → red error text under the fields, Generate disabled.
         6. Enter Latitude `91` → error; fix it → Generate enabled again.
         7. Rotate the phone / leave and return to the screen → nothing crashes.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 9: Documentation and DEVLOG
