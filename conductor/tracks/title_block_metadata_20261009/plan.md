@@ -245,10 +245,10 @@ also migrates both apps' call sites (Step 5b) to keep them working.
 
 Full code: superpowers plan → **Task 6**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_inputs.py` (Task 6 Step 1); confirm
+- [x] Task: Write failing tests (Red) [8f1f780]
+    - [x] Create `tests/test_title_block_inputs.py` (Task 6 Step 1); confirm
       `ModuleNotFoundError: No module named 'app.components.title_block_inputs'`.
-- [ ] Task: Implement (Green)
+- [~] Task: Implement (Green)
     - [ ] Create `app/components/title_block_inputs.py` (Step 3).
     - [ ] Update `app/session.py` and `app/pages/1_survey_plot.py` (Step 4).
     - [ ] Run `uv run pytest tests/test_title_block_inputs.py tests/test_settings_panel.py -v`.
