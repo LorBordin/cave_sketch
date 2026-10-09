@@ -17,6 +17,10 @@ from cave_sketch.survey.merger import SectionProtocol
 from cave_sketch.survey.survey import draw_survey
 
 
+def _optional_float(value) -> Optional[float]:
+    return None if value is None or value == "" else float(value)
+
+
 def resolve_input(input_path: Optional[str], work_dir: str, stem: str) -> Optional[str]:
     """Return a CSV path for an input. DXF inputs are parsed to <work_dir>/<stem>.csv;
     CSV inputs are returned unchanged; None/empty returns None."""
@@ -102,6 +106,18 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
             if err:
                 return json.dumps({"error": "merge_invalid", "detail": err})
 
+        try:
+            title_block = TitleBlockInfo(
+                surveyor_name=data.get("surveyor_name") or "",
+                drawer_name=data.get("drawer_name") or "",
+                municipality=data.get("municipality") or "",
+                latitude=_optional_float(data.get("latitude")),
+                longitude=_optional_float(data.get("longitude")),
+                elevation_m=_optional_float(data.get("elevation_m")),
+            )
+        except ValueError as e:
+            return json.dumps({"error": "invalid_title_block", "detail": str(e)})
+
         pdf_path = str(Path(work_dir) / "survey.pdf")
         fig = draw_survey(
             title=data.get("survey_name", ""),
@@ -114,7 +130,8 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
             child_station=child_station or None,
             section_protocol=SectionProtocol(data.get("section_protocol", "simple")),
             output_path=pdf_path,
-            title_block=TitleBlockInfo(surveyor_name=data.get("surveyor_name") or ""),
+            title_block=title_block,
+            magnetic_variation_deg=float(settings.get("magnetic_variation_deg", 0.0)),
             config={
                 "rotation_deg": settings.get("rotation_deg", 0.0),
                 "show_details": settings.get("show_details", True),

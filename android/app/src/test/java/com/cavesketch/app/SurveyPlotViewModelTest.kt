@@ -79,4 +79,44 @@ class SurveyPlotViewModelTest {
         assertTrue(com.cavesketch.app.util.FileValidator.isAcceptedExtension("data.csv", allowed))
         org.junit.Assert.assertFalse(com.cavesketch.app.util.FileValidator.isAcceptedExtension("survey.txt", allowed))
     }
+
+    @Test
+    fun toJson_includes_title_block_fields_and_variation() {
+        val json = org.json.JSONObject(
+            SurveyInputs(
+                surveyorName = "Alice", drawerName = "Bob", municipality = "Genga",
+                latitude = "43,4", longitude = "12.9", elevationM = "320",
+                magneticVariationDeg = "-1,5",
+            ).toJson()
+        )
+        assertEquals("Bob", json.getString("drawer_name"))
+        assertEquals("Genga", json.getString("municipality"))
+        assertEquals(43.4, json.getDouble("latitude"), 1e-9)
+        assertEquals(12.9, json.getDouble("longitude"), 1e-9)
+        assertEquals(320.0, json.getDouble("elevation_m"), 1e-9)
+        assertEquals(-1.5, json.getJSONObject("settings").getDouble("magnetic_variation_deg"), 1e-9)
+    }
+
+    @Test
+    fun toJson_emits_null_for_empty_numbers_and_zero_variation() {
+        val json = org.json.JSONObject(SurveyInputs().toJson())
+        assertTrue(json.isNull("latitude"))
+        assertTrue(json.isNull("longitude"))
+        assertTrue(json.isNull("elevation_m"))
+        assertEquals(0.0, json.getJSONObject("settings").getDouble("magnetic_variation_deg"), 0.0)
+    }
+
+    @Test
+    fun titleBlockError_validates_inputs() {
+        assertEquals(null, SurveyInputs().titleBlockError())
+        assertEquals(null, SurveyInputs(latitude = "-90", longitude = "180").titleBlockError())
+        assertEquals(null, SurveyInputs(latitude = "0", longitude = "0", elevationM = "0").titleBlockError())
+        assertTrue(SurveyInputs(latitude = "45").titleBlockError()!!.contains("both"))
+        assertTrue(SurveyInputs(latitude = "91", longitude = "0").titleBlockError()!!.contains("Latitude"))
+        assertTrue(SurveyInputs(latitude = "0", longitude = "-181").titleBlockError()!!.contains("Longitude"))
+        assertTrue(SurveyInputs(latitude = "abc", longitude = "0").titleBlockError()!!.contains("Latitude"))
+        assertTrue(SurveyInputs(elevationM = "high").titleBlockError()!!.contains("Elevation"))
+        assertTrue(SurveyInputs(magneticVariationDeg = "200").titleBlockError()!!.contains("Magnetic"))
+    }
 }
+
