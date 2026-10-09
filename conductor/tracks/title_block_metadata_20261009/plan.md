@@ -274,20 +274,20 @@ Full code: superpowers plan → **Task 6**.
 
 Full code: superpowers plan → **Task 7**.
 
-- [ ] Task: Bridge — failing tests (Red), implementation (Green)
-    - [ ] Append the three bridge tests to `tests/test_survey_bridge.py` (Step 1); confirm they
+- [x] Task: Bridge — failing tests (Red), implementation (Green) [782fbcc]
+    - [x] Append the three bridge tests to `tests/test_survey_bridge.py` (Step 1); confirm they
       fail.
-    - [ ] Implement `_optional_float`, the `TitleBlockInfo` construction with the
+    - [x] Implement `_optional_float`, the `TitleBlockInfo` construction with the
       `invalid_title_block` error, and the `magnetic_variation_deg` argument (Step 3).
-    - [ ] Run `uv run pytest tests/test_survey_bridge.py -v && uv run pytest -q`.
-- [ ] Task: Kotlin model — failing tests (Red), implementation (Green)
-    - [ ] Append the three tests to `SurveyPlotViewModelTest.kt` (Step 5); confirm compile
+    - [x] Run `uv run pytest tests/test_survey_bridge.py -v && uv run pytest -q`.
+- [x] Task: Kotlin model — failing tests (Red), implementation (Green) [782fbcc]
+    - [x] Append the three tests to `SurveyPlotViewModelTest.kt` (Step 5); confirm compile
       failure.
-    - [ ] Add `parseDecimalOrNull`, the new `SurveyInputs` fields, `titleBlockError()` and the
+    - [x] Add `parseDecimalOrNull`, the new `SurveyInputs` fields, `titleBlockError()` and the
       new JSON keys; make `parsesAsCoordinate` reuse `parseDecimalOrNull` (Step 7).
-    - [ ] Run the Android gates.
-- [ ] Task: Quality gates and commit
-    - [ ] Python + Android gates. Commit
+    - [x] Run the Android gates.
+- [x] Task: Quality gates and commit [782fbcc]
+    - [x] Python + Android gates. Commit
       `feat(android): send title block metadata and magnetic variation to the bridge`.
 - [ ] Task: Conductor - Device Verification & Approval 'Phase 7' (Protocol in workflow.md)
     - [ ] Android: `./gradlew :app:installDebug`; generate a PDF with surveyor `Test` → same
