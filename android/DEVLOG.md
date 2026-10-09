@@ -303,3 +303,31 @@ None
 
 **Next session notes:** None
 
+## [2026-10-09 16:38] title_block_metadata — Mobile Bridge, Model, and UI Implementation (Phases 5, 7, 8)
+**Files:**
+- android/app/src/main/python/survey_bridge.py
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/GpsPointsEditor.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/TitleBlockFields.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/SettingsForm.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/TitleBlockFieldsTest.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/SettingsFormTest.kt
+- tests/test_survey_bridge.py
+
+**Deviations from spec:**
+- Set coordinate input labels to "Latitude (° N)" and "Longitude (° E)" matching user feedback for hemisphere clarity.
+
+**Assumptions:** None
+
+**Next session notes:**
+Phases 1 through 8 are implemented, verified on physical Android device (SM-S901B), approved by user, and checkpointed.
+What remains to finish track `title_block_metadata_20261009`:
+- Phase 9 (Documentation):
+  1. Update in-app user guide in English (`android/app/src/main/assets/guide/guide_en.md`) and Italian (`guide_it.md`) to document title block fields (drawer, municipality, latitude/longitude, elevation) and magnetic variation in Settings.
+  2. Update `docs/android/README.md` and `docs/android/README.it.md`.
+  3. Run full verification (`uv run ruff check .`, `uv run mypy cave_sketch/`, `uv run pytest`, `./gradlew testDebugUnitTest assembleDebug`).
+  4. Perform Phase 9 verification & approval with user, then create Phase 9 checkpoint.
+  5. Sync Conductor docs and mark track complete in `conductor/tracks.md`.
+

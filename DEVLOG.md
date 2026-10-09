@@ -534,5 +534,42 @@
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-10-09 16:38] title_block_metadata — Core Python and Webapp Implementation (Phases 1-6)
+**Files:**
+- cave_sketch/survey/config.py
+- cave_sketch/survey/graphics/title_block.py
+- cave_sketch/survey/graphics/title_block_layout.py
+- cave_sketch/survey/graphics/grid.py
+- cave_sketch/survey/renderer.py
+- cave_sketch/survey/survey.py
+- app/components/title_block_inputs.py
+- app/session.py
+- app/pages/1_survey_plot.py
+- tests/test_title_block_info.py
+- tests/test_title_block_rows.py
+- tests/test_title_block_layout.py
+- tests/test_title_block.py
+- tests/test_title_block_integration.py
+- tests/test_title_block_inputs.py
+- tests/test_render_regression.py
+- tests/fixtures/render_baselines/plan_only.png
+- tests/fixtures/render_baselines/dual.png
+- tests/fixtures/render_baselines/full_metadata.png
+
+**Deviations from spec:**
+- Updated coordinate input labels in the webapp to "Latitude (° N)" and "Longitude (° E)" based on user feedback.
+
+**Assumptions:** None
+
+**Next session notes:**
+Phases 1 through 8 are implemented, verified on physical Android device (SM-S901B) and desktop webapp, approved, and checkpointed.
+What remains to finish track `title_block_metadata_20261009`:
+- Phase 9 (Documentation):
+  1. Update `android/app/src/main/assets/guide/guide_en.md` and `guide_it.md` documenting new title block metadata fields and magnetic variation in Settings.
+  2. Update `docs/android/README.md` and `docs/android/README.it.md`.
+  3. Run mandatory quality gates (`uv run ruff check .`, `uv run mypy cave_sketch/`, `uv run pytest`, `./gradlew testDebugUnitTest assembleDebug`).
+  4. Perform Phase 9 verification & approval with user, then create Phase 9 checkpoint.
+  5. Sync Conductor docs and mark track complete in `conductor/tracks.md`.
+
 
 
