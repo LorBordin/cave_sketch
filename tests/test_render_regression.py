@@ -10,6 +10,7 @@ import pytest
 
 from cave_sketch.dxf.parser import parse_dxf
 from cave_sketch.survey import draw_survey
+from cave_sketch.survey.config import TitleBlockInfo
 
 
 class MockDate:
@@ -29,7 +30,7 @@ def parsed_csv_paths(tmp_path_factory):
     parse_dxf(dxf_path, output_path=csv_path)
     return csv_path
 
-@pytest.mark.parametrize("scenario", ["plan_only", "dual"])
+@pytest.mark.parametrize("scenario", ["plan_only", "dual", "full_metadata"])
 def test_render_regression(scenario, parsed_csv_paths, tmp_path):
     baselines_dir = Path("tests/fixtures/render_baselines")
     baseline_png = baselines_dir / f"{scenario}.png"
@@ -41,15 +42,31 @@ def test_render_regression(scenario, parsed_csv_paths, tmp_path):
             rule_length=20.0,
             csv_map_path=csv_path_str,
             csv_section_path=None,
-            surveyor_name="Test Surveyor"
+            title_block=TitleBlockInfo(surveyor_name="Test Surveyor"),
         )
-    else:  # dual
+    elif scenario == "dual":
         fig = draw_survey(
             title="Sample Survey Dual",
             rule_length=20.0,
             csv_map_path=csv_path_str,
             csv_section_path=csv_path_str,
-            surveyor_name="Test Surveyor"
+            title_block=TitleBlockInfo(surveyor_name="Test Surveyor"),
+        )
+    else:  # full_metadata
+        fig = draw_survey(
+            title="Sample Survey Full Metadata",
+            rule_length=20.0,
+            csv_map_path=csv_path_str,
+            csv_section_path=csv_path_str,
+            magnetic_variation_deg=2.5,
+            title_block=TitleBlockInfo(
+                surveyor_name="Test Surveyor",
+                drawer_name="Test Drawer",
+                municipality="Genga",
+                latitude=43.40123,
+                longitude=12.96543,
+                elevation_m=320,
+            ),
         )
     
     baselines_dir.mkdir(parents=True, exist_ok=True)

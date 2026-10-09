@@ -1,93 +1,46 @@
 import matplotlib.pyplot as plt
+import pytest
 
-from cave_sketch.survey.graphics.title_block import draw_title_block
+from cave_sketch.survey.graphics.title_block import draw_cave_name, draw_title_block
+
+ROWS = ["Rilevatore: John Doe", "Data: 01/01/2026", "Sviluppo: 154.3 m", "Dislivello: 45.2 m"]
 
 
-def test_draw_title_block_all_fields():
+def _page():
     fig = plt.figure(figsize=(8.27, 11.69))
-    draw_title_block(
-        fig=fig,
-        cave_name="Grotta del Vento",
-        surveyor_name="John Doe",
-        total_length=154.3,
-        total_depth=45.2,
-    )
-
-    # Verify that an Axes was added for the title block
-    # It should be the last or one of the axes in the figure.
-    title_ax = None
-    for ax in fig.axes:
-        # Check if this axes is in the top margin area (e.g., y >= 0.8)
-        bbox = ax.get_position()
-        if bbox.y0 >= 0.8:
-            title_ax = ax
-            break
-
-    assert title_ax is not None, "Title block axes not found at the top of the figure"
-
-    # Verify texts
-    texts = [t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts]
-    joined_text = " ".join(texts)
-
-    assert "Grotta del Vento" in joined_text
-    assert "John Doe" in joined_text
-    assert "154.3 m" in joined_text
-    assert "45.2 m" in joined_text
-    assert "Data" in joined_text or "Date" in joined_text
+    fig.subplots_adjust(top=0.86)
+    ax = fig.add_subplot(1, 1, 1)
+    return fig, ax
 
 
-def test_draw_title_block_omits_depth_when_none():
-    fig = plt.figure(figsize=(8.27, 11.69))
-    draw_title_block(
-        fig=fig,
-        cave_name="Grotta del Vento",
-        surveyor_name="John Doe",
-        total_length=154.3,
-        total_depth=None,
-    )
+def test_draw_title_block_draws_rows_in_header():
+    fig, ax = _page()
+    name_text = draw_cave_name(fig, "Grotta del Vento")
+    placement = draw_title_block(fig, name_text, ROWS, [ax])
 
-    title_ax = None
-    for ax in fig.axes:
-        bbox = ax.get_position()
-        if bbox.y0 >= 0.8:
-            title_ax = ax
-            break
-
-    assert title_ax is not None
-
-    texts = [t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts]
-    joined_text = " ".join(texts)
-
-    assert "154.3 m" in joined_text
-    assert "Dislivello" not in joined_text
-    assert "Depth" not in joined_text
+    assert placement.strategy == "header"
+    title_ax = fig.axes[-1]
+    assert tuple(title_ax.get_position().bounds) == pytest.approx(placement.rect)
+    assert [t.get_text() for t in title_ax.texts] == ROWS
+    assert "Grotta del Vento" in [t.get_text() for t in fig.texts]
+    plt.close(fig)
 
 
-def test_draw_title_block_empty_surveyor():
-    fig = plt.figure(figsize=(8.27, 11.69))
-    draw_title_block(
-        fig=fig,
-        cave_name="Grotta Senza Nome",
-        surveyor_name="",
-        total_length=50.0,
-        total_depth=10.0,
-    )
+def test_rows_are_evenly_spaced_top_to_bottom():
+    fig, ax = _page()
+    draw_title_block(fig, draw_cave_name(fig, "G"), ROWS, [ax])
+    ys = [t.get_position()[1] for t in fig.axes[-1].texts]
+    steps = [a - b for a, b in zip(ys, ys[1:])]
+    assert all(s > 0 for s in steps)
+    assert max(steps) - min(steps) < 1e-9
+    plt.close(fig)
 
-    title_ax = None
-    for ax in fig.axes:
-        bbox = ax.get_position()
-        if bbox.y0 >= 0.8:
-            title_ax = ax
-            break
 
-    assert title_ax is not None
-
-    texts = [t.get_text() for t in title_ax.texts] + [t.get_text() for t in fig.texts]
-    joined_text = " ".join(texts)
-
-    assert "Grotta Senza Nome" in joined_text
-    assert "50.0 m" in joined_text
-    assert "10.0 m" in joined_text
+def test_draw_cave_name_wraps_long_names():
+    fig, _ = _page()
+    text = draw_cave_name(fig, "Abisso di Frasassi con Sviluppo Eccezionale e Molto Lungo")
+    assert text.get_text() == "Abisso di Frasassi con Sviluppo\nEccezionale e Molto Lungo"
+    plt.close(fig)
 
 
 def test_wrap_text_logic():
@@ -98,18 +51,3 @@ def test_wrap_text_logic():
     long_name = "This is a very long name that exceeds the character limit"
     wrapped = wrap_text(long_name, max_chars=20)
     assert wrapped == "This is a very long\nname that exceeds..."
-
-
-def test_draw_title_block_long_cave_name_wrapping():
-    fig = plt.figure(figsize=(8.27, 11.69))
-    draw_title_block(
-        fig=fig,
-        cave_name="Abisso di Frasassi con Sviluppo Eccezionale e Molto Lungo",
-        surveyor_name="Explorer",
-        total_length=120.0,
-        total_depth=30.0,
-    )
-    texts = [t.get_text() for t in fig.texts]
-    joined_fig_text = " ".join(texts)
-    # Checks that it was split into lines
-    assert "Abisso di Frasassi con Sviluppo\nEccezionale e Molto Lungo" in joined_fig_text
