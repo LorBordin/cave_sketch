@@ -14,7 +14,6 @@ class SurveyConfig:
     line_width_zoom: float = 0.0
     show_north: bool = True
     show_grid: bool = True
-    surveyor_name: str = ""
     show_centerline: bool = True
 
 

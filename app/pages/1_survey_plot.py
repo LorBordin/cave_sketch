@@ -12,6 +12,7 @@ from components.sidebar import render_sidebar
 from session import init_session
 
 from cave_sketch.survey import draw_survey
+from cave_sketch.survey.config import TitleBlockInfo
 
 st.set_page_config(page_title="Cave Survey Plot", layout="centered")
 init_session()
@@ -58,7 +59,7 @@ if st.button("✨ Generate Survey Plot"):
                 child_station=st.session_state.child_station,
                 section_protocol=SectionProtocol(st.session_state.section_protocol),
                 output_path=pdf_path,
-                surveyor_name=surveyor_name,
+                title_block=TitleBlockInfo(surveyor_name=surveyor_name),
                 config=settings,
             )
             st.session_state.cave_survey = fig

@@ -12,6 +12,7 @@ from typing import Optional
 import pandas as pd
 
 from cave_sketch.dxf.parser import parse_dxf
+from cave_sketch.survey.config import TitleBlockInfo
 from cave_sketch.survey.merger import SectionProtocol
 from cave_sketch.survey.survey import draw_survey
 
@@ -113,7 +114,7 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
             child_station=child_station or None,
             section_protocol=SectionProtocol(data.get("section_protocol", "simple")),
             output_path=pdf_path,
-            surveyor_name=data.get("surveyor_name", ""),
+            title_block=TitleBlockInfo(surveyor_name=data.get("surveyor_name") or ""),
             config={
                 "rotation_deg": settings.get("rotation_deg", 0.0),
                 "show_details": settings.get("show_details", True),

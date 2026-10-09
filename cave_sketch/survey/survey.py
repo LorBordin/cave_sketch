@@ -6,7 +6,7 @@ from matplotlib.figure import Figure
 
 from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
 from cave_sketch.geo.declination import apply_magnetic_variation
-from cave_sketch.survey.config import SurveyConfig
+from cave_sketch.survey.config import SurveyConfig, TitleBlockInfo
 from cave_sketch.survey.merger import SectionProtocol, merge_surveys
 from cave_sketch.survey.metrics import compute_total_depth, compute_total_length
 from cave_sketch.survey.pdf import export_pdf
@@ -25,7 +25,7 @@ def draw_survey(
     section_protocol: SectionProtocol = SectionProtocol.SIMPLE,
     output_path: Optional[str] = None,
     excluded_nodes: Optional[List] = None,
-    surveyor_name: str = "",
+    title_block: Optional[TitleBlockInfo] = None,
     magnetic_variation_deg: float = 0.0,
     config: Dict = {},
 ) -> Figure:
@@ -86,7 +86,6 @@ def draw_survey(
         line_width_zoom=config.get("line_width_zoom", 0.0),
         show_north=show_north,
         show_grid=config.get("show_grid", True),
-        surveyor_name=surveyor_name,
         show_centerline=config.get("show_centerline", True),
     )
 
@@ -97,6 +96,9 @@ def draw_survey(
         excluded_nodes=excluded_nodes,
         total_length=total_length,
         total_depth=total_depth,
+        title_block=title_block,
+        # Variation only rotates the map; a section-only survey must not claim it.
+        magnetic_variation_deg=magnetic_variation_deg if merged_map is not None else 0.0,
     )
 
     if output_path:
