@@ -205,14 +205,14 @@ Full code: superpowers plan → **Task 4**.
 Full code: superpowers plan → **Task 5**. This phase changes `draw_survey`'s signature, so it
 also migrates both apps' call sites (Step 5b) to keep them working.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Rewrite the title block tests in `tests/test_title_block.py`, migrate
+- [x] Task: Write failing tests (Red) [48c94d3]
+    - [x] Rewrite the title block tests in `tests/test_title_block.py`, migrate
       `tests/test_title_block_integration.py` (sed command + two new tests) and
       `tests/test_render_regression.py` (new `full_metadata` scenario) — Task 5 Step 1.
-    - [ ] Run `uv run pytest tests/test_title_block.py tests/test_title_block_integration.py -v`;
+    - [x] Run `uv run pytest tests/test_title_block.py tests/test_title_block_integration.py -v`;
       confirm `ImportError: cannot import name 'draw_cave_name'` / unexpected keyword
       `title_block`.
-- [ ] Task: Implement rendering changes (Green)
+- [~] Task: Implement rendering changes (Green)
     - [ ] `title_block.py`: replace old `draw_title_block` with `draw_cave_name`,
       `draw_title_block`, `_draw_box` (Step 3).
     - [ ] `renderer.py`: name first, plots, then rows + `draw_title_block` (Step 4).
