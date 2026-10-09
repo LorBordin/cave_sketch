@@ -79,36 +79,36 @@
   `feat(ui): add SaveShareButton composable with save/share menu`
   (one commit per Red/Green pair, per `conductor/workflow.md`).
 
-## Phase 2: Wire `SaveShareButton` into Both Screens
+## Phase 2: Wire `SaveShareButton` into Both Screens [checkpoint: ab0a8d2]
 
-- [ ] Task: Implement — `SatelliteScreen.kt`
-    - [ ] Replace the three `Button(onClick = { shareFile(...) })` blocks
+- [x] Task: Implement — `SatelliteScreen.kt` [ab0a8d2]
+    - [x] Replace the three `Button(onClick = { shareFile(...) })` blocks
       (HTML, JSON, KMZ) with `SaveShareButton(...)`, passing
       `Modifier.fillMaxWidth()`, `onError = showSnackbar`, and
       `onSaved = { showSnackbar("Saved $name.<ext>") }` for each.
-    - [ ] Remove the now-unused `import com.cavesketch.app.util.shareFile`
+    - [x] Remove the now-unused `import com.cavesketch.app.util.shareFile`
       and add `import com.cavesketch.app.ui.components.SaveShareButton`.
-- [ ] Task: Implement — `SurveyPlotScreen.kt`
-    - [ ] Replace the "Save / Share PDF" `Button` with `SaveShareButton(...)`
+- [x] Task: Implement — `SurveyPlotScreen.kt` [ab0a8d2]
+    - [x] Replace the "Save / Share PDF" `Button` with `SaveShareButton(...)`
       the same way, using the screen's existing `showSnackbar`.
-    - [ ] Add `import com.cavesketch.app.ui.components.SaveShareButton`.
-- [ ] Task: Regression-test and verify
-    - [ ] Run `./gradlew :app:testDebugUnitTest`; confirm the full suite
+    - [x] Add `import com.cavesketch.app.ui.components.SaveShareButton`.
+- [x] Task: Regression-test and verify [ab0a8d2]
+    - [x] Run `./gradlew :app:testDebugUnitTest`; confirm the full suite
       passes.
-    - [ ] Run `./gradlew :app:assembleDebug`; confirm `BUILD SUCCESSFUL`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Wire SaveShareButton into Both Screens' (Protocol in workflow.md)
-    - [ ] Install on device/emulator: `./gradlew :app:installDebug`.
-    - [ ] Generate a Survey Plot PDF; tap "Save / Share PDF"; confirm the
+    - [x] Run `./gradlew :app:assembleDebug`; confirm `BUILD SUCCESSFUL`.
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Wire SaveShareButton into Both Screens' (Protocol in workflow.md)
+    - [x] Install on device/emulator: `./gradlew :app:installDebug`.
+    - [x] Generate a Survey Plot PDF; tap "Save / Share PDF"; confirm the
       menu shows "Save to Device" / "Share".
-    - [ ] Tap "Save to Device"; pick a location (e.g. Downloads) in the
+    - [x] Tap "Save to Device"; pick a location (e.g. Downloads) in the
       system picker; confirm the PDF appears there and opens correctly.
-    - [ ] Tap "Share" on the same button; confirm the Android share sheet
+    - [x] Tap "Share" on the same button; confirm the Android share sheet
       opens as it does today.
-    - [ ] Generate a Satellite Map; repeat both checks ("Save to Device" +
+    - [x] Generate a Satellite Map; repeat both checks ("Save to Device" +
       "Share") for the HTML, JSON, and KMZ buttons.
-    - [ ] Force a save failure (e.g. cancel the system picker mid-flow, or
+    - [x] Force a save failure (e.g. cancel the system picker mid-flow, or
       fill the device storage) and confirm a friendly snackbar message
       appears rather than a crash.
-    - [ ] **Does this meet your expectations? Please confirm with yes or
+    - [x] **Does this meet your expectations? Please confirm with yes or
       provide feedback on what needs to be changed.**
-- [ ] Commit: `feat(ui): wire SaveShareButton into SatelliteScreen and SurveyPlotScreen`.
+- [x] Commit: `feat(ui): wire SaveShareButton into SatelliteScreen and SurveyPlotScreen`.
