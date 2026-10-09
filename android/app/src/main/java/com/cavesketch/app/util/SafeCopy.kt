@@ -28,3 +28,15 @@ fun safeCopyUriToDir(
     fileName: String,
     onError: (String) -> Unit,
 ): String? = runCopy({ copyUriToDir(context, uri, dir, fileName) }, onError)
+
+/**
+ * Copies a local file at [sourcePath] to a target SAF [targetUri] like [copyFileToUri],
+ * converting failures into a friendly [onError] callback and a null return.
+ */
+fun safeCopyFileToUri(
+    context: Context,
+    sourcePath: String,
+    targetUri: Uri,
+    onError: (String) -> Unit,
+): String? = runCopy({ copyFileToUri(context, sourcePath, targetUri) }, onError)
+

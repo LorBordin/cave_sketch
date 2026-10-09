@@ -14,6 +14,16 @@ fun copyUriToDir(context: Context, uri: Uri, dir: File, fileName: String): Strin
     return out.absolutePath
 }
 
+/** Copies a local file at [sourcePath] into a target SAF [targetUri]; returns [targetUri]'s string form. */
+fun copyFileToUri(context: Context, sourcePath: String, targetUri: Uri): String {
+    val input = File(sourcePath).inputStream()
+    context.contentResolver.openOutputStream(targetUri).use { output ->
+        requireNotNull(output) { "Cannot open output stream for $targetUri" }
+        input.use { it.copyTo(output) }
+    }
+    return targetUri.toString()
+}
+
 /** Queries the content resolver for the document's display name, fallback to lastPathSegment. */
 fun getDisplayName(context: Context, uri: Uri): String {
     return context.contentResolver.query(uri, null, null, null, null)?.use { c ->
