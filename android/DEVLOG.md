@@ -287,12 +287,19 @@ None.
 **Next session notes:**
 None
 
-## [2026-07-06 10:07] Release — v1.1.0 APK Build
+## [2026-10-09 10:07] implementation — Save Exported Artifacts to Device Storage Complete
 **Files:**
-- android/app/build.gradle
-- android/RELEASE.md
-- CaveSketch-v1.1.0.apk
+- android/app/src/main/java/com/cavesketch/app/util/FileCopy.kt
+- android/app/src/main/java/com/cavesketch/app/util/SafeCopy.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/SaveShareButton.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SatelliteScreen.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/test/java/com/cavesketch/app/util/FileCopyTest.kt
+- android/app/src/test/java/com/cavesketch/app/ui/components/SaveShareButtonTest.kt
 
 **Deviations from spec:** None
+
 **Assumptions:** None
+
 **Next session notes:** None
+
