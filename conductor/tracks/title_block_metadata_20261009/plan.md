@@ -120,11 +120,11 @@ Full code: superpowers plan → **Task 2**.
 
 Full code: superpowers plan → **Task 3**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_layout.py` (Task 3 Step 1).
-    - [ ] Run `uv run pytest tests/test_title_block_layout.py -v`; confirm
+- [x] Task: Write failing tests (Red) [9db1a65]
+    - [x] Create `tests/test_title_block_layout.py` (Task 3 Step 1).
+    - [x] Run `uv run pytest tests/test_title_block_layout.py -v`; confirm
       `ModuleNotFoundError: ... title_block_layout`.
-- [ ] Task: Implement `title_block_layout.py` (Green)
+- [~] Task: Implement `title_block_layout.py` (Green)
     - [ ] Create `cave_sketch/survey/graphics/title_block_layout.py` (Task 3 Step 3), including
       the `_find_free_corner` stub that returns `None` (Phase 4 replaces it).
     - [ ] Run `uv run pytest tests/test_title_block_layout.py -v`; all pass.
