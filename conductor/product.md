@@ -21,6 +21,7 @@ CaveSketch is a lightweight, mobile-friendly application designed to empower cav
 - **Magnetic Variation Correction**: Automatic correction of magnetic compass bearings to true geographic north for plan views and georeferenced satellite overlays.
 - **KML Export**: Export georeferenced cave data for 3D visualization in Google Earth.
 - **Multi-Survey Merging**: Support for merging parent and child surveys using station matching, with specialized section protocols like Mirror and Displacement.
+- **Artifact Saving & Sharing**: Export PDF survey plots, satellite HTML maps, JSON, and KMZ files with choices to save directly to local device storage via Android Storage Access Framework or launch the share sheet.
 
 ## Future Roadmap
 - **3D Visualization**: Exporting 3D cave meshes (OBJ).
