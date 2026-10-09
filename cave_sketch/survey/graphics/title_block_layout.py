@@ -3,7 +3,7 @@
 All rectangles are (x0, y0, width, height) in figure-fraction coordinates.
 """
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple
 
 from matplotlib.axes import Axes
 from matplotlib.backend_bases import RendererBase
@@ -30,9 +30,14 @@ class Placement:
     strategy: str  # "header" | "corner" | "grow-header"
 
 
+def _get_renderer(fig: Figure) -> RendererBase:
+    canvas: Any = fig.canvas
+    return canvas.get_renderer()
+
+
 def measure_title_block(fig: Figure, rows: List[str]) -> Tuple[float, float]:
     """Return the (width, height) in figure fraction needed to draw `rows`."""
-    renderer = fig.canvas.get_renderer()
+    renderer = _get_renderer(fig)
     widest_px = 0.0
     for row in rows:
         probe = fig.text(0, 0, row, fontsize=FONT_SIZE)
@@ -50,7 +55,8 @@ def place_title_block(
     """Pick the box rectangle: header slot, else a free plot corner, else grow the header."""
     width, height = size
     fig.draw_without_rendering()  # applies aspect ratios so axes boxes are final
-    renderer = fig.canvas.get_renderer()
+    renderer = _get_renderer(fig)
+
     name_box = name_text.get_window_extent(renderer).transformed(fig.transFigure.inverted())
 
     header = _header_rect(width, height, HEADER_TOP)
