@@ -23,8 +23,8 @@
 
 ## Phase 1: Save-to-Device Building Blocks (utility + component)
 
-- [ ] Task: Write tests — `copyFileToUri` / `safeCopyFileToUri`
-    - [ ] In `android/app/src/test/java/com/cavesketch/app/util/SafeCopyTest.kt`
+- [x] Task: Write tests — `copyFileToUri` / `safeCopyFileToUri` [775f060]
+    - [x] In `android/app/src/test/java/com/cavesketch/app/util/SafeCopyTest.kt`
       (or a new `FileCopyTest.kt` alongside it), add tests covering:
       - `copyFileToUri` copies the exact bytes of a source file to a target
         `file://` URI and returns the URI's string form.
@@ -34,20 +34,20 @@
         friendly message when the source path doesn't exist (reusing
         `runCopy`, so this exercises the existing `friendlyError` mapping —
         no new error-message logic to test).
-    - [ ] Run `./gradlew :app:testDebugUnitTest --tests "*FileCopy*" --tests "*SafeCopy*"`;
+    - [x] Run `./gradlew :app:testDebugUnitTest --tests "*FileCopy*" --tests "*SafeCopy*"`;
       confirm the new tests fail (Red) — `copyFileToUri`/`safeCopyFileToUri`
       don't exist yet.
-- [ ] Task: Implement `copyFileToUri` / `safeCopyFileToUri`
-    - [ ] In `util/FileCopy.kt`, add
+- [x] Task: Implement `copyFileToUri` / `safeCopyFileToUri` [775f060]
+    - [x] In `util/FileCopy.kt`, add
       `copyFileToUri(context: Context, sourcePath: String, targetUri: Uri): String`:
       open `File(sourcePath).inputStream()`, copy into
       `context.contentResolver.openOutputStream(targetUri)` (`requireNotNull`
       it, matching `copyUriToDir`'s null-check style), return
       `targetUri.toString()`.
-    - [ ] In `util/SafeCopy.kt`, add
+    - [x] In `util/SafeCopy.kt`, add
       `safeCopyFileToUri(context, sourcePath, targetUri, onError): String? = runCopy({ copyFileToUri(context, sourcePath, targetUri) }, onError)`.
-    - [ ] Re-run the tests from the previous task; confirm they pass (Green).
-- [ ] Task: Write tests — `SaveShareButton`
+    - [x] Re-run the tests from the previous task; confirm they pass (Green).
+- [~] Task: Write tests — `SaveShareButton`
     - [ ] New `android/app/src/test/java/com/cavesketch/app/ui/components/SaveShareButtonTest.kt`,
       Robolectric + `createComposeRule` (same style as `PrimaryCtaTest.kt`).
       Cover:
