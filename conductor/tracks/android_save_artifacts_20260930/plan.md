@@ -21,7 +21,7 @@
 
 ---
 
-## Phase 1: Save-to-Device Building Blocks (utility + component)
+## Phase 1: Save-to-Device Building Blocks (utility + component) [checkpoint: c31f949]
 
 - [x] Task: Write tests — `copyFileToUri` / `safeCopyFileToUri` [775f060]
     - [x] In `android/app/src/test/java/com/cavesketch/app/util/SafeCopyTest.kt`
@@ -47,8 +47,8 @@
     - [x] In `util/SafeCopy.kt`, add
       `safeCopyFileToUri(context, sourcePath, targetUri, onError): String? = runCopy({ copyFileToUri(context, sourcePath, targetUri) }, onError)`.
     - [x] Re-run the tests from the previous task; confirm they pass (Green).
-- [~] Task: Write tests — `SaveShareButton`
-    - [ ] New `android/app/src/test/java/com/cavesketch/app/ui/components/SaveShareButtonTest.kt`,
+- [x] Task: Write tests — `SaveShareButton` [20a9cd4]
+    - [x] New `android/app/src/test/java/com/cavesketch/app/ui/components/SaveShareButtonTest.kt`,
       Robolectric + `createComposeRule` (same style as `PrimaryCtaTest.kt`).
       Cover:
       - The button renders with the given `label` text.
@@ -56,24 +56,24 @@
       - Tapping "Share" results in an `ACTION_SEND` intent having been
         started (assert via Robolectric's `Shadows.shadowOf(application).nextStartedActivity`)
         with the expected `type` (mimeType).
-    - [ ] Run `./gradlew :app:testDebugUnitTest --tests "*SaveShareButton*"`;
+    - [x] Run `./gradlew :app:testDebugUnitTest --tests "*SaveShareButton*"`;
       confirm it fails (Red) — the composable doesn't exist yet.
-- [ ] Task: Implement `SaveShareButton`
-    - [ ] New `android/app/src/main/java/com/cavesketch/app/ui/components/SaveShareButton.kt`:
+- [x] Task: Implement `SaveShareButton` [c31f949]
+    - [x] New `android/app/src/main/java/com/cavesketch/app/ui/components/SaveShareButton.kt`:
       `@Composable fun SaveShareButton(label: String, path: String, mimeType: String, displayName: String, modifier: Modifier = Modifier, onError: (String) -> Unit = {}, onSaved: () -> Unit = {})`.
       - `var expanded by remember { mutableStateOf(false) }`.
       - `rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument(mimeType))`
         callback: on non-null `Uri`, call `safeCopyFileToUri(context, path, uri, onError)?.let { onSaved() }`.
       - `Box(modifier) { Button(onClick = { expanded = true }, Modifier.fillMaxWidth()) { Text(label) }; DropdownMenu(expanded, { expanded = false }) { DropdownMenuItem("Save to Device") { expanded = false; launcher.launch(displayName) }; DropdownMenuItem("Share") { expanded = false; shareFile(context, path, mimeType, displayName) } } }`.
-    - [ ] Re-run the tests from the previous task; confirm they pass (Green).
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Save-to-Device Building Blocks' (Protocol in workflow.md)
-    - [ ] Run `./gradlew :app:testDebugUnitTest`; confirm the full unit test
+    - [x] Re-run the tests from the previous task; confirm they pass (Green).
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Save-to-Device Building Blocks' (Protocol in workflow.md)
+    - [x] Run `./gradlew :app:testDebugUnitTest`; confirm the full unit test
       suite passes (no regressions).
-    - [ ] Run `./gradlew :app:assembleDebug`; confirm `BUILD SUCCESSFUL`.
-    - [ ] No user-visible change yet at this checkpoint (the component isn't
+    - [x] Run `./gradlew :app:assembleDebug`; confirm `BUILD SUCCESSFUL`.
+    - [x] No user-visible change yet at this checkpoint (the component isn't
       wired into any screen) — present this as a code-only checkpoint and
       confirm with the user before proceeding to Phase 2.
-- [ ] Commit: `test(util): add tests for copyFileToUri and safeCopyFileToUri`,
+- [x] Commit: `test(util): add tests for copyFileToUri and safeCopyFileToUri`,
   `feat(util): add copyFileToUri and safeCopyFileToUri`,
   `test(ui): add SaveShareButtonTest`,
   `feat(ui): add SaveShareButton composable with save/share menu`
