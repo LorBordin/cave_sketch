@@ -1,0 +1,8 @@
+{
+  "track_id": "title_block_metadata_20261009",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-10-09T12:36:08+02:00",
+  "updated_at": "2026-10-09T12:36:08+02:00",
+  "description": "Add optional Comune, Disegnatore, GPS coordinates, Quota slm and Declinazione rows to the PDF title block (shown only when entered), expose the inputs in the webapp and Android app (plus the missing Android magnetic variation input), and measure the title block to place it in the best free position (header slot, free plot corner, or grown header)."
+}

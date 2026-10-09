@@ -5,6 +5,11 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
+- [ ] **Track: Title Block Metadata & Adaptive Placement**
+*Link: [./tracks/title_block_metadata_20261009/](./tracks/title_block_metadata_20261009/)*
+
+---
+
 - [x] **Track: Save Exported Artifacts to Device Storage (Android)**
 *Link: [./archive/android_save_artifacts_20260930/](./archive/android_save_artifacts_20260930/)*
 

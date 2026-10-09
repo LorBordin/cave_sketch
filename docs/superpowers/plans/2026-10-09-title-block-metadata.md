@@ -571,12 +571,12 @@ git commit -m "feat(survey): measure title block and place it in header or grown
 
 - [ ] **Step 1: Write the failing tests** (append to `tests/test_title_block_layout.py`)
 
+First add these two imports to the import block at the top of the file (ruff rejects imports
+below code): `from matplotlib.patches import Circle` (next to the existing `Rectangle` import, i.e.
+`from matplotlib.patches import Circle, Rectangle`) and
+`from cave_sketch.survey.graphics.grid import _add_grid`. Then append:
+
 ```python
-from matplotlib.patches import Circle
-
-from cave_sketch.survey.graphics.grid import _add_grid
-
-
 def _assert_inside_axes(fig, rect, ax):
     ax_box = ax.get_window_extent(fig.canvas.get_renderer()).transformed(
         fig.transFigure.inverted()
@@ -638,7 +638,8 @@ def test_map_axes_preferred_over_section_axes():
         ax.set_xlim(0, 10)
         ax.set_ylim(0, 10)
     rows = NINE_ROWS[:7]
-    placement = place_title_block(fig, measure_title_block(fig, rows), name_text, [map_ax, section_ax])
+    size = measure_title_block(fig, rows)
+    placement = place_title_block(fig, size, name_text, [map_ax, section_ax])
     assert placement.strategy == "corner"
     _assert_inside_axes(fig, placement.rect, map_ax)
     plt.close(fig)
@@ -735,8 +736,9 @@ def _hits(artist: Artist, box_px: Bbox, renderer: RendererBase) -> bool:
             return False
         m = MARKER_MARGIN_PX
         x, y = points[:, 0], points[:, 1]
-        inside = (x >= box_px.x0 - m) & (x <= box_px.x1 + m) & (y >= box_px.y0 - m) & (y <= box_px.y1 + m)
-        return bool(np.any(inside))
+        in_x = (x >= box_px.x0 - m) & (x <= box_px.x1 + m)
+        in_y = (y >= box_px.y0 - m) & (y <= box_px.y1 + m)
+        return bool(np.any(in_x & in_y))
     if isinstance(artist, Collection):
         transform = artist.get_transform()
         return any(
@@ -768,6 +770,7 @@ git commit -m "feat(survey): place title block in a free plot corner when header
 - Modify: `cave_sketch/survey/renderer.py`
 - Modify: `cave_sketch/survey/survey.py`
 - Modify: `cave_sketch/survey/config.py` (remove `SurveyConfig.surveyor_name`)
+- Modify: `app/pages/1_survey_plot.py`, `android/app/src/main/python/survey_bridge.py` (one-line caller migration)
 - Modify: `tests/test_title_block.py`, `tests/test_title_block_integration.py`, `tests/test_render_regression.py`
 - Regenerate: `tests/fixtures/render_baselines/{plan_only,dual}.png`; create `full_metadata.png`
 
@@ -1032,6 +1035,25 @@ Store the section axes: in the section block, rename `ax` to `section_ax` (keep 
         magnetic_variation_deg=magnetic_variation_deg if merged_map is not None else 0.0,
 ```
 
+- [ ] **Step 5b: Keep both apps working (minimal caller migration)**
+
+`app/pages/1_survey_plot.py` — add `from cave_sketch.survey.config import TitleBlockInfo` and in the
+`draw_survey(...)` call replace `surveyor_name=surveyor_name,` with:
+
+```python
+                title_block=TitleBlockInfo(surveyor_name=surveyor_name),
+```
+
+`android/app/src/main/python/survey_bridge.py` — add `from cave_sketch.survey.config import
+TitleBlockInfo` and in the `draw_survey(...)` call replace
+`surveyor_name=data.get("surveyor_name", ""),` with:
+
+```python
+            title_block=TitleBlockInfo(surveyor_name=data.get("surveyor_name") or ""),
+```
+
+(Tasks 6 and 7 replace these lines with the full inputs.)
+
 - [ ] **Step 6: Run the unit + integration tests**
 
 Run: `uv run pytest tests/test_title_block.py tests/test_title_block_integration.py tests/test_title_block_rows.py tests/test_title_block_layout.py tests/test_grid.py tests/test_survey_rendering.py -v`
@@ -1050,12 +1072,12 @@ Expected: 3 PASS
 - [ ] **Step 8: Full suite**
 
 Run: `uv run pytest -q`
-Expected: all PASS. (`survey_bridge.py` still passes `surveyor_name`, but its tests mock `draw_survey`, so they stay green; the bridge is migrated in Task 7. Do not ship between Task 5 and Task 7.)
+Expected: all PASS.
 
 - [ ] **Step 9: Commit**
 
 ```bash
-git add cave_sketch/survey tests/test_title_block.py tests/test_title_block_integration.py tests/test_render_regression.py tests/fixtures/render_baselines
+git add cave_sketch/survey tests/test_title_block.py tests/test_title_block_integration.py tests/test_render_regression.py tests/fixtures/render_baselines app/pages/1_survey_plot.py android/app/src/main/python/survey_bridge.py
 git commit -m "feat(survey): render extended title block with adaptive placement"
 ```
 
@@ -1240,7 +1262,7 @@ change the button's first branches to:
     elif st.session_state.map_csv or st.session_state.section_csv:
 ```
 
-and replace `surveyor_name=surveyor_name,` in the `draw_survey(...)` call with `title_block=title_block,`.
+and replace `title_block=TitleBlockInfo(surveyor_name=surveyor_name),` (from Task 5) in the `draw_survey(...)` call with `title_block=title_block,`; remove the now-unused `TitleBlockInfo` import from the page.
 
 - [ ] **Step 5: Run tests**
 
@@ -1249,7 +1271,7 @@ Expected: all PASS
 
 - [ ] **Step 6: Manual check**
 
-Run: `uv run streamlit run app/main.py` (if the entry differs, use the command in `README.md`). Upload `tests/fixtures/sample.dxf`, fill all title block fields + magnetic variation 2.5, generate, and confirm the preview shows all rows and no overlap. Enter only Latitude → error shown, Generate blocked.
+Run: `uv run streamlit run app/app.py`. Upload `tests/fixtures/sample.dxf`, fill all title block fields + magnetic variation 2.5, generate, and confirm the preview shows all rows and no overlap. Enter only Latitude → error shown, Generate blocked.
 
 - [ ] **Step 7: Commit**
 
@@ -1308,7 +1330,9 @@ def test_generate_passes_title_block_and_variation(two_csvs):
 def test_generate_defaults_when_fields_missing_or_null(two_csvs):
     from cave_sketch.survey.config import TitleBlockInfo
 
-    _, mock_draw = _generate_with(two_csvs, {"latitude": None, "longitude": None, "elevation_m": None})
+    _, mock_draw = _generate_with(
+        two_csvs, {"latitude": None, "longitude": None, "elevation_m": None}
+    )
     _, kwargs = mock_draw.call_args
     assert kwargs["title_block"] == TitleBlockInfo()
     assert kwargs["magnetic_variation_deg"] == 0.0
@@ -1328,7 +1352,7 @@ Expected: the three new tests FAIL (`KeyError: 'title_block'` / no `invalid_titl
 
 - [ ] **Step 3: Implement the bridge**
 
-In `survey_bridge.py` add `from cave_sketch.survey.config import TitleBlockInfo` and a helper near the top-level helpers:
+In `survey_bridge.py` (the `TitleBlockInfo` import already exists from Task 5) add a helper near the top-level helpers:
 
 ```python
 def _optional_float(value) -> Optional[float]:
@@ -1351,7 +1375,7 @@ Inside `generate_survey_plot`, before `pdf_path = ...`:
             return json.dumps({"error": "invalid_title_block", "detail": str(e)})
 ```
 
-In the `draw_survey(...)` call replace `surveyor_name=data.get("surveyor_name", ""),` with:
+In the `draw_survey(...)` call replace the Task 5 line `title_block=TitleBlockInfo(surveyor_name=data.get("surveyor_name") or ""),` with:
 
 ```python
             title_block=title_block,
