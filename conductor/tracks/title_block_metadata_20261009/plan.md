@@ -84,7 +84,7 @@ Full code: superpowers plan → **Task 1**.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 2: Title Block Rows
+## Phase 2: Title Block Rows [checkpoint: 6a6108b]
 
 Full code: superpowers plan → **Task 2**.
 
@@ -97,10 +97,10 @@ Full code: superpowers plan → **Task 2**.
       `cave_sketch/survey/graphics/title_block.py` (Task 2 Step 3). Leave the existing
       `draw_title_block` untouched.
     - [x] Run `uv run pytest tests/test_title_block_rows.py tests/test_title_block.py -v`; all pass.
-- [~] Task: Quality gates and commit
-    - [ ] Python gates. Commit `feat(survey): build title block rows from TitleBlockInfo`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 2' (Protocol in workflow.md)
-    - [ ] Show the rows the PDF will contain:
+- [x] Task: Quality gates and commit [2f89c5b]
+    - [x] Python gates. Commit `feat(survey): build title block rows from TitleBlockInfo`.
+- [x] Task: Conductor - Device Verification & Approval 'Phase 2' (Protocol in workflow.md) [6a6108b]
+    - [x] Show the rows the PDF will contain:
       ```bash
       uv run python - <<'EOF'
       from cave_sketch.survey.config import TitleBlockInfo
@@ -112,8 +112,8 @@ Full code: superpowers plan → **Task 2**.
       ```
       Expected: 9 rows in the order of Global Constraints, `Coordinate: 33.50000° S, 12.96543° E`,
       `Quota slm: 0 m`, `Declinazione: 1.2° W`.
-    - [ ] Webapp and Android: generate a PDF; identical to the Phase 1 references.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] Webapp and Android: generate a PDF; identical to the Phase 1 references.
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 3: Measure the Box; Header Slot and Grow-Header Placement
