@@ -241,7 +241,7 @@ also migrates both apps' call sites (Step 5b) to keep them working.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 6: Webapp Inputs
+## Phase 6: Webapp Inputs [checkpoint: 7848b1d]
 
 Full code: superpowers plan → **Task 6**.
 
