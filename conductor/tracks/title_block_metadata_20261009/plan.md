@@ -304,14 +304,14 @@ Full code: superpowers plan → **Task 8**.
 - [x] Task: Write failing UI tests (Red) [f5400af]
     - [x] Create `TitleBlockFieldsTest.kt` and append the magnetic variation test to
       `SettingsFormTest.kt` (Step 1); confirm compile failure.
-- [~] Task: Implement (Green)
-    - [ ] Create `ui/components/TitleBlockFields.kt` (Step 3).
-    - [ ] Add the magnetic variation field to `SettingsForm.kt` (Step 4).
-    - [ ] Use `TitleBlockFields` in `SurveyPlotScreen.kt` and gate `canGenerate` on
+- [x] Task: Implement (Green) [c672a19]
+    - [x] Create `ui/components/TitleBlockFields.kt` (Step 3).
+    - [x] Add the magnetic variation field to `SettingsForm.kt` (Step 4).
+    - [x] Use `TitleBlockFields` in `SurveyPlotScreen.kt` and gate `canGenerate` on
       `titleBlockError() == null` (Step 5).
-    - [ ] Run the Android gates.
-- [ ] Task: Quality gates and commit
-    - [ ] Android gates + `uv run pytest -q`. Commit
+    - [x] Run the Android gates.
+- [x] Task: Quality gates and commit [c672a19]
+    - [x] Android gates + `uv run pytest -q`. Commit
       `feat(android): add title block fields and magnetic variation input`.
 - [ ] Task: Conductor - Device Verification & Approval 'Phase 8' (Protocol in workflow.md)
     - [ ] On the **physical phone** (and emulator if available), `./gradlew :app:installDebug`:
