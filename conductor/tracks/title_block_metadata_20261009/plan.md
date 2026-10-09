@@ -248,12 +248,12 @@ Full code: superpowers plan → **Task 6**.
 - [x] Task: Write failing tests (Red) [8f1f780]
     - [x] Create `tests/test_title_block_inputs.py` (Task 6 Step 1); confirm
       `ModuleNotFoundError: No module named 'app.components.title_block_inputs'`.
-- [~] Task: Implement (Green)
-    - [ ] Create `app/components/title_block_inputs.py` (Step 3).
-    - [ ] Update `app/session.py` and `app/pages/1_survey_plot.py` (Step 4).
-    - [ ] Run `uv run pytest tests/test_title_block_inputs.py tests/test_settings_panel.py -v`.
-- [ ] Task: Quality gates and commit
-    - [ ] Python gates. Commit `feat(app): add title block metadata inputs to survey plot page`.
+- [x] Task: Implement (Green) [ae36837]
+    - [x] Create `app/components/title_block_inputs.py` (Step 3).
+    - [x] Update `app/session.py` and `app/pages/1_survey_plot.py` (Step 4).
+    - [x] Run `uv run pytest tests/test_title_block_inputs.py tests/test_settings_panel.py -v`.
+- [x] Task: Quality gates and commit [ae36837]
+    - [x] Python gates. Commit `feat(app): add title block metadata inputs to survey plot page`.
 - [ ] Task: Conductor - Device Verification & Approval 'Phase 6' (Protocol in workflow.md)
     - [ ] Webapp on desktop browser **and** on a phone browser (same Wi-Fi, use the
       "Network URL" Streamlit prints):
