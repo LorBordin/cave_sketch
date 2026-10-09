@@ -116,7 +116,7 @@ Full code: superpowers plan → **Task 2**.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 3: Measure the Box; Header Slot and Grow-Header Placement
+## Phase 3: Measure the Box; Header Slot and Grow-Header Placement [checkpoint: 1c9ed85]
 
 Full code: superpowers plan → **Task 3**.
 
@@ -128,11 +128,11 @@ Full code: superpowers plan → **Task 3**.
     - [x] Create `cave_sketch/survey/graphics/title_block_layout.py` (Task 3 Step 3), including
       the `_find_free_corner` stub that returns `None` (Phase 4 replaces it).
     - [x] Run `uv run pytest tests/test_title_block_layout.py -v`; all pass.
-- [~] Task: Quality gates and commit
-    - [ ] Python gates. Commit
+- [x] Task: Quality gates and commit [89f676d]
+    - [x] Python gates. Commit
       `feat(survey): measure title block and place it in header or grown header`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 3' (Protocol in workflow.md)
-    - [ ] Render the placement demo and show the user the three images:
+- [x] Task: Conductor - Device Verification & Approval 'Phase 3' (Protocol in workflow.md) [1c9ed85]
+    - [x] Render the placement demo and show the user the three images:
       ```bash
       mkdir -p /tmp/title_block_demo && uv run python - <<'EOF'
       import matplotlib
@@ -170,9 +170,9 @@ Full code: superpowers plan → **Task 3**.
       Expected printout: `1_small -> header`, `2_large_sparse -> grow-header` (corners arrive
       in Phase 4), `3_large_dense -> grow-header`. In every image the box does not touch the
       cave name and the plot starts below the box.
-    - [ ] Webapp and Android: generate a PDF; identical to the Phase 1 references (the new
+    - [x] Webapp and Android: generate a PDF; identical to the Phase 1 references (the new
       module is not wired in yet).
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
 ## Phase 4: Free In-Plot Corner Search
