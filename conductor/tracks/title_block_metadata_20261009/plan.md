@@ -270,7 +270,7 @@ Full code: superpowers plan → **Task 6**.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 7: Android Bridge and `SurveyInputs` Model
+## Phase 7: Android Bridge and `SurveyInputs` Model [checkpoint: bf19679]
 
 Full code: superpowers plan → **Task 7**.
 
