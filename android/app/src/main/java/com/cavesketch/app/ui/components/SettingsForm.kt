@@ -12,6 +12,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
@@ -19,6 +22,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.testTag
 import com.cavesketch.app.ui.SurveyInputs
+import com.cavesketch.app.ui.parseDecimalOrNull
 
 @Composable
 fun SettingsForm(inputs: SurveyInputs, onChange: (SurveyInputs) -> Unit) {
@@ -40,6 +44,17 @@ fun SettingsForm(inputs: SurveyInputs, onChange: (SurveyInputs) -> Unit) {
         step = 5,
         formatter = { "${it.toInt()}°" },
         onChange = { onChange(inputs.copy(rotationDeg = it.toInt())) }
+    )
+
+    OutlinedTextField(
+        value = inputs.magneticVariationDeg,
+        onValueChange = { onChange(inputs.copy(magneticVariationDeg = it)) },
+        label = { Text("Magnetic variation (°, +E/-W)") },
+        placeholder = { Text("0") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+        isError = inputs.magneticVariationDeg.isNotBlank() &&
+            parseDecimalOrNull(inputs.magneticVariationDeg)?.let { it in -180.0..180.0 } != true,
+        modifier = Modifier.fillMaxWidth().testTag("magnetic_variation_field"),
     )
 
     StepperControl(
