@@ -1,3 +1,4 @@
+import math
 import re
 from enum import Enum
 from typing import Dict, Optional, Set, Tuple
@@ -9,6 +10,109 @@ class SectionProtocol(Enum):
     SIMPLE = "simple"
     MIRROR = "mirror"
     DISPLACEMENT = "displacement"
+
+
+def _bbox_distance(
+    b1: Tuple[float, float, float, float],
+    b2: Tuple[float, float, float, float],
+) -> float:
+    """Compute the minimum Euclidean distance between two 2D axis-aligned bounding boxes."""
+    dx = max(0.0, b1[0] - b2[1], b2[0] - b1[1])
+    dy = max(0.0, b1[2] - b2[3], b2[2] - b1[3])
+    return math.hypot(dx, dy)
+
+
+def _compute_displacement(
+    parent_df: pd.DataFrame,
+    child_df: pd.DataFrame,
+    anchor_dx: float,
+    anchor_dy: float,
+) -> Tuple[float, float]:
+    """
+    Compute total (dx, dy) displacement for child survey relative to parent survey.
+
+    Starts from the Simple alignment (anchor_dx, anchor_dy), tests directions from
+    0° (right) to -90° (below) in 5° steps, slides child to clear parent bounding box
+    by at least 10% of parent diagonal (floor 1.0 m), and selects the placement
+    yielding the smallest combined bounding box area (tie-break: shorter slide distance,
+    then angle closer to 0°).
+    """
+    p_min_x = float(parent_df["X"].min())
+    p_max_x = float(parent_df["X"].max())
+    p_min_y = float(parent_df["Y"].min())
+    p_max_y = float(parent_df["Y"].max())
+    p_box = (p_min_x, p_max_x, p_min_y, p_max_y)
+
+    diag = math.hypot(p_max_x - p_min_x, p_max_y - p_min_y)
+    padding = max(1.0, 0.10 * diag)
+
+    c_min_x0 = float(child_df["X"].min()) + anchor_dx
+    c_max_x0 = float(child_df["X"].max()) + anchor_dx
+    c_min_y0 = float(child_df["Y"].min()) + anchor_dy
+    c_max_y0 = float(child_df["Y"].max()) + anchor_dy
+
+    # Angles from 0° (right) to -90° (below) in 5° steps (19 candidates)
+    angles = [0 - 5 * i for i in range(19)]
+
+    best_key = None
+    best_offset: Tuple[float, float] = (anchor_dx, anchor_dy)
+
+    s_max = (
+        (p_max_x - p_min_x)
+        + (p_max_y - p_min_y)
+        + (c_max_x0 - c_min_x0)
+        + (c_max_y0 - c_min_y0)
+        + 2.0 * padding
+        + 10.0
+    )
+
+    for deg in angles:
+        if deg == 0:
+            ux, uy = 1.0, 0.0
+        elif deg == -90:
+            ux, uy = 0.0, -1.0
+        else:
+            rad = math.radians(deg)
+            ux, uy = math.cos(rad), math.sin(rad)
+
+        def c_box_at(s: float) -> Tuple[float, float, float, float]:
+            return (
+                c_min_x0 + s * ux,
+                c_max_x0 + s * ux,
+                c_min_y0 + s * uy,
+                c_max_y0 + s * uy,
+            )
+
+        if _bbox_distance(p_box, c_box_at(0.0)) >= padding:
+            s = 0.0
+        else:
+            low = 0.0
+            high = s_max
+            # Binary search to find minimum slide distance clearing padding
+            for _ in range(60):
+                mid = (low + high) / 2.0
+                if _bbox_distance(p_box, c_box_at(mid)) >= padding:
+                    high = mid
+                else:
+                    low = mid
+            s = high
+
+        # Combined bounding box
+        cb = c_box_at(s)
+        comb_min_x = min(p_min_x, cb[0])
+        comb_max_x = max(p_max_x, cb[1])
+        comb_min_y = min(p_min_y, cb[2])
+        comb_max_y = max(p_max_y, cb[3])
+        area = (comb_max_x - comb_min_x) * (comb_max_y - comb_min_y)
+
+        # Key for selection: min area, tie-break shorter slide, tie-break angle closer to 0°
+        key = (round(area, 6), round(s, 6), abs(deg))
+        if best_key is None or key < best_key:
+            best_key = key
+            best_offset = (anchor_dx + s * ux, anchor_dy + s * uy)
+
+    return best_offset
+
 
 def _get_numeric_ids(df: pd.DataFrame) -> Set[int]:
     """Extract numeric IDs from the Node_Id column."""

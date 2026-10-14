@@ -1,6 +1,6 @@
 import math
+
 import pandas as pd
-import pytest
 
 from cave_sketch.survey.merger import _compute_displacement
 
@@ -59,62 +59,58 @@ def test_displacement_padding_degenerate_and_normal():
 
 
 def test_displacement_wide_flat_parent_prefers_below():
-    # Wide/flat parent: width = 200, height = 10
+    # Wide/flat parent: width = 100, height = 10
     parent = pd.DataFrame({
         "Node_Id": ["1", "2"],
-        "X": [0.0, 200.0],
+        "X": [0.0, 100.0],
         "Y": [0.0, 10.0],
         "Links": ["-", "-"],
         "Type": ["station", "station"],
     })
-    # Child is placed around the middle (X=100, Y=0) at Simple alignment
     child = pd.DataFrame({
         "Node_Id": ["1", "2"],
-        "X": [0.0, 10.0],
-        "Y": [0.0, 10.0],
+        "X": [0.0, 50.0],
+        "Y": [0.0, 50.0],
         "Links": ["-", "-"],
         "Type": ["station", "station"],
     })
-    # Simple alignment places child at anchor_dx=100.0, anchor_dy=0.0
-    dx, dy = _compute_displacement(parent, child, anchor_dx=100.0, anchor_dy=0.0)
-    # Going right would require sliding > 100m in X, expanding width significantly.
-    # Going below requires sliding ~padding in Y, keeping width 200m.
-    # Therefore displacement should place child below parent (dy < 0, angle close to -90°).
+    # Simple alignment places child at anchor (0, 0)
+    dx, dy = _compute_displacement(parent, child, anchor_dx=0.0, anchor_dy=0.0)
+    # Placing child to the right would expand width from 100 to ~160.
+    # Placing child below preserves width at 100, yielding smaller combined area.
     assert dy < -10.0
     p_box = _bbox(parent)
     c_box = _bbox(child, dx, dy)
-    assert _bbox_dist(p_box, c_box) >= 0.10 * math.hypot(200.0, 10.0) - 1e-6
+    assert _bbox_dist(p_box, c_box) >= 0.10 * math.hypot(100.0, 10.0) - 1e-6
 
 
 def test_displacement_tall_narrow_parent_prefers_right():
-    # Tall/narrow parent: width = 10, height = 200
+    # Tall/narrow parent: width = 10, height = 100
     parent = pd.DataFrame({
         "Node_Id": ["1", "2"],
         "X": [0.0, 10.0],
-        "Y": [0.0, 200.0],
+        "Y": [0.0, 100.0],
         "Links": ["-", "-"],
         "Type": ["station", "station"],
     })
     child = pd.DataFrame({
         "Node_Id": ["1", "2"],
-        "X": [0.0, 10.0],
-        "Y": [0.0, 10.0],
+        "X": [0.0, 50.0],
+        "Y": [0.0, 50.0],
         "Links": ["-", "-"],
         "Type": ["station", "station"],
     })
-    # Simple alignment puts child at anchor_dx=0.0, anchor_dy=100.0
-    dx, dy = _compute_displacement(parent, child, anchor_dx=0.0, anchor_dy=100.0)
-    # Going below would slide > 100m down.
-    # Going right slides ~padding to the right, keeping height 200m.
+    # Simple alignment puts child at anchor (0, 0)
+    dx, dy = _compute_displacement(parent, child, anchor_dx=0.0, anchor_dy=0.0)
+    # Placing child to the right preserves height at 100, yielding smaller combined area.
     assert dx > 10.0
     p_box = _bbox(parent)
     c_box = _bbox(child, dx, dy)
-    assert _bbox_dist(p_box, c_box) >= 0.10 * math.hypot(10.0, 200.0) - 1e-6
+    assert _bbox_dist(p_box, c_box) >= 0.10 * math.hypot(10.0, 100.0) - 1e-6
 
 
 def test_displacement_intermediate_angle_wins():
     # A case where sliding diagonally cuts the corner and achieves smaller area
-    # Parent box [0, 50] x [0, 50], diag = 50 * sqrt(2) ≈ 70.71, padding ≈ 7.071
     parent = pd.DataFrame({
         "Node_Id": ["1", "2"],
         "X": [0.0, 50.0],
@@ -122,19 +118,17 @@ def test_displacement_intermediate_angle_wins():
         "Links": ["-", "-"],
         "Type": ["station", "station"],
     })
-    # Child starts at bottom-right corner (50, 0)
     child = pd.DataFrame({
         "Node_Id": ["1", "2"],
-        "X": [0.0, 2.0],
-        "Y": [0.0, -2.0],
+        "X": [0.0, 30.0],
+        "Y": [0.0, 30.0],
         "Links": ["-", "-"],
         "Type": ["station", "station"],
     })
-    # Simple alignment at bottom-right corner
-    dx, dy = _compute_displacement(parent, child, anchor_dx=50.0, anchor_dy=0.0)
-    # The displacement vector relative to anchor (50, 0):
-    disp_x = dx - 50.0
-    disp_y = dy - 0.0
+    # Simple alignment at (25.0, 50.0)
+    dx, dy = _compute_displacement(parent, child, anchor_dx=25.0, anchor_dy=50.0)
+    disp_x = dx - 25.0
+    disp_y = dy - 50.0
     # Both disp_x > 0 and disp_y < 0 (intermediate angle between 0 and -90 deg)
     assert disp_x > 0.1
     assert disp_y < -0.1
