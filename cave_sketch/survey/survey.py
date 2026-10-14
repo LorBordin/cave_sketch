@@ -7,7 +7,7 @@ from matplotlib.figure import Figure
 from cave_sketch.dxf.models import CaveSurvey, SurveyPoint
 from cave_sketch.geo.declination import apply_magnetic_variation
 from cave_sketch.survey.config import SurveyConfig
-from cave_sketch.survey.merger import SectionProtocol, merge_surveys
+from cave_sketch.survey.merger import MapProtocol, SectionProtocol, merge_surveys
 from cave_sketch.survey.metrics import compute_total_depth, compute_total_length
 from cave_sketch.survey.pdf import export_pdf
 from cave_sketch.survey.renderer import render_survey
@@ -28,6 +28,7 @@ def draw_survey(
     surveyor_name: str = "",
     magnetic_variation_deg: float = 0.0,
     config: Dict = {},
+    map_protocol: MapProtocol = MapProtocol.SIMPLE,
 ) -> Figure:
     """
     Draw a cave survey, optionally merging a child survey.
@@ -45,7 +46,8 @@ def draw_survey(
             child_section=child_section,
             parent_station=parent_station,
             child_station=child_station,
-            section_protocol=section_protocol
+            section_protocol=section_protocol,
+            map_protocol=map_protocol,
         )
     else:
         merged_map, merged_section = parent_map, parent_section
@@ -55,7 +57,25 @@ def draw_survey(
 
     # Compute metrics after merge
     total_length = compute_total_length(merged_map)
-    total_depth = compute_total_depth(merged_section)
+    if (
+        child_section is not None
+        and parent_section is not None
+        and section_protocol == SectionProtocol.DISPLACEMENT
+        and parent_station
+        and child_station
+    ):
+        _, simple_section = merge_surveys(
+            None,
+            parent_section,
+            None,
+            child_section,
+            parent_station,
+            child_station,
+            section_protocol=SectionProtocol.SIMPLE,
+        )
+        total_depth = compute_total_depth(simple_section)
+    else:
+        total_depth = compute_total_depth(merged_section)
 
     survey = None
     if merged_map is not None:

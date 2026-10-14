@@ -12,6 +12,11 @@ class SectionProtocol(Enum):
     DISPLACEMENT = "displacement"
 
 
+class MapProtocol(Enum):
+    SIMPLE = "simple"
+    DISPLACEMENT = "displacement"
+
+
 def _bbox_distance(
     b1: Tuple[float, float, float, float],
     b2: Tuple[float, float, float, float],
@@ -271,11 +276,12 @@ def merge_surveys(
     child_section: Optional[pd.DataFrame],
     parent_station: str,
     child_station: str,
-    section_protocol: SectionProtocol = SectionProtocol.SIMPLE
+    section_protocol: SectionProtocol = SectionProtocol.SIMPLE,
+    map_protocol: MapProtocol = MapProtocol.SIMPLE,
 ) -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame]]:
     """
     Merge two cave surveys (parent and child) into a single survey.
-    
+
     Args:
         parent_map: DataFrame for parent map view
         parent_section: DataFrame for parent section view
@@ -284,19 +290,25 @@ def merge_surveys(
         parent_station: Station ID in parent survey to match
         child_station: Station ID in child survey to match
         section_protocol: Protocol to use for merging section view
-        
+        map_protocol: Protocol to use for merging map view
+
     Returns:
         Tuple of (merged_map, merged_section) DataFrames
     """
     merged_map = None
     if parent_map is not None and child_map is not None:
         merged_map = _merge_single_view(
-            parent_map, child_map, parent_station, child_station
+            parent_map,
+            child_map,
+            parent_station,
+            child_station,
+            is_section=False,
+            is_displacement=(map_protocol == MapProtocol.DISPLACEMENT),
         )
     elif parent_map is not None:
         merged_map = parent_map.copy()
     elif child_map is not None:
-        # If only child is present, it's not really a merge, 
+        # If only child is present, it's not really a merge,
         # but for consistency we might want to just return it.
         # However, the UI ensures both are uploaded.
         merged_map = child_map.copy()
@@ -304,12 +316,16 @@ def merge_surveys(
     merged_section = None
     if parent_section is not None and child_section is not None:
         merged_section = _merge_single_view(
-            parent_section, child_section, parent_station, child_station,
-            is_section=True, section_protocol=section_protocol
+            parent_section,
+            child_section,
+            parent_station,
+            child_station,
+            is_section=True,
+            section_protocol=section_protocol,
         )
     elif parent_section is not None:
         merged_section = parent_section.copy()
     elif child_section is not None:
         merged_section = child_section.copy()
-        
+
     return merged_map, merged_section
