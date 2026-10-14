@@ -72,6 +72,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Fix Entrance Symbol Orientation & Rotation Preservation**
+- [x] **Track: Fix Entrance Symbol Orientation & Rotation Preservation**
 *Link: [./tracks/entrance_symbol_orientation_20261014/](./tracks/entrance_symbol_orientation_20261014/)*
 
