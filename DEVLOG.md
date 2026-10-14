@@ -590,4 +590,16 @@
 **Assumptions:** None
 **Next session notes:** Phase 3 complete. Session defaults include map_protocol='simple', radio selector shown conditionally when child map is present, satellite merged_map.csv forced to MapProtocol.SIMPLE, docs updated in English and Italian.
 
+## [2026-10-14 13:38] Phase 3: Webapp UI — Displacement Line Styling Enhancement
+**Files:**
+- cave_sketch/style.py
+- cave_sketch/features/render_features.py
+- tests/test_merge_displacement.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** User chose bold firebrick dashed line (1.5pt, [8, 4]) to guarantee visibility and distinction from the lightgray dotted spatial grid.
+**Next session notes:** Connector line style updated and verified.
+
+
 
