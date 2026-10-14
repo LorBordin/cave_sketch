@@ -32,7 +32,7 @@
 - [x] Task: Write failing tests: `MapProtocol` enum; `merge_surveys(map_protocol=DISPLACEMENT)`
   displaces the map; default stays Simple (existing outputs unchanged); `draw_survey(map_protocol=...)`
   forwards it (484fcd4)
-- [ ] Task: Implement `MapProtocol` + `map_protocol` param in `merge_surveys` and `draw_survey`
+- [x] Task: Implement `MapProtocol` + `map_protocol` param in `merge_surveys` and `draw_survey` (7071bb3)
 - [ ] Task: Gates + root `DEVLOG.md` entry
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Map Protocol API' (Protocol in workflow.md)
 
