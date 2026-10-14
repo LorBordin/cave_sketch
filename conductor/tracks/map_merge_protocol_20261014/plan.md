@@ -25,7 +25,7 @@
   connector rows (Displacement totals == Simple totals) (dac5e24)
 - [x] Task: Write failing test + fix if needed: renderer draws connector rows as a dotted line, with
   no station marker/label (b311c38)
-- [ ] Task: Gates + root `DEVLOG.md` entry
+- [x] Task: Gates + root `DEVLOG.md` entry (29a3611)
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Shared Displacement Routine' (Protocol in workflow.md)
 
 ## Phase 2: Map Protocol API
