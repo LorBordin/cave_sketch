@@ -14,10 +14,10 @@
 
 ## Phase 2: End-to-End Regression Testing & PDF Survey Verification
 
-- [ ] Task: Automated regression test using `tests/fixtures/sample_entrance.dxf`
-    - [ ] Write integration test validating `parse_dxf` parses `B_entrance` with ~170.17° rotation
-    - [ ] Validate `draw_survey` retains this rotation in the rendered feature strokes (verifying apex points toward the entrance rather than north)
-    - [ ] Confirm backward compatibility with surveys lacking rotation data
+- [x] Task: Automated regression test using `tests/fixtures/sample_entrance.dxf` (58d30d9)
+    - [x] Write integration test validating `parse_dxf` parses `B_entrance` with ~170.17° rotation
+    - [x] Validate `draw_survey` retains this rotation in the rendered feature strokes (verifying apex points toward the entrance rather than north)
+    - [x] Confirm backward compatibility with surveys lacking rotation data
 - [ ] Task: Verification and documentation
     - [ ] Run full project verification: `ruff check`, `mypy cave_sketch/`, `pytest`
     - [ ] Document changes in `DEVLOG.md` according to project rules
