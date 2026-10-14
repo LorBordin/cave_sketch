@@ -43,9 +43,9 @@
 - [x] f684707 Task: Implement: `app/session.py` key; radio in `app/components/merging_controls.py`;
   `app/pages/1_survey_plot.py` passes `map_protocol` to `draw_survey` and forces
   `MapProtocol.SIMPLE` for `merged_map.csv`
-- [~] Task: Update docs (`docs/web/survey-merging.md`, `docs/web/survey-merging.it.md`, README,
+- [x] b0e4ef5 Task: Update docs (`docs/web/survey-merging.md`, `docs/web/survey-merging.it.md`, README,
   in-app guide if it describes the protocols)
-- [ ] Task: Gates + root `DEVLOG.md` entry
+- [~] Task: Gates + root `DEVLOG.md` entry
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Webapp UI' (Protocol in workflow.md)
     - [ ] `uv run streamlit run app/app.py`: merge `tests/fixtures/sample.dxf` with itself
       (e.g. stations 1/1), Map = Displacement → PDF shows the child clear of the parent + dotted
