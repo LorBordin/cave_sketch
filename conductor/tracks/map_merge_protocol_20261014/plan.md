@@ -36,7 +36,7 @@
 - [x] Task: Gates + root `DEVLOG.md` entry (ebb85e5)
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Map Protocol API' (Protocol in workflow.md) (2ab6c19)
 
-## Phase 3: Webapp UI
+## Phase 3: Webapp UI (183b312)
 - [x] 9025258 Task: Write failing tests (follow existing app test style, e.g. `tests/test_settings_panel.py`,
   `tests/test_satellite_map.py`): session default `map_protocol="simple"`; radio shown only when a
   child map is uploaded; satellite `merged_map.csv` always uses Simple
@@ -46,13 +46,13 @@
 - [x] b0e4ef5 Task: Update docs (`docs/web/survey-merging.md`, `docs/web/survey-merging.it.md`, README,
   in-app guide if it describes the protocols)
 - [x] 3846f1b Task: Gates + root `DEVLOG.md` entry
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Webapp UI' (Protocol in workflow.md)
-    - [ ] `uv run streamlit run app/app.py`: merge `tests/fixtures/sample.dxf` with itself
+- [x] 183b312 Task: Conductor - User Manual Verification 'Phase 3: Webapp UI' (Protocol in workflow.md)
+    - [x] `uv run streamlit run app/app.py`: merge `tests/fixtures/sample.dxf` with itself
       (e.g. stations 1/1), Map = Displacement → PDF shows the child clear of the parent + dotted
       connector; Satellite page shows the true position
 
 ## Phase 4: Android – code (doable without Android Studio)
-- [ ] Task: Write failing tests in `tests/test_survey_bridge.py`: `map_protocol` parsed (default
+- [~] Task: Write failing tests in `tests/test_survey_bridge.py`: `map_protocol` parsed (default
   `simple`) and forwarded to `draw_survey`; `effective_map_csv` always merges with Simple
 - [ ] Task: Implement `android/app/src/main/python/survey_bridge.py` changes
 - [ ] Task: Kotlin: `SurveyInputs.mapProtocol = "simple"` + `"map_protocol"` in `toJson()`
