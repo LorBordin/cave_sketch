@@ -54,8 +54,8 @@
 ## Phase 4: Android – code (doable without Android Studio)
 - [x] 5146467 Task: Write failing tests in `tests/test_survey_bridge.py`: `map_protocol` parsed (default
   `simple`) and forwarded to `draw_survey`; `effective_map_csv` always merges with Simple
-- [~] Task: Implement `android/app/src/main/python/survey_bridge.py` changes
-- [ ] Task: Kotlin: `SurveyInputs.mapProtocol = "simple"` + `"map_protocol"` in `toJson()`
+- [x] b0ceffc Task: Implement `android/app/src/main/python/survey_bridge.py` changes
+- [~] Task: Kotlin: `SurveyInputs.mapProtocol = "simple"` + `"map_protocol"` in `toJson()`
   (`SurveyPlotViewModel.kt`); "Map merge protocol" radio (Simple / Displacement) in
   `MergeControls.kt`, shown only when `childMapPath != null`; write/extend a JVM unit test for
   `toJson()` under `android/app/src/test/java/com/cavesketch/app/` (written, NOT run here)
