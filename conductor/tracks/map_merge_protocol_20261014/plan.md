@@ -21,8 +21,8 @@
     - [x] One `connector` row links parent station → displaced child station
     - [x] No child row links to the parent station; existing Simple / Mirror tests still pass
 - [x] Task: Refactor `_merge_single_view` to use the helper and the new station/connector handling (9f7d2dd)
-- [ ] Task: Write failing tests + implement: `compute_total_length` / `compute_total_depth` ignore
-  connector rows (Displacement totals == Simple totals)
+- [x] Task: Write failing tests + implement: `compute_total_length` / `compute_total_depth` ignore
+  connector rows (Displacement totals == Simple totals) (dac5e24)
 - [ ] Task: Write failing test + fix if needed: renderer draws connector rows as a dotted line, with
   no station marker/label
 - [ ] Task: Gates + root `DEVLOG.md` entry
