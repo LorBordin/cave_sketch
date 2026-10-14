@@ -9,7 +9,7 @@
     - [x] Update `generate_survey_plot` to call `effective_section_csv` and include `section_csv_path` in the result dictionary
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Survey Core & Python Bridge Logic' (Protocol in workflow.md) [f31593a]
 
-## Phase 2: Streamlit Webapp CSV Download Integration
+## Phase 2: Streamlit Webapp CSV Download Integration [checkpoint: 0ce0adc]
 - [x] Task: TDD - Write tests for webapp survey CSV download persistence [382652b]
     - [x] Add tests verifying session state and output path resolution for effective map and section CSVs
 - [x] Task: Implement CSV download buttons in `app/pages/1_survey_plot.py` [dd661cf]
@@ -17,7 +17,7 @@
     - [x] Store `effective_map_csv` and `effective_section_csv` in `st.session_state`
     - [x] Add download buttons for Map CSV (`<sanitized_name>_map.csv`) and Section CSV (`<sanitized_name>_section.csv`) under preview
     - [x] Verify iterative survey merging workflow (Upload A+B -> Generate -> Download CSV -> Upload as Main -> Upload C -> Merge)
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp CSV Download Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp CSV Download Integration' (Protocol in workflow.md) [0ce0adc]
 
 ## Phase 3: Android ViewModel & UI Implementation
 - [ ] Task: TDD - Write JVM unit tests for Android ViewModel
