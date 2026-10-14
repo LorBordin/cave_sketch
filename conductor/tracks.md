@@ -69,3 +69,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [ ] **Track: Map Merge Protocol (Simple / Displacement) for map view, webapp + Android**
 *Link: [./tracks/map_merge_protocol_20261014/](./tracks/map_merge_protocol_20261014/)*
+
+---
+
+- [ ] **Track: Fix Entrance Symbol Orientation & Rotation Preservation**
+*Link: [./tracks/entrance_symbol_orientation_20261014/](./tracks/entrance_symbol_orientation_20261014/)*
+

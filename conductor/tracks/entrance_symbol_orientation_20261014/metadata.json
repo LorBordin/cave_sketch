@@ -1,0 +1,8 @@
+{
+  "track_id": "entrance_symbol_orientation_20261014",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-10-14T10:43:25Z",
+  "updated_at": "2026-10-14T10:43:25Z",
+  "description": "Fix entrance and point symbol orientation bug in PDF survey plots and apply declination adjustment"
+}
