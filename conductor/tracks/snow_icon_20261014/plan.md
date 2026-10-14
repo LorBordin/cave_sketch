@@ -9,5 +9,5 @@
     - [x] Add `snow` icon strokes in `cave_sketch/features/render_features.py`
     - [x] Update `B_snow` in `cave_sketch/style.py`
     - [x] Remove B_snow from the KMZ point suppression in `google_earth.py`; verify matplotlib/folium rendering and legibility of white
-- [ ] Task: Verify (ruff, mypy, pytest), append DEVLOG.md entry
+- [x] Task: Verify (ruff, mypy, pytest), append DEVLOG.md entry [dfe9ace]
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Snow icon' (Protocol in workflow.md)
