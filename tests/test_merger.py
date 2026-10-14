@@ -208,7 +208,8 @@ def test_merge_surveys_displacement_station_handling():
     assert "3" in node_ids
     assert "4" in node_ids
 
-    # Displaced child matching station 3 coordinates are displaced (not coincident with parent station 2)
+    # Displaced child matching station 3 coordinates are displaced
+    # (not coincident with parent station 2)
     row_parent_2 = merged[merged["Node_Id"] == "2"].iloc[0]
     row_child_3 = merged[merged["Node_Id"] == "3"].iloc[0]
     assert (row_child_3["X"], row_child_3["Y"]) != (row_parent_2["X"], row_parent_2["Y"])

@@ -140,22 +140,23 @@ def _merge_single_view(
     parent_station: str,
     child_station: str,
     is_section: bool = False,
-    section_protocol: SectionProtocol = SectionProtocol.SIMPLE
+    section_protocol: SectionProtocol = SectionProtocol.SIMPLE,
+    is_displacement: bool = False,
 ) -> pd.DataFrame:
     """Helper to merge a single view (map or section)."""
     parent_df = parent_df.copy()
     child_df = child_df.copy()
 
     # Normalize Node_Id as string
-    parent_df["Node_Id"] = parent_df["Node_Id"].astype(str)
-    child_df["Node_Id"] = child_df["Node_Id"].astype(str)
+    parent_df.loc[:, "Node_Id"] = parent_df["Node_Id"].astype(str)
+    child_df.loc[:, "Node_Id"] = child_df["Node_Id"].astype(str)
     parent_station = str(parent_station)
     child_station = str(child_station)
 
     # 1. Coordinate translation
     p_indices = [i for i, nid in enumerate(parent_df["Node_Id"]) if nid == parent_station]
     c_indices = [i for i, nid in enumerate(child_df["Node_Id"]) if nid == child_station]
-    
+
     if not p_indices:
         raise ValueError(f"Station {parent_station} not found in parent survey.")
     if not c_indices:
@@ -165,72 +166,47 @@ def _merge_single_view(
     c_row = child_df.iloc[c_indices[0]]
 
     # Simple translation: align child_station to parent_station
-    delta_x = p_row["X"] - c_row["X"]
-    delta_y = p_row["Y"] - c_row["Y"]
-    
+    delta_x = float(p_row["X"] - c_row["X"])
+    delta_y = float(p_row["Y"] - c_row["Y"])
+
     # Apply protocol-specific transformations before translation if needed (e.g. MIRROR)
-    # MIRROR: "mirror the child sketch across the vertical axis (y-axis) before being placed"
-    # Vertical axis (y-axis) means X' = -X.
     if is_section and section_protocol == SectionProtocol.MIRROR:
-        # Mirror child across its own vertical axis through child_station
-        child_df["X"] = 2 * c_row["X"] - child_df["X"]
-        # Recalculate delta_x after mirroring (c_row["X"] stays same, but child_df["X"] changed)
-        delta_x = p_row["X"] - c_row["X"]
+        child_df.loc[:, "X"] = 2 * float(c_row["X"]) - child_df["X"]
+        delta_x = float(p_row["X"] - c_row["X"])
 
-    if is_section and section_protocol == SectionProtocol.DISPLACEMENT:
-        # Displacement algorithm: search right first, then below
-        p_max_x = parent_df["X"].max()
-        padding = 50.0 # Better padding for displacement
-        
-        # Start by centering child at parent station
-        delta_x = p_row["X"] - c_row["X"]
-        delta_y = p_row["Y"] - c_row["Y"]
-        
-        # Shift child to the right of parent survey
-        # child_df["X"] + delta_x is the position if SIMPLE. 
-        # We want (child_df["X"] + delta_x).min() > p_max_x + padding
-        current_child_min_x = child_df["X"].min() + delta_x
-        additional_shift_x = max(0, (p_max_x + padding) - current_child_min_x)
-        delta_x += additional_shift_x
-        
-        # Add connector node to child_df
-        # This node is at the parent station's absolute coordinates
-        # but relative to the child survey's origin 
-        # (so after delta shift it lands on parent station)
-        connector_id = "CONN_1"
-        connector_node = pd.DataFrame({
-            "Node_Id": [connector_id],
-            "X": [p_row["X"] - delta_x],
-            "Y": [p_row["Y"] - delta_y],
-            "Links": [child_station],
-            "Type": ["connector"]
-        })
-        child_df = pd.concat([child_df, connector_node], ignore_index=True)
+    displacement = is_displacement or (
+        is_section and section_protocol == SectionProtocol.DISPLACEMENT
+    )
 
-    child_df["X"] = child_df["X"] + delta_x
-    child_df["Y"] = child_df["Y"] + delta_y
+    if displacement:
+        delta_x, delta_y = _compute_displacement(parent_df, child_df, delta_x, delta_y)
+
+    child_df.loc[:, "X"] = child_df["X"] + delta_x
+    child_df.loc[:, "Y"] = child_df["Y"] + delta_y
 
     # 2. ID Remapping
     parent_numeric_ids = _get_numeric_ids(parent_df)
     child_numeric_ids = _get_numeric_ids(child_df)
-    
-    mapping: Dict[str, str] = {child_station: parent_station}
-    
+
+    mapping: Dict[str, str] = {}
+    if not displacement:
+        mapping[child_station] = parent_station
+
     pref_offset = 0
     if child_numeric_ids:
         max_parent = max(parent_numeric_ids) if parent_numeric_ids else 0
         min_child = min(child_numeric_ids)
         offset = max_parent + 1 - min_child
-        
+
         for cid in child_numeric_ids:
             cid_str = str(cid)
-            if cid_str != child_station:
+            if displacement or cid_str != child_station:
                 mapping[cid_str] = str(cid + offset)
 
     # Mixed IDs (xxPyy) remapping
     parent_prefixes = _get_mixed_prefixes(parent_df)
     child_prefixes = _get_mixed_prefixes(child_df)
-    
+
     if child_prefixes:
         max_p_pref = max(parent_prefixes) if parent_prefixes else 0
         min_c_pref = min(child_prefixes)
@@ -249,14 +225,15 @@ def _merge_single_view(
             return f"{new_base}P{suffix}"
         return nid_str
 
-    # Remove coincident node from child AFTER computing mapping/offset
-    not_coincident_indices = [
-        i for i, nid in enumerate(child_df["Node_Id"]) if str(nid) != child_station
-    ]
-    child_df = child_df.iloc[not_coincident_indices].reset_index(drop=True)
-    
-    child_df["Node_Id"] = child_df["Node_Id"].apply(remap_id)
-    
+    if not displacement:
+        # Remove coincident node from child AFTER computing mapping/offset
+        not_coincident_indices = [
+            i for i, nid in enumerate(child_df["Node_Id"]) if str(nid) != child_station
+        ]
+        child_df = child_df.iloc[not_coincident_indices].reset_index(drop=True)
+
+    child_df.loc[:, "Node_Id"] = child_df["Node_Id"].apply(remap_id)
+
     def remap_links(link_val) -> str:
         if pd.isna(link_val) or not link_val or link_val == "-":
             return "-"
@@ -264,8 +241,23 @@ def _merge_single_view(
         if link_str.endswith(".0"):
             link_str = link_str[:-2]
         return "-".join(remap_id(link) for link in link_str.split("-"))
-    
-    child_df["Links"] = child_df["Links"].apply(remap_links)
+
+    child_df.loc[:, "Links"] = child_df["Links"].apply(remap_links)
+
+    if displacement:
+        displaced_child_station = remap_id(child_station)
+        connector_data: Dict[str, list] = {
+            "Node_Id": [f"CONN_{parent_station}"],
+            "X": [float(p_row["X"])],
+            "Y": [float(p_row["Y"])],
+            "Links": [displaced_child_station],
+            "Type": ["connector"],
+        }
+        for col in parent_df.columns:
+            if col not in connector_data:
+                connector_data[col] = [pd.NA]
+        connector_row = pd.DataFrame(connector_data)
+        return pd.concat([parent_df, child_df, connector_row], ignore_index=True)
 
     return pd.concat([parent_df, child_df], ignore_index=True)
 
