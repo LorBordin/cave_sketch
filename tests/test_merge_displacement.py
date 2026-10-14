@@ -187,9 +187,9 @@ def test_displacement_connector_rendering():
     # Line features must include the connector
     conn_lines = [line for line in features["lines"] if line.get("dash") is not None]
     assert len(conn_lines) == 1
-    assert conn_lines[0]["color"] == "gray"
-    assert conn_lines[0]["dash"] == [3, 7]
-    assert conn_lines[0]["weight"] == 0.5
+    assert conn_lines[0]["color"] == "firebrick"
+    assert conn_lines[0]["dash"] == [8, 4]
+    assert conn_lines[0]["weight"] == 1.5
 
     # Check matplotlib rendering: only stations get text labels
     fig, ax = plt.subplots()

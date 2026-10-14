@@ -42,10 +42,10 @@ STYLE_MAP = {
     "B_entrance": {"color": "firebrick", "icon": "entrance", "size_m": 1.5, "type": "icon"},
     "B_water-flow": {"color": "mediumpurple", "icon": "water_flow", "size_m": 1.5, "type": "icon"},
     "connector": {
-        "color": "gray",
-        "linestyle": "dotted",
+        "color": "firebrick",
+        "linestyle": (0, (8, 4)),
         "type": "line",
-        "weight": 0.5,
+        "weight": 1.5,
     },
 }
 
