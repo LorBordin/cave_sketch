@@ -50,3 +50,33 @@ def test_round_trip_restores_original_coordinates() -> None:
 
     np.testing.assert_allclose(restored["X"].to_numpy(), df["X"].to_numpy(), atol=1e-9)
     np.testing.assert_allclose(restored["Y"].to_numpy(), df["Y"].to_numpy(), atol=1e-9)
+
+
+def test_apply_magnetic_variation_adjusts_rotation_column() -> None:
+    df = pd.DataFrame({
+        "Node_Id": ["entrance", "station1", "station2"],
+        "Links": ["-", "station2", "station1"],
+        "X": [0.0, 10.0, 20.0],
+        "Y": [0.0, 10.0, 20.0],
+        "Type": ["B_entrance", "station", "station"],
+        "Rotation": [170.0, 5.0, float("nan")],
+    })
+
+    # East variation +10 deg -> -10 deg turn (modulo 360)
+    res_east = apply_magnetic_variation(df, 10.0)
+    assert res_east["Rotation"].iloc[0] == pytest.approx(160.0)
+    assert res_east["Rotation"].iloc[1] == pytest.approx(355.0)
+    assert pd.isna(res_east["Rotation"].iloc[2])
+
+    # West variation -15 deg -> +15 deg turn (modulo 360)
+    res_west = apply_magnetic_variation(df, -15.0)
+    assert res_west["Rotation"].iloc[0] == pytest.approx(185.0)
+    assert res_west["Rotation"].iloc[1] == pytest.approx(20.0)
+    assert pd.isna(res_west["Rotation"].iloc[2])
+
+    # Zero variation leaves Rotation intact
+    res_zero = apply_magnetic_variation(df, 0.0)
+    assert res_zero["Rotation"].iloc[0] == pytest.approx(170.0)
+    assert res_zero["Rotation"].iloc[1] == pytest.approx(5.0)
+    assert pd.isna(res_zero["Rotation"].iloc[2])
+
