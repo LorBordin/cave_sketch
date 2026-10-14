@@ -8,11 +8,11 @@
 >   Stop there and resume Phase 5 on an Android-capable machine.
 
 ## Phase 1: Shared Displacement Routine (library)
-- [ ] Task: Write failing tests for the placement helper (`tests/test_merge_displacement.py`)
-    - [ ] Padding = 10% of the parent bbox diagonal (1 m floor for a degenerate parent)
-    - [ ] Wide/flat parent → below-ish placement; tall/narrow parent → right-ish; a case where an
+- [x] Task: Write failing tests for the placement helper (`tests/test_merge_displacement.py`) (da889a3)
+    - [x] Padding = 10% of the parent bbox diagonal (1 m floor for a degenerate parent)
+    - [x] Wide/flat parent → below-ish placement; tall/narrow parent → right-ish; a case where an
       intermediate angle wins
-    - [ ] Child bbox always clears parent bbox by ≥ padding; deterministic tie-break
+    - [x] Child bbox always clears parent bbox by ≥ padding; deterministic tie-break
 - [ ] Task: Implement `_compute_displacement(parent_df, child_df, anchor_dx, anchor_dy) -> (dx, dy)`
   in `cave_sketch/survey/merger.py` (angles 0°…−90° in 5° steps, min combined-bbox area,
   tie-break shorter slide then angle closer to 0°)
