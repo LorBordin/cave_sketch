@@ -7,7 +7,7 @@
 > - **⏸ PAUSE POINT at the end of Phase 4:** the creating machine has no Android Studio / SDK.
 >   Stop there and resume Phase 5 on an Android-capable machine.
 
-## Phase 1: Shared Displacement Routine (library)
+## Phase 1: Shared Displacement Routine (library) [checkpoint: 2d48192]
 - [x] Task: Write failing tests for the placement helper (`tests/test_merge_displacement.py`) (da889a3)
     - [x] Padding = 10% of the parent bbox diagonal (1 m floor for a degenerate parent)
     - [x] Wide/flat parent → below-ish placement; tall/narrow parent → right-ish; a case where an
@@ -26,7 +26,7 @@
 - [x] Task: Write failing test + fix if needed: renderer draws connector rows as a dotted line, with
   no station marker/label (b311c38)
 - [x] Task: Gates + root `DEVLOG.md` entry (29a3611)
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Shared Displacement Routine' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Shared Displacement Routine' (Protocol in workflow.md) (2d48192)
 
 ## Phase 2: Map Protocol API
 - [ ] Task: Write failing tests: `MapProtocol` enum; `merge_surveys(map_protocol=DISPLACEMENT)`
