@@ -1,13 +1,13 @@
 # Implementation Plan: Download Survey CSV Files (Web & Android)
 
-## Phase 1: Survey Core & Python Bridge Logic
+## Phase 1: Survey Core & Python Bridge Logic [checkpoint: f31593a]
 - [x] Task: TDD - Write tests for effective section CSV generation and Python bridge [b88bd19]
     - [x] Add unit tests verifying `effective_section_csv` and `effective_map_csv` when merging
     - [x] Add unit tests for `survey_bridge.py` verifying that `generate_survey_plot` returns both `map_csv_path` and `section_csv_path` in its JSON output
 - [x] Task: Implement effective section CSV logic and update Python bridge [2295794]
     - [x] Implement `effective_section_csv` function in `android/app/src/main/python/survey_bridge.py`
     - [x] Update `generate_survey_plot` to call `effective_section_csv` and include `section_csv_path` in the result dictionary
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Survey Core & Python Bridge Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Survey Core & Python Bridge Logic' (Protocol in workflow.md) [f31593a]
 
 ## Phase 2: Streamlit Webapp CSV Download Integration
 - [ ] Task: TDD - Write tests for webapp survey CSV download persistence
