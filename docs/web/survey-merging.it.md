@@ -20,9 +20,19 @@ Per unire ulteriori rilievi oltre a un figlio, scaricare il risultato unito e ri
 
 ![Interfaccia di unione](imgs/merge-ui.png)
 
-## Vista in Pianta
+## Protocolli per la Vista in Pianta
 
-La vista in pianta utilizza sempre l'**Unione Semplice**: il figlio viene traslato in modo che la sua stazione corrispondente coincida con quella del padre. Non viene esposto alcun selettore di protocollo per la vista in pianta.
+Quando viene caricata una mappa figlia, è possibile selezionare un protocollo di unione per la vista in pianta:
+
+### Unione Semplice (Predefinita)
+
+La stazione corrispondente del figlio viene allineata a quella del padre. Entrambi i rilievi sono disegnati nello stesso spazio di coordinate.
+
+### Dislocamento
+
+Il rilievo figlio viene spostato automaticamente in un'area separata e non sovrapposta all'esterno del riquadro di delimitazione (bounding box) del padre per evitare sovrapposizioni visive. Una linea sottile di connessione collega la stazione corrispondente del padre a quella del figlio.
+
+> **Nota su metriche ed esportazioni geospaziali:** La linea di connessione è esclusa dai calcoli di sviluppo e dislivello complessivi, lasciando invariati i totali della grotta. Inoltre, le mappe satellitari e le esportazioni KML/KMZ utilizzano sempre l'allineamento geografico reale (Unione Semplice).
 
 ## Protocolli per la Vista in Sezione
 

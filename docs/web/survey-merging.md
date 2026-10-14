@@ -20,9 +20,19 @@ To merge additional surveys beyond one child, download the merged result and re-
 
 ![Merge UI](imgs/merge-ui.png)
 
-## Map View
+## Map View Protocols
 
-Map view always uses **Simple Merging**: the child is translated so that its matching station coincides with the parent's matching station. No protocol selector is exposed for map view.
+When a child map is uploaded, you can select a merging protocol for the plan view:
+
+### Simple Merging (Default)
+
+The child's matching station is aligned to coincide with the parent's matching station. Both surveys are drawn in the same coordinate space.
+
+### Displacement
+
+The child map is automatically shifted to a separate, non-overlapping area outside the parent's bounding box to prevent visual clutter in complex or overlapping passages. A thin connector line links the parent's matching station to the child's displaced matching station.
+
+> **Note on cave metrics & geospatial exports:** The connector line is excluded from total length and depth calculations, keeping cave totals identical to Simple Merging. In addition, Satellite maps and KML/KMZ exports always preserve the true geographic alignment (Simple Merging).
 
 ## Section View Protocols
 

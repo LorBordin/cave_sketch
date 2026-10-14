@@ -10,7 +10,7 @@ CaveSketch is a browser-based application built with [Streamlit](https://streaml
 
 ## 📖 Guides
 
-- **[Survey Merging](survey-merging.md)** — Combine a parent and child survey into a single PDF plot, with three section protocols (Simple, Mirror, Displacement).
+- **[Survey Merging](survey-merging.md)** — Combine a parent and child survey into a single PDF plot, with configurable map and section protocols (Simple, Mirror, Displacement).
 - **[Satellite Maps & Export](satellite-maps.md)** — Place cave surveys on satellite imagery, combine multiple surveys on one map, and export to HTML, KML, or offline KMZ.
 
 ---
