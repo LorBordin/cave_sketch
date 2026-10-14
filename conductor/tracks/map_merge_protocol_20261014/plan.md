@@ -37,10 +37,10 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Map Protocol API' (Protocol in workflow.md) (2ab6c19)
 
 ## Phase 3: Webapp UI
-- [ ] Task: Write failing tests (follow existing app test style, e.g. `tests/test_settings_panel.py`,
+- [x] 9025258 Task: Write failing tests (follow existing app test style, e.g. `tests/test_settings_panel.py`,
   `tests/test_satellite_map.py`): session default `map_protocol="simple"`; radio shown only when a
   child map is uploaded; satellite `merged_map.csv` always uses Simple
-- [ ] Task: Implement: `app/session.py` key; radio in `app/components/merging_controls.py`;
+- [~] Task: Implement: `app/session.py` key; radio in `app/components/merging_controls.py`;
   `app/pages/1_survey_plot.py` passes `map_protocol` to `draw_survey` and forces
   `MapProtocol.SIMPLE` for `merged_map.csv`
 - [ ] Task: Update docs (`docs/web/survey-merging.md`, `docs/web/survey-merging.it.md`, README,
