@@ -74,3 +74,70 @@ def test_generate_survey_plot_respects_show_centerline(two_csvs):
         mock_draw.assert_called_once()
         _, kwargs = mock_draw.call_args
         assert kwargs["config"]["show_centerline"] is False
+
+
+@pytest.fixture
+def numeric_csvs(tmp_path):
+    parent = pd.DataFrame({
+        "Node_Id": ["1", "2"], "X": [0.0, 10.0], "Y": [0.0, 0.0],
+        "Links": ["2", "1"], "Type": ["station", "station"],
+    })
+    child = pd.DataFrame({
+        "Node_Id": ["1", "2"], "X": [0.0, 5.0], "Y": [0.0, 0.0],
+        "Links": ["2", "1"], "Type": ["station", "station"],
+    })
+    p = tmp_path / "num_map.csv"
+    c = tmp_path / "num_child_map.csv"
+    parent.to_csv(p, index=False)
+    child.to_csv(c, index=False)
+    return str(p), str(c), tmp_path
+
+
+def test_generate_survey_plot_passes_map_protocol(numeric_csvs):
+    from unittest.mock import patch
+    import json
+    from cave_sketch.survey.merger import MapProtocol
+    map_csv, child_csv, work_dir = numeric_csvs
+
+    # Default to simple
+    inputs_json_default = {
+        "map_path": map_csv,
+        "child_map_path": child_csv,
+        "parent_station": "2",
+        "child_station": "1",
+    }
+    with patch.object(survey_bridge, "draw_survey") as mock_draw:
+        survey_bridge.generate_survey_plot(json.dumps(inputs_json_default), str(work_dir))
+        mock_draw.assert_called_once()
+        _, kwargs = mock_draw.call_args
+        assert kwargs.get("map_protocol") == MapProtocol.SIMPLE
+
+    # Explicit displacement
+    inputs_json_disp = {
+        "map_path": map_csv,
+        "child_map_path": child_csv,
+        "parent_station": "2",
+        "child_station": "1",
+        "map_protocol": "displacement",
+    }
+    with patch.object(survey_bridge, "draw_survey") as mock_draw:
+        survey_bridge.generate_survey_plot(json.dumps(inputs_json_disp), str(work_dir))
+        mock_draw.assert_called_once()
+        _, kwargs = mock_draw.call_args
+        assert kwargs.get("map_protocol") == MapProtocol.DISPLACEMENT
+
+
+def test_effective_map_csv_always_uses_simple_map_protocol(two_csvs):
+    from unittest.mock import patch
+    from cave_sketch.survey import merger
+    from cave_sketch.survey.merger import MapProtocol
+    map_csv, child_csv, work_dir = two_csvs
+
+    with patch.object(merger, "merge_surveys", return_value=(pd.DataFrame({"Node_Id": ["1"]}), None)) as mock_merge:
+        survey_bridge.effective_map_csv(
+            map_csv, child_csv, "st2", "st1", SectionProtocol.DISPLACEMENT, str(work_dir)
+        )
+        mock_merge.assert_called_once()
+        _, kwargs = mock_merge.call_args
+        assert kwargs.get("map_protocol") == MapProtocol.SIMPLE
+
