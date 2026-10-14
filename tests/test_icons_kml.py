@@ -16,7 +16,7 @@ def _kml_root(map_data):
 def test_kml_icon_style_uses_wall_width_and_icon_color():
     root = _kml_root({"name": "M", "lines": [], "nodes": []})
     styles = {s.get("id"): s for s in root.findall(".//kml:Style", NS)}
-    for typ in ["B_blocks", "B_continuation", "B_entrance", "B_water-flow", "L_water-flow"]:
+    for typ in ["B_blocks", "B_continuation", "B_entrance", "B_water-flow", "B_snow", "L_water-flow"]:
         line_style = styles[f"icon_{typ}"].find("kml:LineStyle", NS)
         assert line_style.find("kml:width", NS).text == str(STYLE_MAP["L_wall"]["weight"])
         assert line_style.find("kml:color", NS).text == rgba_to_kml_color(STYLE_MAP[typ]["color"])

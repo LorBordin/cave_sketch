@@ -16,6 +16,7 @@ def test_compact_kml_export():
         ],
         "nodes": [
             {"id": "5", "lat": 5.0, "lon": 5.0, "type": "B_ice"},
+            {"id": "6", "lat": 6.0, "lon": 6.0, "type": "B_snow"},
         ],
         "water_polygons": [
             {
@@ -37,20 +38,26 @@ def test_compact_kml_export():
     
     ns = {"kml": "http://www.opengis.net/kml/2.2"}
     
-    # 1. One shared style for wall
+    # 1. One shared style for wall, and one for icon_B_snow
     styles = root.findall(".//kml:Style", ns)
     style_ids = [s.get("id") for s in styles]
     assert "line_wall" in style_ids or "line_L_wall" in style_ids, "Should have a shared style for wall"
+    assert "icon_B_snow" in style_ids, "Should have a shared style for icon_B_snow"
     
-    # 2. MultiGeometry for wall lines
+    # 2. MultiGeometry for wall lines and icons
     placemarks = root.findall(".//kml:Placemark", ns)
     
     wall_placemarks = []
     water_placemarks = []
     point_placemarks = []
+    snow_placemarks = []
     
     for p in placemarks:
-        if p.find(".//kml:MultiGeometry", ns) is not None:
+        style_url = p.find("kml:styleUrl", ns)
+        url_text = style_url.text if style_url is not None else ""
+        if url_text == "#icon_B_snow":
+            snow_placemarks.append(p)
+        elif p.find(".//kml:MultiGeometry", ns) is not None:
             wall_placemarks.append(p)
         elif p.find(".//kml:Polygon", ns) is not None:
             water_placemarks.append(p)
@@ -63,8 +70,13 @@ def test_compact_kml_export():
     # 1 polygon
     assert len(water_placemarks) == 1, "Expected exactly ONE Polygon placemark"
     
-    # B_ice / B_snow point placemarks are suppressed from KMZ
+    # B_ice point placemarks are suppressed from KMZ
     assert len(point_placemarks) == 0, "Expected B_ice point placemarks to be suppressed"
+
+    # B_snow icon placemark is present with 3 LineString strokes (6 arms)
+    assert len(snow_placemarks) == 1, "Expected exactly ONE B_snow icon placemark"
+    snow_linestrings = snow_placemarks[0].findall(".//kml:LineString", ns)
+    assert len(snow_linestrings) == 3, "Expected 3 LineStrings for 6-armed snow asterisk"
     
     # Check styleUrl
     style_url = wall_placemarks[0].find("kml:styleUrl", ns).text

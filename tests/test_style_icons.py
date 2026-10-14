@@ -19,8 +19,27 @@ def test_every_stroke_is_a_polyline(name):
 
 def test_expected_icons_exist():
     assert set(ICON_SHAPES) == {
-        "blocks", "entrance", "continuation", "water_flow", "water_flow_chevron"
+        "blocks", "entrance", "continuation", "water_flow", "water_flow_chevron", "snow"
     }
+
+
+def test_snow_icon_is_six_armed_asterisk():
+    strokes = icon_strokes("snow", 10.0, 20.0, size_m=1.5)
+    assert len(strokes) == 3
+    # Sized in meters: largest dimension is size_m
+    xs = [x for stroke in strokes for x, _ in stroke]
+    ys = [y for stroke in strokes for _, y in stroke]
+    assert max(max(xs) - min(xs), max(ys) - min(ys)) == pytest.approx(1.5, abs=1e-3)
+    # Centered at (10.0, 20.0)
+    assert (max(xs) + min(xs)) / 2 == pytest.approx(10.0, abs=1e-3)
+    assert (max(ys) + min(ys)) / 2 == pytest.approx(20.0, abs=1e-3)
+    # 6 arms emanating from the center, each length 1.5 / 2 = 0.75m
+    for stroke in strokes:
+        assert len(stroke) == 2
+        (x1, y1), (x2, y2) = stroke
+        # Arm from center to tip
+        assert ((x1 - 10.0) ** 2 + (y1 - 20.0) ** 2) ** 0.5 == pytest.approx(0.75, abs=1e-3)
+        assert ((x2 - 10.0) ** 2 + (y2 - 20.0) ** 2) ** 0.5 == pytest.approx(0.75, abs=1e-3)
 
 
 def test_icon_strokes_scales_and_translates():

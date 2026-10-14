@@ -3,7 +3,7 @@ from matplotlib.colors import is_color_like
 from cave_sketch.style import ICON_LINE_WEIGHT, STYLE_MAP
 from cave_sketch.style_icons import ICON_SHAPES
 
-ICON_TYPES = ["B_blocks", "B_continuation", "B_entrance", "B_water-flow"]
+ICON_TYPES = ["B_blocks", "B_continuation", "B_entrance", "B_water-flow", "B_snow"]
 
 
 def test_block_placeholder_is_replaced_by_real_dxf_name():
@@ -17,6 +17,7 @@ def test_icon_types_reference_existing_shapes_with_positive_size():
         "B_continuation": "continuation",
         "B_entrance": "entrance",
         "B_water-flow": "water_flow",
+        "B_snow": "snow",
     }
     for typ, icon in expected.items():
         style = STYLE_MAP[typ]
@@ -37,9 +38,12 @@ def test_icon_line_weight_matches_wall():
     assert ICON_LINE_WEIGHT == STYLE_MAP["L_wall"]["weight"]
 
 
-def test_ice_and_snow_stay_plain_markers():
+def test_ice_stays_plain_marker_and_snow_is_icon():
     assert STYLE_MAP["B_ice"]["type"] == "point"
-    assert STYLE_MAP["B_snow"]["type"] == "point"
+    assert STYLE_MAP["B_snow"]["type"] == "icon"
+    assert STYLE_MAP["B_snow"]["icon"] == "snow"
+    assert STYLE_MAP["B_snow"]["color"] == "white"
+    assert STYLE_MAP["B_snow"]["size_m"] == 1.5
 
 
 def test_every_style_color_is_renderable():
