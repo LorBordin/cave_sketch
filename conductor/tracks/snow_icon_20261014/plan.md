@@ -1,10 +1,10 @@
 # Plan
 
 ## Phase 1: Snow icon
-- [ ] Task: Write failing tests
-    - [ ] Test `snow` icon strokes generation (6 arms, sized in meters)
-    - [ ] Update `tests/test_kmz_export.py` to expect B_snow icon LineStrings; keep B_ice suppressed
-    - [ ] Update `tests/test_style.py` for B_snow as icon
+- [x] Task: Write failing tests [3567305]
+    - [x] Test `snow` icon strokes generation (6 arms, sized in meters)
+    - [x] Update `tests/test_kmz_export.py` to expect B_snow icon LineStrings; keep B_ice suppressed
+    - [x] Update `tests/test_style.py` for B_snow as icon
 - [ ] Task: Implement
     - [ ] Add `snow` icon strokes in `cave_sketch/features/render_features.py`
     - [ ] Update `B_snow` in `cave_sketch/style.py`
