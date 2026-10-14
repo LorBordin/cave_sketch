@@ -12,11 +12,11 @@
 ## Phase 2: Streamlit Webapp CSV Download Integration
 - [x] Task: TDD - Write tests for webapp survey CSV download persistence [382652b]
     - [x] Add tests verifying session state and output path resolution for effective map and section CSVs
-- [ ] Task: Implement CSV download buttons in `app/pages/1_survey_plot.py`
-    - [ ] Compute and save `merged_section.csv` when child section is merged (mirroring `merged_map.csv`)
-    - [ ] Store `effective_map_csv` and `effective_section_csv` in `st.session_state`
-    - [ ] Add download buttons for Map CSV (`<sanitized_name>_map.csv`) and Section CSV (`<sanitized_name>_section.csv`) under preview
-    - [ ] Verify iterative survey merging workflow (Upload A+B -> Generate -> Download CSV -> Upload as Main -> Upload C -> Merge)
+- [x] Task: Implement CSV download buttons in `app/pages/1_survey_plot.py` [dd661cf]
+    - [x] Compute and save `merged_section.csv` when child section is merged (mirroring `merged_map.csv`)
+    - [x] Store `effective_map_csv` and `effective_section_csv` in `st.session_state`
+    - [x] Add download buttons for Map CSV (`<sanitized_name>_map.csv`) and Section CSV (`<sanitized_name>_section.csv`) under preview
+    - [x] Verify iterative survey merging workflow (Upload A+B -> Generate -> Download CSV -> Upload as Main -> Upload C -> Merge)
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp CSV Download Integration' (Protocol in workflow.md)
 
 ## Phase 3: Android ViewModel & UI Implementation
