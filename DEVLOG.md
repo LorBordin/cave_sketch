@@ -534,5 +534,19 @@
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-10-14 11:01] Track entrance_symbol_orientation_20261014 — Implementation
+**Files:**
+- cave_sketch/survey/survey.py
+- cave_sketch/geo/declination.py
+- tests/test_df_to_survey_rotation.py
+- tests/test_declination.py
+- tests/test_entrance_symbol_orientation.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Entrance symbol orientation and rotation preservation under declination are fully verified and tested end-to-end.
+
+
 
 
