@@ -108,9 +108,16 @@ def draw_survey(
 def _df_to_survey(df: pd.DataFrame, name: str) -> CaveSurvey:
     """Helper to convert a survey DataFrame back to a CaveSurvey model."""
     survey = CaveSurvey(name=name)
+    has_rotation = "Rotation" in df.columns
     for _, row in df.iterrows():
         links_str = row["Links"]
         links = [link.strip() for link in str(links_str).split("-") if link.strip() and link != "-"]
+        rotation = 0.0
+        if has_rotation and pd.notna(row["Rotation"]):
+            try:
+                rotation = float(row["Rotation"])
+            except (ValueError, TypeError):
+                rotation = 0.0
         survey.points.append(
             SurveyPoint(
                 id=str(row["Node_Id"]),
@@ -118,6 +125,7 @@ def _df_to_survey(df: pd.DataFrame, name: str) -> CaveSurvey:
                 y=float(row["Y"]),
                 point_type=str(row["Type"]),
                 links=links,
+                rotation=rotation,
             )
         )
     return survey
