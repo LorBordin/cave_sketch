@@ -1,7 +1,6 @@
-from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+
 import pandas as pd
-import pytest
 
 from cave_sketch.survey.merger import SectionProtocol, merge_surveys
 from cave_sketch.utils.filename import sanitize_filename
@@ -9,6 +8,7 @@ from cave_sketch.utils.filename import sanitize_filename
 
 def test_session_state_has_merged_section_csv():
     import streamlit as st
+
     from app.session import init_session
 
     st.session_state.clear()
@@ -140,7 +140,8 @@ def test_iterative_survey_merge_workflow(tmp_path):
     )
     assert merged_abc_map is not None
     assert merged_abc_sec is not None
-    # 2 from A, 1 from B (since 1 merged with 2), 1 from C (since 1 merged with 4) = 4 total stations
+    # 2 from A, 1 from B (since 1 merged with 2), 1 from C (since 1 merged with 4)
+    # Total = 4 stations
     assert len(merged_abc_map) == 4
     assert len(merged_abc_sec) == 4
 

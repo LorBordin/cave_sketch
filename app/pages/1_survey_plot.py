@@ -87,6 +87,37 @@ if st.button("✨ Generate Survey Plot"):
                     st.session_state.merged_map_csv = None
             else:
                 st.session_state.merged_map_csv = None
+            st.session_state.effective_map_csv = (
+                st.session_state.merged_map_csv or st.session_state.map_csv
+            )
+
+            if (
+                st.session_state.child_section_csv
+                and st.session_state.parent_station
+                and st.session_state.child_station
+            ):
+                _parent_sec_df = pd.read_csv(st.session_state.section_csv)
+                _child_sec_df = pd.read_csv(st.session_state.child_section_csv)
+                _, _merged_sec_df = merge_surveys(
+                    parent_map=None,
+                    parent_section=_parent_sec_df,
+                    child_map=None,
+                    child_section=_child_sec_df,
+                    parent_station=st.session_state.parent_station,
+                    child_station=st.session_state.child_station,
+                    section_protocol=SectionProtocol(st.session_state.section_protocol),
+                )
+                _merged_sec_path = st.session_state.files_dir / "merged_section.csv"
+                if _merged_sec_df is not None:
+                    _merged_sec_df.to_csv(_merged_sec_path, index=False)
+                    st.session_state.merged_section_csv = _merged_sec_path
+                else:
+                    st.session_state.merged_section_csv = None
+            else:
+                st.session_state.merged_section_csv = None
+            st.session_state.effective_section_csv = (
+                st.session_state.merged_section_csv or st.session_state.section_csv
+            )
     else:
         st.warning("⚠️ Please upload at least one file first.")
 
@@ -95,10 +126,44 @@ if st.session_state.cave_survey is not None:
     st.pyplot(st.session_state.cave_survey)
     st.success("✅ PDF Created!")
 
+    from cave_sketch.utils.filename import sanitize_filename
+    sanitized_name = sanitize_filename(st.session_state.survey_name)
+
+    buttons = []
     if st.session_state.pdf_output_path and Path(st.session_state.pdf_output_path).exists():
-        from cave_sketch.utils.filename import sanitize_filename
-        sanitized_name = sanitize_filename(st.session_state.survey_name)
-        with open(st.session_state.pdf_output_path, "rb") as f:
-            st.download_button(
-                "📥 Download PDF", f, file_name=f"{sanitized_name}.pdf", mime="application/pdf"
+        buttons.append(
+            (
+                "📥 Download PDF",
+                st.session_state.pdf_output_path,
+                f"{sanitized_name}.pdf",
+                "application/pdf",
             )
+        )
+
+    effective_map = (
+        st.session_state.effective_map_csv
+        or st.session_state.merged_map_csv
+        or st.session_state.map_csv
+    )
+    if effective_map and Path(effective_map).exists():
+        buttons.append(
+            ("📥 Download Map CSV", effective_map, f"{sanitized_name}_map.csv", "text/csv")
+        )
+
+    effective_sec = (
+        st.session_state.effective_section_csv
+        or st.session_state.merged_section_csv
+        or st.session_state.section_csv
+    )
+    if effective_sec and Path(effective_sec).exists():
+        buttons.append(
+            ("📥 Download Section CSV", effective_sec, f"{sanitized_name}_section.csv", "text/csv")
+        )
+
+    if buttons:
+        cols = st.columns(len(buttons))
+        for col, (label, file_path, fname, mime) in zip(cols, buttons):
+            with open(file_path, "rb") as f:
+                col.download_button(
+                    label, f, file_name=fname, mime=mime
+                )
