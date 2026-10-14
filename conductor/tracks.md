@@ -78,5 +78,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: B_snow icon in KMZ (white "*")**
+- [x] **Track: B_snow icon in KMZ (white "*")**
 *Link: [./tracks/snow_icon_20261014/](./tracks/snow_icon_20261014/)*
