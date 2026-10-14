@@ -29,7 +29,7 @@ class SessionCleanupTest {
         // Guards against an artifact being added elsewhere without updating cleanup.
         val expected = listOf(
             "map.csv", "section.csv", "child_map.csv", "child_section.csv",
-            "merged_map.csv", "survey.pdf", "survey.html", "survey.json", "survey.kmz",
+            "merged_map.csv", "merged_section.csv", "survey.pdf", "survey.html", "survey.json", "survey.kmz",
         )
         assertEquals(expected.toSet(), SESSION_FILES.toSet())
     }

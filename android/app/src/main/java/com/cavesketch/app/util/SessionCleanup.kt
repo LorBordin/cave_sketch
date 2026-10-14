@@ -3,7 +3,7 @@ package com.cavesketch.app.util
 /** Fixed-name intermediate + output artifacts written during a session. */
 val SESSION_FILES: List<String> = listOf(
     "map.csv", "section.csv", "child_map.csv", "child_section.csv",
-    "merged_map.csv", "survey.pdf", "survey.html", "survey.json", "survey.kmz",
+    "merged_map.csv", "merged_section.csv", "survey.pdf", "survey.html", "survey.json", "survey.kmz",
 )
 
 /** Prefix for imported additional JSON maps (`additional_0.json`, …). */

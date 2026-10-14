@@ -127,16 +127,41 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
                 is PlotState.Error -> StateBanner("⚠️ ${s.message}", isError = true)
                 is PlotState.Success -> {
                     PdfPreview(s.pdfPath)
-                    val name = inputs.surveyName.ifBlank { "survey" } + ".pdf"
+                    val baseName = inputs.surveyName.ifBlank { "survey" }
+                    val pdfName = "$baseName.pdf"
                     SaveShareButton(
                         label = "Save / Share PDF",
                         path = s.pdfPath,
                         mimeType = "application/pdf",
-                        displayName = name,
+                        displayName = pdfName,
                         modifier = Modifier.fillMaxWidth(),
                         onError = showSnackbar,
-                        onSaved = { showSnackbar("Saved $name") },
+                        onSaved = { showSnackbar("Saved $pdfName") },
                     )
+                    if (s.mapCsvPath != null) {
+                        val mapName = "${baseName}_map.csv"
+                        SaveShareButton(
+                            label = "Save / Share Map CSV",
+                            path = s.mapCsvPath,
+                            mimeType = "text/csv",
+                            displayName = mapName,
+                            modifier = Modifier.fillMaxWidth(),
+                            onError = showSnackbar,
+                            onSaved = { showSnackbar("Saved $mapName") },
+                        )
+                    }
+                    if (s.sectionCsvPath != null) {
+                        val sectionName = "${baseName}_section.csv"
+                        SaveShareButton(
+                            label = "Save / Share Section CSV",
+                            path = s.sectionCsvPath,
+                            mimeType = "text/csv",
+                            displayName = sectionName,
+                            modifier = Modifier.fillMaxWidth(),
+                            onError = showSnackbar,
+                            onSaved = { showSnackbar("Saved $sectionName") },
+                        )
+                    }
                 }
                 PlotState.Idle -> StateBanner("Pick your files and tap Generate.", isError = false)
             }
