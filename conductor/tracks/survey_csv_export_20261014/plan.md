@@ -10,8 +10,8 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Survey Core & Python Bridge Logic' (Protocol in workflow.md) [f31593a]
 
 ## Phase 2: Streamlit Webapp CSV Download Integration
-- [ ] Task: TDD - Write tests for webapp survey CSV download persistence
-    - [ ] Add tests verifying session state and output path resolution for effective map and section CSVs
+- [x] Task: TDD - Write tests for webapp survey CSV download persistence [382652b]
+    - [x] Add tests verifying session state and output path resolution for effective map and section CSVs
 - [ ] Task: Implement CSV download buttons in `app/pages/1_survey_plot.py`
     - [ ] Compute and save `merged_section.csv` when child section is merged (mirroring `merged_map.csv`)
     - [ ] Store `effective_map_csv` and `effective_section_csv` in `st.session_state`
