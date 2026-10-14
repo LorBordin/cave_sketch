@@ -297,9 +297,17 @@ None
 - android/app/src/test/java/com/cavesketch/app/util/FileCopyTest.kt
 - android/app/src/test/java/com/cavesketch/app/ui/components/SaveShareButtonTest.kt
 
+## [2026-10-14 13:47] Phase 4: Android – Code Complete
+**Files:**
+- android/app/src/main/python/survey_bridge.py
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt
+- android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt
+- tests/test_survey_bridge.py
+- android/DEVLOG.md
+
 **Deviations from spec:** None
+**Assumptions:** Pending on-device verification and gradle build on machine with Android SDK/JDK (Phase 5).
+**Next session notes:** Phase 4 code complete. Map merge protocol integrated into SurveyInputs, MergeControls, and survey_bridge. Python gates pass cleanly.
 
-**Assumptions:** None
-
-**Next session notes:** None
 

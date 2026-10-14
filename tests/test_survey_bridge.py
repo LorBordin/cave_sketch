@@ -94,9 +94,11 @@ def numeric_csvs(tmp_path):
 
 
 def test_generate_survey_plot_passes_map_protocol(numeric_csvs):
-    from unittest.mock import patch
     import json
+    from unittest.mock import patch
+
     from cave_sketch.survey.merger import MapProtocol
+
     map_csv, child_csv, work_dir = numeric_csvs
 
     # Default to simple
@@ -129,11 +131,14 @@ def test_generate_survey_plot_passes_map_protocol(numeric_csvs):
 
 def test_effective_map_csv_always_uses_simple_map_protocol(two_csvs):
     from unittest.mock import patch
+
     from cave_sketch.survey import merger
     from cave_sketch.survey.merger import MapProtocol
+
     map_csv, child_csv, work_dir = two_csvs
 
-    with patch.object(merger, "merge_surveys", return_value=(pd.DataFrame({"Node_Id": ["1"]}), None)) as mock_merge:
+    dummy_df = pd.DataFrame({"Node_Id": ["1"]})
+    with patch.object(merger, "merge_surveys", return_value=(dummy_df, None)) as mock_merge:
         survey_bridge.effective_map_csv(
             map_csv, child_csv, "st2", "st1", SectionProtocol.DISPLACEMENT, str(work_dir)
         )
