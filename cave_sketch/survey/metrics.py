@@ -20,6 +20,8 @@ def compute_total_length(df: pd.DataFrame) -> float:
     # Mapping of numeric station ID to coordinates (X, Y)
     coords = {}
     for _, row in df.iterrows():
+        if row.get("Type") == "connector":
+            continue
         node_id = str(row["Node_Id"])
         if numeric_pattern.match(node_id):
             coords[node_id] = (float(row["X"]), float(row["Y"]))
@@ -27,6 +29,8 @@ def compute_total_length(df: pd.DataFrame) -> float:
     # Parse and deduplicate legs
     legs = set()
     for _, row in df.iterrows():
+        if row.get("Type") == "connector":
+            continue
         node_id = str(row["Node_Id"])
         if not numeric_pattern.match(node_id):
             continue
@@ -70,6 +74,8 @@ def compute_total_depth(df: Optional[pd.DataFrame]) -> Optional[float]:
     # Collect Y coordinates for numeric-only stations
     y_coords = []
     for _, row in df.iterrows():
+        if row.get("Type") == "connector":
+            continue
         node_id = str(row["Node_Id"])
         if numeric_pattern.match(node_id):
             y_coords.append(float(row["Y"]))

@@ -118,3 +118,32 @@ def test_compute_total_depth_empty_or_single_station():
 
 def test_compute_total_depth_none_when_no_section():
     assert compute_total_depth(None) is None
+
+
+def test_compute_total_length_excludes_connector_rows():
+    df = pd.DataFrame({
+        "Node_Id": ["1", "2", "3"],
+        "X": [0.0, 10.0, 100.0],
+        "Y": [0.0, 0.0, 100.0],
+        "Links": ["2", "1-3", "2"],
+        "Type": ["station", "station", "connector"],
+    })
+    # Numeric node 3 has Type="connector" linking to 2.
+    # It must be excluded from legs and coords.
+    # Only leg is 1-2 (length 10.0).
+    assert compute_total_length(df) == pytest.approx(10.0)
+
+
+def test_compute_total_depth_excludes_connector_rows():
+    df = pd.DataFrame({
+        "Node_Id": ["1", "2", "3"],
+        "X": [0.0, 10.0, 100.0],
+        "Y": [5.0, 15.0, 999.0],
+        "Links": ["-", "-", "-"],
+        "Type": ["station", "station", "connector"],
+    })
+    # Node 3 has Type="connector" and extreme Y=999.0.
+    # Must be excluded from depth.
+    # Depth is 15.0 - 5.0 = 10.0.
+    assert compute_total_depth(df) == pytest.approx(10.0)
+
