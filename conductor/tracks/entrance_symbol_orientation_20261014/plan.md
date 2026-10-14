@@ -12,7 +12,7 @@
     - [x] Verify unit tests pass
 - [x] Task: Conductor - User Manual Verification 'Core Rotation Preservation & Magnetic Variation' (Protocol in workflow.md) (dfdd132)
 
-## Phase 2: End-to-End Regression Testing & PDF Survey Verification
+## Phase 2: End-to-End Regression Testing & PDF Survey Verification [checkpoint: 6df7c9d]
 
 - [x] Task: Automated regression test using `tests/fixtures/sample_entrance.dxf` (58d30d9)
     - [x] Write integration test validating `parse_dxf` parses `B_entrance` with ~170.17° rotation
@@ -21,4 +21,4 @@
 - [x] Task: Verification and documentation (9e198d0)
     - [x] Run full project verification: `ruff check`, `mypy cave_sketch/`, `pytest`
     - [x] Document changes in `DEVLOG.md` according to project rules
-- [~] Task: Conductor - User Manual Verification 'End-to-End Regression Testing & PDF Survey Verification' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'End-to-End Regression Testing & PDF Survey Verification' (Protocol in workflow.md) (6df7c9d)
