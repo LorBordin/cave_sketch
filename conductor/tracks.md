@@ -76,7 +76,3 @@ This file tracks all major tracks for the project. Each track has its own detail
 *Link: [./tracks/survey_csv_export_20261014/](./tracks/survey_csv_export_20261014/)*
 
 
----
-
-- [x] **Track: B_snow icon in KMZ (white "*")**
-*Link: [./tracks/snow_icon_20261014/](./tracks/snow_icon_20261014/)*
