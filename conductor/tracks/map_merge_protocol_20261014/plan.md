@@ -16,10 +16,10 @@
 - [x] Task: Implement `_compute_displacement(parent_df, child_df, anchor_dx, anchor_dy) -> (dx, dy)`
   in `cave_sketch/survey/merger.py` (angles 0°…−90° in 5° steps, min combined-bbox area,
   tie-break shorter slide then angle closer to 0°) (3c6d7dc)
-- [ ] Task: Write failing tests for Displacement station handling (section)
-    - [ ] Child matching station kept (remapped ID) at its displaced position
-    - [ ] One `connector` row links parent station → displaced child station
-    - [ ] No child row links to the parent station; existing Simple / Mirror tests still pass
+- [x] Task: Write failing tests for Displacement station handling (section) (df634cd)
+    - [x] Child matching station kept (remapped ID) at its displaced position
+    - [x] One `connector` row links parent station → displaced child station
+    - [x] No child row links to the parent station; existing Simple / Mirror tests still pass
 - [ ] Task: Refactor `_merge_single_view` to use the helper and the new station/connector handling
 - [ ] Task: Write failing tests + implement: `compute_total_length` / `compute_total_depth` ignore
   connector rows (Displacement totals == Simple totals)
