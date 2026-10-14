@@ -20,7 +20,7 @@
     - [x] Child matching station kept (remapped ID) at its displaced position
     - [x] One `connector` row links parent station → displaced child station
     - [x] No child row links to the parent station; existing Simple / Mirror tests still pass
-- [ ] Task: Refactor `_merge_single_view` to use the helper and the new station/connector handling
+- [x] Task: Refactor `_merge_single_view` to use the helper and the new station/connector handling (9f7d2dd)
 - [ ] Task: Write failing tests + implement: `compute_total_length` / `compute_total_depth` ignore
   connector rows (Displacement totals == Simple totals)
 - [ ] Task: Write failing test + fix if needed: renderer draws connector rows as a dotted line, with
