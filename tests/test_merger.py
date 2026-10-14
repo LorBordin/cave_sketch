@@ -170,3 +170,65 @@ def test_draw_survey_no_child(tmp_path):
 
     assert fig is not None
     assert output_pdf.exists()
+
+
+def test_merge_surveys_displacement_station_handling():
+    parent_section = pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 10.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    })
+
+    child_section = pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 5.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    })
+
+    _, merged = merge_surveys(
+        parent_map=None,
+        parent_section=parent_section,
+        child_map=None,
+        child_section=child_section,
+        parent_station="2",
+        child_station="1",
+        section_protocol=SectionProtocol.DISPLACEMENT
+    )
+
+    assert merged is not None
+    node_ids = merged["Node_Id"].tolist()
+
+    # Child matching station (1) is NOT deleted; remapped to "3" with offset
+    assert "1" in node_ids
+    assert "2" in node_ids
+    assert "3" in node_ids
+    assert "4" in node_ids
+
+    # Displaced child matching station 3 coordinates are displaced (not coincident with parent station 2)
+    row_parent_2 = merged[merged["Node_Id"] == "2"].iloc[0]
+    row_child_3 = merged[merged["Node_Id"] == "3"].iloc[0]
+    assert (row_child_3["X"], row_child_3["Y"]) != (row_parent_2["X"], row_parent_2["Y"])
+
+    # Displaced child station 4 links to displaced child station 3 (NOT to parent station 2)
+    row_child_4 = merged[merged["Node_Id"] == "4"].iloc[0]
+    assert row_child_4["Links"] == "3"
+
+    # No child station links to parent station 2
+    child_rows = merged[merged["Node_Id"].isin(["3", "4"])]
+    for _, crow in child_rows.iterrows():
+        links = [lk.strip() for lk in str(crow["Links"]).split("-") if lk.strip()]
+        assert "2" not in links
+
+    # Exactly one connector row links parent station 2 to displaced child station 3
+    connectors = merged[merged["Type"] == "connector"]
+    assert len(connectors) == 1
+    conn = connectors.iloc[0]
+    # Connector coordinates at parent station 2, linked to child station 3
+    assert conn["X"] == row_parent_2["X"]
+    assert conn["Y"] == row_parent_2["Y"]
+    assert conn["Links"] == "3"
+
