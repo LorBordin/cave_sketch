@@ -12,7 +12,7 @@ from typing import Optional
 import pandas as pd
 
 from cave_sketch.dxf.parser import parse_dxf
-from cave_sketch.survey.merger import SectionProtocol
+from cave_sketch.survey.merger import MapProtocol, SectionProtocol
 from cave_sketch.survey.survey import draw_survey
 
 
@@ -67,6 +67,7 @@ def effective_map_csv(map_csv: Optional[str], child_map_csv: Optional[str],
             parent_station=parent_station,
             child_station=child_station,
             section_protocol=section_protocol,
+            map_protocol=MapProtocol.SIMPLE,
         )
         if merged_df is not None:
             merged_path = Path(work_dir) / "merged_map.csv"
@@ -112,6 +113,7 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
             parent_station=parent_station or None,
             child_station=child_station or None,
             section_protocol=SectionProtocol(data.get("section_protocol", "simple")),
+            map_protocol=MapProtocol(data.get("map_protocol", "simple")),
             output_path=pdf_path,
             surveyor_name=data.get("surveyor_name", ""),
             config={
