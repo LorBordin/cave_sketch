@@ -233,3 +233,101 @@ def test_merge_surveys_displacement_station_handling():
     assert conn["Y"] == row_parent_2["Y"]
     assert conn["Links"] == "3"
 
+
+def test_map_protocol_enum_and_merge_surveys_displacement():
+    from cave_sketch.survey.merger import MapProtocol
+
+    assert MapProtocol.SIMPLE.value == "simple"
+    assert MapProtocol.DISPLACEMENT.value == "displacement"
+
+    parent_map = pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 20.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    })
+
+    child_map = pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 10.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    })
+
+    # Default is SIMPLE: child matching station is coincident with parent station 2
+    merged_def, _ = merge_surveys(
+        parent_map=parent_map,
+        parent_section=None,
+        child_map=child_map,
+        child_section=None,
+        parent_station="2",
+        child_station="1",
+    )
+    assert merged_def is not None
+    # In SIMPLE: child 1 is merged with parent 2; child 2 is remapped to 4 at (30.0, 0.0)
+    assert "3" not in merged_def["Node_Id"].tolist()
+    row_4_def = merged_def[merged_def["Node_Id"] == "4"].iloc[0]
+    assert row_4_def["X"] == 30.0
+    assert len(merged_def[merged_def["Type"] == "connector"]) == 0
+
+    # DISPLACEMENT: child map is displaced
+    merged_disp, _ = merge_surveys(
+        parent_map=parent_map,
+        parent_section=None,
+        child_map=child_map,
+        child_section=None,
+        parent_station="2",
+        child_station="1",
+        map_protocol=MapProtocol.DISPLACEMENT,
+    )
+    assert merged_disp is not None
+    node_ids = merged_disp["Node_Id"].tolist()
+    assert "1" in node_ids
+    assert "2" in node_ids
+    assert "3" in node_ids
+    assert "4" in node_ids
+
+    # Connector row exists in map
+    connectors = merged_disp[merged_disp["Type"] == "connector"]
+    assert len(connectors) == 1
+    assert connectors.iloc[0]["Links"] == "3"
+
+
+def test_draw_survey_forwards_map_protocol(tmp_path):
+    from cave_sketch.survey.merger import MapProtocol
+
+    parent_map = tmp_path / "parent_map.csv"
+    child_map = tmp_path / "child_map.csv"
+
+    pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 20.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    }).to_csv(parent_map, index=False)
+
+    pd.DataFrame({
+        "Node_Id": ["1", "2"],
+        "X": [0.0, 10.0],
+        "Y": [0.0, 0.0],
+        "Links": ["2", "1"],
+        "Type": ["station", "station"]
+    }).to_csv(child_map, index=False)
+
+    fig = draw_survey(
+        title="Displacement Map Cave",
+        rule_length=10.0,
+        csv_map_path=str(parent_map),
+        csv_section_path=None,
+        child_csv_map_path=str(child_map),
+        child_csv_section_path=None,
+        parent_station="2",
+        child_station="1",
+        map_protocol=MapProtocol.DISPLACEMENT,
+    )
+    assert fig is not None
+
+
