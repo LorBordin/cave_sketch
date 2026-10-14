@@ -19,14 +19,14 @@
     - [x] Verify iterative survey merging workflow (Upload A+B -> Generate -> Download CSV -> Upload as Main -> Upload C -> Merge)
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Streamlit Webapp CSV Download Integration' (Protocol in workflow.md) [0ce0adc]
 
-## Phase 3: Android ViewModel & UI Implementation
+## Phase 3: Android ViewModel & UI Implementation [checkpoint: 6a5088b]
 - [x] Task: TDD - Write JVM unit tests for Android ViewModel [05e8b20]
     - [x] Update `SurveyPlotViewModelTest.kt` to test parsing of `map_csv_path` and `section_csv_path` into `PlotState.Success`
 - [x] Task: Implement Android ViewModel and UI changes [ec36923]
     - [x] Update `PlotState.Success` in `SurveyPlotViewModel.kt` to include `mapCsvPath` and `sectionCsvPath`
     - [x] Update `SurveyPlotScreen.kt` to add "Save / Share Map CSV" and "Save / Share Section CSV" buttons using `SaveShareButton`
     - [x] Update `SessionCleanup.kt` to ensure `merged_section.csv` is included in the session cleanup file list
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Android ViewModel & UI Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Android ViewModel & UI Implementation' (Protocol in workflow.md) [6a5088b]
 
 ## Phase 4: Android Environment Check & Verification (Pause Point)
 - [ ] Task: Verify Android Studio and device connectivity (PAUSE POINT)
