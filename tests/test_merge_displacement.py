@@ -162,6 +162,41 @@ def test_displacement_clears_padding_and_deterministic():
 
     p_box = _bbox(parent)
     c_box = _bbox(child, res1[0], res1[1])
-    diag = math.hypot(parent["X"].max() - parent["X"].min(), parent["Y"].max() - parent["Y"].min())
+    diag = math.hypot(
+        parent["X"].max() - parent["X"].min(), parent["Y"].max() - parent["Y"].min()
+    )
     padding = max(1.0, 0.10 * diag)
     assert _bbox_dist(p_box, c_box) >= padding - 1e-6
+
+
+def test_displacement_connector_rendering():
+    import matplotlib.pyplot as plt
+
+    from cave_sketch.features.render_features import extract_features_from_df
+    from cave_sketch.survey.graphics.survey_plot import create_survey
+
+    df = pd.DataFrame({
+        "Node_Id": ["1", "2", "CONN_1"],
+        "X": [0.0, 10.0, 0.0],
+        "Y": [0.0, 0.0, 0.0],
+        "Links": ["-", "-", "2"],
+        "Type": ["station", "station", "connector"],
+    })
+
+    features = extract_features_from_df(df)
+    # Line features must include the connector
+    conn_lines = [line for line in features["lines"] if line.get("dash") is not None]
+    assert len(conn_lines) == 1
+    assert conn_lines[0]["color"] == "gray"
+    assert conn_lines[0]["dash"] == [3, 7]
+    assert conn_lines[0]["weight"] == 0.5
+
+    # Check matplotlib rendering: only stations get text labels
+    fig, ax = plt.subplots()
+    create_survey(df, rule_flag=False, north_flag=False, config={}, ax=ax)
+    texts = [t.get_text() for t in ax.texts]
+    assert "1" in texts
+    assert "2" in texts
+    assert "CONN_1" not in texts
+    plt.close(fig)
+
