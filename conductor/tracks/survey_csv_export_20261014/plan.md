@@ -29,21 +29,21 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Android ViewModel & UI Implementation' (Protocol in workflow.md) [6a5088b]
 
 ## Phase 4: Android Environment Check & Verification (Pause Point)
-- [ ] Task: Verify Android Studio and device connectivity (PAUSE POINT)
-    - [ ] Check if Android SDK / Android Studio is installed and `./gradlew` is available
-    - [ ] Check if an Android physical device or emulator is connected (`adb devices`)
-    - [ ] If Android Studio or an Android test device is NOT available, pause track development, update metadata with status note, and halt for resumption on an Android-equipped laptop
+- [x] Task: Verify Android Studio and device connectivity (PAUSE POINT) [8ba2610]
+    - [x] Check if Android SDK / Android Studio is installed and `./gradlew` is available
+    - [x] Check if an Android physical device or emulator is connected (`adb devices`)
+    - [x] If Android Studio or an Android test device is NOT available, pause track development, update metadata with status note, and halt for resumption on an Android-equipped laptop
 - [ ] Task: Execute Android build and test verification (on Android-capable environment)
     - [ ] Run `./gradlew :app:testDebugUnitTest :app:assembleDebug`
     - [ ] Install debug APK and verify CSV export and iterative merge on Android device
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Android Environment Check & Verification' (Protocol in workflow.md)
 
 ## Phase 5: Documentation & Final Verification
-- [ ] Task: Update documentation
-    - [ ] Update user documentation in `docs/` describing how to merge >2 surveys by downloading and re-uploading CSV files
-- [ ] Task: Mandatory verification & DEVLOG updates
-    - [ ] Run `uv run ruff check .`
-    - [ ] Run `uv run mypy cave_sketch/`
-    - [ ] Run `uv run pytest`
-    - [ ] Append entries to root `DEVLOG.md` and `android/DEVLOG.md`
+- [x] Task: Update documentation [a19d75c]
+    - [x] Update user documentation in `docs/` describing how to merge >2 surveys by downloading and re-uploading CSV files
+- [x] Task: Mandatory verification & DEVLOG updates [f38f088]
+    - [x] Run `uv run ruff check .`
+    - [x] Run `uv run mypy cave_sketch/`
+    - [x] Run `uv run pytest`
+    - [x] Append entries to root `DEVLOG.md` and `android/DEVLOG.md`
 - [ ] Task: Conductor - User Manual Verification 'Phase 5: Documentation & Final Verification' (Protocol in workflow.md)
