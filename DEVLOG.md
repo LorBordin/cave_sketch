@@ -547,6 +547,25 @@
 **Assumptions:** None
 **Next session notes:** Entrance symbol orientation and rotation preservation under declination are fully verified and tested end-to-end.
 
+## [2026-10-14 16:02] Track snow_icon_20261014 — Implementation
+**Files:**
+- cave_sketch/style_icons.py
+- cave_sketch/style.py
+- cave_sketch/backend_renders/google_earth.py
+- cave_sketch/backend_renders/matplotlib.py
+- tests/test_style_icons.py
+- tests/test_style.py
+- tests/test_kmz_export.py
+- tests/test_icons_kml.py
+- tests/test_icons_matplotlib.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** Matplotlib renders a subtle dark (#404040) underlay outline behind white icon strokes to ensure legibility when plotted on white survey backgrounds.
+**Next session notes:** None
+
+
+
 
 
 
