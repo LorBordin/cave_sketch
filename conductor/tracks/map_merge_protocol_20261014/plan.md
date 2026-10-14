@@ -13,9 +13,9 @@
     - [x] Wide/flat parent → below-ish placement; tall/narrow parent → right-ish; a case where an
       intermediate angle wins
     - [x] Child bbox always clears parent bbox by ≥ padding; deterministic tie-break
-- [ ] Task: Implement `_compute_displacement(parent_df, child_df, anchor_dx, anchor_dy) -> (dx, dy)`
+- [x] Task: Implement `_compute_displacement(parent_df, child_df, anchor_dx, anchor_dy) -> (dx, dy)`
   in `cave_sketch/survey/merger.py` (angles 0°…−90° in 5° steps, min combined-bbox area,
-  tie-break shorter slide then angle closer to 0°)
+  tie-break shorter slide then angle closer to 0°) (3c6d7dc)
 - [ ] Task: Write failing tests for Displacement station handling (section)
     - [ ] Child matching station kept (remapped ID) at its displaced position
     - [ ] One `connector` row links parent station → displaced child station
