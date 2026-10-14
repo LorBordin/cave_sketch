@@ -23,8 +23,8 @@
 - [x] Task: Refactor `_merge_single_view` to use the helper and the new station/connector handling (9f7d2dd)
 - [x] Task: Write failing tests + implement: `compute_total_length` / `compute_total_depth` ignore
   connector rows (Displacement totals == Simple totals) (dac5e24)
-- [ ] Task: Write failing test + fix if needed: renderer draws connector rows as a dotted line, with
-  no station marker/label
+- [x] Task: Write failing test + fix if needed: renderer draws connector rows as a dotted line, with
+  no station marker/label (b311c38)
 - [ ] Task: Gates + root `DEVLOG.md` entry
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Shared Displacement Routine' (Protocol in workflow.md)
 
