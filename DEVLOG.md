@@ -572,3 +572,22 @@
 **Assumptions:** None
 **Next session notes:** Phase 2 complete. MapProtocol enum (SIMPLE, DISPLACEMENT) exposed and forwarded through merge_surveys and draw_survey.
 
+## [2026-10-14 13:26] Phase 3: Webapp UI — Implementation
+**Files:**
+- app/components/merging_controls.py
+- app/pages/1_survey_plot.py
+- app/session.py
+- docs/web/survey-merging.md
+- docs/web/survey-merging.it.md
+- docs/web/README.md
+- docs/web/README.it.md
+- README.md
+- README.it.md
+- tests/test_webapp_map_merge.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 3 complete. Session defaults include map_protocol='simple', radio selector shown conditionally when child map is present, satellite merged_map.csv forced to MapProtocol.SIMPLE, docs updated in English and Italian.
+
+
