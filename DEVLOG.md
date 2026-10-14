@@ -547,6 +547,23 @@
 **Assumptions:** None
 **Next session notes:** Entrance symbol orientation and rotation preservation under declination are fully verified and tested end-to-end.
 
+## [2026-10-14 14:32] Track survey_csv_export_20261014 — Survey CSV Export Implementation
+**Files:**
+- android/app/src/main/python/survey_bridge.py
+- tests/test_survey_bridge.py
+- app/session.py
+- app/pages/1_survey_plot.py
+- tests/test_survey_csv_export.py
+- docs/web/survey-merging.md
+- docs/web/survey-merging.it.md
+- docs/android/README.md
+- docs/android/README.it.md
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Survey CSV export is fully implemented and tested for webapp and Python bridge. Users can download merged/parsed Map and Section CSVs and iteratively merge >2 sub-surveys.
+
 
 
 

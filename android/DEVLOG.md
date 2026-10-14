@@ -303,3 +303,18 @@ None
 
 **Next session notes:** None
 
+## [2026-10-14 14:32] Track survey_csv_export_20261014 — Android ViewModel & UI Implementation
+**Files:**
+- android/app/src/main/python/survey_bridge.py
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/main/java/com/cavesketch/app/util/SessionCleanup.kt
+- android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt
+- android/app/src/test/java/com/cavesketch/app/util/SessionCleanupTest.kt
+- android/DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** Android device/SDK environment check paused at Phase 4 on machine without Java/Android runtime.
+**Next session notes:** Kotlin code changes and JVM tests are complete. When running on an Android-equipped laptop with Java and Android SDK, run `./gradlew :app:testDebugUnitTest :app:assembleDebug` and verify on-device.
+
+
