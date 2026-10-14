@@ -559,3 +559,16 @@
 **Deviations from spec:** None
 **Assumptions:** None
 **Next session notes:** Phase 1 complete. Placement helper `_compute_displacement`, station retention, and connector handling implemented and tested. Metrics correctly exclude connector rows.
+
+## [2026-10-14 11:55] Phase 2: Map Protocol API — Implementation
+**Files:**
+- cave_sketch/survey/__init__.py
+- cave_sketch/survey/merger.py
+- cave_sketch/survey/survey.py
+- tests/test_merger.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 2 complete. MapProtocol enum (SIMPLE, DISPLACEMENT) exposed and forwarded through merge_surveys and draw_survey.
+
