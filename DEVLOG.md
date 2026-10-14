@@ -547,6 +547,15 @@
 **Assumptions:** None
 **Next session notes:** Entrance symbol orientation and rotation preservation under declination are fully verified and tested end-to-end.
 
+## [2026-10-14 11:46] Phase 1: Shared Displacement Routine — Implementation
+**Files:**
+- cave_sketch/survey/merger.py
+- cave_sketch/survey/metrics.py
+- tests/test_merge_displacement.py
+- tests/test_merger.py
+- tests/test_survey_metrics.py
+- DEVLOG.md
 
-
-
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 1 complete. Placement helper `_compute_displacement`, station retention, and connector handling implemented and tested. Metrics correctly exclude connector rows.

@@ -148,8 +148,11 @@ def _merge_single_view(
     child_df = child_df.copy()
 
     # Normalize Node_Id as string
-    parent_df.loc[:, "Node_Id"] = parent_df["Node_Id"].astype(str)
-    child_df.loc[:, "Node_Id"] = child_df["Node_Id"].astype(str)
+    parent_df = parent_df.assign(Node_Id=parent_df["Node_Id"].astype(str))
+    child_df = child_df.assign(
+        Node_Id=child_df["Node_Id"].astype(str),
+        Links=child_df["Links"].astype(str),
+    )
     parent_station = str(parent_station)
     child_station = str(child_station)
 
