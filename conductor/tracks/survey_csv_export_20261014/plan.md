@@ -1,9 +1,9 @@
 # Implementation Plan: Download Survey CSV Files (Web & Android)
 
 ## Phase 1: Survey Core & Python Bridge Logic
-- [ ] Task: TDD - Write tests for effective section CSV generation and Python bridge
-    - [ ] Add unit tests verifying `effective_section_csv` and `effective_map_csv` when merging
-    - [ ] Add unit tests for `survey_bridge.py` verifying that `generate_survey_plot` returns both `map_csv_path` and `section_csv_path` in its JSON output
+- [x] Task: TDD - Write tests for effective section CSV generation and Python bridge [b88bd19]
+    - [x] Add unit tests verifying `effective_section_csv` and `effective_map_csv` when merging
+    - [x] Add unit tests for `survey_bridge.py` verifying that `generate_survey_plot` returns both `map_csv_path` and `section_csv_path` in its JSON output
 - [ ] Task: Implement effective section CSV logic and update Python bridge
     - [ ] Implement `effective_section_csv` function in `android/app/src/main/python/survey_bridge.py`
     - [ ] Update `generate_survey_plot` to call `effective_section_csv` and include `section_csv_path` in the result dictionary
