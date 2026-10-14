@@ -75,12 +75,33 @@ def render_to_matplotlib(
     icon_segments = []
     icon_colors = []
     icon_linewidths = []
+    outline_segments = []
+    outline_linewidths = []
     for icon in features.get("icons", []):
         lw = _scaled_linewidth(icon["weight"], zoom_factor, ref_scale)
+        color = icon["color"]
+        is_white = str(color).lower() in ("white", "#fff", "#ffffff")
         for stroke in icon["strokes"]:
-            icon_segments.append([(px, py) for py, px in stroke])  # [y, x] -> (x, y)
-            icon_colors.append(icon["color"])
+            seg = [(px, py) for py, px in stroke]  # [y, x] -> (x, y)
+            icon_segments.append(seg)
+            icon_colors.append(color)
             icon_linewidths.append(lw)
+            if is_white:
+                outline_segments.append(seg)
+                outline_linewidths.append(lw + 0.8)
+
+    if outline_segments:
+        ax.add_collection(
+            LineCollection(
+                outline_segments,
+                colors="#404040",
+                linewidths=outline_linewidths,
+                capstyle="round",
+                joinstyle="round",
+                alpha=0.8,
+                zorder=2.9,
+            )
+        )
 
     if icon_segments:
         ax.add_collection(

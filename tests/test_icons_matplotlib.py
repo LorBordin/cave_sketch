@@ -39,3 +39,21 @@ def test_matplotlib_icon_strokes_are_in_data_coordinates():
     xs = [x for seg in icons.get_segments() for x, _ in seg]
     assert min(xs) == pytest.approx(5.0 - STYLE_MAP["B_blocks"]["size_m"] / 2, abs=1e-2)
     plt.close(fig)
+
+
+def test_matplotlib_white_icon_gets_contrast_outline():
+    df = pd.DataFrame([
+        {"Node_Id": "0P0", "X": 0.0, "Y": 0.0, "Links": "0P1", "Type": "L_wall", "Rotation": 0.0},
+        {"Node_Id": "0P1", "X": 10.0, "Y": 0.0, "Links": "0P0", "Type": "L_wall", "Rotation": 0.0},
+        {"Node_Id": "B_snow_0", "X": 5.0, "Y": 5.0, "Links": "-", "Type": "B_snow", "Rotation": 0.0},
+    ])
+    fig, ax = plt.subplots()
+    render_to_matplotlib(extract_features_from_df(df), ax)
+    collections = [c for c in ax.collections if isinstance(c, LineCollection)]
+    # Expect 3 LineCollections: walls (zorder=2), outline (zorder=2.9), white icons (zorder=3)
+    assert len(collections) == 3
+    outline_coll = next(c for c in collections if c.get_zorder() == 2.9)
+    assert outline_coll.get_segments() is not None
+    assert len(outline_coll.get_segments()) == len(ICON_SHAPES["snow"])
+    plt.close(fig)
+

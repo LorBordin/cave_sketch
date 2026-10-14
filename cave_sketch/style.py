@@ -23,12 +23,7 @@ STYLE_MAP = {
         "markersize": 2,
         "type": "point",
     },
-    "B_snow": {
-        "color": "aliceblue",
-        "marker": "*",
-        "markersize": 2,
-        "type": "point",
-    },
+    "B_snow": {"color": "white", "icon": "snow", "size_m": 1.5, "type": "icon"},
     "L_water-flow": {
         "color": "steelblue",
         "linestyle": "solid",

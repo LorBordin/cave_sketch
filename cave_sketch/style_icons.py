@@ -45,6 +45,12 @@ ICON_SHAPES: Dict[str, List[Stroke]] = {
     "water_flow_chevron": [
         [(-0.5, -0.25), (0.0, 0.25), (0.5, -0.25)],
     ],
+    # Snow: 6-armed asterisk (TopoDroid B_snow).
+    "snow": [
+        [(0.0, -0.5), (0.0, 0.5)],
+        [(-0.4, -0.3), (0.4, 0.3)],
+        [(-0.4, 0.3), (0.4, -0.3)],
+    ],
 }
 
 
