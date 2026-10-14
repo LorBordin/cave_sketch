@@ -55,11 +55,11 @@
 - [x] 5146467 Task: Write failing tests in `tests/test_survey_bridge.py`: `map_protocol` parsed (default
   `simple`) and forwarded to `draw_survey`; `effective_map_csv` always merges with Simple
 - [x] b0ceffc Task: Implement `android/app/src/main/python/survey_bridge.py` changes
-- [~] Task: Kotlin: `SurveyInputs.mapProtocol = "simple"` + `"map_protocol"` in `toJson()`
+- [x] dbf1712 Task: Kotlin: `SurveyInputs.mapProtocol = "simple"` + `"map_protocol"` in `toJson()`
   (`SurveyPlotViewModel.kt`); "Map merge protocol" radio (Simple / Displacement) in
   `MergeControls.kt`, shown only when `childMapPath != null`; write/extend a JVM unit test for
   `toJson()` under `android/app/src/test/java/com/cavesketch/app/` (written, NOT run here)
-- [ ] Task: Python gates + `android/DEVLOG.md` entry noting the pending Android verification
+- [~] Task: Python gates + `android/DEVLOG.md` entry noting the pending Android verification
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Android – code' (Protocol in workflow.md) – Python side only
 - [ ] Task: ⏸ PAUSE POINT – requires an Android Studio / SDK machine
     - [ ] Set `metadata.json` status to `in_progress` and add the note
