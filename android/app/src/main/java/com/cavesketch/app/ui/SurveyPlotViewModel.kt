@@ -27,6 +27,7 @@ data class SurveyInputs(
     val parentStation: String = "",
     val childStation: String = "",
     val sectionProtocol: String = "simple",
+    val mapProtocol: String = "simple",
     val ruleLength: Int = 100,
     val rotationDeg: Int = 0,
     val showDetails: Boolean = true,
@@ -56,6 +57,7 @@ data class SurveyInputs(
             .put("parent_station", parentStation)
             .put("child_station", childStation)
             .put("section_protocol", sectionProtocol)
+            .put("map_protocol", mapProtocol)
             .put("settings", settings)
             .toString()
     }
