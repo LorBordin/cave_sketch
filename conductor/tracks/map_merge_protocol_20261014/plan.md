@@ -28,13 +28,13 @@
 - [x] Task: Gates + root `DEVLOG.md` entry (29a3611)
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Shared Displacement Routine' (Protocol in workflow.md) (2d48192)
 
-## Phase 2: Map Protocol API
+## Phase 2: Map Protocol API [checkpoint: 2ab6c19]
 - [x] Task: Write failing tests: `MapProtocol` enum; `merge_surveys(map_protocol=DISPLACEMENT)`
   displaces the map; default stays Simple (existing outputs unchanged); `draw_survey(map_protocol=...)`
   forwards it (484fcd4)
 - [x] Task: Implement `MapProtocol` + `map_protocol` param in `merge_surveys` and `draw_survey` (7071bb3)
 - [x] Task: Gates + root `DEVLOG.md` entry (ebb85e5)
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Map Protocol API' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Map Protocol API' (Protocol in workflow.md) (2ab6c19)
 
 ## Phase 3: Webapp UI
 - [ ] Task: Write failing tests (follow existing app test style, e.g. `tests/test_settings_panel.py`,
