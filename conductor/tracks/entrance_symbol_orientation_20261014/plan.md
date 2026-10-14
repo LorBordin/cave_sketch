@@ -18,7 +18,7 @@
     - [x] Write integration test validating `parse_dxf` parses `B_entrance` with ~170.17° rotation
     - [x] Validate `draw_survey` retains this rotation in the rendered feature strokes (verifying apex points toward the entrance rather than north)
     - [x] Confirm backward compatibility with surveys lacking rotation data
-- [ ] Task: Verification and documentation
-    - [ ] Run full project verification: `ruff check`, `mypy cave_sketch/`, `pytest`
-    - [ ] Document changes in `DEVLOG.md` according to project rules
-- [ ] Task: Conductor - User Manual Verification 'End-to-End Regression Testing & PDF Survey Verification' (Protocol in workflow.md)
+- [x] Task: Verification and documentation (9e198d0)
+    - [x] Run full project verification: `ruff check`, `mypy cave_sketch/`, `pytest`
+    - [x] Document changes in `DEVLOG.md` according to project rules
+- [~] Task: Conductor - User Manual Verification 'End-to-End Regression Testing & PDF Survey Verification' (Protocol in workflow.md)
