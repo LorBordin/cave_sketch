@@ -6,10 +6,10 @@
     - [x] Write unit tests demonstrating that converting a DataFrame with a `Rotation` column into a `CaveSurvey` via `_df_to_survey` retains the rotation values on `SurveyPoint` objects, defaulting to 0.0 when missing
     - [x] Implement rotation preservation in `_df_to_survey` in `cave_sketch/survey/survey.py`
     - [x] Verify unit tests pass and code quality checks are satisfied
-- [ ] Task: TDD - Adjust symbol rotation in `apply_magnetic_variation`
-    - [ ] Write unit tests verifying that applying magnetic variation updates both coordinate geometry and the `Rotation` column by `-variation_deg` (modulo 360°)
-    - [ ] Implement `Rotation` adjustment in `cave_sketch/geo/declination.py`
-    - [ ] Verify unit tests pass
+- [x] Task: TDD - Adjust symbol rotation in `apply_magnetic_variation` (7435353)
+    - [x] Write unit tests verifying that applying magnetic variation updates both coordinate geometry and the `Rotation` column by `-variation_deg` (modulo 360°)
+    - [x] Implement `Rotation` adjustment in `cave_sketch/geo/declination.py`
+    - [x] Verify unit tests pass
 - [ ] Task: Conductor - User Manual Verification 'Core Rotation Preservation & Magnetic Variation' (Protocol in workflow.md)
 
 ## Phase 2: End-to-End Regression Testing & PDF Survey Verification
