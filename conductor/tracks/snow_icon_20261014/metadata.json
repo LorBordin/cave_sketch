@@ -1,0 +1,8 @@
+{
+  "track_id": "snow_icon_20261014",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-10-14T13:45:00Z",
+  "updated_at": "2026-10-14T13:45:00Z",
+  "description": "B_snow block is not rendered in the kmz file but only in the kml. Create an icon for B_snow (white '*', like TopoDroid)."
+}
