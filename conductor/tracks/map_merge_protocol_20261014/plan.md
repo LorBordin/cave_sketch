@@ -51,7 +51,7 @@
       (e.g. stations 1/1), Map = Displacement → PDF shows the child clear of the parent + dotted
       connector; Satellite page shows the true position
 
-## Phase 4: Android – code (doable without Android Studio)
+## Phase 4: Android – code (doable without Android Studio) (923b1db)
 - [x] 5146467 Task: Write failing tests in `tests/test_survey_bridge.py`: `map_protocol` parsed (default
   `simple`) and forwarded to `draw_survey`; `effective_map_csv` always merges with Simple
 - [x] b0ceffc Task: Implement `android/app/src/main/python/survey_bridge.py` changes
@@ -60,9 +60,9 @@
   `MergeControls.kt`, shown only when `childMapPath != null`; write/extend a JVM unit test for
   `toJson()` under `android/app/src/test/java/com/cavesketch/app/` (written, NOT run here)
 - [x] 1c5d3f2 Task: Python gates + `android/DEVLOG.md` entry noting the pending Android verification
-- [~] Task: Conductor - User Manual Verification 'Phase 4: Android – code' (Protocol in workflow.md) – Python side only
-- [ ] Task: ⏸ PAUSE POINT – requires an Android Studio / SDK machine
-    - [ ] Set `metadata.json` status to `in_progress` and add the note
+- [x] 923b1db Task: Conductor - User Manual Verification 'Phase 4: Android – code' (Protocol in workflow.md) – Python side only
+- [x] Task: ⏸ PAUSE POINT – requires an Android Studio / SDK machine
+    - [x] Set `metadata.json` status to `in_progress` and add the note
       "paused: Phase 5 requires Android device"; commit; STOP and inform the user.
 
 ## Phase 5: Android – build & device verification (REQUIRES Android machine)
