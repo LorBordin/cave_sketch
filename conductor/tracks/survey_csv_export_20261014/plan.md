@@ -22,10 +22,10 @@
 ## Phase 3: Android ViewModel & UI Implementation
 - [x] Task: TDD - Write JVM unit tests for Android ViewModel [05e8b20]
     - [x] Update `SurveyPlotViewModelTest.kt` to test parsing of `map_csv_path` and `section_csv_path` into `PlotState.Success`
-- [ ] Task: Implement Android ViewModel and UI changes
-    - [ ] Update `PlotState.Success` in `SurveyPlotViewModel.kt` to include `mapCsvPath` and `sectionCsvPath`
-    - [ ] Update `SurveyPlotScreen.kt` to add "Save / Share Map CSV" and "Save / Share Section CSV" buttons using `SaveShareButton`
-    - [ ] Update `SessionCleanup.kt` to ensure `merged_section.csv` is included in the session cleanup file list
+- [x] Task: Implement Android ViewModel and UI changes [ec36923]
+    - [x] Update `PlotState.Success` in `SurveyPlotViewModel.kt` to include `mapCsvPath` and `sectionCsvPath`
+    - [x] Update `SurveyPlotScreen.kt` to add "Save / Share Map CSV" and "Save / Share Section CSV" buttons using `SaveShareButton`
+    - [x] Update `SessionCleanup.kt` to ensure `merged_section.csv` is included in the session cleanup file list
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Android ViewModel & UI Implementation' (Protocol in workflow.md)
 
 ## Phase 4: Android Environment Check & Verification (Pause Point)
