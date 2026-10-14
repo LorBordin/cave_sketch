@@ -39,7 +39,12 @@ Seleziona file DXF dal dispositivo e configura l'output del rilievo:
 - Unione opzionale con un **rilievo figlio** (ID stazione + protocollo sezione)
 
 Tocca **Genera** per produrre un'anteprima PDF, poi **Salva** o **Condividi**
-il risultato.
+il risultato:
+- **Grafico PDF del rilievo**
+- **CSV Pianta** (dati del rilievo elaborati o uniti)
+- **CSV Sezione** (dati della sezione elaborati o uniti)
+
+I file CSV esportati possono essere riaperti come rilievo principale per unire ulteriori rilievi figli in modo iterativo.
 
 ![Rilievo — selezione file e impostazioni base](../mobile-app/screenshots_v1/survey_1.jpg)
 

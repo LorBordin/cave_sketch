@@ -37,7 +37,12 @@ Pick DXF files from your device and configure the survey output:
 - Optional **merge with a child survey** (station IDs + section protocol)
 
 Tap **Generate** to produce a PDF preview, then **Save** or **Share** the
-result.
+result:
+- **PDF Survey Plot**
+- **Map CSV** (parsed or merged survey data)
+- **Section CSV** (parsed or merged section data)
+
+The exported CSV files can be reopened as the primary survey to merge further child surveys iteratively.
 
 ![Survey Plot — file picker and basic settings](../mobile-app/screenshots_v1/survey_1.jpg)
 

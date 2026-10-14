@@ -16,7 +16,14 @@ On the **Survey Plot** page, below the main upload buttons, a merge section appe
 
 > **Station ID format:** IDs must be purely numeric (e.g. `30`, `47`). IDs containing letters (e.g. `12P4`) identify wall or line geometry, not survey stations — they are rejected with a clear error message.
 
-To merge additional surveys beyond one child, download the merged result and re-upload it as a new parent.
+### Merging More Than Two Surveys (Iterative Merge)
+
+To merge more than two surveys:
+1. Merge Survey 1 (main) and Survey 2 (child) as usual.
+2. Underneath the preview, click **📥 Download Map CSV** and/or **📥 Download Section CSV** to save the merged dataset.
+3. In a new session or after clearing inputs, upload the downloaded merged CSV files as the new **Main Survey**.
+4. Upload Survey 3 as the **Child Survey**, set the matching station IDs, and generate the plot.
+5. Repeat iteratively for any number of sub-surveys!
 
 ![Merge UI](imgs/merge-ui.png)
 
