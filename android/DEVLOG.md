@@ -318,3 +318,12 @@ None
 **Next session notes:** Kotlin code changes and JVM tests are complete. When running on an Android-equipped laptop with Java and Android SDK, run `./gradlew :app:testDebugUnitTest :app:assembleDebug` and verify on-device.
 
 
+## [2026-10-15 12:25] Track survey_csv_export_20261014 — Android Device Verification
+**Files:**
+- android/DEVLOG.md
+- conductor/tracks/survey_csv_export_20261014/metadata.json
+- conductor/tracks/survey_csv_export_20261014/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** Built with OpenJDK 21 from Android Studio JBR.
+**Next session notes:** All 37 unit tests passed (`:app:testDebugUnitTest`), debug APK assembled (`:app:assembleDebug`), installed on physical device `R5CWA01LS0Z`, and verified.
