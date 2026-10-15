@@ -74,3 +74,60 @@ def test_generate_survey_plot_respects_show_centerline(two_csvs):
         mock_draw.assert_called_once()
         _, kwargs = mock_draw.call_args
         assert kwargs["config"]["show_centerline"] is False
+
+
+def _generate_with(two_csvs, extra, settings=None):
+    import json
+    from unittest.mock import patch
+
+    map_csv, _, work_dir = two_csvs
+    inputs = {"map_path": map_csv, "survey_name": "T", "settings": settings or {}, **extra}
+    with patch.object(survey_bridge, "draw_survey") as mock_draw:
+        out = json.loads(survey_bridge.generate_survey_plot(json.dumps(inputs), str(work_dir)))
+    return out, mock_draw
+
+
+def test_generate_passes_title_block_and_variation(two_csvs):
+    from cave_sketch.survey.config import TitleBlockInfo
+
+    _, mock_draw = _generate_with(
+        two_csvs,
+        {
+            "surveyor_name": "Alice",
+            "drawer_name": "Bob",
+            "municipality": "Genga",
+            "latitude": 43.4,
+            "longitude": 12.9,
+            "elevation_m": 320,
+        },
+        settings={"magnetic_variation_deg": 2.5},
+    )
+    _, kwargs = mock_draw.call_args
+    assert kwargs["title_block"] == TitleBlockInfo(
+        surveyor_name="Alice",
+        drawer_name="Bob",
+        municipality="Genga",
+        latitude=43.4,
+        longitude=12.9,
+        elevation_m=320.0,
+    )
+    assert kwargs["magnetic_variation_deg"] == 2.5
+
+
+def test_generate_defaults_when_fields_missing_or_null(two_csvs):
+    from cave_sketch.survey.config import TitleBlockInfo
+
+    _, mock_draw = _generate_with(
+        two_csvs, {"latitude": None, "longitude": None, "elevation_m": None}
+    )
+    _, kwargs = mock_draw.call_args
+    assert kwargs["title_block"] == TitleBlockInfo()
+    assert kwargs["magnetic_variation_deg"] == 0.0
+
+
+def test_generate_rejects_invalid_title_block(two_csvs):
+    out, mock_draw = _generate_with(two_csvs, {"latitude": 43.4, "longitude": None})
+    assert out["error"] == "invalid_title_block"
+    assert "together" in out["detail"]
+    mock_draw.assert_not_called()
+

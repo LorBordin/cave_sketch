@@ -59,48 +59,48 @@
 
 ---
 
-## Phase 1: `TitleBlockInfo` Model
+## Phase 1: `TitleBlockInfo` Model [checkpoint: b994803]
 
 Full code: superpowers plan → **Task 1**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_info.py` with the tests from Task 1 Step 1.
-    - [ ] Run `uv run pytest tests/test_title_block_info.py -v`; confirm it fails with
+- [x] Task: Write failing tests (Red) [15d117f]
+    - [x] Create `tests/test_title_block_info.py` with the tests from Task 1 Step 1.
+    - [x] Run `uv run pytest tests/test_title_block_info.py -v`; confirm it fails with
       `ImportError: cannot import name 'TitleBlockInfo'`.
-- [ ] Task: Implement `TitleBlockInfo` (Green)
-    - [ ] Add the dataclass to `cave_sketch/survey/config.py` (Task 1 Step 3). Do **not**
+- [x] Task: Implement `TitleBlockInfo` (Green) [a598f76]
+    - [x] Add the dataclass to `cave_sketch/survey/config.py` (Task 1 Step 3). Do **not**
       remove `SurveyConfig.surveyor_name` yet (that happens in Phase 5).
-    - [ ] Run `uv run pytest tests/test_title_block_info.py -v`; all pass.
-- [ ] Task: Quality gates and commit
-    - [ ] Run the Python gates. Commit `feat(survey): add validated TitleBlockInfo model`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 1' (Protocol in workflow.md)
-    - [ ] Show the validation working:
+    - [x] Run `uv run pytest tests/test_title_block_info.py -v`; all pass.
+- [x] Task: Quality gates and commit [a598f76]
+    - [x] Run the Python gates. Commit `feat(survey): add validated TitleBlockInfo model`.
+- [x] Task: Conductor - Device Verification & Approval 'Phase 1' (Protocol in workflow.md) [b994803]
+    - [x] Show the validation working:
       `uv run python -c "from cave_sketch.survey.config import TitleBlockInfo as T; print(T(latitude=0.0, longitude=0.0)); T(latitude=45.0)"`
       → prints the object, then `ValueError: Latitude and longitude must be entered together.`
-    - [ ] Webapp: generate a PDF (map only, surveyor `Test`); title block identical to
+    - [x] Webapp: generate a PDF (map only, surveyor `Test`); title block identical to
       `before_web.pdf`.
-    - [ ] Android: `./gradlew :app:installDebug`, generate a PDF; identical to
+    - [x] Android: `./gradlew :app:installDebug`, generate a PDF; identical to
       `before_android.pdf`.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 2: Title Block Rows
+## Phase 2: Title Block Rows [checkpoint: 6a6108b]
 
 Full code: superpowers plan → **Task 2**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_rows.py` (Task 2 Step 1).
-    - [ ] Run `uv run pytest tests/test_title_block_rows.py -v`; confirm
+- [x] Task: Write failing tests (Red) [be5fd2a]
+    - [x] Create `tests/test_title_block_rows.py` (Task 2 Step 1).
+    - [x] Run `uv run pytest tests/test_title_block_rows.py -v`; confirm
       `ImportError: cannot import name 'build_title_rows'`.
-- [ ] Task: Implement `build_title_rows` (Green)
-    - [ ] Add `MAX_VALUE_CHARS`, `_truncate`, `_format_coordinates`, `build_title_rows` to
+- [x] Task: Implement `build_title_rows` (Green) [2f89c5b]
+    - [x] Add `MAX_VALUE_CHARS`, `_truncate`, `_format_coordinates`, `build_title_rows` to
       `cave_sketch/survey/graphics/title_block.py` (Task 2 Step 3). Leave the existing
       `draw_title_block` untouched.
-    - [ ] Run `uv run pytest tests/test_title_block_rows.py tests/test_title_block.py -v`; all pass.
-- [ ] Task: Quality gates and commit
-    - [ ] Python gates. Commit `feat(survey): build title block rows from TitleBlockInfo`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 2' (Protocol in workflow.md)
-    - [ ] Show the rows the PDF will contain:
+    - [x] Run `uv run pytest tests/test_title_block_rows.py tests/test_title_block.py -v`; all pass.
+- [x] Task: Quality gates and commit [2f89c5b]
+    - [x] Python gates. Commit `feat(survey): build title block rows from TitleBlockInfo`.
+- [x] Task: Conductor - Device Verification & Approval 'Phase 2' (Protocol in workflow.md) [6a6108b]
+    - [x] Show the rows the PDF will contain:
       ```bash
       uv run python - <<'EOF'
       from cave_sketch.survey.config import TitleBlockInfo
@@ -112,27 +112,27 @@ Full code: superpowers plan → **Task 2**.
       ```
       Expected: 9 rows in the order of Global Constraints, `Coordinate: 33.50000° S, 12.96543° E`,
       `Quota slm: 0 m`, `Declinazione: 1.2° W`.
-    - [ ] Webapp and Android: generate a PDF; identical to the Phase 1 references.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] Webapp and Android: generate a PDF; identical to the Phase 1 references.
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 3: Measure the Box; Header Slot and Grow-Header Placement
+## Phase 3: Measure the Box; Header Slot and Grow-Header Placement [checkpoint: 1c9ed85]
 
 Full code: superpowers plan → **Task 3**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_layout.py` (Task 3 Step 1).
-    - [ ] Run `uv run pytest tests/test_title_block_layout.py -v`; confirm
+- [x] Task: Write failing tests (Red) [9db1a65]
+    - [x] Create `tests/test_title_block_layout.py` (Task 3 Step 1).
+    - [x] Run `uv run pytest tests/test_title_block_layout.py -v`; confirm
       `ModuleNotFoundError: ... title_block_layout`.
-- [ ] Task: Implement `title_block_layout.py` (Green)
-    - [ ] Create `cave_sketch/survey/graphics/title_block_layout.py` (Task 3 Step 3), including
+- [x] Task: Implement `title_block_layout.py` (Green) [843fd1e]
+    - [x] Create `cave_sketch/survey/graphics/title_block_layout.py` (Task 3 Step 3), including
       the `_find_free_corner` stub that returns `None` (Phase 4 replaces it).
-    - [ ] Run `uv run pytest tests/test_title_block_layout.py -v`; all pass.
-- [ ] Task: Quality gates and commit
-    - [ ] Python gates. Commit
+    - [x] Run `uv run pytest tests/test_title_block_layout.py -v`; all pass.
+- [x] Task: Quality gates and commit [89f676d]
+    - [x] Python gates. Commit
       `feat(survey): measure title block and place it in header or grown header`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 3' (Protocol in workflow.md)
-    - [ ] Render the placement demo and show the user the three images:
+- [x] Task: Conductor - Device Verification & Approval 'Phase 3' (Protocol in workflow.md) [1c9ed85]
+    - [x] Render the placement demo and show the user the three images:
       ```bash
       mkdir -p /tmp/title_block_demo && uv run python - <<'EOF'
       import matplotlib
@@ -170,92 +170,92 @@ Full code: superpowers plan → **Task 3**.
       Expected printout: `1_small -> header`, `2_large_sparse -> grow-header` (corners arrive
       in Phase 4), `3_large_dense -> grow-header`. In every image the box does not touch the
       cave name and the plot starts below the box.
-    - [ ] Webapp and Android: generate a PDF; identical to the Phase 1 references (the new
+    - [x] Webapp and Android: generate a PDF; identical to the Phase 1 references (the new
       module is not wired in yet).
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 4: Free In-Plot Corner Search
+## Phase 4: Free In-Plot Corner Search [checkpoint: a5248cb]
 
 Full code: superpowers plan → **Task 4**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Add the imports to the **top** of `tests/test_title_block_layout.py` and append the
+- [x] Task: Write failing tests (Red) [5e15f12]
+    - [x] Add the imports to the **top** of `tests/test_title_block_layout.py` and append the
       five tests (Task 4 Step 1).
-    - [ ] Run `uv run pytest tests/test_title_block_layout.py -v`; the five new tests fail with
+    - [x] Run `uv run pytest tests/test_title_block_layout.py -v`; the five new tests fail with
       `strategy == "grow-header"`, Phase 3 tests still pass.
-- [ ] Task: Implement corner search (Green)
-    - [ ] Add `gid="grid"` to both lines in `cave_sketch/survey/graphics/grid.py`.
-    - [ ] Replace the `_find_free_corner` stub and add `_corner_rects`, `_ignored`, `_hits`,
+- [x] Task: Implement corner search (Green) [3d10f31]
+    - [x] Add `gid="grid"` to both lines in `cave_sketch/survey/graphics/grid.py`.
+    - [x] Replace the `_find_free_corner` stub and add `_corner_rects`, `_ignored`, `_hits`,
       `CORNER_INSET`, `MARKER_MARGIN_PX` (Task 4 Step 3).
-    - [ ] Run `uv run pytest tests/test_title_block_layout.py tests/test_grid.py -v`; all pass.
-- [ ] Task: Quality gates and commit
-    - [ ] Python gates. Commit
+    - [x] Run `uv run pytest tests/test_title_block_layout.py tests/test_grid.py -v`; all pass.
+- [x] Task: Quality gates and commit [3d10f31]
+    - [x] Python gates. Commit
       `feat(survey): place title block in a free plot corner when header is too small`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 4' (Protocol in workflow.md)
-    - [ ] Rerun the Phase 3 demo command. Expected: `2_large_sparse -> corner` (box in the
+- [x] Task: Conductor - Device Verification & Approval 'Phase 4' (Protocol in workflow.md) [a5248cb]
+    - [x] Rerun the Phase 3 demo command. Expected: `2_large_sparse -> corner` (box in the
       top-left, not crossing the diagonal line); the other two unchanged.
-    - [ ] Webapp and Android: generate a PDF **with grid on**; identical to the Phase 1
+    - [x] Webapp and Android: generate a PDF **with grid on**; identical to the Phase 1
       references (grid lines look the same; the new `gid` is invisible).
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 5: Wire the Title Block into Rendering
+## Phase 5: Wire the Title Block into Rendering [checkpoint: d95f5ea]
 
 Full code: superpowers plan → **Task 5**. This phase changes `draw_survey`'s signature, so it
 also migrates both apps' call sites (Step 5b) to keep them working.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Rewrite the title block tests in `tests/test_title_block.py`, migrate
+- [x] Task: Write failing tests (Red) [48c94d3]
+    - [x] Rewrite the title block tests in `tests/test_title_block.py`, migrate
       `tests/test_title_block_integration.py` (sed command + two new tests) and
       `tests/test_render_regression.py` (new `full_metadata` scenario) — Task 5 Step 1.
-    - [ ] Run `uv run pytest tests/test_title_block.py tests/test_title_block_integration.py -v`;
+    - [x] Run `uv run pytest tests/test_title_block.py tests/test_title_block_integration.py -v`;
       confirm `ImportError: cannot import name 'draw_cave_name'` / unexpected keyword
       `title_block`.
-- [ ] Task: Implement rendering changes (Green)
-    - [ ] `title_block.py`: replace old `draw_title_block` with `draw_cave_name`,
+- [x] Task: Implement rendering changes (Green) [5326a22]
+    - [x] `title_block.py`: replace old `draw_title_block` with `draw_cave_name`,
       `draw_title_block`, `_draw_box` (Step 3).
-    - [ ] `renderer.py`: name first, plots, then rows + `draw_title_block` (Step 4).
-    - [ ] `survey.py` / `config.py`: `title_block` parameter, remove
+    - [x] `renderer.py`: name first, plots, then rows + `draw_title_block` (Step 4).
+    - [x] `survey.py` / `config.py`: `title_block` parameter, remove
       `SurveyConfig.surveyor_name`, forward variation only when a map exists (Step 5).
-    - [ ] Migrate `app/pages/1_survey_plot.py` and `android/app/src/main/python/survey_bridge.py`
+    - [x] Migrate `app/pages/1_survey_plot.py` and `android/app/src/main/python/survey_bridge.py`
       to `title_block=TitleBlockInfo(surveyor_name=...)` (Step 5b).
-    - [ ] Run the tests listed in Step 6; all pass.
-- [ ] Task: Regenerate render baselines
-    - [ ] `CAVE_SKETCH_GENERATE_BASELINES=1 uv run pytest tests/test_render_regression.py -v`
+    - [x] Run the tests listed in Step 6; all pass.
+- [x] Task: Regenerate render baselines [5326a22]
+    - [x] `CAVE_SKETCH_GENERATE_BASELINES=1 uv run pytest tests/test_render_regression.py -v`
       (3 skipped), then open the three PNGs in `tests/fixtures/render_baselines/` and check
       them as described in Step 7. Then `uv run pytest tests/test_render_regression.py -v`
       (3 pass).
-- [ ] Task: Quality gates and commit
-    - [ ] Python gates **and** Android gates (the bridge changed). Commit
+- [x] Task: Quality gates and commit [5326a22]
+    - [x] Python gates **and** Android gates (the bridge changed). Commit
       `feat(survey): render extended title block with adaptive placement`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 5' (Protocol in workflow.md)
-    - [ ] Show the user `tests/fixtures/render_baselines/full_metadata.png`: 9 rows, no overlap
+- [x] Task: Conductor - Device Verification & Approval 'Phase 5' (Protocol in workflow.md)
+    - [x] Show the user `tests/fixtures/render_baselines/full_metadata.png`: 9 rows, no overlap
       with cave walls, stations, north arrow, scale bar or cave name.
-    - [ ] Webapp: map only and map + section with surveyor `Test`: box top-right in the header
+    - [x] Webapp: map only and map + section with surveyor `Test`: box top-right in the header
       as in `before_web.pdf` (row spacing may differ slightly), rows Rilevatore/Data/Sviluppo
       (+ Dislivello with section). Set magnetic variation `2.5` → an extra
       `Declinazione: 2.5° E` row appears.
-    - [ ] Android: `./gradlew :app:installDebug`, generate a PDF with surveyor `Test`: same
+    - [x] Android: `./gradlew :app:installDebug`, generate a PDF with surveyor `Test`: same
       result as the webapp; the app does not show an error.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 6: Webapp Inputs
+## Phase 6: Webapp Inputs [checkpoint: 7848b1d]
 
 Full code: superpowers plan → **Task 6**.
 
-- [ ] Task: Write failing tests (Red)
-    - [ ] Create `tests/test_title_block_inputs.py` (Task 6 Step 1); confirm
+- [x] Task: Write failing tests (Red) [8f1f780]
+    - [x] Create `tests/test_title_block_inputs.py` (Task 6 Step 1); confirm
       `ModuleNotFoundError: No module named 'app.components.title_block_inputs'`.
-- [ ] Task: Implement (Green)
-    - [ ] Create `app/components/title_block_inputs.py` (Step 3).
-    - [ ] Update `app/session.py` and `app/pages/1_survey_plot.py` (Step 4).
-    - [ ] Run `uv run pytest tests/test_title_block_inputs.py tests/test_settings_panel.py -v`.
-- [ ] Task: Quality gates and commit
-    - [ ] Python gates. Commit `feat(app): add title block metadata inputs to survey plot page`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 6' (Protocol in workflow.md)
-    - [ ] Webapp on desktop browser **and** on a phone browser (same Wi-Fi, use the
+- [x] Task: Implement (Green) [ae36837]
+    - [x] Create `app/components/title_block_inputs.py` (Step 3).
+    - [x] Update `app/session.py` and `app/pages/1_survey_plot.py` (Step 4).
+    - [x] Run `uv run pytest tests/test_title_block_inputs.py tests/test_settings_panel.py -v`.
+- [x] Task: Quality gates and commit [ae36837]
+    - [x] Python gates. Commit `feat(app): add title block metadata inputs to survey plot page`.
+- [x] Task: Conductor - Device Verification & Approval 'Phase 6' (Protocol in workflow.md)
+    - [x] Webapp on desktop browser **and** on a phone browser (same Wi-Fi, use the
       "Network URL" Streamlit prints):
         1. The "👤 Title block" section shows Surveyor, Drawer, Municipality, Latitude,
            Longitude, Elevation.
@@ -266,55 +266,55 @@ Full code: superpowers plan → **Task 6**.
         4. Enter only Latitude → red error "Latitude and longitude must be entered together.";
            clicking Generate shows "Please fix the title block fields…" and no PDF is made.
         5. Switch to another page in the sidebar and back → values are kept.
-    - [ ] Android: generate a PDF; unchanged from Phase 5.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] Android: generate a PDF; unchanged from Phase 5.
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 7: Android Bridge and `SurveyInputs` Model
+## Phase 7: Android Bridge and `SurveyInputs` Model [checkpoint: bf19679]
 
 Full code: superpowers plan → **Task 7**.
 
-- [ ] Task: Bridge — failing tests (Red), implementation (Green)
-    - [ ] Append the three bridge tests to `tests/test_survey_bridge.py` (Step 1); confirm they
+- [x] Task: Bridge — failing tests (Red), implementation (Green) [782fbcc]
+    - [x] Append the three bridge tests to `tests/test_survey_bridge.py` (Step 1); confirm they
       fail.
-    - [ ] Implement `_optional_float`, the `TitleBlockInfo` construction with the
+    - [x] Implement `_optional_float`, the `TitleBlockInfo` construction with the
       `invalid_title_block` error, and the `magnetic_variation_deg` argument (Step 3).
-    - [ ] Run `uv run pytest tests/test_survey_bridge.py -v && uv run pytest -q`.
-- [ ] Task: Kotlin model — failing tests (Red), implementation (Green)
-    - [ ] Append the three tests to `SurveyPlotViewModelTest.kt` (Step 5); confirm compile
+    - [x] Run `uv run pytest tests/test_survey_bridge.py -v && uv run pytest -q`.
+- [x] Task: Kotlin model — failing tests (Red), implementation (Green) [782fbcc]
+    - [x] Append the three tests to `SurveyPlotViewModelTest.kt` (Step 5); confirm compile
       failure.
-    - [ ] Add `parseDecimalOrNull`, the new `SurveyInputs` fields, `titleBlockError()` and the
+    - [x] Add `parseDecimalOrNull`, the new `SurveyInputs` fields, `titleBlockError()` and the
       new JSON keys; make `parsesAsCoordinate` reuse `parseDecimalOrNull` (Step 7).
-    - [ ] Run the Android gates.
-- [ ] Task: Quality gates and commit
-    - [ ] Python + Android gates. Commit
+    - [x] Run the Android gates.
+- [x] Task: Quality gates and commit [782fbcc]
+    - [x] Python + Android gates. Commit
       `feat(android): send title block metadata and magnetic variation to the bridge`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 7' (Protocol in workflow.md)
-    - [ ] Android: `./gradlew :app:installDebug`; generate a PDF with surveyor `Test` → same
+- [x] Task: Conductor - Device Verification & Approval 'Phase 7' (Protocol in workflow.md)
+    - [x] Android: `./gradlew :app:installDebug`; generate a PDF with surveyor `Test` → same
       as Phase 5 (no new fields on screen yet; this phase only changes data plumbing). The GPS
       points editor on the Satellite screen still accepts `45,5` without a red error.
-    - [ ] Webapp: unchanged from Phase 6.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] Webapp: unchanged from Phase 6.
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 8: Android UI Fields
+## Phase 8: Android UI Fields [checkpoint: 95b7f77]
 
 Full code: superpowers plan → **Task 8**.
 
-- [ ] Task: Write failing UI tests (Red)
-    - [ ] Create `TitleBlockFieldsTest.kt` and append the magnetic variation test to
+- [x] Task: Write failing UI tests (Red) [f5400af]
+    - [x] Create `TitleBlockFieldsTest.kt` and append the magnetic variation test to
       `SettingsFormTest.kt` (Step 1); confirm compile failure.
-- [ ] Task: Implement (Green)
-    - [ ] Create `ui/components/TitleBlockFields.kt` (Step 3).
-    - [ ] Add the magnetic variation field to `SettingsForm.kt` (Step 4).
-    - [ ] Use `TitleBlockFields` in `SurveyPlotScreen.kt` and gate `canGenerate` on
+- [x] Task: Implement (Green) [c672a19]
+    - [x] Create `ui/components/TitleBlockFields.kt` (Step 3).
+    - [x] Add the magnetic variation field to `SettingsForm.kt` (Step 4).
+    - [x] Use `TitleBlockFields` in `SurveyPlotScreen.kt` and gate `canGenerate` on
       `titleBlockError() == null` (Step 5).
-    - [ ] Run the Android gates.
-- [ ] Task: Quality gates and commit
-    - [ ] Android gates + `uv run pytest -q`. Commit
+    - [x] Run the Android gates.
+- [x] Task: Quality gates and commit [c672a19]
+    - [x] Android gates + `uv run pytest -q`. Commit
       `feat(android): add title block fields and magnetic variation input`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 8' (Protocol in workflow.md)
-    - [ ] On the **physical phone** (and emulator if available), `./gradlew :app:installDebug`:
+- [x] Task: Conductor - Device Verification & Approval 'Phase 8' (Protocol in workflow.md)
+    - [x] On the **physical phone** (and emulator if available), `./gradlew :app:installDebug`:
         1. "Survey details" shows Survey name, Surveyor, Drawer, Municipality, Latitude,
            Longitude, Elevation; Settings shows "Magnetic variation (°, +E/-W)".
         2. Latitude/Longitude/Elevation/Variation open a numeric keyboard.
@@ -325,25 +325,25 @@ Full code: superpowers plan → **Task 8**.
         5. Enter only Latitude → red error text under the fields, Generate disabled.
         6. Enter Latitude `91` → error; fix it → Generate enabled again.
         7. Rotate the phone / leave and return to the screen → nothing crashes.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 9: Documentation and DEVLOG
+## Phase 9: Documentation and DEVLOG [checkpoint: d8d421a]
 
 Full code: superpowers plan → **Task 9**.
 
-- [ ] Task: Update user docs
-    - [ ] `android/app/src/main/assets/guide/guide_en.md` and `guide_it.md`,
+- [x] Task: Update user docs [7f0b175]
+    - [x] `android/app/src/main/assets/guide/guide_en.md` and `guide_it.md`,
       `docs/android/README.md` and `README.it.md` (Step 1).
-- [ ] Task: DEVLOG entries
-    - [ ] `DEVLOG.md` and `android/DEVLOG.md` in the existing format (Step 2).
-- [ ] Task: Final verification and commit
-    - [ ] Python gates + Android gates. Commit
+- [x] Task: DEVLOG entries [7f0b175]
+    - [x] `DEVLOG.md` and `android/DEVLOG.md` in the existing format (Step 2).
+- [x] Task: Final verification and commit [7f0b175]
+    - [x] Python gates + Android gates. Commit
       `docs: document title block metadata fields and Android magnetic variation`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 9' (Protocol in workflow.md)
-    - [ ] Android: `./gradlew :app:installDebug`, open the in-app guide in English and Italian
+- [x] Task: Conductor - Device Verification & Approval 'Phase 9' (Protocol in workflow.md) [d8d421a]
+    - [x] Android: `./gradlew :app:installDebug`, open the in-app guide in English and Italian
       → the new fields and magnetic variation are described.
-    - [ ] Final end-to-end run on both devices with all fields filled (same values as Phase 8):
+    - [x] Final end-to-end run on both devices with all fields filled (same values as Phase 8):
       PDFs match each other.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.

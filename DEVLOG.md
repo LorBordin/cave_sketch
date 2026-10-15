@@ -534,6 +534,40 @@
 **Assumptions:** None
 **Next session notes:** None
 
+## [2026-10-09 16:38] title_block_metadata — Core Python and Webapp Implementation (Phases 1-6)
+**Files:**
+- cave_sketch/survey/config.py
+- cave_sketch/survey/graphics/title_block.py
+- cave_sketch/survey/graphics/title_block_layout.py
+- cave_sketch/survey/graphics/grid.py
+- cave_sketch/survey/renderer.py
+- cave_sketch/survey/survey.py
+- app/components/title_block_inputs.py
+- app/session.py
+- app/pages/1_survey_plot.py
+- tests/test_title_block_info.py
+- tests/test_title_block_rows.py
+- tests/test_title_block_layout.py
+- tests/test_title_block.py
+- tests/test_title_block_integration.py
+- tests/test_title_block_inputs.py
+- tests/test_render_regression.py
+- tests/fixtures/render_baselines/plan_only.png
+- tests/fixtures/render_baselines/dual.png
+- tests/fixtures/render_baselines/full_metadata.png
+
+**Deviations from spec:**
+- Updated coordinate input labels in the webapp to "Latitude (° N)" and "Longitude (° E)" based on user feedback.
+
+**Assumptions:** None
+
+**Next session notes:**
+Phases 1 through 8 are implemented, verified on physical Android device (SM-S901B) and desktop webapp, approved, and checkpointed.
+What remains to finish track `title_block_metadata_20261009`:
+- Phase 9 (Documentation):
+  1. Update `android/app/src/main/assets/guide/guide_en.md` and `guide_it.md` documenting new title block metadata fields and magnetic variation in Settings.
+  2. Update `docs/android/README.md` and `docs/android/README.it.md`.
+
 ## [2026-10-14 11:01] Track entrance_symbol_orientation_20261014 — Implementation
 **Files:**
 - cave_sketch/survey/survey.py
@@ -564,8 +598,26 @@
 **Assumptions:** Matplotlib renders a subtle dark (#404040) underlay outline behind white icon strokes to ensure legibility when plotted on white survey backgrounds.
 **Next session notes:** None
 
+## [2026-10-15 11:35] Title Block Metadata — Implementation & Documentation Complete
+**Files:**
+- android/app/src/main/assets/guide/guide_en.md
+- android/app/src/main/assets/guide/guide_it.md
+- docs/android/README.md
+- docs/android/README.it.md
+- DEVLOG.md
 
+**Deviations from spec:** None
 
+**Assumptions:** None
 
-
+**Next session notes:**
+Track `title_block_metadata_20261009` is fully implemented and documented:
+- Extended title block model `TitleBlockInfo` supporting surveyor, drawer, municipality, coordinates (decimal degrees, both or neither), elevation, declination, length, and depth.
+- Formatted Italian title block rows with free-text truncation and coordinate direction indicators.
+- Adaptive placement strategy order: header slot -> map plot free corners (TR, TL, BR, BL) -> section plot free corners -> grow header.
+- `surveyor_name` keyword argument removed from `draw_survey` in favor of `title_block: TitleBlockInfo`.
+- Render baselines regenerated (`plan_only.png`, `dual.png`, `full_metadata.png`) for extended title block layout and full metadata scenario.
+- Webapp and Android mobile app updated with inputs, validation, and magnetic variation configuration.
+- User guides updated in English and Italian across mobile app assets and repository documentation.
+- All Python gates, Android unit tests, and build checks pass cleanly.
 

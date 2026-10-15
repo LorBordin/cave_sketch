@@ -36,6 +36,7 @@ import com.cavesketch.app.ui.components.SectionCard
 import com.cavesketch.app.ui.components.SettingsForm
 import com.cavesketch.app.ui.components.StateBanner
 import com.cavesketch.app.ui.components.SaveShareButton
+import com.cavesketch.app.ui.components.TitleBlockFields
 import com.cavesketch.app.util.extensionOf
 
 import androidx.compose.material3.Scaffold
@@ -51,7 +52,8 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
     val coroutineScope = rememberCoroutineScope()
     var inputs by remember { mutableStateOf(SurveyInputs()) }
     val state by viewModel.state.collectAsState()
-    val canGenerate = inputs.mapPath != null || inputs.sectionPath != null
+    val canGenerate = (inputs.mapPath != null || inputs.sectionPath != null) &&
+        inputs.titleBlockError() == null
 
     val showSnackbar: (String) -> Unit = { msg ->
         coroutineScope.launch {
@@ -94,12 +96,7 @@ fun SurveyPlotScreen(viewModel: SurveyPlotViewModel) {
                     label = { Text("Survey name") },
                     modifier = Modifier.fillMaxWidth(),
                 )
-                OutlinedTextField(
-                    value = inputs.surveyorName,
-                    onValueChange = { inputs = inputs.copy(surveyorName = it) },
-                    label = { Text("Surveyor name") },
-                    modifier = Modifier.fillMaxWidth(),
-                )
+                TitleBlockFields(inputs) { inputs = it }
             }
 
             SectionCard("Settings", Icons.Filled.Tune) {

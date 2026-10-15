@@ -29,7 +29,8 @@ happens **entirely on-device** — no server required.
 
 Pick DXF files from your device and configure the survey output:
 
-- **Survey name** and **surveyor**
+- **Survey name**, **surveyor**, and the optional title block fields: **drawer**, **municipality**, **latitude/longitude** (decimal degrees, both or neither) and **elevation** (m a.s.l.). Only filled-in fields are printed.
+- **Magnetic variation** (in Settings, +E/−W): rotates the map to true north and is printed in the title block when not 0.
 - **Scale** and **rule length**
 - **Rotation**
 - **Marker / text / line-width zoom**

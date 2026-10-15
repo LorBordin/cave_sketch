@@ -25,14 +25,14 @@ def _add_grid(
     end_k_x = int(math.floor(x_max / grid_spacing))
     for k in range(start_k_x, end_k_x + 1):
         x = k * grid_spacing
-        ax.axvline(x, color="lightgray", linestyle=":", zorder=0)
+        ax.axvline(x, color="lightgray", linestyle=":", zorder=0, gid="grid")
 
     # Horizontal lines (snapped to multiples of grid_spacing)
     start_k_y = int(math.ceil(y_min / grid_spacing))
     end_k_y = int(math.floor(y_max / grid_spacing))
     for k in range(start_k_y, end_k_y + 1):
         y = k * grid_spacing
-        ax.axhline(y, color="lightgray", linestyle=":", zorder=0)
+        ax.axhline(y, color="lightgray", linestyle=":", zorder=0, gid="grid")
 
 
 def snap_rule_to_grid(

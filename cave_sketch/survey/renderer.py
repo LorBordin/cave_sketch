@@ -5,9 +5,13 @@ import pandas as pd
 from matplotlib.figure import Figure
 
 from cave_sketch.dxf.models import CaveSurvey
-from cave_sketch.survey.config import SurveyConfig
+from cave_sketch.survey.config import SurveyConfig, TitleBlockInfo
 from cave_sketch.survey.graphics.survey_plot import create_survey
-from cave_sketch.survey.graphics.title_block import draw_title_block
+from cave_sketch.survey.graphics.title_block import (
+    build_title_rows,
+    draw_cave_name,
+    draw_title_block,
+)
 
 
 def render_survey(
@@ -17,6 +21,8 @@ def render_survey(
     excluded_nodes: Optional[List[str]] = None,
     total_length: float = 0.0,
     total_depth: Optional[float] = None,
+    title_block: Optional[TitleBlockInfo] = None,
+    magnetic_variation_deg: float = 0.0,
 ) -> Figure:
     """
     Render a cave survey plot (plan and optionally section) using matplotlib.
@@ -28,6 +34,8 @@ def render_survey(
         excluded_nodes: List of node IDs to exclude from rendering.
         total_length: Total length of the cave survey in meters.
         total_depth: Total depth range in meters, or None.
+        title_block: Metadata shown in the title block.
+        magnetic_variation_deg: Variation applied to the map, printed when non-zero.
 
     Returns:
         A matplotlib Figure object.
@@ -35,13 +43,7 @@ def render_survey(
     # Create Fig
     fig = plt.figure(figsize=(8.27, 11.69))
     fig.subplots_adjust(top=0.86)
-    draw_title_block(
-        fig=fig,
-        cave_name=survey.name,
-        surveyor_name=config.surveyor_name,
-        total_length=total_length,
-        total_depth=total_depth,
-    )
+    name_text = draw_cave_name(fig, survey.name)
 
     n_plots = 1 + (1 if section_survey else 0)
     index = 1
@@ -57,9 +59,10 @@ def render_survey(
         "show_centerline": config.show_centerline,
     }
 
+    section_ax = None
     # 1. Section Subplot
     if section_survey:
-        ax = plt.subplot(n_plots, 1, index)
+        section_ax = plt.subplot(n_plots, 1, index)
         section_df = _survey_to_df(section_survey)
         create_survey(
             section_df,
@@ -69,13 +72,13 @@ def render_survey(
             excluded_nodes=excluded_nodes,
             rule_orientation="vertical",
             config=config_dict,
-            ax=ax,
+            ax=section_ax,
         )
-        ax.set_title("Sezione")
+        section_ax.set_title("Sezione")
         index += 1
 
     # 2. Map subplot
-    ax = plt.subplot(n_plots, 1, index)
+    map_ax = plt.subplot(n_plots, 1, index)
     map_df = _survey_to_df(survey)
     create_survey(
         map_df,
@@ -86,10 +89,17 @@ def render_survey(
         rule_orientation="horizontal",
         rotation_deg=config.rotation_deg,
         config=config_dict,
-        ax=ax,
+        ax=map_ax,
     )
     title = "Pianta" if config.show_north or section_survey is not None else "Sezione"
-    ax.set_title(title)
+    map_ax.set_title(title)
+
+    # The plan view gets first pick of free corners for the title block.
+    plot_axes = [map_ax] + ([section_ax] if section_ax is not None else [])
+    rows = build_title_rows(
+        title_block or TitleBlockInfo(), magnetic_variation_deg, total_length, total_depth
+    )
+    draw_title_block(fig, name_text, rows, plot_axes)
 
     return fig
 

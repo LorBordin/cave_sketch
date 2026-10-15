@@ -17,6 +17,9 @@ sealed interface PlotState {
     data class Error(val message: String) : PlotState
 }
 
+/** Parses a user-typed decimal, accepting a comma as the decimal separator. */
+fun parseDecimalOrNull(value: String): Double? = value.trim().replace(",", ".").toDoubleOrNull()
+
 data class SurveyInputs(
     val mapPath: String? = null,
     val sectionPath: String? = null,
@@ -24,6 +27,11 @@ data class SurveyInputs(
     val childSectionPath: String? = null,
     val surveyName: String = "",
     val surveyorName: String = "",
+    val drawerName: String = "",
+    val municipality: String = "",
+    val latitude: String = "",
+    val longitude: String = "",
+    val elevationM: String = "",
     val parentStation: String = "",
     val childStation: String = "",
     val sectionProtocol: String = "simple",
@@ -35,7 +43,25 @@ data class SurveyInputs(
     val textZoom: Double = 0.0,
     val lineWidthZoom: Double = 0.0,
     val showCenterline: Boolean = true,
+    val magneticVariationDeg: String = "",
 ) {
+    /** First validation error for title block / variation inputs, or null. Mirrors TitleBlockInfo (Python). */
+    fun titleBlockError(): String? {
+        if (latitude.isBlank() != longitude.isBlank()) return "Enter both latitude and longitude, or neither."
+        if (latitude.isNotBlank()) {
+            val lat = parseDecimalOrNull(latitude)
+            if (lat == null || lat !in -90.0..90.0) return "Latitude must be a number between -90 and 90."
+            val lon = parseDecimalOrNull(longitude)
+            if (lon == null || lon !in -180.0..180.0) return "Longitude must be a number between -180 and 180."
+        }
+        if (elevationM.isNotBlank() && parseDecimalOrNull(elevationM) == null) return "Elevation must be a number."
+        if (magneticVariationDeg.isNotBlank()) {
+            val mv = parseDecimalOrNull(magneticVariationDeg)
+            if (mv == null || mv !in -180.0..180.0) return "Magnetic variation must be a number between -180 and 180."
+        }
+        return null
+    }
+
     fun toJson(): String {
         val settings = JSONObject()
             .put("rule_length", ruleLength)
@@ -46,6 +72,7 @@ data class SurveyInputs(
             .put("text_zoom", textZoom)
             .put("line_width_zoom", lineWidthZoom)
             .put("show_centerline", showCenterline)
+            .put("magnetic_variation_deg", parseDecimalOrNull(magneticVariationDeg) ?: 0.0)
         return JSONObject()
             .put("map_path", mapPath ?: JSONObject.NULL)
             .put("section_path", sectionPath ?: JSONObject.NULL)
@@ -53,6 +80,11 @@ data class SurveyInputs(
             .put("child_section_path", childSectionPath ?: JSONObject.NULL)
             .put("survey_name", surveyName)
             .put("surveyor_name", surveyorName)
+            .put("drawer_name", drawerName)
+            .put("municipality", municipality)
+            .put("latitude", parseDecimalOrNull(latitude) ?: JSONObject.NULL)
+            .put("longitude", parseDecimalOrNull(longitude) ?: JSONObject.NULL)
+            .put("elevation_m", parseDecimalOrNull(elevationM) ?: JSONObject.NULL)
             .put("parent_station", parentStation)
             .put("child_station", childStation)
             .put("section_protocol", sectionProtocol)

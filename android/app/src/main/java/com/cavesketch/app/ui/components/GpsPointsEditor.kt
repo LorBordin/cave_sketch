@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.cavesketch.app.ui.GpsPoint
+import com.cavesketch.app.ui.parseDecimalOrNull
 
 /** Mirror of cave_sketch.geo.coordinates.parse_coordinate (decimal, '.'/',' separator). */
-fun parsesAsCoordinate(value: String): Boolean =
-    value.trim().replace(",", ".").toDoubleOrNull() != null
+fun parsesAsCoordinate(value: String): Boolean = parseDecimalOrNull(value) != null
 
 @Composable
 fun GpsPointsEditor(
