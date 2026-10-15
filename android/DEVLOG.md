@@ -307,7 +307,13 @@ None
 - android/DEVLOG.md
 
 **Deviations from spec:** None
-**Assumptions:** Pending on-device verification and gradle build on machine with Android SDK/JDK (Phase 5).
-**Next session notes:** Phase 4 code complete. Map merge protocol integrated into SurveyInputs, MergeControls, and survey_bridge. Python gates pass cleanly.
+## [2026-10-15 11:59] Phase 5: Android – Build & Device Verification Complete
+**Files:**
+- conductor/tracks/map_merge_protocol_20261014/metadata.json
+- android/DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** Built and verified unit tests (`:app:testDebugUnitTest`) and assembly (`:app:assembleDebug`) successfully with Gradle 9.5 / JDK 21. Installed debug APK onto connected device (SM-S901B) via adb. Sample DXF pushed to device Download folder for on-device survey merge verification.
+**Next session notes:** Phase 5 complete. Ready for manual verification checkpoint and documentation sync.
 
 
