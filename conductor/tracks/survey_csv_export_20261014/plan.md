@@ -33,9 +33,9 @@
     - [x] Check if Android SDK / Android Studio is installed and `./gradlew` is available
     - [x] Check if an Android physical device or emulator is connected (`adb devices`)
     - [x] If Android Studio or an Android test device is NOT available, pause track development, update metadata with status note, and halt for resumption on an Android-equipped laptop
-- [ ] Task: Execute Android build and test verification (on Android-capable environment)
-    - [ ] Run `./gradlew :app:testDebugUnitTest :app:assembleDebug`
-    - [ ] Install debug APK and verify CSV export and iterative merge on Android device
+- [x] Task: Execute Android build and test verification (on Android-capable environment) [07f0c34]
+    - [x] Run `./gradlew :app:testDebugUnitTest :app:assembleDebug`
+    - [x] Install debug APK and verify CSV export and iterative merge on Android device
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Android Environment Check & Verification' (Protocol in workflow.md)
 
 ## Phase 5: Documentation & Final Verification
