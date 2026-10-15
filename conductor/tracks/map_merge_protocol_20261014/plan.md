@@ -68,7 +68,7 @@
 ## Phase 5: Android – build & device verification (REQUIRES Android machine)
 - [x] 3c3e7f4 Task: `cd android && ./gradlew :app:testDebugUnitTest :app:assembleDebug`; fix any
   compile/test failures
-- [ ] Task: `./gradlew :app:installDebug`; on a device merge `sample.dxf` with itself,
+- [x] 2894d69 Task: `./gradlew :app:installDebug`; on a device merge `sample.dxf` with itself,
   Map = Displacement → PDF preview shows the displaced child + connector; Satellite map shows the
   true position; the map radio is hidden without a child map
 - [ ] Task: `android/DEVLOG.md` entry; set track status to completed
