@@ -328,7 +328,7 @@ Full code: superpowers plan → **Task 8**.
     - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
 
-## Phase 9: Documentation and DEVLOG
+## Phase 9: Documentation and DEVLOG [checkpoint: d8d421a]
 
 Full code: superpowers plan → **Task 9**.
 
@@ -340,10 +340,10 @@ Full code: superpowers plan → **Task 9**.
 - [x] Task: Final verification and commit [7f0b175]
     - [x] Python gates + Android gates. Commit
       `docs: document title block metadata fields and Android magnetic variation`.
-- [ ] Task: Conductor - Device Verification & Approval 'Phase 9' (Protocol in workflow.md)
-    - [ ] Android: `./gradlew :app:installDebug`, open the in-app guide in English and Italian
+- [x] Task: Conductor - Device Verification & Approval 'Phase 9' (Protocol in workflow.md) [d8d421a]
+    - [x] Android: `./gradlew :app:installDebug`, open the in-app guide in English and Italian
       → the new fields and magnetic variation are described.
-    - [ ] Final end-to-end run on both devices with all fields filled (same values as Phase 8):
+    - [x] Final end-to-end run on both devices with all fields filled (same values as Phase 8):
       PDFs match each other.
-    - [ ] **Does this meet your expectations? Please confirm with yes or provide feedback on
+    - [x] **Does this meet your expectations? Please confirm with yes or provide feedback on
       what needs to be changed.** — STOP and wait.
