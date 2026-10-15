@@ -332,13 +332,13 @@ Full code: superpowers plan → **Task 8**.
 
 Full code: superpowers plan → **Task 9**.
 
-- [ ] Task: Update user docs
-    - [ ] `android/app/src/main/assets/guide/guide_en.md` and `guide_it.md`,
+- [x] Task: Update user docs [7f0b175]
+    - [x] `android/app/src/main/assets/guide/guide_en.md` and `guide_it.md`,
       `docs/android/README.md` and `README.it.md` (Step 1).
-- [ ] Task: DEVLOG entries
-    - [ ] `DEVLOG.md` and `android/DEVLOG.md` in the existing format (Step 2).
-- [ ] Task: Final verification and commit
-    - [ ] Python gates + Android gates. Commit
+- [x] Task: DEVLOG entries [7f0b175]
+    - [x] `DEVLOG.md` and `android/DEVLOG.md` in the existing format (Step 2).
+- [x] Task: Final verification and commit [7f0b175]
+    - [x] Python gates + Android gates. Commit
       `docs: document title block metadata fields and Android magnetic variation`.
 - [ ] Task: Conductor - Device Verification & Approval 'Phase 9' (Protocol in workflow.md)
     - [ ] Android: `./gradlew :app:installDebug`, open the in-app guide in English and Italian
