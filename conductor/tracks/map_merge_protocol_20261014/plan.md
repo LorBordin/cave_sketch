@@ -65,11 +65,11 @@
     - [x] Set `metadata.json` status to `in_progress` and add the note
       "paused: Phase 5 requires Android device"; commit; STOP and inform the user.
 
-## Phase 5: Android – build & device verification (REQUIRES Android machine)
+## Phase 5: Android – build & device verification (REQUIRES Android machine) [checkpoint: eba77c0]
 - [x] 3c3e7f4 Task: `cd android && ./gradlew :app:testDebugUnitTest :app:assembleDebug`; fix any
   compile/test failures
 - [x] 2894d69 Task: `./gradlew :app:installDebug`; on a device merge `sample.dxf` with itself,
   Map = Displacement → PDF preview shows the displaced child + connector; Satellite map shows the
   true position; the map radio is hidden without a child map
 - [x] 433bc4a Task: `android/DEVLOG.md` entry; set track status to completed
-- [ ] Task: Conductor - User Manual Verification 'Phase 5: Android – build & device verification' (Protocol in workflow.md)
+- [x] eba77c0 Task: Conductor - User Manual Verification 'Phase 5: Android – build & device verification' (Protocol in workflow.md)
