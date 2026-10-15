@@ -66,7 +66,7 @@
       "paused: Phase 5 requires Android device"; commit; STOP and inform the user.
 
 ## Phase 5: Android – build & device verification (REQUIRES Android machine)
-- [ ] Task: `cd android && ./gradlew :app:testDebugUnitTest :app:assembleDebug`; fix any
+- [x] 3c3e7f4 Task: `cd android && ./gradlew :app:testDebugUnitTest :app:assembleDebug`; fix any
   compile/test failures
 - [ ] Task: `./gradlew :app:installDebug`; on a device merge `sample.dxf` with itself,
   Map = Displacement → PDF preview shows the displaced child + connector; Satellite map shows the
