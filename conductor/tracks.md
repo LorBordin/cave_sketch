@@ -72,6 +72,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: Download Survey CSV Files (Web & Android) to Support >2 Sub-Surveys Merge**
+- [x] **Track: Download Survey CSV Files (Web & Android) to Support >2 Sub-Surveys Merge**
 *Link: [./tracks/survey_csv_export_20261014/](./tracks/survey_csv_export_20261014/)*
 
