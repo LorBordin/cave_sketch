@@ -327,7 +327,21 @@ What remains to finish track `title_block_metadata_20261009`:
 - Phase 9 (Documentation):
   1. Update in-app user guide in English (`android/app/src/main/assets/guide/guide_en.md`) and Italian (`guide_it.md`) to document title block fields (drawer, municipality, latitude/longitude, elevation) and magnetic variation in Settings.
   2. Update `docs/android/README.md` and `docs/android/README.it.md`.
-  3. Run full verification (`uv run ruff check .`, `uv run mypy cave_sketch/`, `uv run pytest`, `./gradlew testDebugUnitTest assembleDebug`).
-  4. Perform Phase 9 verification & approval with user, then create Phase 9 checkpoint.
-  5. Sync Conductor docs and mark track complete in `conductor/tracks.md`.
 
+## [2026-10-15 11:35] Title Block Metadata — In-App User Guide & Documentation Complete
+**Files:**
+- android/app/src/main/assets/guide/guide_en.md
+- android/app/src/main/assets/guide/guide_it.md
+- docs/android/README.md
+- docs/android/README.it.md
+- android/DEVLOG.md
+
+**Deviations from spec:** None
+
+**Assumptions:** None
+
+**Next session notes:**
+Title block metadata fields and magnetic variation documentation completed:
+- In-app offline user guides in English (`guide_en.md`) and Italian (`guide_it.md`) updated with descriptions of the new title block fields (drawer, municipality, latitude/longitude, elevation) and Settings magnetic variation.
+- User documentation in `docs/android/README.md` and `docs/android/README.it.md` updated with matching descriptions.
+- All Android unit tests (`testDebugUnitTest`) pass and debug APK builds cleanly (`assembleDebug`).

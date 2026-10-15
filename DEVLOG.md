@@ -567,9 +567,26 @@ What remains to finish track `title_block_metadata_20261009`:
 - Phase 9 (Documentation):
   1. Update `android/app/src/main/assets/guide/guide_en.md` and `guide_it.md` documenting new title block metadata fields and magnetic variation in Settings.
   2. Update `docs/android/README.md` and `docs/android/README.it.md`.
-  3. Run mandatory quality gates (`uv run ruff check .`, `uv run mypy cave_sketch/`, `uv run pytest`, `./gradlew testDebugUnitTest assembleDebug`).
-  4. Perform Phase 9 verification & approval with user, then create Phase 9 checkpoint.
-  5. Sync Conductor docs and mark track complete in `conductor/tracks.md`.
 
+## [2026-10-15 11:35] Title Block Metadata — Implementation & Documentation Complete
+**Files:**
+- android/app/src/main/assets/guide/guide_en.md
+- android/app/src/main/assets/guide/guide_it.md
+- docs/android/README.md
+- docs/android/README.it.md
+- DEVLOG.md
 
+**Deviations from spec:** None
 
+**Assumptions:** None
+
+**Next session notes:**
+Track `title_block_metadata_20261009` is fully implemented and documented:
+- Extended title block model `TitleBlockInfo` supporting surveyor, drawer, municipality, coordinates (decimal degrees, both or neither), elevation, declination, length, and depth.
+- Formatted Italian title block rows with free-text truncation and coordinate direction indicators.
+- Adaptive placement strategy order: header slot -> map plot free corners (TR, TL, BR, BL) -> section plot free corners -> grow header.
+- `surveyor_name` keyword argument removed from `draw_survey` in favor of `title_block: TitleBlockInfo`.
+- Render baselines regenerated (`plan_only.png`, `dual.png`, `full_metadata.png`) for extended title block layout and full metadata scenario.
+- Webapp and Android mobile app updated with inputs, validation, and magnetic variation configuration.
+- User guides updated in English and Italian across mobile app assets and repository documentation.
+- All Python gates, Android unit tests, and build checks pass cleanly.

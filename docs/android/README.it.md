@@ -31,7 +31,8 @@ necessario.
 
 Seleziona file DXF dal dispositivo e configura l'output del rilievo:
 
-- **Nome rilievo** e **rilevatore**
+- **Nome rilievo**, **rilevatore** e i campi opzionali del cartiglio: **disegnatore**, **comune**, **latitudine/longitudine** (gradi decimali, entrambi o nessuno) e **quota slm** (m s.l.m.). Vengono stampati solo i campi compilati.
+- **Declinazione magnetica** (nelle Impostazioni, +E/−W): ruota la pianta verso il nord geografico e viene stampata nel cartiglio quando diversa da 0.
 - **Scala** e **lunghezza scala grafica**
 - **Rotazione**
 - **Zoom marcatori / testo / spessore linee**
