@@ -28,7 +28,7 @@
     - [x] Update `SessionCleanup.kt` to ensure `merged_section.csv` is included in the session cleanup file list
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Android ViewModel & UI Implementation' (Protocol in workflow.md) [6a5088b]
 
-## Phase 4: Android Environment Check & Verification (Pause Point)
+## Phase 4: Android Environment Check & Verification (Pause Point) [checkpoint: 84adda4]
 - [x] Task: Verify Android Studio and device connectivity (PAUSE POINT) [8ba2610]
     - [x] Check if Android SDK / Android Studio is installed and `./gradlew` is available
     - [x] Check if an Android physical device or emulator is connected (`adb devices`)
@@ -36,7 +36,7 @@
 - [x] Task: Execute Android build and test verification (on Android-capable environment) [07f0c34]
     - [x] Run `./gradlew :app:testDebugUnitTest :app:assembleDebug`
     - [x] Install debug APK and verify CSV export and iterative merge on Android device
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Android Environment Check & Verification' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Android Environment Check & Verification' (Protocol in workflow.md) [84adda4]
 
 ## Phase 5: Documentation & Final Verification
 - [x] Task: Update documentation [a19d75c]
