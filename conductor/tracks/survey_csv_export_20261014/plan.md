@@ -38,7 +38,7 @@
     - [x] Install debug APK and verify CSV export and iterative merge on Android device
 - [x] Task: Conductor - User Manual Verification 'Phase 4: Android Environment Check & Verification' (Protocol in workflow.md) [84adda4]
 
-## Phase 5: Documentation & Final Verification
+## Phase 5: Documentation & Final Verification [checkpoint: 1a4083d]
 - [x] Task: Update documentation [a19d75c]
     - [x] Update user documentation in `docs/` describing how to merge >2 surveys by downloading and re-uploading CSV files
 - [x] Task: Mandatory verification & DEVLOG updates [f38f088]
@@ -46,4 +46,4 @@
     - [x] Run `uv run mypy cave_sketch/`
     - [x] Run `uv run pytest`
     - [x] Append entries to root `DEVLOG.md` and `android/DEVLOG.md`
-- [ ] Task: Conductor - User Manual Verification 'Phase 5: Documentation & Final Verification' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 5: Documentation & Final Verification' (Protocol in workflow.md) [1a4083d]
