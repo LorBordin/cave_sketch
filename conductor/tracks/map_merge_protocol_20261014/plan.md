@@ -71,5 +71,5 @@
 - [x] 2894d69 Task: `./gradlew :app:installDebug`; on a device merge `sample.dxf` with itself,
   Map = Displacement → PDF preview shows the displaced child + connector; Satellite map shows the
   true position; the map radio is hidden without a child map
-- [ ] Task: `android/DEVLOG.md` entry; set track status to completed
+- [x] 433bc4a Task: `android/DEVLOG.md` entry; set track status to completed
 - [ ] Task: Conductor - User Manual Verification 'Phase 5: Android – build & device verification' (Protocol in workflow.md)
