@@ -14,7 +14,11 @@ class AppState(TypedDict):
     pdf_output_path: Optional[Path]
     map_loaded: bool
     map_csv: Optional[Path]
+    merged_map_csv: Optional[Path]
+    effective_map_csv: Optional[Path]
     section_csv: Optional[Path]
+    merged_section_csv: Optional[Path]
+    effective_section_csv: Optional[Path]
     known_points: List[Dict[str, Any]]
     rotation_angle: float
     magnetic_variation_deg: float
@@ -47,7 +51,10 @@ def init_session() -> None:
         "map_loaded": False,
         "map_csv": None,
         "merged_map_csv": None,
+        "effective_map_csv": None,
         "section_csv": None,
+        "merged_section_csv": None,
+        "effective_section_csv": None,
         "child_map_csv": None,
         "child_section_csv": None,
         "parent_station": "",

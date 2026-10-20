@@ -66,6 +66,24 @@ class SurveyPlotViewModelTest {
     }
 
     @Test
+    fun success_with_map_and_section_csv_populates_state() = runTest(testDispatcher) {
+        val model = vm(object : SurveyBridge {
+            override suspend fun generate(inputsJson: String, workDir: String) =
+                """{"pdf_path":"/tmp/survey.pdf","map_csv_path":"/tmp/map.csv","section_csv_path":"/tmp/section.csv"}"""
+        })
+        model.generate(inputs)
+        advanceUntilIdle()
+        assertEquals(
+            PlotState.Success(
+                pdfPath = "/tmp/survey.pdf",
+                mapCsvPath = "/tmp/map.csv",
+                sectionCsvPath = "/tmp/section.csv",
+            ),
+            model.state.value
+        )
+    }
+
+    @Test
     fun survey_inputs_to_json_includes_show_centerline() {
         val inputs = SurveyInputs(showCenterline = false)
         val json = inputs.toJson()

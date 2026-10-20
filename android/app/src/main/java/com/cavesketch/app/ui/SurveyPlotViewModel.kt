@@ -13,7 +13,11 @@ import org.json.JSONObject
 sealed interface PlotState {
     data object Idle : PlotState
     data class Generating(val phase: String) : PlotState
-    data class Success(val pdfPath: String) : PlotState
+    data class Success(
+        val pdfPath: String,
+        val mapCsvPath: String? = null,
+        val sectionCsvPath: String? = null,
+    ) : PlotState
     data class Error(val message: String) : PlotState
 }
 
@@ -112,14 +116,20 @@ class SurveyPlotViewModel(
                 val resultJson = bridge.generate(inputs.toJson(), workDir)
                 val obj = JSONObject(resultJson)
                 _state.value = if (obj.has("pdf_path")) {
-                    if (obj.has("map_csv_path")) {
+                    val mapCsvPath = if (obj.has("map_csv_path")) obj.getString("map_csv_path") else null
+                    val sectionCsvPath = if (obj.has("section_csv_path")) obj.getString("section_csv_path") else null
+                    if (mapCsvPath != null) {
                         store.publish(
                             com.cavesketch.app.data.SurveyResult(
-                                obj.getString("map_csv_path"), inputs.surveyName
+                                mapCsvPath, inputs.surveyName
                             )
                         )
                     }
-                    PlotState.Success(obj.getString("pdf_path"))
+                    PlotState.Success(
+                        pdfPath = obj.getString("pdf_path"),
+                        mapCsvPath = mapCsvPath,
+                        sectionCsvPath = sectionCsvPath,
+                    )
                 } else {
                     PlotState.Error(obj.optString("detail", obj.optString("error", "Unknown error")))
                 }

@@ -635,6 +635,23 @@ What remains to finish track `title_block_metadata_20261009`:
 **Assumptions:** User chose bold firebrick dashed line (1.5pt, [8, 4]) to guarantee visibility and distinction from the lightgray dotted spatial grid.
 **Next session notes:** Connector line style updated and verified.
 
+## [2026-10-14 14:32] Track survey_csv_export_20261014 — Survey CSV Export Implementation
+**Files:**
+- android/app/src/main/python/survey_bridge.py
+- tests/test_survey_bridge.py
+- app/session.py
+- app/pages/1_survey_plot.py
+- tests/test_survey_csv_export.py
+- docs/web/survey-merging.md
+- docs/web/survey-merging.it.md
+- docs/android/README.md
+- docs/android/README.it.md
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Survey CSV export is fully implemented and tested for webapp and Python bridge. Users can download merged/parsed Map and Section CSVs and iteratively merge >2 sub-surveys.
+
 ## [2026-10-14 16:02] Track snow_icon_20261014 — Implementation
 **Files:**
 - cave_sketch/style_icons.py
@@ -685,4 +702,16 @@ Track `title_block_metadata_20261009` is fully implemented and documented:
 **Deviations from spec:** None
 **Assumptions:** Combined MapProtocol imports/arguments from feature branch with TitleBlockInfo and magnetic_variation_deg from main. Preserved all unit tests from both branches. Chronologically integrated all DEVLOG entries.
 **Next session notes:** Branch feature/map_merge_protocol_20261014 resolved and merged cleanly into main.
+
+## [2026-10-20 10:02] Merge Resolution — feature/survey_csv_export_20261014 into main
+**Files:**
+- DEVLOG.md
+- android/DEVLOG.md
+- conductor/product.md
+- tests/test_survey_bridge.py
+
+**Deviations from spec:** None
+**Assumptions:** Preserved all tests from both branches in tests/test_survey_bridge.py. Combined product description highlights for multi-survey merging and artifact saving/sharing in conductor/product.md. Chronologically integrated all DEVLOG entries across root and Android devlogs.
+**Next session notes:** Merge conflicts resolved cleanly. All Ruff lint checks, mypy type checks, and pytest suites (263 tests) pass.
+
 

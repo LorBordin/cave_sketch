@@ -81,6 +81,32 @@ def effective_map_csv(map_csv: Optional[str], child_map_csv: Optional[str],
     return map_csv
 
 
+def effective_section_csv(section_csv: Optional[str], child_section_csv: Optional[str],
+                          parent_station: str, child_station: str,
+                          section_protocol: SectionProtocol,
+                          work_dir: str) -> Optional[str]:
+    """Return the section CSV path: the merged CSV when a valid merge was
+    requested, else the parsed section CSV, or None when no section was provided."""
+    if not section_csv:
+        return None
+    if child_section_csv and parent_station and child_station:
+        from cave_sketch.survey.merger import merge_surveys
+        _, merged_df = merge_surveys(
+            parent_map=None,
+            parent_section=pd.read_csv(section_csv),
+            child_map=None,
+            child_section=pd.read_csv(child_section_csv),
+            parent_station=parent_station,
+            child_station=child_station,
+            section_protocol=section_protocol,
+        )
+        if merged_df is not None:
+            merged_path = Path(work_dir) / "merged_section.csv"
+            merged_df.to_csv(merged_path, index=False)
+            return str(merged_path)
+    return section_csv
+
+
 def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
     """Entrypoint mirroring app/pages/1_survey_plot.py. See module/Interfaces for
     the inputs_json shape. Returns JSON {"pdf_path": ...} or {"error", "detail"}."""
@@ -95,7 +121,7 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
 
         if not map_csv and not section_csv:
             return json.dumps({"error": "no_input",
-                               "detail": "Select at least one map or section file."})
+                                "detail": "Select at least one map or section file."})
 
         parent_station = data.get("parent_station") or ""
         child_station = data.get("child_station") or ""
@@ -147,12 +173,19 @@ def generate_survey_plot(inputs_json: str, work_dir: str) -> str:
         import matplotlib.pyplot as plt
         plt.close(fig)  # release the figure; mobile renders the PDF, not the figure
         result = {"pdf_path": pdf_path}
+        protocol = SectionProtocol(data.get("section_protocol", "simple"))
         eff_map_csv = effective_map_csv(
             map_csv, child_map_csv, parent_station or "", child_station or "",
-            SectionProtocol(data.get("section_protocol", "simple")), work_dir,
+            protocol, work_dir,
         )
         if eff_map_csv:
             result["map_csv_path"] = eff_map_csv
+        eff_section_csv = effective_section_csv(
+            section_csv, child_section_csv, parent_station or "", child_station or "",
+            protocol, work_dir,
+        )
+        if eff_section_csv:
+            result["section_csv_path"] = eff_section_csv
         return json.dumps(result)
     except Exception as e:  # noqa: BLE001 — the bridge converts all failures to structured errors
         return json.dumps({"error": "render_failed", "detail": str(e)})

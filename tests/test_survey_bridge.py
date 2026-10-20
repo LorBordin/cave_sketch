@@ -202,3 +202,67 @@ def test_effective_map_csv_always_uses_simple_map_protocol(two_csvs):
         _, kwargs = mock_merge.call_args
         assert kwargs.get("map_protocol") == MapProtocol.SIMPLE
 
+
+def test_no_merge_returns_parsed_section_csv(two_csvs, tmp_path):
+    section_csv, _, _ = two_csvs
+    out = survey_bridge.effective_section_csv(
+        section_csv, None, "", "", SectionProtocol.SIMPLE, str(tmp_path)
+    )
+    assert out == section_csv
+
+
+def test_no_section_returns_none(tmp_path):
+    out = survey_bridge.effective_section_csv(
+        None, None, "", "", SectionProtocol.SIMPLE, str(tmp_path)
+    )
+    assert out is None
+
+
+def test_section_merge_writes_and_returns_merged_section_csv(two_csvs):
+    section_csv, child_csv, work_dir = two_csvs
+    out = survey_bridge.effective_section_csv(
+        section_csv, child_csv, "st2", "st1", SectionProtocol.SIMPLE, str(work_dir)
+    )
+    assert out == str(work_dir / "merged_section.csv")
+    assert Path(out).exists()
+    assert len(pd.read_csv(out)) > len(pd.read_csv(section_csv))
+
+
+def test_generate_survey_plot_returns_map_and_section_csv_paths(tmp_path):
+    import json
+    from unittest.mock import patch
+    parent_df = pd.DataFrame({
+        "Node_Id": ["1", "2"], "X": [0.0, 10.0], "Y": [0.0, 0.0],
+        "Links": ["2", "1"], "Type": ["station", "station"],
+    })
+    child_df = pd.DataFrame({
+        "Node_Id": ["1", "2"], "X": [0.0, 5.0], "Y": [0.0, 0.0],
+        "Links": ["2", "1"], "Type": ["station", "station"],
+    })
+    map_csv = str(tmp_path / "map.csv")
+    sec_csv = str(tmp_path / "section.csv")
+    child_map_csv = str(tmp_path / "child_map.csv")
+    child_sec_csv = str(tmp_path / "child_section.csv")
+    parent_df.to_csv(map_csv, index=False)
+    parent_df.to_csv(sec_csv, index=False)
+    child_df.to_csv(child_map_csv, index=False)
+    child_df.to_csv(child_sec_csv, index=False)
+
+    inputs_json = {
+        "map_path": map_csv,
+        "section_path": sec_csv,
+        "child_map_path": child_map_csv,
+        "child_section_path": child_sec_csv,
+        "parent_station": "2",
+        "child_station": "1",
+        "section_protocol": "simple",
+        "survey_name": "TestBothCsvs",
+    }
+    with patch.object(survey_bridge, "draw_survey"):
+        resp_json = survey_bridge.generate_survey_plot(json.dumps(inputs_json), str(tmp_path))
+        resp = json.loads(resp_json)
+        assert "pdf_path" in resp
+        assert "map_csv_path" in resp
+        assert resp["map_csv_path"] == str(tmp_path / "merged_map.csv")
+        assert "section_csv_path" in resp
+        assert resp["section_csv_path"] == str(tmp_path / "merged_section.csv")

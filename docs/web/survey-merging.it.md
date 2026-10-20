@@ -16,7 +16,14 @@ Nella pagina **Survey Plot**, sotto i pulsanti di caricamento principali, compar
 
 > **Formato ID stazione:** gli ID devono essere puramente numerici (es. `30`, `47`). ID contenenti lettere (es. `12P4`) identificano geometrie di pareti o linee, non stazioni di rilievo — vengono rifiutati con un chiaro messaggio di errore.
 
-Per unire ulteriori rilievi oltre a un figlio, scaricare il risultato unito e ricaricarlo come nuovo padre.
+### Unione di più di due rilievi (Unione iterativa)
+
+Per unire più di due rilievi:
+1. Unire il Rilievo 1 (principale) e il Rilievo 2 (figlio) normalmente.
+2. Sotto l'anteprima, cliccare su **📥 Scarica CSV Mappa** e/o **📥 Scarica CSV Sezione** per salvare il dataset unito.
+3. In una nuova sessione, caricare i file CSV scaricati come nuovo **Rilievo Principale**.
+4. Caricare il Rilievo 3 come **Rilievo Figlio**, impostare le stazioni corrispondenti e generare il grafico.
+5. Ripetere iterativamente per qualsiasi numero di sotto-rilievi!
 
 ![Interfaccia di unione](imgs/merge-ui.png)
 

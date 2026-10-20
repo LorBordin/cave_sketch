@@ -359,3 +359,28 @@ Title block metadata fields and magnetic variation documentation completed:
 - In-app offline user guides in English (`guide_en.md`) and Italian (`guide_it.md`) updated with descriptions of the new title block fields (drawer, municipality, latitude/longitude, elevation) and Settings magnetic variation.
 - User documentation in `docs/android/README.md` and `docs/android/README.it.md` updated with matching descriptions.
 - All Android unit tests (`testDebugUnitTest`) pass and debug APK builds cleanly (`assembleDebug`).
+
+## [2026-10-14 14:32] Track survey_csv_export_20261014 — Android ViewModel & UI Implementation
+**Files:**
+- android/app/src/main/python/survey_bridge.py
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotScreen.kt
+- android/app/src/main/java/com/cavesketch/app/util/SessionCleanup.kt
+- android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt
+- android/app/src/test/java/com/cavesketch/app/util/SessionCleanupTest.kt
+- android/DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** Android device/SDK environment check paused at Phase 4 on machine without Java/Android runtime.
+**Next session notes:** Kotlin code changes and JVM tests are complete. When running on an Android-equipped laptop with Java and Android SDK, run `./gradlew :app:testDebugUnitTest :app:assembleDebug` and verify on-device.
+
+
+## [2026-10-15 12:25] Track survey_csv_export_20261014 — Android Device Verification
+**Files:**
+- android/DEVLOG.md
+- conductor/tracks/survey_csv_export_20261014/metadata.json
+- conductor/tracks/survey_csv_export_20261014/plan.md
+
+**Deviations from spec:** None
+**Assumptions:** Built with OpenJDK 21 from Android Studio JBR.
+**Next session notes:** All 37 unit tests passed (`:app:testDebugUnitTest`), debug APK assembled (`:app:assembleDebug`), installed on physical device `R5CWA01LS0Z`, and verified.
