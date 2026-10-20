@@ -67,8 +67,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Map Merge Protocol (Simple / Displacement) for map view, webapp + Android**
-*Link: [./tracks/map_merge_protocol_20261014/](./tracks/map_merge_protocol_20261014/)*
+- [x] **Track: Map Merge Protocol (Simple / Displacement) for map view, webapp + Android**
+*Link: [./archive/map_merge_protocol_20261014/](./archive/map_merge_protocol_20261014/)*
 
 ---
 

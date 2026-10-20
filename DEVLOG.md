@@ -581,6 +581,60 @@ What remains to finish track `title_block_metadata_20261009`:
 **Assumptions:** None
 **Next session notes:** Entrance symbol orientation and rotation preservation under declination are fully verified and tested end-to-end.
 
+## [2026-10-14 11:46] Phase 1: Shared Displacement Routine — Implementation
+**Files:**
+- cave_sketch/survey/merger.py
+- cave_sketch/survey/metrics.py
+- tests/test_merge_displacement.py
+- tests/test_merger.py
+- tests/test_survey_metrics.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 1 complete. Placement helper `_compute_displacement`, station retention, and connector handling implemented and tested. Metrics correctly exclude connector rows.
+
+## [2026-10-14 11:55] Phase 2: Map Protocol API — Implementation
+**Files:**
+- cave_sketch/survey/__init__.py
+- cave_sketch/survey/merger.py
+- cave_sketch/survey/survey.py
+- tests/test_merger.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 2 complete. MapProtocol enum (SIMPLE, DISPLACEMENT) exposed and forwarded through merge_surveys and draw_survey.
+
+## [2026-10-14 13:26] Phase 3: Webapp UI — Implementation
+**Files:**
+- app/components/merging_controls.py
+- app/pages/1_survey_plot.py
+- app/session.py
+- docs/web/survey-merging.md
+- docs/web/survey-merging.it.md
+- docs/web/README.md
+- docs/web/README.it.md
+- README.md
+- README.it.md
+- tests/test_webapp_map_merge.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 3 complete. Session defaults include map_protocol='simple', radio selector shown conditionally when child map is present, satellite merged_map.csv forced to MapProtocol.SIMPLE, docs updated in English and Italian.
+
+## [2026-10-14 13:38] Phase 3: Webapp UI — Displacement Line Styling Enhancement
+**Files:**
+- cave_sketch/style.py
+- cave_sketch/features/render_features.py
+- tests/test_merge_displacement.py
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** User chose bold firebrick dashed line (1.5pt, [8, 4]) to guarantee visibility and distinction from the lightgray dotted spatial grid.
+**Next session notes:** Connector line style updated and verified.
+
 ## [2026-10-14 16:02] Track snow_icon_20261014 — Implementation
 **Files:**
 - cave_sketch/style_icons.py
@@ -620,4 +674,15 @@ Track `title_block_metadata_20261009` is fully implemented and documented:
 - Webapp and Android mobile app updated with inputs, validation, and magnetic variation configuration.
 - User guides updated in English and Italian across mobile app assets and repository documentation.
 - All Python gates, Android unit tests, and build checks pass cleanly.
+
+## [2026-10-20 09:37] Merge Resolution — feature/map_merge_protocol_20261014 into main
+**Files:**
+- DEVLOG.md
+- android/app/src/main/python/survey_bridge.py
+- cave_sketch/survey/survey.py
+- tests/test_survey_bridge.py
+
+**Deviations from spec:** None
+**Assumptions:** Combined MapProtocol imports/arguments from feature branch with TitleBlockInfo and magnetic_variation_deg from main. Preserved all unit tests from both branches. Chronologically integrated all DEVLOG entries.
+**Next session notes:** Branch feature/map_merge_protocol_20261014 resolved and merged cleanly into main.
 

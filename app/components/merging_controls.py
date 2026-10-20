@@ -62,15 +62,35 @@ def merging_controls_component():
                 st.error(f"⚠️ Station '{child_station}' not found in Child Section survey.")
                 station_exists = False
 
+    # Map Protocol Selector (appears only if child map is uploaded)
+    if st.session_state.child_map_csv:
+        st.markdown("### 🗺️ Map View Merging Protocol")
+        current_map_protocol = st.session_state.get("map_protocol", "simple")
+        map_index = 0
+        if current_map_protocol in ["simple", "displacement"]:
+            map_index = ["simple", "displacement"].index(current_map_protocol)
+        map_protocol = st.radio(
+            "Select protocol for Map View merge:",
+            options=["simple", "displacement"],
+            format_func=lambda x: x.capitalize(),
+            index=map_index,
+            key="map_protocol_radio",
+        )
+        st.session_state.map_protocol = map_protocol
+
     # Section Protocol Selector (appears only if child section is uploaded)
     if st.session_state.child_section_csv:
         st.markdown("### 📐 Section View Merging Protocol")
+        current_sec_protocol = st.session_state.get("section_protocol", "simple")
+        sec_index = 0
+        if current_sec_protocol in ["simple", "mirror", "displacement"]:
+            sec_index = ["simple", "mirror", "displacement"].index(current_sec_protocol)
         protocol = st.radio(
             "Select protocol for Section View merge:",
             options=["simple", "mirror", "displacement"],
             format_func=lambda x: x.capitalize(),
-            index=["simple", "mirror", "displacement"].index(st.session_state.section_protocol),
-            key="protocol_radio"
+            index=sec_index,
+            key="protocol_radio",
         )
         st.session_state.section_protocol = protocol
 

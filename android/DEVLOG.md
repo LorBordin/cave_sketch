@@ -297,11 +297,25 @@ None
 - android/app/src/test/java/com/cavesketch/app/util/FileCopyTest.kt
 - android/app/src/test/java/com/cavesketch/app/ui/components/SaveShareButtonTest.kt
 
+## [2026-10-14 13:47] Phase 4: Android – Code Complete
+**Files:**
+- android/app/src/main/python/survey_bridge.py
+- android/app/src/main/java/com/cavesketch/app/ui/SurveyPlotViewModel.kt
+- android/app/src/main/java/com/cavesketch/app/ui/components/MergeControls.kt
+- android/app/src/test/java/com/cavesketch/app/SurveyPlotViewModelTest.kt
+- tests/test_survey_bridge.py
+- android/DEVLOG.md
+
 **Deviations from spec:** None
+## [2026-10-15 11:59] Phase 5: Android – Build & Device Verification Complete
+**Files:**
+- conductor/tracks/map_merge_protocol_20261014/metadata.json
+- android/DEVLOG.md
 
-**Assumptions:** None
+**Deviations from spec:** None
+**Assumptions:** Built and verified unit tests (`:app:testDebugUnitTest`) and assembly (`:app:assembleDebug`) successfully with Gradle 9.5 / JDK 21. Installed debug APK onto connected device (SM-S901B) via adb. Sample DXF pushed to device Download folder for on-device survey merge verification.
+**Next session notes:** Phase 5 complete. Ready for manual verification checkpoint and documentation sync.
 
-**Next session notes:** None
 
 ## [2026-10-09 16:38] title_block_metadata — Mobile Bridge, Model, and UI Implementation (Phases 5, 7, 8)
 **Files:**

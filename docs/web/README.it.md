@@ -10,7 +10,7 @@ CaveSketch è un'applicazione web basata su [Streamlit](https://streamlit.io/) c
 
 ## 📖 Guide
 
-- **[Unione rilievi](survey-merging.it.md)** — Unisci un rilievo padre e uno figlio in un unico PDF, con tre protocolli per la sezione (Semplice, Specchio, Dislocamento).
+- **[Unione rilievi](survey-merging.it.md)** — Unisci un rilievo padre e uno figlio in un unico PDF, con protocolli configurabili per pianta e sezione (Semplice, Specchio, Dislocamento).
 - **[Mappe satellitari ed esportazione](satellite-maps.it.md)** — Posiziona i rilievi su immagini satellitari, combina più rilievi su un'unica mappa ed esporta in HTML, KML o KMZ offline.
 
 ---

@@ -98,6 +98,12 @@ def extract_features_from_json(map_data: Dict[str, Any]) -> Dict[str, list]:
             dash = [5, 5]
         elif linestyle == (0, (1, 2)):
             dash = [3, 7]
+        elif (
+            isinstance(linestyle, tuple)
+            and len(linestyle) == 2
+            and isinstance(linestyle[1], (tuple, list))
+        ):
+            dash = list(linestyle[1])
 
         pt_from = [line["from"]["lat"], line["from"]["lon"]]
         pt_to = [line["to"]["lat"], line["to"]["lon"]]
@@ -227,12 +233,27 @@ def extract_features_from_df(
 
                 if style_type == "line":
                     style = STYLE_MAP.get(typ, STYLE_MAP["L_wall"])
+                    linestyle = style.get("linestyle", "solid")
+                    dash = None
+                    if linestyle == (0, (1, 1)):
+                        dash = [5, 5]
+                    elif linestyle == (0, (1, 2)):
+                        dash = [3, 7]
+                    elif (
+                        isinstance(linestyle, tuple)
+                        and len(linestyle) == 2
+                        and isinstance(linestyle[1], (tuple, list))
+                    ):
+                        dash = list(linestyle[1])
+                    elif linestyle != "solid":
+                        dash = [3, 7]
+
                     features["lines"].append(
                         {
                             "coords": [[y, x], [y2, x2]],
                             "color": style.get("color", "black"),
                             "weight": style.get("weight", 1),
-                            "dash": None if style.get("linestyle", "solid") == "solid" else [3, 7],
+                            "dash": dash,
                             "popup": f"{typ} ({nid}-{nbr})",
                         }
                     )

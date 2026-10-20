@@ -46,6 +46,18 @@ fun MergeControls(
             onValueChange = { onChange(inputs.copy(childStation = it)) },
             label = { Text("Child station ID (e.g. 47)") },
         )
+        if (inputs.childMapPath != null) {
+            Text("Map merge protocol")
+            listOf("simple", "displacement").forEach { proto ->
+                Row(Modifier.selectable(
+                    selected = inputs.mapProtocol == proto,
+                    onClick = { onChange(inputs.copy(mapProtocol = proto)) },
+                )) {
+                    RadioButton(inputs.mapProtocol == proto, null)
+                    Text(proto.replaceFirstChar { it.uppercase() })
+                }
+            }
+        }
         if (inputs.childSectionPath != null) {
             Text("Section merge protocol")
             listOf("simple", "mirror", "displacement").forEach { proto ->

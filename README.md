@@ -27,7 +27,7 @@ Perfect for field research and offline base camps. Run all survey rendering on-d
 ## 🧭 Features at a Glance
 
 - 🖨️ **PDF Cave Survey Plots** — Generate high-quality print-ready plan and section maps with customizable scale, rotation, grid, and drawn scale bars.
-- 🔗 **Survey Merging** — Join a parent and child survey directly in the survey plot, supporting multiple section layout protocols (Simple, Mirror, Displacement).
+- 🔗 **Survey Merging** — Join a parent and child survey directly in the survey plot, supporting multiple plan and section layout protocols (Simple, Mirror, Displacement).
 - 🌍 **Satellite Imagery Overlay** — Position your cave map on GPS-georeferenced satellite images (more referenced points = higher accuracy).
 - 🗺️ **Multi-Survey Maps** — Combine multiple independent surveys into a single geographic view using JSON export and re-import.
 - 📦 **Offline KMZ & KML Export** — Export self-contained, optimized KMZ archives for offline use in mobile mapping tools like Locus Map or OsmAnd.

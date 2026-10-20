@@ -27,7 +27,7 @@ Perfetta per l'uso sul campo e campi base offline. Esegue tutto il rendering del
 ## 🧭 Funzionalità in breve
 
 - 🖨️ **Rilievi Speleologici in PDF** — Genera pianta e sezione ad alta qualità pronte per la stampa con scala, rotazione, griglia personalizzabili e scala grafica integrata.
-- 🔗 **Unione dei Rilievi** — Unisci un rilievo padre e uno figlio direttamente nel grafico del rilievo, con supporto a più protocolli per la sezione (Semplice, Specchio, Dislocamento).
+- 🔗 **Unione dei Rilievi** — Unisci un rilievo padre e uno figlio direttamente nel grafico del rilievo, con supporto a più protocolli per pianta e sezione (Semplice, Specchio, Dislocamento).
 - 🌍 **Sovrapposizione su Immagini Satellitari** — Posiziona la mappa della grotta su immagini satellitari georeferenziate tramite punti GPS (più punti si inseriscono, migliore sarà la precisione).
 - 🗺️ **Mappe con Più Rilievi** — Combina più rilievi indipendenti su un'unica vista satellitare tramite l'esportazione e re-importazione in formato JSON.
 - 📦 **Esportazione KMZ e KML Offline** — Esporta archivi KMZ ottimizzati e autonomi da usare offline in applicazioni cartografiche per dispositivi mobili come Locus Map o OsmAnd.

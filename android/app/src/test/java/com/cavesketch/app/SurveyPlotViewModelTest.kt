@@ -73,6 +73,20 @@ class SurveyPlotViewModelTest {
     }
 
     @Test
+    fun survey_inputs_to_json_includes_map_protocol_default() {
+        val inputs = SurveyInputs()
+        val json = inputs.toJson()
+        assertTrue(json.contains("\"map_protocol\":\"simple\""))
+    }
+
+    @Test
+    fun survey_inputs_to_json_includes_map_protocol_displacement() {
+        val inputs = SurveyInputs(mapProtocol = "displacement")
+        val json = inputs.toJson()
+        assertTrue(json.contains("\"map_protocol\":\"displacement\""))
+    }
+
+    @Test
     fun testFileValidator_surveyExtensions() {
         val allowed = com.cavesketch.app.util.FileValidator.SURVEY_EXTENSIONS
         assertTrue(com.cavesketch.app.util.FileValidator.isAcceptedExtension("survey.dxf", allowed))
