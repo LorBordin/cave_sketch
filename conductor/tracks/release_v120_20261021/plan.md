@@ -11,7 +11,7 @@
 - [x] Task: Append root `DEVLOG.md` entry; commit `docs: Update user docs for v1.2.0` (790a83a)
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Documentation Audit & Update' (Protocol in workflow.md) (bf284a0)
 
-## Phase 2: Version Bump & Verification
+## Phase 2: Version Bump & Verification [checkpoint: bd94bbe]
 
 - [x] Task: Bump version in `build.gradle` (6d6d106)
     - [x] `versionCode` 2 → 3, `versionName` "1.1.0" → "1.2.0"
@@ -19,15 +19,15 @@
 - [x] Task: Run gates (6d6d106)
     - [x] `uv run ruff check .` / `uv run mypy cave_sketch/` / `uv run pytest`
     - [x] `cd android && ./gradlew :app:testDebugUnitTest`
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Version Bump & Verification' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Version Bump & Verification' (Protocol in workflow.md) (bd94bbe)
 
 ## Phase 3: Build & Package
 
-- [ ] Task: Build release APK
-    - [ ] `./gradlew assembleRelease`; verify signed with the release keystore
-- [ ] Task: Rename to `CaveSketch-v1.2.0.apk`
-- [ ] Task: User installs APK over v1.1.0 on device and confirms upgrade + new features
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Build & Package' (Protocol in workflow.md)
+- [x] Task: Build release APK (6d6d106)
+    - [x] `./gradlew assembleRelease`; verify signed with the release keystore
+- [x] Task: Rename to `CaveSketch-v1.2.0.apk` (6d6d106)
+- [x] Task: User installs APK over v1.1.0 on device and confirms upgrade + new features (6d6d106)
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Build & Package' (Protocol in workflow.md)
 
 ## Phase 4: Tag, Release Notes & Release Guide
 
