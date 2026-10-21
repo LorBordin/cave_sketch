@@ -76,3 +76,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 *Link: [./archive/survey_csv_export_20261014/](./archive/survey_csv_export_20261014/)*
 
 
+
+---
+
+- [ ] **Track: CaveSketch v1.2.0 Android Release (docs update + GitHub Releases guide)**
+*Link: [./tracks/release_v120_20261021/](./tracks/release_v120_20261021/)*

@@ -1,0 +1,8 @@
+{
+  "track_id": "release_v120_20261021",
+  "type": "chore",
+  "status": "new",
+  "created_at": "2026-10-21T08:55:00Z",
+  "updated_at": "2026-10-21T08:55:00Z",
+  "description": "Build and publish CaveSketch v1.2.0 Android APK with all post-v1.1.0 improvements, update documentation accordingly, and guide the user through publishing on GitHub Releases"
+}
