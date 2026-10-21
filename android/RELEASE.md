@@ -41,7 +41,7 @@ cp android/app/build/outputs/apk/release/app-release.apk CaveSketch-v1.2.0.apk
    - **Choose a tag:** Select `v1.2.0` (must match `versionName` in `android/app/build.gradle`).
    - **Release title:** `⛰️ CaveSketch v1.2.0 for Android` (or `CaveSketch v1.2.0`).
 4. **Paste the release notes:**
-   - Copy the markdown release notes (from `conductor/tracks/release_v120_20261021/release_notes_v1.2.0.md`) into the **Describe this release** text box.
+   - Copy the markdown release notes (from `conductor/archive/release_v120_20261021/release_notes_v1.2.0.md`) into the **Describe this release** text box.
    - Use the **Preview** tab to verify that the headings, bullet points, and emojis render cleanly.
 5. **Attach the signed APK binary:**
    - Drag and drop `CaveSketch-v1.2.0.apk` (from the repository root) into the **Attach binaries by dropping them here or selecting them** area at the bottom of the form.
