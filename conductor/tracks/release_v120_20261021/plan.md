@@ -21,19 +21,19 @@
     - [x] `cd android && ./gradlew :app:testDebugUnitTest`
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Version Bump & Verification' (Protocol in workflow.md) (bd94bbe)
 
-## Phase 3: Build & Package
+## Phase 3: Build & Package [checkpoint: aef61b9]
 
 - [x] Task: Build release APK (6d6d106)
     - [x] `./gradlew assembleRelease`; verify signed with the release keystore
 - [x] Task: Rename to `CaveSketch-v1.2.0.apk` (6d6d106)
 - [x] Task: User installs APK over v1.1.0 on device and confirms upgrade + new features (6d6d106)
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Build & Package' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Build & Package' (Protocol in workflow.md) (aef61b9)
 
 ## Phase 4: Tag, Release Notes & Release Guide
 
-- [ ] Task: Draft GitHub release notes (English, v1.1.0 format) as deliverable
-- [ ] Task: Update `android/RELEASE.md` with v1.2.0 + step-by-step GitHub Releases guide
-- [ ] Task: Append `android/DEVLOG.md` release entry
-- [ ] Task: Create annotated tag `v1.2.0` on the release commit
-- [ ] Task: Guide user through publishing (`git push origin main --tags`, draft release, attach APK, paste notes, publish, verify)
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Tag, Release Notes & Release Guide' (Protocol in workflow.md)
+- [x] Task: Draft GitHub release notes (English, v1.1.0 format) as deliverable (3726c82)
+- [x] Task: Update `android/RELEASE.md` with v1.2.0 + step-by-step GitHub Releases guide (3726c82)
+- [x] Task: Append `android/DEVLOG.md` release entry (3726c82)
+- [x] Task: Create annotated tag `v1.2.0` on the release commit (3726c82)
+- [x] Task: Guide user through publishing (`git push origin main --tags`, draft release, attach APK, paste notes, publish, verify) (3726c82)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Tag, Release Notes & Release Guide' (Protocol in workflow.md)
