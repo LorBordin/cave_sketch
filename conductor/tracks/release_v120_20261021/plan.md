@@ -1,6 +1,6 @@
 # Plan: CaveSketch v1.2.0 Android Release
 
-## Phase 1: Documentation Audit & Update
+## Phase 1: Documentation Audit & Update [checkpoint: bf284a0]
 
 - [x] Task: Audit docs against included tracks (790a83a)
     - [x] Diff each doc vs. the 8 included tracks; list gaps
@@ -9,17 +9,17 @@
 - [x] Task: Update `docs/android/README.md` + `README.it.md` (790a83a)
 - [x] Task: Update root `README.md` / `README.it.md` and `conductor/product.md` (if stale) (790a83a)
 - [x] Task: Append root `DEVLOG.md` entry; commit `docs: Update user docs for v1.2.0` (790a83a)
-- [~] Task: Conductor - User Manual Verification 'Phase 1: Documentation Audit & Update' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Documentation Audit & Update' (Protocol in workflow.md) (bf284a0)
 
 ## Phase 2: Version Bump & Verification
 
-- [ ] Task: Bump version in `build.gradle`
-    - [ ] `versionCode` 2 → 3, `versionName` "1.1.0" → "1.2.0"
-    - [ ] Commit: `chore(android): Bump version to v1.2.0 (versionCode 3)`
-- [ ] Task: Run gates
-    - [ ] `uv run ruff check .` / `uv run mypy cave_sketch/` / `uv run pytest`
-    - [ ] `cd android && ./gradlew :app:testDebugUnitTest`
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Version Bump & Verification' (Protocol in workflow.md)
+- [x] Task: Bump version in `build.gradle` (6d6d106)
+    - [x] `versionCode` 2 → 3, `versionName` "1.1.0" → "1.2.0"
+    - [x] Commit: `chore(android): Bump version to v1.2.0 (versionCode 3)`
+- [x] Task: Run gates (6d6d106)
+    - [x] `uv run ruff check .` / `uv run mypy cave_sketch/` / `uv run pytest`
+    - [x] `cd android && ./gradlew :app:testDebugUnitTest`
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Version Bump & Verification' (Protocol in workflow.md)
 
 ## Phase 3: Build & Package
 
