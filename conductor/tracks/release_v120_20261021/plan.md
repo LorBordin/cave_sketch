@@ -2,14 +2,14 @@
 
 ## Phase 1: Documentation Audit & Update
 
-- [ ] Task: Audit docs against included tracks
-    - [ ] Diff each doc vs. the 8 included tracks; list gaps
-- [ ] Task: Update in-app guide (`guide_en.md` + `guide_it.md`)
-    - [ ] Save to Device / Share, Map & Section CSV + iterative merge, map merge protocol, DXF icons
-- [ ] Task: Update `docs/android/README.md` + `README.it.md`
-- [ ] Task: Update root `README.md` / `README.it.md` and `conductor/product.md` (if stale)
-- [ ] Task: Append root `DEVLOG.md` entry; commit `docs: Update user docs for v1.2.0`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Documentation Audit & Update' (Protocol in workflow.md)
+- [x] Task: Audit docs against included tracks (790a83a)
+    - [x] Diff each doc vs. the 8 included tracks; list gaps
+- [x] Task: Update in-app guide (`guide_en.md` + `guide_it.md`) (790a83a)
+    - [x] Save to Device / Share, Map & Section CSV + iterative merge, map merge protocol, DXF icons
+- [x] Task: Update `docs/android/README.md` + `README.it.md` (790a83a)
+- [x] Task: Update root `README.md` / `README.it.md` and `conductor/product.md` (if stale) (790a83a)
+- [x] Task: Append root `DEVLOG.md` entry; commit `docs: Update user docs for v1.2.0` (790a83a)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Documentation Audit & Update' (Protocol in workflow.md)
 
 ## Phase 2: Version Bump & Verification
 
