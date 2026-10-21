@@ -714,4 +714,20 @@ Track `title_block_metadata_20261009` is fully implemented and documented:
 **Assumptions:** Preserved all tests from both branches in tests/test_survey_bridge.py. Combined product description highlights for multi-survey merging and artifact saving/sharing in conductor/product.md. Chronologically integrated all DEVLOG entries across root and Android devlogs.
 **Next session notes:** Merge conflicts resolved cleanly. All Ruff lint checks, mypy type checks, and pytest suites (263 tests) pass.
 
+## [2026-10-21 11:03] Track release_v120_20261021 Phase 1 — Documentation Audit & Update
+**Files:**
+- android/app/src/main/assets/guide/guide_en.md
+- android/app/src/main/assets/guide/guide_it.md
+- docs/android/README.md
+- docs/android/README.it.md
+- README.md
+- README.it.md
+- conductor/product.md
+- DEVLOG.md
+
+**Deviations from spec:** None
+**Assumptions:** None
+**Next session notes:** Phase 1 user documentation updates complete across English and Italian in-app guides, Android user guides, and root READMEs for v1.2.0.
+
+
 

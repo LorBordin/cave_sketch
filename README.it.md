@@ -26,11 +26,11 @@ Perfetta per l'uso sul campo e campi base offline. Esegue tutto il rendering del
 
 ## 🧭 Funzionalità in breve
 
-- 🖨️ **Rilievi Speleologici in PDF** — Genera pianta e sezione ad alta qualità pronte per la stampa con scala, rotazione, griglia personalizzabili e scala grafica integrata.
-- 🔗 **Unione dei Rilievi** — Unisci un rilievo padre e uno figlio direttamente nel grafico del rilievo, con supporto a più protocolli per pianta e sezione (Semplice, Specchio, Dislocamento).
+- 🖨️ **Rilievi Speleologici in PDF** — Genera pianta e sezione ad alta qualità pronte per la stampa con scala, rotazione, correzione della declinazione magnetica al nord geografico, griglia, scala grafica integrata, simboli DXF TopoDroid (ingresso, prosecuzione, flusso d'acqua, blocchi/frana, neve/ghiaccio) e cartiglio adattivo con metadati estesi del rilievo.
+- 🔗 **Unione dei Rilievi** — Unisci un rilievo padre e uno figlio direttamente nel grafico del rilievo, con supporto a più protocolli per pianta (Semplice, Dislocamento) e sezione (Semplice, Specchio, Dislocamento) e unione iterativa di >2 sotto-rilievi tramite esportazione e ri-caricamento dei CSV di pianta e sezione.
 - 🌍 **Sovrapposizione su Immagini Satellitari** — Posiziona la mappa della grotta su immagini satellitari georeferenziate tramite punti GPS (più punti si inseriscono, migliore sarà la precisione).
 - 🗺️ **Mappe con Più Rilievi** — Combina più rilievi indipendenti su un'unica vista satellitare tramite l'esportazione e re-importazione in formato JSON.
-- 📦 **Esportazione KMZ e KML Offline** — Esporta archivi KMZ ottimizzati e autonomi da usare offline in applicazioni cartografiche per dispositivi mobili come Locus Map o OsmAnd.
+- 📦 **Esportazione KMZ e KML Offline** — Esporta archivi KMZ ottimizzati e autonomi (con simboli speleologici in scala e icone neve/ghiaccio) da usare offline su Google Earth o in applicazioni cartografiche mobili come Locus Map e OsmAnd.
 
 Per guide dettagliate su come utilizzare queste funzioni, esplora la [Documentazione della Web App](docs/web/README.it.md) o la [Guida Utente Android](docs/android/README.it.md).
 

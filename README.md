@@ -26,11 +26,11 @@ Perfect for field research and offline base camps. Run all survey rendering on-d
 
 ## 🧭 Features at a Glance
 
-- 🖨️ **PDF Cave Survey Plots** — Generate high-quality print-ready plan and section maps with customizable scale, rotation, grid, and drawn scale bars.
-- 🔗 **Survey Merging** — Join a parent and child survey directly in the survey plot, supporting multiple plan and section layout protocols (Simple, Mirror, Displacement).
+- 🖨️ **PDF Cave Survey Plots** — Generate high-quality print-ready plan and section maps with customizable scale, rotation, magnetic declination correction to true north, grid, drawn scale bars, TopoDroid DXF symbol rendering (entrance, continuation, water-flow, blocks, snow/ice), and an adaptive title block with extended survey metadata.
+- 🔗 **Survey Merging** — Join a parent and child survey directly in the survey plot, supporting multiple plan (Simple, Displacement) and section (Simple, Mirror, Displacement) layout protocols, plus iterative merging of >2 sub-surveys via Map & Section CSV export and re-upload.
 - 🌍 **Satellite Imagery Overlay** — Position your cave map on GPS-georeferenced satellite images (more referenced points = higher accuracy).
 - 🗺️ **Multi-Survey Maps** — Combine multiple independent surveys into a single geographic view using JSON export and re-import.
-- 📦 **Offline KMZ & KML Export** — Export self-contained, optimized KMZ archives for offline use in mobile mapping tools like Locus Map or OsmAnd.
+- 📦 **Offline KMZ & KML Export** — Export self-contained, optimized KMZ archives (with ground-scaled cave symbols and snow/ice icons) for offline use in Google Earth or mobile mapping tools like Locus Map and OsmAnd.
 
 For detailed guides on how to use these features, explore the [Web App Documentation](docs/web/README.md) or the [Android User Guide](docs/android/README.md).
 
