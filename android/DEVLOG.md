@@ -384,3 +384,17 @@ Title block metadata fields and magnetic variation documentation completed:
 **Deviations from spec:** None
 **Assumptions:** Built with OpenJDK 21 from Android Studio JBR.
 **Next session notes:** All 37 unit tests passed (`:app:testDebugUnitTest`), debug APK assembled (`:app:assembleDebug`), installed on physical device `R5CWA01LS0Z`, and verified.
+
+## [2026-10-21 11:37] Release — v1.2.0 APK Build
+**Files:**
+- android/app/build.gradle
+- android/app/src/main/assets/guide/guide_en.md
+- android/app/src/main/assets/guide/guide_it.md
+- android/RELEASE.md
+- android/DEVLOG.md
+- CaveSketch-v1.2.0.apk
+
+**Deviations from spec:** None
+**Assumptions:** Signed with the existing `release.jks` keystore so in-place upgrades over v1.0.0 and v1.1.0 preserve app data and settings.
+**Next session notes:** v1.2.0 (`versionCode 3`) built, verified via in-place upgrade over v1.1.0 on physical device (`R5CWA01LS0Z`), and tagged `v1.2.0` for GitHub Releases.
+
