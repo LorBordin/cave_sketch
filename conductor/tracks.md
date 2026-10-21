@@ -79,5 +79,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: CaveSketch v1.2.0 Android Release (docs update + GitHub Releases guide)**
+- [x] **Track: CaveSketch v1.2.0 Android Release (docs update + GitHub Releases guide)**
 *Link: [./tracks/release_v120_20261021/](./tracks/release_v120_20261021/)*

@@ -29,11 +29,11 @@
 - [x] Task: User installs APK over v1.1.0 on device and confirms upgrade + new features (6d6d106)
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Build & Package' (Protocol in workflow.md) (aef61b9)
 
-## Phase 4: Tag, Release Notes & Release Guide
+## Phase 4: Tag, Release Notes & Release Guide [checkpoint: 8a32b16]
 
 - [x] Task: Draft GitHub release notes (English, v1.1.0 format) as deliverable (3726c82)
 - [x] Task: Update `android/RELEASE.md` with v1.2.0 + step-by-step GitHub Releases guide (3726c82)
 - [x] Task: Append `android/DEVLOG.md` release entry (3726c82)
 - [x] Task: Create annotated tag `v1.2.0` on the release commit (3726c82)
 - [x] Task: Guide user through publishing (`git push origin main --tags`, draft release, attach APK, paste notes, publish, verify) (3726c82)
-- [x] Task: Conductor - User Manual Verification 'Phase 4: Tag, Release Notes & Release Guide' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Tag, Release Notes & Release Guide' (Protocol in workflow.md) (8a32b16)
